@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ | Yellow Letter HQ (MOCKUP, not the live site)</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300&display=swap" rel="stylesheet">
+<style>:root{--y:#FFC523;--yh:#E5A800;--yt:#FFF7DB;--ys:#FFE9A8;--ink:#262626;--tx:#3F3F46;--mu:#71717A;--soft:#F7F7F8;--line:#E4E4E7;--line2:#D4D4D8;--ok:#15803D;--okt:#ECFDF3;--bad:#B42318;--badt:#FEF3F2;--amb:#B54708;--ambt:#FFFAEB;--info:#1D4ED8;--infot:#EFF6FF;--r-sm:10px;--r:12px;--r-lg:16px;--sh-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.06);--sh:0 4px 14px rgba(16,24,40,.08);--sh-lg:0 24px 48px rgba(16,24,40,.22);--focus:0 0 0 3px rgba(255,197,35,.45);--head:Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--body:"Open Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:auto}
+body{margin:0;font-family:var(--body);font-size:16px;line-height:1.6;color:var(--tx);background:#fff;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--head);color:var(--ink);line-height:1.2;margin:0;letter-spacing:-.01em}
+a{color:var(--ink)}img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+button{font:inherit}
+/* header */
+.util{background:#262626;color:#e4e4e7;font-size:13px}
+.util .wrap{display:flex;justify-content:flex-end;align-items:center;gap:20px;min-height:38px;flex-wrap:wrap}
+.util a{text-decoration:none;color:#e4e4e7}.util a.hl{color:var(--y);font-weight:600}.util a:hover{color:#fff}
+.hdr{background:#fff;border-bottom:3px solid var(--y);position:sticky;top:0;z-index:50}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;min-height:74px;gap:16px}
+.logo img{height:40px;width:auto}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font:700 13px/1 var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:11px 11px;border-radius:8px}
+.nav a:hover{background:var(--soft)}.nav a.on{color:var(--yh)}
+.cartlink{position:relative}.cartlink .n{position:absolute;top:2px;right:-2px;background:var(--y);color:var(--ink);border-radius:99px;font-size:10px;min-width:17px;height:17px;line-height:17px;text-align:center;padding:0 4px}
+.burger{display:none;background:none;border:1px solid var(--line2);border-radius:10px;padding:8px 10px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:4px 0;border-radius:2px}
+.drawer{display:none;border-top:1px solid var(--line);background:#fff;padding:8px 16px 14px}
+.drawer a{display:block;padding:11px 4px;border-bottom:1px solid var(--line);font:700 14px var(--head);text-decoration:none;color:var(--ink)}
+.drawer a:last-child{border-bottom:0}
+body.menu-open .drawer{display:block}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 20px;border-radius:var(--r-sm);font:700 15px/1.2 var(--body);border:1px solid var(--y);background:var(--y);color:var(--ink);text-decoration:none;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s;white-space:nowrap}
+.btn:hover{background:var(--yh);border-color:var(--yh)}
+.btn:focus-visible{outline:0;box-shadow:var(--focus)}
+.btn.sec{background:#fff;border-color:var(--line2)}.btn.sec:hover{background:var(--soft)}
+.btn.dark{background:#262626;border-color:#262626;color:#fff}.btn.dark:hover{background:#000}
+.btn.sm{min-height:34px;padding:6px 12px;font-size:13px}.btn.lg{min-height:52px;padding:12px 26px;font-size:16px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.pill-help{display:inline-flex;align-items:center;min-height:26px;padding:2px 11px;font-size:12.5px;font-weight:700;border-radius:99px;background:var(--yt);border:1px solid #F5DB8A;color:#7A5A00;cursor:pointer;margin-left:8px;vertical-align:middle}
+.chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;border:1px solid var(--line2);background:#fff;font-size:12px;font-weight:700;color:var(--ink);line-height:1.4}
+.chip.y{background:var(--yt);border-color:#F5DB8A;color:#7A5A00}.chip.ok{background:var(--okt);border-color:#ABEFC6;color:var(--ok)}.chip.bad{background:var(--badt);border-color:#FECDCA;color:var(--bad)}.chip.amb{background:var(--ambt);border-color:#FEDF89;color:var(--amb)}.chip.info{background:var(--infot);border-color:#BFDBFE;color:var(--info)}
+button.chip{cursor:pointer}button.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* notices */
+.note{border:1px solid var(--line);border-left:4px solid var(--amb);background:var(--ambt);border-radius:var(--r-sm);padding:11px 16px;color:#7A2E0E;font-size:14px}
+.note.info{border-left-color:var(--info);background:var(--infot);color:var(--ink)}
+.note.ok{border-left-color:var(--ok);background:var(--okt);color:#05603A}
+/* fields */
+label.f{display:block;color:var(--ink);font-weight:600;font-size:14px;margin:0 0 6px}
+.inp,select.inp,textarea.inp{width:100%;min-height:44px;border:1px solid var(--line2);border-radius:var(--r-sm);padding:10px 14px;font:15px var(--body);color:var(--ink);background:#fff}
+select.inp{appearance:none;-webkit-appearance:none;padding-right:40px;background:#fff none no-repeat right 14px center}
+.inp:focus{outline:0;border-color:var(--yh);box-shadow:var(--focus)}
+.req{color:var(--bad);font-weight:600}
+.fld{margin:0 0 20px}
+.help{font-size:13.5px;color:var(--mu);margin:6px 0 0}
+.new{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;background:var(--okt);color:var(--ok);border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+input[type=checkbox],input[type=radio]{accent-color:var(--yh);width:18px;height:18px;vertical-align:middle}
+.radios{display:flex;gap:10px;flex-wrap:wrap}
+.radios label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:var(--r-sm);padding:9px 14px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;background:#fff}
+.radios label:has(input:checked){border:2px solid var(--yh);background:var(--yt);padding:8px 13px}
+/* cards, panels */
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:24px}
+.box{border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;background:#fff}
+.box h4{font-size:15px;margin:0 0 10px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}.kv b{color:var(--mu);font-weight:600}
+.page{padding-top:28px;padding-bottom:56px}
+.ptitle{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.ptitle h1{font-size:30px}.ptitle p{margin:4px 0 0;color:var(--mu);font-size:14px}
+.muted{color:var(--mu);font-size:13.5px}
+/* tables */
+.tw{border:1px solid var(--line);border-radius:var(--r);overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
+th{background:#262626;color:#fff;font:700 11.5px var(--head);letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:12px 10px;vertical-align:bottom;white-space:nowrap}
+td{padding:12px 10px;border-top:1px solid var(--line);color:var(--ink);vertical-align:middle}
+tbody tr:nth-child(even) td{background:#FCFCFD}
+/* footer */
+footer{background:#262626;color:#c9c9cf;font-size:14.5px;margin-top:0}
+.fcols{display:grid;grid-template-columns:1fr 1fr 1.3fr 1.5fr;gap:32px;padding:56px 24px 36px}
+footer h4{font:700 13px/1 var(--head);letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px;padding-bottom:11px;border-bottom:2px solid var(--y);display:inline-block}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}footer a{text-decoration:none;color:#d4d4d8}footer a:hover{color:var(--y)}
+.cline{display:flex;gap:10px;align-items:center;margin-bottom:10px;color:#fff;font-weight:600}.cline svg{width:16px;height:16px;fill:var(--y)}
+.social{display:flex;gap:14px;margin-top:14px}.social a{width:20px;height:20px;display:inline-flex}.social svg{width:100%;height:100%;fill:currentColor}
+.copy{border-top:1px solid #3a3a3a;text-align:center;padding:18px 24px;font-size:13px;color:#9b9ba3}
+/* screens */
+.scr{display:none}.scr.on{display:block}
+/* HOME */
+.hero{position:relative;color:#fff;text-align:center;background:#222 none center 35%/cover no-repeat}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.78),rgba(15,15,15,.62) 55%,rgba(15,15,15,.8))}
+.hero .wrap{position:relative;padding:110px 24px 116px;max-width:900px}
+.hero h1{color:#fff;font-weight:600;font-size:clamp(32px,5vw,56px)}.hero h1 b{font-weight:800;color:var(--y);display:block}
+.hero .lead{font:italic 400 clamp(18px,2.1vw,22px)/1.45 var(--body);color:#f4f4f5;margin:22px 0 10px}
+.hero p{color:#e4e4e7;font-size:17px;max-width:640px;margin:0 auto 32px}.hero p strong{color:#fff}
+section.s{padding:76px 0}.alt{background:#F7F7F5}
+.sh{text-align:center;max-width:860px;margin:0 auto 40px}.sh h2{font-size:clamp(26px,3.2vw,38px);font-weight:500}.sh h2 b{font-weight:800}
+.rule{width:56px;height:4px;border-radius:4px;background:var(--y);margin:16px auto 18px}.sh p{margin:0;font-size:17px}
+.counter{display:grid;grid-template-columns:1fr 1.25fr;gap:32px;align-items:center;max-width:1000px;margin:0 auto}
+/* Fix 132: How Rapid Orders works pop-up (mock; live needs a small theme JS snippet) */
+.rohow-steps{list-style:none;margin:4px 0 16px;padding:0;display:grid;gap:12px}
+.rohow-steps li{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;background:#FFF8E1;border:1px solid #F5E3A6;border-radius:12px;padding:12px 14px}
+.rohow-steps svg{width:56px;height:56px;display:block}
+.rohow-steps b{display:block;font:800 16px/1.3 var(--head);color:var(--ink)}
+.rohow-steps span{display:block;font-size:14px;line-height:1.45;color:#555;margin-top:2px}
+.rohow-steps .n{display:inline-flex;width:22px;height:22px;border-radius:50%;background:#2b2b2b;color:#FFC523;font:800 12px/22px var(--head);justify-content:center;margin-right:6px;vertical-align:1px}
+.rohow-end{margin:0;font-size:15px;line-height:1.55}
+.rohow-link{background:none;border:0;padding:0;font:700 14px var(--body);text-decoration:underline;cursor:pointer;color:var(--ink)}
+.roa-in .rohow-link{color:#FFC523;display:inline-block;margin-left:18px;font-size:15px}
+@media (max-width:767px){.roa-in .rohow-link{display:block;margin:16px 0 0;text-align:center}}
+/* home: Rapid Orders dark band (Todd picked A, Oct 29). Live: Beaver Builder row on Home (fix 131). */
+.ro-tag{display:inline-block;font:800 12px/1 var(--head);letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border-radius:999px}
+#ro-a{background:#2b2b2b;color:#fff;padding:72px 0}
+.roa-in{display:grid;grid-template-columns:1.7fr 1fr;gap:48px;align-items:center;max-width:1100px;margin:0 auto}
+.roa-in .ro-tag{background:var(--y);color:#2b2b2b;margin-bottom:18px}
+.roa-in h2{font:800 clamp(32px,4.4vw,54px)/1.08 var(--head);color:var(--y);margin:0 0 18px}
+.roa-in p{font-size:19px;line-height:1.6;color:#EDEDED;margin:0 0 30px;max-width:560px}
+.roa-in .btn{min-height:60px;padding:16px 34px;font-size:18px}
+.roa-badge{position:relative;display:flex;justify-content:center}
+.roa-badge svg{width:240px;height:auto}
+.roa-badge b{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);background:var(--y);color:#2b2b2b;font:800 26px/1 var(--head);padding:12px 20px;border-radius:14px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+@media (max-width:767px){#ro-a{padding:48px 0}.roa-in{grid-template-columns:1fr;gap:30px;text-align:left}.roa-badge{order:-1}.roa-badge svg{width:150px}.roa-badge b{font-size:20px}.roa-in .btn{width:100%}}
+.count-card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:36px 26px;text-align:center;border-top:5px solid var(--y)}
+.count-num{font:800 clamp(36px,4.4vw,50px)/1 var(--head);color:var(--ink)}
+.count-lbl{font:700 12.5px/1.4 var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-top:12px}
+.bm-card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}.bm-card .row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;gap:12px;flex-wrap:wrap}.bm-card .row span{font:700 15px var(--head);color:var(--ink)}
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.pcard{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);background:#fff;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;border:1px solid var(--line)}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(0,0,0,.06),0 16px 36px rgba(0,0,0,.12)}
+.pcard .img{aspect-ratio:16/9;background:#ddd center/cover no-repeat}
+.pcard .body{padding:18px 20px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.pcard h3{font-size:21px}
+.price{display:inline-block;margin-top:6px;font:600 14px var(--body);background:var(--yt);border:1px solid #F5E2A0;padding:4px 10px;border-radius:99px}
+.pcard.svc{background:var(--y);border-color:var(--y);justify-content:center}
+/* Fix 136: big template picture pop-up (TV = template viewer). Live: theme JS ydg-product.js / ydg-product-test.js plus functions.php CSS. */
+.tv{position:fixed;inset:0;z-index:1600;display:none;background:rgba(20,20,20,.92);touch-action:pan-y}
+.tv.open{display:flex;flex-direction:column}
+.tv-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:#fff}
+.tv-title{min-width:0}.tv-title h2{color:#fff;font:700 18px/1.3 var(--head);margin:0}.tv-title p{margin:2px 0 0;color:#D4D4D8;font-size:13px}
+.tv-count{flex:none;font:700 13px var(--head);background:var(--y);color:var(--ink);padding:6px 12px;border-radius:99px;white-space:nowrap}
+.tv-x{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:26px;line-height:1;cursor:pointer}
+.tv-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0;padding:0 76px 22px}
+.tv-img{display:block;max-width:min(1024px,100%);max-height:calc(100vh - 120px);width:auto;height:auto;border-radius:var(--r);background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.45);user-select:none;-webkit-user-drag:none;transition:opacity .15s}
+.tv-img.loading{opacity:.35}
+.tv-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:var(--y);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.tv-nav:hover{background:var(--yh)}.tv-nav:focus-visible,.tv-x:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.tv-prev{left:14px}.tv-next{right:14px}
+.tv-hint{text-align:center;color:#A1A1AA;font-size:12px;padding:0 0 12px;margin:0}
+.selected-template-preview{cursor:zoom-in}
+@media (max-width:640px){.tv-stage{padding:0 10px 80px}.tv-nav{top:auto;bottom:18px;transform:none;width:48px;height:48px}.tv-prev{left:calc(50% - 60px)}.tv-next{right:calc(50% - 60px)}.tv-img{max-height:calc(100vh - 210px)}.tv-title h2{font-size:16px}.tv-hint{display:none}}
+/* Fix 135: Budget Maximizer Shop tile, option 3 */
+.pcard .img.ico{background:var(--y);display:flex;align-items:center;justify-content:center;gap:26px;padding:0 34px}
+.ico .badge{width:150px;height:150px;flex:none;border-radius:34px;background:#fff;box-shadow:0 10px 24px rgba(43,43,43,.18);display:flex;align-items:center;justify-content:center;border:3px solid #2b2b2b}
+.ico .line{font:800 30px/1.15 var(--head);color:#2b2b2b;max-width:250px;letter-spacing:-.01em}
+.ico .line small{display:block;font:700 12px var(--head);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;color:#2b2b2b;opacity:.8}
+@media (max-width:767px){.pcard .img.ico{gap:16px;padding:0 20px}.ico .badge{width:104px;height:104px;border-radius:24px}.ico .badge svg{width:78px;height:auto}.ico .line{font-size:22px}.ico .line small{font-size:10.5px;margin-bottom:6px}}
+.pcard.svc .body{flex-direction:column;align-items:flex-start;justify-content:center;height:100%;padding:32px 34px}
+.svc ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}.svc li{font:700 19px/1.25 var(--head);color:var(--ink);display:flex;gap:12px;align-items:center}
+.svc li:before{content:"\2713";width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#1E1E1E;color:var(--y);font-size:13px;display:grid;place-items:center}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feat{background:#fff;border-radius:var(--r);padding:32px 26px;text-align:center;box-shadow:var(--sh)}
+.feat .ico{width:62px;height:62px;border-radius:50%;background:var(--y);display:grid;place-items:center;margin:0 auto 16px}.feat .ico svg{width:28px;height:28px;fill:var(--ink)}
+.feat h3{font-size:19px;margin-bottom:10px}.feat p{margin:0;font-size:15.5px}
+.cta{background:var(--y);text-align:center;padding:76px 0}.cta h2{font-size:clamp(26px,3.2vw,38px);font-weight:800}.cta .rule{background:var(--ink)}.cta p{font-style:italic;font-size:18px;color:#2a2a2a;margin:0 0 28px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:960px;margin:0 auto}
+.stat{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh);border-top:6px solid var(--y);padding:44px 28px 36px;text-align:center}
+.stat-num{font:800 clamp(40px,5.2vw,62px)/1 var(--head);color:var(--ink);letter-spacing:.01em}
+.stat-num.ph{color:#A1A1AA}
+.stat-lbl{font:700 14px/1.4 var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--tx);margin-top:16px}
+.stat-src{font-size:13px;color:var(--mu);margin-top:8px}
+.stat-src.ph-note{display:inline-block;background:var(--ambt);border:1px solid #FEDF89;color:var(--amb);border-radius:99px;padding:3px 12px;font-weight:600}
+@media (max-width:767px){.stats{grid-template-columns:1fr;gap:18px}.stat{padding:32px 18px 26px}}
+/* PRODUCT PAGE */
+.prod-head{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:center;margin-bottom:8px}
+.prod-head .img{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);aspect-ratio:16/10;background:#eee center/cover}
+.prod-head h1{font-size:36px;margin-bottom:10px}
+.sect-t{font:700 20px var(--head);color:var(--ink);margin:30px 0 14px;text-align:center}
+.picker-search{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+.picker-search input{flex:1;min-height:48px;border:1px solid var(--line2);border-radius:var(--r-sm);padding:10px 14px 10px 44px;font-size:16px;color:var(--ink);background:#fff none no-repeat 14px center}
+.picker-search input:focus{outline:0;border-color:var(--y);box-shadow:var(--focus)}
+.picker-search .cnt{font-size:13px;color:var(--mu);white-space:nowrap}
+.tiles-p{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ptile{position:relative;display:flex;align-items:center;gap:14px;min-height:80px;border-radius:var(--r);border:2px solid var(--y);background:var(--y);padding:10px 42px 10px 10px;text-align:left;color:var(--ink);font-weight:700;font-size:15px;line-height:1.3;box-shadow:var(--sh-sm);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+.ptile img{width:104px;height:58px;object-fit:cover;border-radius:6px;flex:0 0 104px}
+.ptile:hover{background:var(--yh);border-color:var(--yh);box-shadow:var(--sh)}
+.ptile.on{border-color:var(--ink);box-shadow:0 0 0 3px rgba(38,38,38,.14)}
+.ptile.on:after{content:"\2713";position:absolute;top:50%;right:12px;transform:translateY(-50%);width:24px;height:24px;border-radius:99px;background:var(--ink);color:var(--y);font-size:14px;line-height:24px;text-align:center}
+.ptile.all{grid-column:1/-1;min-height:56px;border:2px dashed var(--yh);background:var(--yt);box-shadow:none;font-size:14px}
+.ptile.all img{width:72px;height:40px;flex-basis:72px}
+.pick-empty{grid-column:1/-1;border:1px dashed var(--line2);border-radius:var(--r);background:var(--soft);padding:18px;text-align:center;font-size:15px}
+.cfg{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-top:28px;align-items:start}
+.cfg .panel{padding:22px}
+.tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.buyrow{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px;align-items:start}
+#post{font-size:14.5px}
+.tpl{border:1px solid var(--line2);border-radius:var(--r);overflow:hidden;cursor:pointer;background:#fff;display:block}
+.tpl img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.tpl span{display:flex;gap:8px;align-items:center;padding:8px 10px;font-size:13px;font-weight:600;color:var(--ink)}
+.tpl:has(input:checked){border:2px solid var(--yh);box-shadow:0 0 0 3px rgba(255,197,35,.3)}
+.drop{border:2px dashed var(--line2);border-radius:var(--r);background:var(--soft);padding:26px 18px;text-align:center;transition:border-color .15s,background .15s}
+.drop.over{border-color:var(--yh);background:var(--yt)}
+.drop .ic{width:46px;height:46px;border-radius:50%;background:var(--yt);display:grid;place-items:center;margin:0 auto 10px}.drop .ic svg{width:22px;height:22px;stroke:#7A5A00;fill:none;stroke-width:2}
+.drop b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.files{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.files li{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:var(--r-sm);padding:9px 12px;font-size:14px;background:#fff}
+.files li .ok{width:22px;height:22px;border-radius:99px;background:var(--okt);color:var(--ok);display:grid;place-items:center;font-size:12px;font-weight:800}
+.files li button{margin-left:auto;border:0;background:var(--soft);border-radius:99px;width:28px;height:28px;cursor:pointer}
+.ptable td,.ptable th{text-align:center}.ptable th:first-child,.ptable td:first-child{text-align:left}
+.ptable td{font-weight:600}.ptable td:first-child{color:var(--mu);font-weight:400;font-size:13px;min-width:150px}
+.ptable tr.faded td{opacity:.45}
+.ptable td.hit{background:var(--yt)!important;box-shadow:inset 0 0 0 2px var(--yh);font-weight:800}
+.ptable .na{color:var(--mu);font-weight:400;font-size:12px;display:block}
+.ptable-m{display:none}
+.sumbox{border:2px solid var(--y);background:var(--yt);border-radius:var(--r);padding:16px 18px;margin-top:18px}
+.sumrow{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--ink);padding:3px 0}.sumrow b{font-family:var(--head)}
+.sumrow.big{font-size:20px;border-top:1px solid #F5DB8A;margin-top:6px;padding-top:10px}
+.qtyrow{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}.qtyrow .fld{flex:1;min-width:160px;margin:0}
+.err{color:var(--bad);font-size:13.5px;font-weight:600;margin-top:6px}
+/* CART */
+.cart-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
+.cart-item{display:flex;gap:14px;align-items:flex-start}.cart-item img{width:96px;height:60px;object-fit:cover;border-radius:8px}
+.cart-item small{display:block;color:var(--mu);font-size:13px;line-height:1.5}
+.rm{border:0;background:none;color:var(--bad);font-weight:600;font-size:13px;cursor:pointer;padding:0;text-decoration:underline}
+/* ACCOUNT */
+.atiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.atile{border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px;font:700 17px var(--head);color:var(--ink);background:var(--ys);border:2px solid var(--y);border-bottom-width:5px;box-shadow:var(--sh-sm);cursor:pointer;text-align:left;text-decoration:none;transition:background .15s,box-shadow .15s}
+.atile:hover{background:#FFDF80;box-shadow:var(--sh)}
+.atile .ic{width:48px;height:48px;border-radius:12px;background:var(--y);display:flex;align-items:center;justify-content:center}
+.atile .ic svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:2}
+/* ORDERS */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools .inp{width:auto}
+.otable td{font-size:13px}.otable td .acts{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:150px}
+.ocards{display:none}
+.ocard{border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);margin-bottom:12px;overflow:hidden}
+.ocard .h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.ocard .b{padding:12px 14px}.ocard .f{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px;background:var(--soft);border-top:1px solid var(--line)}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline;cursor:pointer;font-size:13px;font-weight:600}
+/* DETAIL */
+.track{display:flex;justify-content:space-between;position:relative;padding:10px 2% 0}
+.track:before{content:"";position:absolute;left:10%;right:10%;top:32px;height:4px;background:var(--line2);border-radius:4px}
+.track .bar{position:absolute;left:10%;top:32px;height:4px;background:var(--y);border-radius:4px}
+.st{position:relative;text-align:center;width:20%;font-size:13px;font-weight:700;color:var(--ink)}
+.st .c{width:44px;height:44px;border-radius:99px;background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--mu);border:4px solid #fff;box-shadow:0 0 0 2px var(--line2)}
+.st.done .c{background:var(--y);color:var(--ink);box-shadow:0 0 0 2px var(--y)}
+.st.cur .c{background:#fff;color:var(--ink);box-shadow:0 0 0 3px var(--yh)}
+.st small{display:block;font-weight:400;color:var(--mu)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.upd{margin:0;padding:0;list-style:none}.upd li{display:grid;grid-template-columns:190px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}.upd li:first-child{border-top:0}
+/* PROOF (today's layout, new buttons only) */
+.proofpg{max-width:1000px;margin:0 auto;padding:22px 16px 60px;color:#333}
+.proofpg .ttl{text-align:center;font:300 40px Raleway,"Open Sans",sans-serif;color:#333;margin:12px 0 6px}
+.proofpg .dl{text-align:center;font-size:13px}.proofpg .dl a{color:#333}
+.btnrow{display:flex;justify-content:space-between;gap:12px;margin:22px 0;flex-wrap:wrap}
+.plinks{font-weight:600;font-size:15px;line-height:2.1}.plinks a{color:#333;text-decoration:none;cursor:pointer}.plinks a:hover{text-decoration:underline}
+.ylhq-proof-approve,.ylhq-proof-disapprove{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;min-width:220px;padding:12px 22px;border-radius:10px;font:700 16px/1.2 "Open Sans",Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .15s}
+.ylhq-proof-approve{background:#FFC523;border:2px solid #FFC523;color:#262626;box-shadow:0 2px 6px rgba(16,24,40,.14)}
+.ylhq-proof-approve:before{content:"\2713";font-size:18px}.ylhq-proof-approve:hover{background:#E5A800;border-color:#E5A800}
+.ylhq-proof-disapprove{background:#fff;border:2px solid #B42318;color:#B42318}
+.ylhq-proof-disapprove:before{content:"\2715";font-size:15px}.ylhq-proof-disapprove:hover{background:#FEF3F2}
+/* RAPID */
+.steps{display:flex;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:6px;flex-wrap:wrap;margin:16px 0}
+.steps button{flex:1;display:flex;align-items:center;gap:10px;border:0;background:none;border-radius:10px;padding:10px 12px;font-weight:700;font-size:14px;color:var(--mu);cursor:pointer;text-align:left;min-width:200px}
+.steps button i{font-style:normal;width:28px;height:28px;border-radius:99px;background:#fff;border:2px solid var(--line2);display:grid;place-items:center;font-size:13px;flex:0 0 28px}
+.steps button.on{background:#fff;color:var(--ink);box-shadow:var(--sh-sm);border:1px solid var(--line)}.steps button.on i{background:var(--y);border-color:var(--y)}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rcard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-sm);display:flex;flex-direction:column;background:#fff}
+.rcard .im{position:relative;aspect-ratio:16/9;background:#8a8f99 center/cover}
+.rcard .im .tag{position:absolute;top:10px;left:10px;background:var(--y);color:var(--ink);font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px}
+.rcard .im .ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 18px;color:#fff;background:linear-gradient(135deg,#9aa0aa,#6b7280)}
+.rcard .im .ph b{font:800 22px/1.1 var(--head)}.rcard .im .ph i{display:block;width:60%;height:3px;background:var(--y);margin:8px 0;border-radius:3px}.rcard .im .ph small{font-size:11px}
+.rcard .t{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:12px 14px 0}
+.rcard .t b{font:700 15px/1.3 var(--head);color:var(--ink)}
+.rcard .d{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:10px 14px 14px;font-size:13px}.rcard .d b{color:var(--mu);font-weight:600}
+.rcard .ft{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--soft);border-top:1px solid var(--line)}
+.empty{border:2px dashed var(--line2);border-radius:var(--r);padding:34px 18px;text-align:center;background:var(--soft)}
+.pager{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:18px;flex-wrap:wrap}
+/* MODAL */
+.dim{position:fixed;inset:0;background:rgba(24,24,27,.55);display:none;align-items:center;justify-content:center;z-index:2000;padding:12px}
+.dim.on{display:flex}
+.modal{width:520px;max-width:100%;max-height:calc(100vh - 24px);overflow:auto;background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-lg);animation:pop .2s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.mh h3{font-size:17px}.x{width:34px;height:34px;border-radius:99px;background:var(--soft);border:0;font-size:20px;line-height:1;cursor:pointer;flex:0 0 34px}
+.mb{padding:20px;font-size:15px}.mb p{margin:0 0 10px}
+.mf{background:var(--soft);border-top:1px solid var(--line);padding:14px 20px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.demo-badge{display:inline-flex;align-items:center;gap:6px;background:#262626;color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.04em;border-radius:99px;padding:3px 10px;margin-bottom:12px}
+/* TOAST */
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#262626;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;box-shadow:var(--sh-lg);opacity:0;pointer-events:none;transition:.2s;z-index:2100;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+/* MOCK TAG + PAGE MENU */
+.mocktag{position:fixed;left:14px;bottom:14px;z-index:1500;display:flex;align-items:center;gap:0;background:#111;color:#fff;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.3);font:700 12px/1 var(--body)}
+.mocktag .lbl{padding:10px 12px 10px 14px;letter-spacing:.03em}.mocktag .lbl b{color:var(--y)}
+.mocktag button{border:0;border-left:1px solid #444;background:none;color:#fff;font:700 12px/1 var(--body);padding:10px 14px;cursor:pointer;border-radius:0 99px 99px 0}
+.mocktag button:hover{color:var(--y)}
+.pmenu{position:fixed;left:14px;bottom:58px;z-index:1501;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-lg);padding:8px;width:270px;display:none;max-height:calc(100vh - 80px);overflow:auto}
+.pmenu.on{display:block}
+.pmenu h5{margin:6px 10px 6px;font:700 11px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.pmenu a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;color:var(--ink)}
+.pmenu a i{font-style:normal;width:22px;height:22px;border-radius:99px;background:var(--soft);display:grid;place-items:center;font-size:11px;color:var(--mu)}
+.pmenu a:hover{background:var(--yt)}.pmenu a.on{background:var(--y)}.pmenu a.on i{background:#fff;color:var(--ink)}
+/* CHAT (look only, HighLevel/LeadConnector widget mock) */
+.hl-chat{position:fixed;right:20px;bottom:20px;z-index:1400}
+.hl-pop{display:none;width:340px;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.22);overflow:hidden;margin-bottom:14px}
+body.chat-open .hl-pop{display:block}body.chat-open .hl-teaser{display:none}
+.hl-head{background:#262626;color:#fff;padding:14px 16px;display:flex;gap:12px;align-items:center}
+.hl-av{width:40px;height:40px;border-radius:50%;background:var(--y);display:grid;place-items:center;font:800 12px var(--head);color:var(--ink);flex:0 0 40px}
+.hl-head b{display:block;font:700 15px var(--head)}.hl-head small{color:#bdbdc4;font-size:12px}
+.hl-head .x{margin-left:auto;background:#3a3a3a;color:#ddd}
+.hl-msgs{padding:14px;background:#FAFAF9;max-height:300px;overflow:auto}
+.hl-msg{background:#fff;border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:14px;line-height:1.5;color:var(--ink);margin-bottom:10px;max-width:92%}
+.hl-msg.me{background:var(--y);border-color:var(--y);border-radius:14px 14px 4px 14px;margin-left:auto}
+.hl-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.hl-chips button{font-size:12.5px;font-weight:600;border:1.5px solid var(--yh);color:#7a5a00;background:var(--yt);padding:6px 10px;border-radius:99px;cursor:pointer}
+.hl-input{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:10px 12px}
+.hl-input input{flex:1;border:0;font:14px var(--body);outline:0;min-width:0}
+.hl-input button{width:34px;height:34px;border-radius:50%;background:var(--y);border:0;display:grid;place-items:center;cursor:pointer}.hl-input svg{width:16px;height:16px;fill:var(--ink)}
+.hl-pow{text-align:center;font-size:10.5px;color:#a1a1aa;padding:0 0 8px}
+.hl-btn{width:60px;height:60px;border-radius:50%;background:var(--y);box-shadow:0 8px 24px rgba(0,0,0,.25);display:grid;place-items:center;margin-left:auto;cursor:pointer;position:relative;border:0}
+.hl-btn svg{width:28px;height:28px;fill:var(--ink)}.hl-btn .dot{position:absolute;top:4px;right:4px;width:14px;height:14px;border-radius:50%;background:#E11D48;border:2px solid #fff}
+.hl-teaser{position:relative;width:290px;background:#fff;border-radius:16px 16px 4px 16px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:14px 30px 14px 16px;margin:0 0 12px auto;font-size:14px;line-height:1.5;color:var(--ink);cursor:pointer}
+.hl-teaser b{display:block;font:700 13px var(--head);margin-bottom:4px}
+.hl-teaser .tx{position:absolute;top:4px;right:6px;border:0;background:none;color:#a1a1aa;font-size:18px;cursor:pointer}
+body.teaser-off .hl-teaser{display:none}
+body.menu-open .hl-chat{display:none} /* crawl fix Oct 29: chat teaser covered the lower phone menu rows */
+/* Fix 137 chat widget extras */
+.hl-on{display:inline-block;width:8px;height:8px;border-radius:50%;background:#22C55E;margin-right:6px;vertical-align:1px}
+.hl-msgs{max-height:min(440px,calc(100vh - 230px))}
+.hl-form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:9px}
+.hl-f{display:grid;gap:4px;font-size:12.5px;font-weight:700;color:var(--ink)}.hl-f i{color:#B42318;font-style:normal}
+.hl-f input,.hl-f textarea{font:14px var(--body);border:1px solid var(--line2,#D4D4D8);border-radius:10px;padding:9px 11px;outline:0;resize:vertical;min-width:0}
+.hl-f input:focus,.hl-f textarea:focus{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,197,35,.35)}
+.hl-cons{display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.45;color:var(--tx)}.hl-cons input{margin-top:2px;accent-color:#2b2b2b;flex:0 0 auto}
+.hl-err{color:#B42318;font-size:12.5px;font-weight:600;min-height:0}.hl-err:empty{display:none}
+.hl-input[hidden]{display:none}.hl-btn .ic-x{display:none}body.chat-open .hl-btn .ic-x{display:block}body.chat-open .hl-btn .ic-chat,body.chat-open .hl-btn .dot{display:none}
+/* RESPONSIVE */
+@media (max-width:980px){
+ .util{display:none}.nav{display:none}.burger{display:block}
+ .hdr .wrap{min-height:62px}.logo img{height:32px}
+ .counter,.pgrid,.feats,.cfg,.cart-grid,.prod-head{grid-template-columns:1fr}
+ .rgrid{grid-template-columns:1fr 1fr}.fcols{grid-template-columns:1fr 1fr}
+ .tpl-grid{grid-template-columns:repeat(2,1fr)}.buyrow{grid-template-columns:1fr}
+}
+@media (max-width:767px){
+ .wrap{padding:0 16px}section.s{padding:56px 0}.page{padding-top:18px;padding-bottom:90px}
+ .hero .wrap{padding:70px 18px 78px}.hero p{font-size:16px}
+ .ptitle h1{font-size:24px}.prod-head h1{font-size:28px}.panel{padding:16px}
+ .tiles-p{grid-template-columns:1fr}.picker-search .cnt{display:none}
+ .atiles{grid-template-columns:1fr}.rgrid{grid-template-columns:1fr}
+ .otable{display:none}.ocards{display:block}.tools .inp{flex:1 1 140px}
+ .two{grid-template-columns:1fr}.upd li{grid-template-columns:1fr}.st{font-size:11px}.st .c{width:34px;height:34px;font-size:14px}.track:before,.track .bar{top:27px}
+ .ptable-d{display:none}.ptable-m{display:block}
+ .proofpg .ttl{font-size:28px}.ylhq-proof-approve,.ylhq-proof-disapprove{min-width:0;flex:1;min-height:48px;padding:10px 14px;font-size:15px}
+ .fcols{grid-template-columns:1fr 1fr;gap:26px;padding:44px 18px 26px}
+ .hl-pop{width:calc(100vw - 28px)}.hl-chat{right:14px;bottom:14px}.hl-teaser{width:230px;font-size:13px}
+ .hl-btn{width:52px;height:52px}
+ .mocktag .lbl{padding:9px 10px 9px 12px;font-size:11px}.mocktag button{padding:9px 12px}
+ .modal{width:100%}.btn.lg{width:100%}
+ .cart-table thead{display:none}.cart-table tr{display:grid;grid-template-columns:1fr 1fr}.cart-table td{border-top:0}.cart-table tr td:first-child{grid-column:1/-1;border-top:1px solid var(--line)}
+}
+/* ===== NEW PAGES (Oct 29 2026) ===== */
+.crumbs{font-size:13.5px;color:var(--mu);margin-bottom:10px}.crumbs a{color:var(--mu)}
+.h2s{font-size:20px;margin:0 0 14px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.two-f{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.three-f{display:grid;grid-template-columns:1.3fr 1fr .8fr;gap:0 14px}
+label.cb{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ink);margin:4px 0 16px;cursor:pointer}
+.fld.bad .inp{border-color:var(--bad);box-shadow:0 0 0 3px rgba(180,35,24,.12)}
+.err{color:var(--bad);font-size:13.5px;font-weight:600;min-height:0}
+.social-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink);font-weight:700;text-decoration:underline;cursor:pointer}
+/* data hub */
+.dh-signin{background:#262626;border-bottom:1px solid #000}.dh-signin .wrap{display:flex;justify-content:flex-end;align-items:center;min-height:52px}
+.dh-signin-btn{background:transparent!important;color:#fff!important;border-color:#6b6b72!important}.dh-signin-btn:hover{border-color:var(--y)!important;color:var(--y)!important}
+.dh-hero{text-align:center;max-width:760px;margin:18px auto 34px}
+.dh-eyebrow{font:800 12px/1 var(--head);letter-spacing:.18em;color:#7A5A00;text-transform:uppercase;display:inline-block;background:var(--yt);border:1px solid #F5DB8A;border-radius:99px;padding:7px 14px;margin-bottom:16px}
+.dh-hero h1{font-size:clamp(34px,4.6vw,52px);font-weight:800}.dh-hero p{font-size:18px;margin:14px 0 0;color:var(--tx)}
+.dh-included{border-top:5px solid var(--y);margin-bottom:34px}.dh-included h2{font-size:22px;margin-bottom:18px;text-align:center}
+.dh-inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dh-inc{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.dh-inc i{font-style:normal;flex:0 0 28px;height:28px;border-radius:99px;background:var(--y);display:grid;place-items:center;font-weight:800;color:var(--ink);font-size:14px}
+.dh-inc b{font:700 15.5px/1.3 var(--head);color:var(--ink)}.dh-inc p{margin:4px 0 0;font-size:14px}
+.dh-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;margin-bottom:40px}
+.dh-card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);overflow:hidden}
+.dh-card-head{padding:26px 24px 18px;text-align:center;border-bottom:1px solid var(--line)}
+.dh-card-head span{display:block;font:800 14px/1 var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--mu)}
+.dh-card-head strong{display:block;font:800 52px/1 var(--head);color:var(--ink);margin:14px 0 10px}.dh-card-head strong em{font-style:normal;font-size:20px;font-weight:700;color:var(--mu)}
+.dh-card-head small{display:block;font-size:13.5px;color:var(--tx);font-weight:600}
+.dh-card-body{padding:20px 24px 24px;display:flex;flex-direction:column;gap:18px;flex:1}.dh-card-body p{margin:0;font-size:14.5px}.dh-card-body .btn{margin-top:auto}
+.dh-card.is-featured{background:#262626;border-color:#262626;box-shadow:0 18px 40px rgba(16,24,40,.25);transform:translateY(-8px)}
+.dh-card.is-featured .dh-card-head{border-color:#3a3a3a;padding-top:40px}.dh-card.is-featured .dh-card-head span{color:var(--y)}
+.dh-card.is-featured .dh-card-head strong{color:#fff}.dh-card.is-featured .dh-card-head strong em{color:#bdbdc4}.dh-card.is-featured small,.dh-card.is-featured p{color:#e4e4e7}
+.dh-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--y);color:var(--ink);font:800 11.5px/1 var(--head);letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:0 0 10px 10px}
+.dh-sec{margin-bottom:34px}.dh-sec h2{font-size:24px;margin-bottom:14px}
+.dh-table td{font-size:15px}.dh-table tr.hi td{background:var(--yt)!important;font-weight:700;border-top:2px solid var(--y)}
+.dh-save{color:var(--ok)}
+.dh-summary{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#262626;color:#e4e4e7;border-radius:var(--r-lg);padding:22px 26px;border-left:6px solid var(--y)}
+.dh-summary p{margin:0;font-size:15px;line-height:1.7}.dh-summary b{color:var(--y)}.dh-summary .sep{color:#6b6b72;margin:0 4px}
+.dsteps button{min-width:160px}.steps button.done i{background:var(--okt);border-color:#ABEFC6;color:var(--ok)}
+.dh-confirm{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}.dh-kv{grid-template-columns:120px 1fr;font-size:14.5px}
+.dh-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.dh-pick-i{display:flex;flex-direction:column;gap:6px;border:1px solid var(--line2);border-radius:var(--r);padding:16px;text-decoration:none}.dh-pick-i b{font:800 18px var(--head)}.dh-pick-i span{font-size:14px;color:var(--tx)}
+.dh-pick-i:hover,.dh-pick-i.feat{border:2px solid var(--yh);background:var(--yt);padding:15px}
+/* subscriptions */
+.subgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.subcard{border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);padding:18px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;background:#fff}
+.subimg{width:100%;aspect-ratio:4/3;border-radius:10px;background:linear-gradient(135deg,var(--yt),#fff);border:1px solid #F5DB8A;display:grid;place-items:center}
+.subimg svg{width:56px;height:56px;fill:none;stroke:var(--ink);stroke-width:1.8}.subcard h3{font-size:16px}
+/* subs picture test: ?subs=live (A, live site banners) or ?subs=art (B, new artwork) or ?subs=photo (C, photo style). Default is now the final artwork; ?subs=icons shows the old icons. */
+.subimg.pic{overflow:hidden;border:1px solid var(--line)}.subimg.pic img{width:100%;height:100%;object-fit:cover;display:block}.subimg.live{aspect-ratio:768/210}
+/* Fix 134: subscription product pages (#/sub/<slug>). Live: WooCommerce product page content for each subscription. */
+.sp-hero{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:center;margin:6px 0 30px}
+.sp-pic{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);aspect-ratio:4/3;background:var(--soft)}.sp-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.sp-eyebrow{font:800 13px/1 var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:10px}
+.sp-hero h1{margin:0 0 10px}.sp-hero p.lead{font-size:17px;margin:0 0 16px}
+.sp-price{font:800 40px/1 var(--head);color:var(--ink);margin:0 0 6px}.sp-price em{font-style:normal;font-size:18px;font-weight:700;color:var(--mu)}.sp-price-note{font-size:14px;color:var(--tx);margin:0 0 18px}
+.sp-sec{margin:0 0 30px}.sp-sec>h2{font-size:24px;margin:0 0 14px}
+.sp-inc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sp-inc li{list-style:none;display:flex;gap:10px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:14.5px}
+.sp-inc li i{flex:0 0 24px;height:24px;border-radius:50%;background:var(--y);color:var(--ink);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+ul.sp-inc{padding:0;margin:0}
+.sp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:sps}
+.sp-step{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);padding:18px}
+.sp-step b.n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--y);font:800 16px var(--head);margin-bottom:10px}
+.sp-step h3{font-size:16px;margin:0 0 6px}.sp-step p{margin:0;font-size:14px}
+.sp-plans{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.sp-plan{display:flex;gap:12px;align-items:flex-start;border:2px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;background:#fff}
+.sp-plan input{margin-top:4px;accent-color:#2b2b2b}.sp-plan.on{border-color:var(--ink);background:var(--yt)}
+.sp-plan b{display:block;font-size:15px}.sp-plan strong{display:block;font:800 26px/1.1 var(--head);margin:6px 0 2px}.sp-plan small{display:block;font-size:13px;color:var(--tx)}
+.sp-table{width:100%;border-collapse:collapse;font-size:14.5px}.sp-table th,.sp-table td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left}.sp-table th{background:var(--soft);color:var(--ink);font-weight:800}
+.sp-faq details{border:1px solid var(--line);border-radius:var(--r);padding:0 16px;margin-bottom:10px;background:#fff}
+.sp-faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style-position:outside}.sp-faq details p{margin:0 0 14px;font-size:14.5px}
+.sp-tc{display:inline-block;background:#FFF4D6;border:1px dashed #C9A227;color:#6b5200;border-radius:6px;padding:1px 7px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.sp-back{display:inline-block;font-weight:700;margin-bottom:12px}
+@media (max-width:767px){.sp-hero,.sp-inc,.sp-steps,.sp-plans{grid-template-columns:1fr}.sp-hero{gap:18px}.sp-price{font-size:34px}}
+/* checkout + cart extras */
+.co-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:start}
+.ci-ph{width:72px;height:54px;border-radius:8px;background:var(--y);display:grid;place-items:center;font:800 13px var(--head);color:var(--ink);flex:0 0 72px}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.cinfo{display:grid;gap:16px;margin-bottom:20px}.cinfo>div{display:flex;gap:12px;align-items:flex-start}
+.ci{flex:0 0 40px;height:40px;border-radius:12px;background:var(--yt);border:1px solid #F5DB8A;display:grid;place-items:center}.ci svg{width:18px;height:18px;fill:var(--ink)}
+.cinfo b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}.cinfo a,.cinfo span{font-weight:700;color:var(--ink);font-size:15.5px}
+.map-ph{position:relative;height:200px;border-radius:var(--r);background:repeating-linear-gradient(45deg,#eef0f3 0 14px,#e6e8ec 14px 28px);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:var(--ink)}
+.map-ph .pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--bad);transform:rotate(-45deg);margin-bottom:8px}.map-ph small{color:var(--mu)}
+/* faq */
+.acc{display:grid;gap:10px}
+.acc-i{border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--sh-sm)}
+.acc-i summary{cursor:pointer;list-style:none;padding:16px 50px 16px 18px;font:700 16px/1.4 var(--head);color:var(--ink);position:relative}
+.acc-i summary::-webkit-details-marker{display:none}
+.acc-i summary:after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:99px;background:var(--yt);display:grid;place-items:center;font-size:18px;color:#7A5A00}
+.acc-i[open] summary{border-bottom:1px solid var(--line)}.acc-i[open] summary:after{content:"\2212";background:var(--y);color:var(--ink)}
+.acc-b{padding:14px 18px 6px;font-size:15px}.acc-b p{margin:0 0 10px}.acc-b ol{margin:0 0 10px;padding-left:20px}
+.vid-soon{display:inline-block;background:var(--soft);border:1px dashed var(--line2);border-radius:8px;padding:6px 12px;font-size:13.5px;color:var(--mu)}
+.faq-img{display:flex;gap:14px;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;padding:12px 14px 0;margin:0 0 12px;background:var(--soft)}
+/* resources */
+.resgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rescard{border-top:4px solid var(--y)}.rescard ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.rescard li a,.rescard li span{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:10px;font-weight:600;font-size:14.5px;text-decoration:none;color:var(--ink)}
+.rescard li a:hover{background:var(--yt);border-color:#F5DB8A}.rescard li a:after{content:" \2197";color:var(--mu)}.rescard li span{color:var(--mu)}
+/* returned mail */
+.ret-head{text-align:center;margin:10px 0 30px}.ret-head h1{font-size:clamp(28px,3.4vw,38px);font-weight:600;margin-bottom:14px}
+.ret-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.ret-tile{background:var(--y);border:0;border-radius:var(--r-lg);box-shadow:var(--sh);padding:26px 18px 30px;display:flex;flex-direction:column;align-items:center;gap:22px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.ret-tile:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(16,24,40,.18);background:#FFCD3F}
+.ret-tile b{font:600 21px var(--head);color:var(--ink);border-bottom:1px solid rgba(0,0,0,.12);padding-bottom:12px;width:100%}
+.ret-tile svg{width:76px;height:76px;fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+/* holiday */
+.hol-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;background:var(--y);border-radius:var(--r-lg);padding:22px 24px;border:2px solid #262626}
+.hol-top h1{font-size:clamp(24px,3vw,32px);font-weight:600}.hol-top h3{font-size:17px;margin:8px 0}.hol-top p{margin:6px 0 0;color:var(--ink)}
+.hol-top .dh-eyebrow{background:transparent;border:0;padding:0;margin-bottom:8px;color:var(--ink)}
+.hol-upd{background:#262626;color:#fff;border-color:#262626;white-space:nowrap}.chg{font-size:14px}
+.hol-status{font-size:14px;margin:14px 0}
+.hol-states{margin-bottom:22px}.hol-sg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}
+.hmap{display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(8,auto);gap:4px}
+.ht,.hc{border:0;border-radius:6px;font:700 11px/1 var(--body);color:#fff;cursor:pointer;padding:0}
+.ht{aspect-ratio:1;display:grid;place-items:center}.hc{padding:5px 7px;border:1px solid}
+.g-fri{background:#2563EB}.g-thu{background:#16A34A}.g-tue{background:#EA7A0C}
+.hc.g-fri{background:#EFF6FF;color:#1D4ED8;border-color:#BFDBFE}.hc.g-thu{background:#ECFDF3;color:#15803D;border-color:#ABEFC6}.hc.g-tue{background:#FFF4E5;color:#B54708;border-color:#FEDF89}
+.ht.sel,.hc.sel{outline:3px solid #262626;outline-offset:1px}
+.hgrp{margin-bottom:12px}.hgl{font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+.hchips{display:flex;flex-wrap:wrap;gap:4px}
+.hol-table table{font-size:13px}.hol-table th{text-align:center;white-space:normal}.hol-table th small{display:block;font:600 10.5px var(--body);text-transform:none;letter-spacing:0;opacity:.85}
+.hgrp-h{background:#fff!important;color:var(--ink)!important;border-bottom:2px solid #262626}.hgrp-h.land{color:var(--ok)!important;border-color:var(--ok)}
+.h-fc{background:#262626}.h-fri{background:#2563EB}.h-thu{background:#16A34A}.h-tue{background:#EA7A0C}.h-land{background:var(--ok)}
+.hcol.hl{box-shadow:inset 0 -4px 0 var(--y)}
+.hol-table td{text-align:center;padding:8px 6px}.hol-table td small{display:block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}.hol-table td b{font-size:14px;color:var(--ink)}
+.hol-table td.hl{background:var(--yt)!important}
+.hol-table td.nx span{display:inline-block;border:1px solid #ABEFC6;color:var(--ok);background:var(--okt);border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.hol-table td.land{background:#F3FBF6!important}.hol-table td.land b{color:#05603A}.hol-table td.land small{text-transform:none;letter-spacing:0;color:#7A5A00;font-weight:700;font-size:11px}
+.hol-table tr.skip td{background:var(--badt)!important;color:var(--bad);font-weight:800}.hol-table tr.skip td.land b{color:var(--bad)}
+.hol-cards{display:none}
+.hcard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:10px;background:#fff}
+.hland{background:#F3FBF6;padding:10px 14px;border-bottom:1px solid var(--line)}.hland small{display:block;font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}.hland b{color:#05603A;font-size:16px}.hland em{display:block;font-style:normal;font-size:12px;font-weight:700;color:#7A5A00}
+.hleave{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}.hleave div{background:#fff;padding:8px 12px}.hleave div.hl{background:var(--yt)}.hleave small{display:block;font-size:11px;color:var(--mu)}.hleave b{font-size:14px;color:var(--ink)}
+.hcard.skip{background:var(--badt);padding:12px 14px;display:grid;gap:2px}.hcard.skip b{color:var(--bad)}.hcard.skip span{font-weight:800;color:var(--bad)}
+.hol-legend{margin-top:16px;display:grid;gap:6px;font-size:13.5px}.hol-legend div{display:grid;grid-template-columns:220px auto 20px 1fr;gap:8px}
+.t-fc{color:#262626}.t-fri{color:#1D4ED8}.t-thu{color:#15803D}.t-tue{color:#B54708}
+/* custom template */
+.ct-price{font:800 26px var(--head);color:var(--ink);margin:6px 0 8px}.ct-head p{margin:0 0 6px}
+/* legal */
+.legal{max-width:900px}.legal-b p{margin:0 0 12px;font-size:15px}.legal-b h2{margin-top:20px}
+/* rapid steps 2-3 and proofs */
+.ro-picked{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:14px;color:var(--ink)}
+.ro-h{font-size:19px;margin:0 0 6px}.ro3{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:0 16px}
+.ro-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+.rp-pend{margin-bottom:16px;border-left:4px solid var(--y)}.rp-prow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.rp-eta{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);font-size:14px}
+.spin{width:16px;height:16px;border-radius:50%;border:3px solid var(--ys);border-top-color:var(--yh);animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.rp-card{border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);margin-top:14px;overflow:hidden}
+.rp-top{display:flex;justify-content:space-between;gap:14px;padding:16px;flex-wrap:wrap}.rp-acts{display:flex;gap:8px;align-items:flex-start}.rp-del{color:var(--bad)}
+.rp-form{display:grid;grid-template-columns:.7fr 1.3fr 1fr 1fr;gap:0 14px;padding:0 16px}
+.rp-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;background:var(--soft);border-top:1px solid var(--line)}
+@media (max-width:980px){
+ .dh-inc-grid{grid-template-columns:1fr 1fr}.dh-cards{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}.dh-card.is-featured{transform:none}
+ .dh-confirm,.co-grid,.contact-grid,.two-col,.hol-sg{grid-template-columns:1fr}.subgrid{grid-template-columns:1fr 1fr}.resgrid{grid-template-columns:1fr 1fr}
+ .dh-summary{flex-direction:column;align-items:flex-start}.ro3,.rp-form{grid-template-columns:1fr 1fr}.hmap{max-width:460px}
+}
+@media (max-width:767px){
+ .dh-inc-grid,.subgrid,.resgrid,.ret-tiles,.dh-pick,.two-f,.three-f,.ro3,.rp-form,.social-btns{grid-template-columns:1fr}
+ .dh-hero{margin:8px auto 24px}.dh-hero p{font-size:16px}.dh-card-head strong{font-size:44px}.dh-summary{padding:18px}
+ .dh-table td,.dh-table th{font-size:13px;padding:10px 8px}
+ .hol-top{flex-direction:column}.hol-table{display:none}.hol-cards{display:block}.hol-legend div{grid-template-columns:1fr}.hol-legend div span:nth-child(3){display:none}
+ .ret-tile{flex-direction:row;padding:16px 18px;gap:16px}.ret-tile b{border:0;padding:0;text-align:left;font-size:18px}.ret-tile svg{width:40px;height:40px;order:-1;flex:0 0 40px}
+ .dh-kv{grid-template-columns:1fr}
+}
+@media (max-width:767px){
+ .dh-save-t thead{display:none}.dh-save-t tr{display:block;border-top:1px solid var(--line)}.dh-save-t tr:first-child{border-top:0}
+ .dh-save-t td{display:flex;justify-content:space-between;gap:10px;border:0;padding:7px 14px;background:#fff!important}
+ .dh-save-t td:before{content:attr(data-l);color:var(--mu);font-weight:600}.dh-save-t td:first-child{background:#262626!important;color:#fff;font-weight:700}.dh-save-t td:first-child:before{content:none}
+ .dh-table th{white-space:normal}
+}
+@media (max-width:767px){.dh-summary .sep{display:block;height:6px;overflow:hidden;visibility:hidden}}
+/* template gallery (All Templates + each product). Real site class names. */
+.hidden-by-default{display:none!important}
+.ptile.all .all-n{display:block;font-weight:600;font-size:12.5px;color:var(--mu);margin-left:auto;padding-left:10px}
+.ptile.all.on{background:var(--y);border-style:solid;border-color:var(--ink)}
+.ptile.all.on .all-n{color:var(--ink)}
+.tg h4{font-family:var(--head);font-weight:700;font-size:20px;color:var(--ink);margin:0 0 6px}
+.tg-all{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm)}
+.tg-sub{margin:0 0 14px;color:var(--mu);font-size:14.5px}
+.tg-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.tg-tab{min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-weight:700;font-size:14px;cursor:pointer}
+.tg-tab span{font-weight:600;color:var(--mu);margin-left:4px}
+.tg-tab:hover{background:var(--soft)}
+.tg-tab.on{background:var(--y);border-color:var(--y)}.tg-tab.on span{color:var(--ink)}
+.tg-tab:focus-visible{outline:0;box-shadow:var(--focus)}
+.tg-jump{display:flex;gap:6px 14px;flex-wrap:wrap;margin:0 0 6px;font-size:13px}
+.tg-jump a{color:var(--tx);text-decoration:underline;text-underline-offset:3px}
+.tg-jump a:hover{color:var(--ink)}
+.tg-gh{font-family:var(--head);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin:22px 0 0}
+.tg-sec{scroll-margin-top:90px}
+.product-heading-section{display:flex;justify-content:center;align-items:center;position:relative;gap:14px;margin:18px 0 14px}
+.horizontal-bar{flex:1;height:2px;background:var(--line);border-radius:2px}
+.horizontal-bar.left{background:linear-gradient(90deg,transparent,var(--ys))}
+.horizontal-bar.right{background:linear-gradient(90deg,var(--ys),transparent)}
+h6.product-heading-all-templates{margin:0;font:700 15px/1.3 var(--head);color:var(--ink);text-align:center;max-width:72%}
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.tg-one .tg-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;max-height:560px;overflow:auto;padding:2px 4px 4px 2px}
+.image-box{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);padding:8px 8px 10px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.image-box:hover{border-color:var(--y);box-shadow:var(--sh);transform:translateY(-1px)}
+.image-box img.gallery-image{width:100%;aspect-ratio:16/9;height:auto;object-fit:contain;border-radius:8px;background:#fff;cursor:zoom-in} /* Fix 136: whole mail piece, sharp 768 copy */
+.image-box>div{position:absolute;top:14px;right:14px}
+.image-box input.ylhq-template{appearance:none;-webkit-appearance:none;width:22px;height:22px;margin:0;border-radius:99px;border:2px solid #fff;background:rgba(38,38,38,.35);box-shadow:0 1px 3px rgba(0,0,0,.3);cursor:pointer}
+.image-box input.ylhq-template:checked{background:var(--ink) none no-repeat center/14px;border-color:var(--y)}
+.image-box input.ylhq-template:focus-visible{outline:0;box-shadow:var(--focus)}
+.image-box label{display:block;margin:8px 2px 0;font-weight:600;font-size:13.5px;line-height:1.35;color:var(--ink);cursor:pointer}
+.image-box.on,.image-box:has(input:checked){border:2px solid var(--yh);background:var(--yt);box-shadow:0 0 0 3px rgba(255,197,35,.3)}
+.tg-empty{margin-top:14px}
+.tg-search{margin:8px 0 12px}
+.tg-c{font-weight:400;color:var(--mu);font-size:13px;margin-left:4px}
+.selected-template-preview{display:flex;align-items:center;gap:16px;margin:0 0 12px;padding:10px;border:2px solid var(--yh);border-radius:var(--r);background:var(--yt);cursor:zoom-in}
+.selected-template-preview img.selected-template-image{width:220px;max-width:46%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#fff}
+.selected-template-preview small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}
+.selected-template-preview h6.tpname{margin:2px 0 0;font:700 16px/1.3 var(--head);color:var(--ink)}
+button.divAction.button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 18px;border-radius:var(--r-sm);border:1px solid var(--line2);background:#fff;color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;margin:0 0 6px}
+button.divAction.button:before{content:"";width:16px;height:16px;background:none no-repeat center/contain}
+button.divAction.button:hover{background:var(--soft);border-color:var(--yh)}
+@media (max-width:767px){
+ .tg-all{padding:14px;margin-top:16px;border-radius:var(--r)}
+ .tg-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px 10px;padding:0 14px 4px}.tg-tab{flex:0 0 auto}
+ .tg-jump{display:none}
+ .tg-grid,.tg-one .tg-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+ .tg-one .tg-grid{max-height:480px}
+ h6.product-heading-all-templates{font-size:14px;max-width:84%}
+ .image-box label{font-size:12.5px}
+ .selected-template-preview img.selected-template-image{width:140px}
+ .ptile.all .all-n{display:none}
+ button.divAction.button{width:100%;justify-content:center}
+}
+.tpl-field{scroll-margin-top:90px}
+.vid-card{display:flex;gap:14px;align-items:center;background:var(--soft);border:1px solid var(--line2);border-radius:10px;padding:14px 16px;margin-top:8px}.vid-card b{display:block}.vid-card span{font-size:13.5px;color:var(--mu)}.vid-play{width:56px;height:40px;border-radius:8px;background:#111;color:#ffd200;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+/* ---------- hero background options (mock) ---------- */
+.hero[data-hero=A]{background-image:none;background-position:center 45%}
+.hero[data-hero=B]{background-image:none;background-position:center}
+.hero[data-hero=C]{background-image:none;background-position:center}
+.hero[data-hero=D]{background-image:none;background-position:62% center}
+.hero[data-hero=E]{background-image:none;background-position:center}
+.hero[data-hero=A]:before,.hero[data-hero=C]:before{background:linear-gradient(180deg,rgba(12,12,12,.74),rgba(12,12,12,.6) 55%,rgba(12,12,12,.82))}
+.hero[data-hero=B]:before{background:linear-gradient(180deg,rgba(15,13,10,.8),rgba(15,13,10,.68) 55%,rgba(15,13,10,.84))}
+.hero[data-hero=D]:before{background:linear-gradient(90deg,rgba(12,12,12,.8),rgba(12,12,12,.62) 60%,rgba(12,12,12,.5)),linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.45))}
+.hero[data-hero=E]:before{background:radial-gradient(ellipse at center,rgba(10,10,10,.62),rgba(10,10,10,.85) 75%)}
+.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.hero[data-hero=C] .hero-vid{display:block}
+.hero[data-hero=C]:before{z-index:1}.hero .wrap{z-index:2}
+.hero-play{display:none;position:absolute;z-index:3;right:20px;top:18px;border:0;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font:700 12.5px/1 var(--body);padding:10px 14px;cursor:pointer;backdrop-filter:blur(4px);box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.hero-play:hover{background:var(--y);color:#111}
+.hero[data-hero=C] .hero-play{display:block}
+.hero-count{display:none}
+.hero[data-hero=E] .hero-count{display:block;margin:0 0 18px}
+.hc-num{font:800 clamp(46px,8.4vw,104px)/1 var(--head);color:var(--y);letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.45);font-variant-numeric:tabular-nums}
+.hc-lbl{font:700 clamp(12px,1.4vw,15px)/1.4 var(--head);letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-top:12px}
+.hero[data-hero=E] h1{font-size:clamp(24px,3.4vw,40px)}
+.hero[data-hero=E] .wrap{padding-top:84px;padding-bottom:96px}
+.mocktag .hb-btn{border-radius:0;display:none}
+body.on-home .mocktag .hb-btn{display:block}
+.hbmenu{position:fixed;left:14px;bottom:58px;z-index:1501;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-lg);padding:8px;width:260px;display:none}
+.hbmenu.on{display:block}
+.hbmenu h5{margin:6px 10px 6px;font:700 11px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.hbmenu a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:var(--ink);font:600 14px var(--body);text-decoration:none}
+.hbmenu a i{font:800 12px/22px var(--head);font-style:normal;width:22px;height:22px;text-align:center;border-radius:6px;background:#f1f1f1}
+.hbmenu a:hover{background:#f6f6f4}.hbmenu a.on{background:#FFF6D6}.hbmenu a.on i{background:var(--y)}
+.hbmenu p{margin:6px 10px 4px;font-size:12px;color:var(--mu)}
+@media (max-width:640px){.hero-play{right:12px;top:12px;font-size:11.5px;padding:8px 12px}.hero[data-hero=E] .wrap{padding-top:56px;padding-bottom:70px}}
+/* Budget Maximizer page (#/budget-maximizer) and Home link */
+.bm-link{display:inline-block;margin-top:14px;font:700 14px/1.3 var(--head);color:var(--ink);text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:3px;text-underline-offset:4px}
+.bm-link:hover{color:var(--yh)}
+.bm-card{background:#fff;border:1px solid var(--line);border-top:6px solid var(--y);border-radius:var(--r-lg);box-shadow:var(--sh);padding:28px 32px}
+.bm-h{font-size:20px;margin-bottom:14px}
+.bm-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:0}
+.bm-list li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);font-size:15.5px;color:var(--ink)}
+.bm-list li:last-child{border-bottom:none}
+.bm-list li svg{flex:0 0 26px;width:26px;height:26px;padding:4px;border-radius:50%;background:var(--y);fill:var(--ink);margin-top:-1px}
+.bm-list li b{font-weight:700}
+.bm-cta{margin-top:24px;background:var(--yt);border:1px solid var(--ys);border-radius:var(--r-lg);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bm-cta p{margin:0;color:var(--ink);font-weight:600}
+.bm-btns{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:720px){.bm-card{padding:22px 18px}}
+.product-heading-all-templates .lpg{font-size:13px;font-weight:700;margin-left:6px;white-space:nowrap}
+/* alignment pass Oct 29 (style only): fields in a row line up, steps on one line, side by side panels match */
+.rp-form .fld,.ro3 .fld{display:flex;flex-direction:column}
+.rp-form .fld>label.f,.ro3 .fld>label.f{flex:1 0 auto}
+.rp-form .fld[hidden],.ro3 .fld[hidden]{display:none}
+.dsteps button{flex:1 1 auto}
+#s-submit-ticket .two-col,.contact-grid{align-items:stretch}
+#s-submit-ticket .two-col>*,.contact-grid>*{height:100%;box-sizing:border-box}
+/* Fix 138+: back pages (thank you, login, tracking, emails, account panels and the rest). Redesign look, sample data only. */
+.bp-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.bp-mock{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px;padding:8px 12px;border:1px dashed var(--line2);border-radius:var(--r-sm);background:var(--soft);font-size:12.5px;color:var(--mu)}
+.bp-mock span{font-weight:700;margin-right:4px}
+.bp-mock .chip{text-decoration:none}.bp-mock .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tc{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;background:var(--ambt);border:1px solid #FEDF89;color:var(--amb);font-size:11px;font-weight:700;vertical-align:middle;white-space:nowrap}
+.bp-ok{border:1px solid #ABEFC6;border-left:4px solid var(--ok);background:var(--okt);color:#054F31;border-radius:var(--r-sm);padding:14px 18px;font-weight:600;font-size:15.5px}
+.bp-bad{border:1px solid #FECDCA;border-left:4px solid var(--bad);background:var(--badt);color:#7A271A;border-radius:var(--r-sm);padding:14px 18px;font-size:14.5px}
+.bp-bad ul{margin:6px 0 0 18px;padding:0}.bp-bad li{margin:2px 0}
+.bp-ov{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:16px 0;background:#fff}
+.bp-ov div{padding:12px 14px;border-right:1px solid var(--line);font-size:12.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.03em;font-weight:700}
+.bp-ov div:last-child{border-right:0}.bp-ov b{display:block;margin-top:4px;font-size:15px;color:var(--ink);text-transform:none;letter-spacing:0;word-break:break-word}
+.bp-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none;counter-reset:s}
+.bp-steps li{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;background:#fff;counter-increment:s;font-size:14px}
+.bp-steps li:before{content:counter(s);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:99px;background:var(--y);color:var(--ink);font-weight:800;margin-bottom:8px}
+.bp-steps b{display:block;color:var(--ink);margin-bottom:3px}
+.bp-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.bp-auth{max-width:460px;margin:8px auto 0}
+.bp-auth h1{font-size:26px;margin-bottom:4px}.bp-auth .sub{color:var(--mu);margin:0 0 16px}
+.bp-auth .alt{text-align:center;margin:14px 0 0;font-size:14px}
+.bp-or{display:flex;align-items:center;gap:10px;color:var(--mu);font-size:12.5px;margin:14px 0}.bp-or:before,.bp-or:after{content:"";flex:1;height:1px;background:var(--line)}
+.bp-pw{position:relative}.bp-pw button{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--info);font-weight:700;font-size:12.5px;cursor:pointer;padding:6px}
+.bp-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.bp-card{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;background:#fff}
+.bp-card small{display:block;color:var(--mu);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}.bp-card b{display:block;font-size:24px;color:var(--ink);margin-top:4px;font-family:var(--head)}
+.bp-card em{font-style:normal;font-size:12.5px;color:var(--mu)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap;border:1px solid var(--line2);background:#fff;color:var(--ink)}
+.pill:before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+.pill.g{color:var(--ok);background:var(--okt);border-color:#ABEFC6}.pill.b{color:var(--info);background:var(--infot);border-color:#B2CCFF}.pill.a{color:var(--amb);background:var(--ambt);border-color:#FEDF89}.pill.r{color:var(--bad);background:var(--badt);border-color:#FECDCA}.pill.n{color:var(--mu)}
+.bp-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;min-width:70px}.bp-bar i{display:block;height:100%;background:var(--ok);border-radius:99px}
+.bp-tbl td,.bp-tbl th{vertical-align:middle}
+.bp-url{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:99px;background:var(--soft);padding:7px 14px;font-size:13px;color:var(--mu);margin:0 0 14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.bp-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
+.bp-stat{border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:center;background:#fff}.bp-stat b{display:block;font-size:26px;font-family:var(--head);color:var(--ink)}.bp-stat span{font-size:12.5px;color:var(--mu);font-weight:700}
+.bp-hbar{display:grid;grid-template-columns:120px 1fr 64px;align-items:center;gap:10px;font-size:13.5px;margin:7px 0}.bp-hbar .t{height:14px;border-radius:6px;background:var(--soft);overflow:hidden}.bp-hbar .t i{display:block;height:100%;border-radius:6px}
+.bp-help{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;background:var(--yt);border:1px solid var(--ys);border-radius:var(--r);padding:16px 18px;margin-top:16px}
+.bp-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bp-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.bp-tiles a,.bp-tiles button{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--line);border-radius:var(--r);background:#fff;padding:16px 18px;font:inherit;color:var(--ink);text-decoration:none;cursor:pointer;box-shadow:var(--sh-sm)}
+.bp-tiles a:hover,.bp-tiles button:hover{border-color:var(--y);box-shadow:var(--sh)}
+.bp-tiles b{font-family:var(--head);font-size:16px}.bp-tiles span{font-size:13px;color:var(--mu)}
+/* emails */
+.em-wrap{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:start}
+.em-list{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
+.em-list h5{margin:0;padding:10px 14px;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mu);background:var(--soft);border-bottom:1px solid var(--line)}
+.em-list a{display:block;padding:10px 14px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:13.5px}
+.em-list a small{display:block;color:var(--mu);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.em-list a.on{background:var(--yt);box-shadow:inset 3px 0 0 var(--yh)}
+.em-head{border:1px solid var(--line);border-radius:var(--r) var(--r) 0 0;background:#fff;padding:12px 16px;font-size:13.5px}
+.em-head .kv{gap:3px 12px}
+.em-stage{border:1px solid var(--line);border-top:0;border-radius:0 0 var(--r) var(--r);background:#EAF0F6;padding:22px 12px}
+.em-mail{max-width:600px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:var(--sh-sm);font-family:Arial,Helvetica,sans-serif;color:#262626;font-size:15px;line-height:1.55;transition:max-width .2s}
+.em-stage.ph .em-mail{max-width:375px}
+.em-mail .eh{background:#F9C323;padding:18px 24px;text-align:center}.em-mail .eh b{font-family:var(--head);font-size:20px;letter-spacing:.02em}
+.em-mail .eb{padding:24px}.em-mail h2{font-family:Arial,Helvetica,sans-serif;font-size:22px;margin:0 0 12px}
+.em-mail .ebtn{display:inline-block;background:#F9C323;color:#262626;font-weight:700;text-decoration:none;padding:12px 24px;border-radius:8px;margin:8px 0 14px}
+.em-mail table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 14px}.em-mail td{border-bottom:1px solid #eee;padding:7px 4px;vertical-align:top}.em-mail td+td{text-align:right}
+.em-mail .ef{background:#262626;color:#D4D4D8;padding:16px 24px;font-size:12.5px;text-align:center}.em-mail .ef a{color:#FFC523}
+.em-mail .ebox{background:#FFF7DB;border:1px solid #FFE9A8;border-radius:8px;padding:12px 14px;margin:6px 0 14px;font-size:14px}
+.em-today{margin-top:14px}
+.em-today summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.em-today pre{white-space:pre-wrap;font:13px/1.5 ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;margin:8px 0 0}
+@media (max-width:900px){.bp-ov{grid-template-columns:1fr 1fr}.bp-ov div{border-bottom:1px solid var(--line)}.bp-cards,.bp-stats{grid-template-columns:1fr 1fr}.em-wrap{grid-template-columns:1fr}.em-list{display:none}.em-list.sm{display:block}}
+@media (max-width:640px){.bp-steps,.bp-grid2,.bp-tiles{grid-template-columns:1fr}.bp-hbar{grid-template-columns:96px 1fr 52px;font-size:12.5px}.em-stage{padding:12px 6px}.em-mail .eb{padding:18px}.bp-ov b{font-size:14px}}
+.em-sel{display:none}@media (max-width:900px){.em-sel{display:block}}
+/* Fix 136 follow-up: Pick this template inside the viewer */
+.tv-pick{white-space:nowrap}.tv-pick.done{background:#fff;color:var(--ink)}
+@media (max-width:640px){.tv-bar{flex-wrap:wrap}.tv-bar>div:last-child{width:100%;justify-content:space-between}}
+#dim .modal.bp-wide{max-width:880px;width:calc(100% - 24px)}
+.inp.bad{border-color:var(--bad);box-shadow:0 0 0 3px rgba(180,35,24,.12)}
+/* tier 3 */
+.bp-spin{width:34px;height:34px;flex:none;border-radius:99px;border:4px solid var(--line);border-top-color:var(--yh);animation:bpspin 0.9s linear infinite}@keyframes bpspin{to{transform:rotate(360deg)}}
+.bp-code{white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Menlo,monospace;background:#1f1f23;color:#f4f4f5;border-radius:var(--r-sm);padding:12px 14px;margin:6px 0 14px}
+#bp-root h3{margin-top:6px}
+.cal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.cal-h{font-size:12px;font-weight:700;color:var(--mu);text-align:center;padding:4px}
+.cal-d{min-height:78px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;font-size:12px;background:#fff;overflow:hidden}.cal-d b{display:block;font-size:13px}.cal-d.on{background:var(--yt);border-color:var(--ys)}.cal-d span{display:block;font-size:11px;line-height:1.3;margin-top:2px;word-break:break-word}
+@media (max-width:640px){.cal-d{min-height:56px;padding:3px}.cal-d span{font-size:9.5px}.bp-steps[style]{grid-template-columns:1fr!important}#bp-root .bp-grid2[style]{grid-template-columns:1fr!important}}
+/* hosted mockup safety layer */
+.mock-safe{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#FFC523;color:#262626;border:1px solid #E5A800;border-radius:8px;padding:10px 14px;margin:0 0 14px;font-size:14px;line-height:1.4}
+.mock-safe .btn{background:#fff}
+.inp.safe-ro,.inp[readonly].safe-ro{background:#fff;color:var(--ink);cursor:default;opacity:1}
+footer .mock-foot{margin-top:4px;opacity:.85}
+/* Real YLHQ order page fonts from the live theme (ydg-theme-child/fonts, css/product-fonts.css v2.40), subset to basic Latin. Open Sans is the Typed font (css/theme.css). */
+
+
+
+
+
+
+
+
+
+/* order page option pickers (font, paper, envelope) */
+.opt-help{margin:0 0 12px;color:var(--mu);font-size:15px}
+/* round 4: tabs, my templates, color swatches */
+.opt-env .env-ph{display:flex;align-items:center;justify-content:center;width:100%;height:88px;border:2px dashed var(--line2);border-radius:8px;margin-bottom:4px;font-size:13px;font-weight:700;color:var(--mu);background:#fff}.opt-env .env-sub{font-size:12px;color:#333;line-height:1.3}.env-cust{margin:10px 0 4px;padding:12px;border:1px solid var(--line2);border-radius:12px;background:#fffbe6}.env-cust .env-drop{margin-top:8px;padding:12px}
+.opt-sws.env-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;max-width:100%}.opt-sws.env-grid .opt-env{width:auto;min-width:0}.opt-sw.opt-env{padding:8px 26px 10px 8px}.opt-env img{width:100%;height:88px;object-fit:contain;background:#fff;border-radius:8px;margin-bottom:4px}.opt-env .ft-n{font-size:13.5px;font-weight:600;line-height:1.25}.opt-env .env-pr{font-size:12px;color:var(--mu)}.opt-env .env-pr.up{color:#7a5a00;font-weight:700}@media(max-width:600px){.opt-sws.env-grid{grid-template-columns:1fr 1fr}.opt-env img{height:70px}}
+.opt-sws{display:flex;flex-wrap:wrap;gap:8px}
+.opt-sw{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;border:2px solid var(--line2);border-radius:99px;cursor:pointer;background:#fff;font-size:14px}
+.opt-sw input{position:absolute;opacity:0;width:1px;height:1px}.opt-sw i{width:22px;height:22px;border-radius:50%;border:1px solid #999;flex:none}
+.opt-sw.on{border-color:var(--ink);box-shadow:0 0 0 2px var(--y)}.opt-sw small{color:var(--mu)}
+.opt-sw:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.opt-fixed{margin:8px 0;font-size:14.5px}
+.opt-dot{width:13px;height:13px;border-radius:50%;border:1px solid #888;display:inline-block}.opt-dot.f{border-radius:3px}
+/* round 5 */
+.opt-fs span{font-weight:600}.opt-llf{font-size:12.5px;color:var(--mu);margin:6px 0 0}
+.op-pick{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--soft)}
+.op-h{display:block;font:800 15px var(--head);color:var(--ink);margin-bottom:6px}
+.op-row{margin:8px 0}.op-l{display:block;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:5px}
+.opt-ffn{display:inline!important}
+/* round 6: font tiles in the real typeface */
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;max-width:100%}
+.opt-sw.opt-ft{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:3px;padding:10px 30px 10px 12px;border-radius:12px;min-width:0;text-align:left;line-height:1.2}
+.opt-ft .ft-n{font-size:17px;font-weight:400;color:var(--ink);overflow-wrap:anywhere}
+.opt-ft .ft-s{font-size:14px;font-weight:400;color:#333;overflow-wrap:anywhere}
+.opt-ft .ft-own{font-family:inherit;font-style:italic;color:var(--mu);font-size:13.5px}
+.opt-ft small{font-size:12px}
+.opt-ft .ft-ck{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line2);font-size:11px;line-height:14px;text-align:center;color:transparent;background:#fff}
+.opt-sw.opt-ft.on{background:#fffbe6;border-color:var(--ink);box-shadow:0 0 0 2px var(--y)}
+.opt-ft.on .ft-ck{background:var(--ink);border-color:var(--ink);color:#fff}
+.opt-ffn{font-weight:400}
+@media (max-width:480px){.ft-grid{grid-template-columns:1fr 1fr}.opt-ft .ft-n{font-size:15px}.opt-ft .ft-s{font-size:12.5px}}
+.lo{margin:10px 0 18px;display:flex;flex-direction:column;gap:8px}.lo-cb{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:14.5px}.lo-cb input{margin-top:3px}.lo-cb small{display:block;font-size:12.5px}.lo-more{margin-left:24px}.lo-more summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px}.lo-more .lo-cb{margin:6px 0}.lt-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #cfd4dc;border-radius:8px;padding:6px 8px;background:#fff;min-height:44px;cursor:text}.lt-tags:focus-within{border-color:#111;box-shadow:0 0 0 3px rgba(255,204,0,.35)}.lt-tag{display:inline-flex;align-items:center;gap:4px;background:#FFF3B0;border:1px solid #E9C400;border-radius:999px;padding:3px 6px 3px 10px;font-size:14px;font-weight:600}.lt-tag button{border:0;background:none;cursor:pointer;font-size:16px;line-height:1;padding:0 2px;color:#333}.lt-in{flex:1;min-width:220px;border:0;outline:0;font:inherit;font-size:15px;padding:6px 2px;background:transparent}
+/* round 16: landing pages in full */
+.lpx h1{font-size:clamp(28px,3.4vw,40px)}.lpx h2{font-size:clamp(22px,2.6vw,30px);font-weight:700;margin:0 0 10px}.lpx h3{font-size:18px;margin:0 0 6px}
+.lpx .lp-sec{margin:0 0 22px}.lpx p{margin:0 0 10px}
+.lpx .lp-hero{background:var(--yt);border:1px solid #F5DB8A;border-radius:var(--r-lg);padding:28px;margin-bottom:22px}
+.lpx .lp-ck{color:var(--ok);font-weight:800;font-size:18px}.lpx .lp-x{color:var(--bad);font-weight:800;font-size:18px}
+.lpx .lp-feat td:first-child{font-weight:700;color:var(--ink)}.lpx .lp-feat td{text-align:center}.lpx .lp-feat td:first-child{text-align:left}
+.lpx .lp-win td:nth-child(2){background:var(--okt);font-weight:800}
+.lpx .lp-nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.lpx .lp-img{display:block;max-width:100%;border-radius:var(--r);border:1px solid var(--line)}
+/* round 17: Zillow EOS v2 page */
+.z2 .z2-wrap{max-width:none}.z2 section,.z2 .z2-hero,.z2 .z2-disc{margin:0 0 30px}
+.z2 .z2-center{text-align:center}.z2 .z2-center .z2-lead{max-width:760px;margin:0 auto 18px}
+.z2 .z2-eyebrow{display:inline-block;background:var(--ink);color:var(--y);font:700 12px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:12px}
+.z2 h1{font-size:clamp(28px,3.4vw,42px)}.z2 h1 .z2-z{background:var(--y);padding:0 6px;border-radius:6px}
+.z2 h2{font-size:clamp(22px,2.6vw,30px);font-weight:700;margin:0 0 10px}.z2 h3{font-size:17px;margin:8px 0 6px}
+.z2 .z2-hero{background:var(--yt);border:1px solid #F5DB8A;border-radius:var(--r-lg);padding:28px}
+.z2 .z2-hero-grid,.z2 .z2-split,.z2 .z2-get-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center}
+.z2 .z2-sub{font-size:17px;margin:12px 0 6px}.z2 .z2-sub2{font-size:15px;margin:0 0 16px;font-weight:600;color:var(--ink)}
+.z2 .z2-hero-cta,.z2 .z2-cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.z2 .z2-cta-row{justify-content:center}
+.z2 .z2-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 22px;border-radius:var(--r-sm);font:700 15px/1.2 var(--body);text-decoration:none;border:1px solid var(--y);background:var(--y);color:var(--ink)}
+.z2 .z2-btn:hover{background:var(--yh);border-color:var(--yh)}.z2 .z2-btn-dark{background:#262626;border-color:#262626;color:#fff}.z2 .z2-btn-dark:hover{background:#000}
+.z2 .z2-link{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:2px}
+.z2 .z2-checks{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font-size:13.5px;font-weight:600}.z2 .z2-checks li:before{content:"\2713  ";color:var(--ok)}
+.z2 img{display:block;max-width:100%;height:auto;border-radius:var(--r);border:1px solid var(--line)}
+.z2 .z2-gbar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.z2 .z2-gbar>div{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.z2 .z2-ic{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--y);font:800 15px var(--head);color:var(--ink)}
+.z2 .z2-gbar small{display:block;color:var(--mu);font-size:13px}
+.z2 .z2-street{max-width:760px;margin:0 auto 16px}
+.z2 .z2-three,.z2 .z2-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:left;margin-bottom:22px}
+.z2 .z2-card,.z2 .z2-step,.z2 .z2-gcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:18px}
+.z2 .z2-card.z2-ok{border-color:#86D19C;background:var(--okt)}
+.z2 .z2-tag{display:inline-block;font:800 11.5px var(--head);letter-spacing:.05em;padding:3px 10px;border-radius:99px;margin-bottom:8px}.z2 .z2-t-low,.z2 .z2-t-high{background:var(--badt);color:var(--bad)}.z2 .z2-t-ok{background:#fff;color:var(--ok);border:1px solid #86D19C}
+.z2 .z2-nums{font-size:14px;color:var(--mu)}.z2 .z2-nums b{color:var(--ink);font-size:16px}
+.z2 .z2-pain,.z2 .z2-getlist{margin:0 0 12px;padding-left:20px}.z2 .z2-pain li,.z2 .z2-getlist li{margin-bottom:6px}
+.z2 .z2-n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--y);font:800 16px var(--head)}
+.z2 .z2-fine{font-size:13px;color:var(--mu)}
+.z2 .z2-price{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.z2 .z2-price>div{background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.z2 .z2-lbl{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}.z2 .z2-val{font:800 28px var(--head);color:var(--ink)}.z2 .z2-note{font-size:13px}
+.z2 .z2-gcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-bottom:14px}
+.z2 .z2-k{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}.z2 .z2-big{font:700 18px/1.3 var(--head);color:var(--ink);margin:6px 0 8px}
+.z2 .z2-cred{font-size:15px}
+.z2 .z2-faq details{border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;background:#fff;padding:0 16px}
+.z2 .z2-faq summary{cursor:pointer;padding:14px 0;font:700 15px var(--head);color:var(--ink)}.z2 .z2-faq details p{margin:0 0 14px;font-size:14.5px}
+.z2 .z2-final{background:var(--y);border-radius:var(--r-lg);padding:28px;text-align:center}.z2 .z2-final .z2-lead{max-width:720px;margin:8px auto 14px}
+.z2 .z2-small{font-size:13.5px;margin:6px 0 0}
+.z2 .z2-disc{font-size:12.5px;color:var(--mu);border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:760px){.z2 .z2-hero-grid,.z2 .z2-split,.z2 .z2-get-grid,.z2 .z2-three,.z2 .z2-steps,.z2 .z2-gcards,.z2 .z2-gbar,.z2 .z2-price{grid-template-columns:1fr}}
+.pvo-intro{margin:0 0 18px;font-size:15px}.pvo-intro p{margin:0 0 6px}.pvo-intro a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:2px}
+.pvo-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;padding:0;list-style:none}.pvo-chips li{background:var(--yt);border:1px solid var(--ys);border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--ink)}
+.pvo-step{display:flex;gap:10px;align-items:center;margin-bottom:14px}.pvo-step span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--y);font:800 14px var(--head);color:var(--ink)}.pvo-step h3{font-size:18px;margin:0}
+.pvo-drop{border:2px dashed var(--line2);border-radius:var(--r);background:var(--soft);padding:26px 20px;text-align:center}
+.pvo-stats{background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;margin-top:12px;font-size:14px}.pvo-stats p{margin:4px 0}
+.pvo-sum div{display:flex;justify-content:space-between;font-size:14px;padding:4px 0}.pvo-sum div span:last-child{font-weight:600;color:var(--ink)}.pvo-sum .tot{font:700 20px var(--head);color:var(--ink)}
+/* r20: Home tracking section + EOS options */
+.htk{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;max-width:1000px;margin:0 auto}
+.htk-txt p{margin:0 0 14px;font-size:16px}
+.htk-list{margin:0 0 20px;padding:0;list-style:none}.htk-list li{position:relative;padding-left:26px;margin:0 0 8px;font-weight:600}
+.htk-list li:before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:50%;background:var(--y)}
+.htk-vis{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:18px 20px;border-top:5px solid var(--y)}
+.htk-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.htk-head span{font-size:12px;color:var(--mu);font-weight:700;text-transform:uppercase}
+.htk-row{display:grid;grid-template-columns:1fr auto 90px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.htk-row small{display:block;color:var(--mu);font-size:12.5px}.htk-row .bp-bar{min-width:0}
+.htk-foot{border-top:1px solid var(--line);padding-top:10px;font-weight:700;font-size:14px}
+@media(max-width:760px){.htk{grid-template-columns:1fr;gap:22px}.htk-row{grid-template-columns:1fr auto;}.htk-row .bp-bar{grid-column:1/-1}}
+.eosx{margin:-4px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:#fffdf3}
+.eosx .fld{margin-bottom:12px}.eosx .cb{margin:0 0 10px}.eosx .cb input{width:18px;height:18px;accent-color:#e0a800;flex:none}
+.eosx-pct{display:flex;align-items:center;gap:8px}.eosx-pct input{max-width:120px}
+/* r21: CSV only note and pop-up, saved agent panel, Flip Card options, Invoice me */
+.up-warn{margin:10px 0 0;padding:10px 12px;border-radius:8px;background:#fff8e1;border:1px solid #f3dc8a;color:#c62828;font-size:14px}
+.csvpop{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;display:grid;place-items:center;padding:16px}
+.csvpop-in{background:var(--y);border-radius:12px;max-width:640px;width:100%;padding:26px 28px}
+.csvpop-in h2{font-size:24px;font-weight:500;margin:0 0 14px;line-height:1.25}.csvpop-in p{margin:0 0 18px;font-size:14px}.csvpop-in a{color:#2b2b2b;word-break:break-all}
+.agp{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0;background:#fff}
+.agp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.agp-row select{max-width:280px}
+.agp-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.agp-msg{font-size:13px}
+@media(max-width:560px){.agp-form{grid-template-columns:1fr}}
+.inv-note{padding:0 0 8px;color:red;font-size:16px;font-weight:bold;margin:0}
+/* r22: auto-match window, agent and return address sections */
+.am-lvl{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.am-lvl.ok{color:#1b7a33}.am-lvl.chk{color:#a86400}.am-lvl.no{color:#c62828}.am-lvl.you{color:#1f4fbf}
+.am-lvl i{font-style:normal;display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:11px}
+.am-lvl.ok i{background:#1b7a33}.am-lvl.chk i{background:#e0a800}.am-lvl.no i{background:#c62828}.am-lvl.you i{background:#1f4fbf}
+.am-sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 10px}.am-sum span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:99px;background:#f3f3f3}
+.agr{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:#fff}
+.agr h4{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px}.agr h4 .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--y);font-size:13px}
+.agr .help{margin:0 0 10px;font-size:13px;color:var(--mu)}
+.agr-src{display:inline-block;font-size:12.5px;font-weight:700;background:#fff8e1;border:1px solid #f3dc8a;border-radius:99px;padding:3px 10px;margin:0 0 10px}
+.agr-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}.agr-g .full{grid-column:1/-1}
+.agr-g3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+.agr .fld{margin:0}.agr-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.agr-pick{margin-top:10px}.agr-same{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;margin:0 0 10px;cursor:pointer}
+@media(max-width:560px){.agr-g,.agr-g3{grid-template-columns:1fr}}
+/* r22b: upload steps wizard */
+#dim.wz .mdl,#dim.wz .modal{max-width:980px;width:96vw}
+.wz-steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 14px;flex-wrap:wrap}
+.wz-steps li{flex:1;min-width:110px;font-size:12.5px;font-weight:700;color:#777;border-top:5px solid #e6e6e6;padding-top:6px}
+.wz-steps li.on{color:#111;border-color:var(--y)}.wz-steps li.done{color:#1b7a33;border-color:#1b7a33}
+.wz-steps li span{display:block;font-size:11px;font-weight:600;color:#999}
+.wz-file{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 8px}
+.wz-file .ic{width:46px;height:46px;border-radius:10px;background:var(--y);display:grid;place-items:center;font-weight:800;font-size:12px}
+.wz-file.bad .ic{background:#f6d5d5}.wz-file small{display:block;color:var(--mu)}
+.wz-g h5{margin:16px 0 4px;font-size:15px}.wz-g p.help{margin:0 0 8px;font-size:13px;color:var(--mu)}
+.wz-t{width:100%;border-collapse:collapse}.wz-t td,.wz-t th{padding:7px 8px;border-bottom:1px solid #eee;text-align:left;font-size:13.5px;vertical-align:middle}
+.wz-t th{font-size:12px;color:#555;background:#fafafa}.wz-t select{min-width:170px;max-width:100%}
+.wz-t .ex{color:#555;font-size:12.5px}.wz-t tr.bad td{background:#fff3f3}
+.wz-req{color:#c62828;font-size:11.5px;font-weight:700;margin-left:4px}.wz-opt{color:#888;font-size:11.5px;margin-left:4px}
+.am-lvl.past{color:#6a3fb5}.am-lvl.past i{background:#6a3fb5}.am-lvl.blank{color:#777}.am-lvl.blank i{background:#aaa}
+.wz-err{border:1px solid #f1b3b3;background:#fff5f5;border-radius:10px;padding:10px 12px;margin:10px 0;font-size:13.5px}
+.wz-err b{color:#c62828}.wz-err ul{margin:6px 0 0;padding-left:18px}
+.wz-one{display:flex;gap:8px;align-items:flex-start;background:#fff8e1;border:1px solid #f3dc8a;border-radius:10px;padding:10px 12px;margin:6px 0 8px;font-size:13.5px;cursor:pointer}
+.wz-chips{display:flex;gap:6px;flex-wrap:wrap}.wz-chips button{font-size:12.5px}
+.wz-cnt{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:12px 0}
+.wz-cnt div{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #eee;font-size:14px}
+.wz-cnt div:last-child{border-bottom:0;background:#fff8e1;font-weight:800;font-size:15.5px}
+.wz-cnt .m{color:#c62828;font-weight:700}.wz-cnt .u{color:#1f4fbf;font-weight:700}
+.wz-bar{height:8px;background:#eee;border-radius:99px;overflow:hidden;margin:8px 0}.wz-bar i{display:block;height:100%;background:var(--y);width:0;transition:width .3s}
+.wz-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wz-sum>div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px}
+.wz-sum b.h{display:block;font-size:12px;color:#666;text-transform:uppercase;margin-bottom:4px}
+@media(max-width:640px){.wz-sum{grid-template-columns:1fr}.wz-t th:nth-child(3),.wz-t td:nth-child(3){display:none}.wz-steps li{min-width:58px;font-size:11px}.wz-steps li span{display:none}}
+.dh-signin .wrap{justify-content:space-between}.dh-signin-logo{height:26px;width:auto;display:block}
+.dh-logo{display:block;width:min(440px,100%);height:auto;margin:0 auto 16px;border-radius:12px}.dh-logo.sm{width:min(300px,100%);margin:0 0 14px}
+
+/* Nov 14: per order mail tracking + Design a New Mail Piece flow */
+.tko-head,.tko-row{display:grid;grid-template-columns:minmax(150px,1.3fr) minmax(150px,1.4fr) minmax(170px,1.4fr) 100px 120px 110px;gap:12px;align-items:center}
+.tko-head{padding:0 14px 8px;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.03em}
+.tko{border:1px solid var(--line);border-radius:var(--r);background:#fff;margin:0 0 10px;overflow:hidden}
+.tko.open{border-color:var(--line2);box-shadow:var(--sh-sm)}
+.tko-row{width:100%;text-align:left;background:none;border:0;padding:12px 14px;cursor:pointer;font:inherit;color:inherit}
+.tko-row:hover{background:var(--soft)}
+.tko-row small{display:block;color:var(--mu);font-size:12.5px;margin-top:2px}
+.tko-pr b{display:block;font-size:13.5px;margin-bottom:5px}
+.tko-pr .bp-bar{display:block;max-width:220px}
+.tko-l{display:none!important}
+.tko-c{font-size:13px;font-weight:700;color:var(--info);text-align:right}
+.tko-x{border-top:1px solid var(--line);background:var(--soft);padding:12px 14px 14px}
+.tko-g h4{margin:6px 0 8px;font-size:14px}
+.tko-g+.tko-g{margin-top:12px}
+.tko-t{table-layout:fixed;width:100%;min-width:640px}.tko-t th:nth-child(1){width:70px}.tko-t th:nth-child(2){width:110px}.tko-t th:nth-child(3){width:70px}.tko-t th:nth-child(4){width:120px}.tko-t th:nth-child(6){width:120px}
+.tko-t td,.tko-t th{font-size:13px;padding:7px 10px}
+.tko-xf{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media(max-width:900px){.tko-head{display:none}.tko-row{grid-template-columns:1fr auto;row-gap:8px}.tko-pr{grid-column:1/-1}.tko-l{display:block!important}.tko-c{grid-column:1/-1;text-align:left}}
+.tkc h4{margin:0 0 12px}
+.tkc-chart{display:flex;align-items:flex-end;gap:6px;height:170px;padding:0 4px;margin-bottom:10px}
+.tkc-b{flex:1;max-width:56px;display:flex;flex-direction:column;align-items:center;height:100%}
+.tkc-col{flex:1;width:100%;display:flex;align-items:flex-end;background:var(--soft);border-radius:6px 6px 0 0}
+.tkc-col i{display:block;width:100%;border-radius:6px 6px 0 0;min-height:3px}
+.tkc-b small{font-size:11.5px;color:var(--mu);padding:5px 0 0}
+i.del{background:var(--ok)}i.tr{background:var(--info)}i.up{background:var(--line2)}
+.tkc-key{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mu)}
+.tkc-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.tkl{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line)}
+.tkl li{position:relative;display:grid;grid-template-columns:200px minmax(0,1fr) 190px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.tkl li:last-child{border-bottom:0}
+.tkl li:before{content:"";position:absolute;left:-25px;top:50%;margin-top:-6px;width:12px;height:12px;border-radius:50%;background:var(--line2);border:2px solid #fff}
+.tkl li.del:before{background:var(--ok)}.tkl li.tr:before{background:var(--info)}
+.tkl li>div:last-child{justify-self:end;text-align:right}.tkl-d b{display:block}.tkl-d span{font-size:13px;color:var(--mu)}
+.tkl-s small{display:block;font-size:12.5px;color:var(--mu);margin-top:4px}
+@media(max-width:700px){.tkl li{grid-template-columns:1fr}.tkl li>div:last-child{justify-self:start;text-align:left}}
+.ct-subh{font-size:17px;font-weight:600;margin:4px 0 8px}
+.ct-steps{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0}
+.ct-steps a{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none}
+.ct-steps span{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;background:var(--line);font-size:11.5px;font-weight:800}
+.ct-steps li.ok span{background:var(--ok);color:#fff}
+.ct-flow .ct-step{margin:0 0 14px;scroll-margin-top:80px}
+.ct-sh{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px}
+.ct-sh h2{margin:0;font-size:19px}.ct-sh p{margin:2px 0 0;font-size:13.5px}
+.ct-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--y);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800}
+.ct-n.ok{background:var(--ok);color:#fff}
+.ct-why{margin:6px 0 0;font-size:13px;color:var(--mu);line-height:1.45}.ct-why b{color:var(--ink);font-weight:700}
+.ct-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.ct-card{border:2px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.ct-card.on{border-color:var(--ok);box-shadow:0 0 0 3px var(--okt)}
+.ct-im{position:relative;aspect-ratio:4/3;background:#eee center/cover;border:0;cursor:zoom-in;padding:0;width:100%}
+.ct-im span{position:absolute;right:8px;bottom:8px;background:rgba(17,17,17,.75);color:#fff;font-size:11.5px;font-weight:700;border-radius:6px;padding:2px 8px}
+.ct-b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ct-b>b{font-size:14px;line-height:1.3}
+.ct-b dl{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin:0;font-size:12.5px}.ct-b dt{color:var(--mu);font-weight:600}.ct-b dd{margin:0}
+.ct-from{font-size:13px;margin-top:auto}
+.ct-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:0 12px}
+@media(max-width:700px){.ct-grid{grid-template-columns:1fr 1fr}}
+.ct-kv{margin:0 0 14px}
+.rcard .im .tag.rdy{background:var(--ok);color:#fff}
+.rcard.rdy{border-color:var(--ok)}
+</style><style>
+html{scroll-behavior:smooth}
+.faq-hero{background:var(--soft);border-bottom:1px solid var(--line)}
+.faq-hero .wrap{padding:38px 24px 30px;text-align:center}
+.faq-hero h1{font-size:36px}
+.faq-hero p{margin:8px auto 18px;color:var(--mu);max-width:640px}
+.faq-search{position:relative;max-width:640px;margin:0 auto}
+.faq-search input{width:100%;box-sizing:border-box;font:16px var(--body);padding:15px 46px 15px 48px;border:2px solid var(--line2);border-radius:99px;background:#fff;outline:none}
+.faq-search input:focus{border-color:var(--y);box-shadow:0 0 0 4px var(--yt)}
+.faq-search svg{position:absolute;left:17px;top:50%;transform:translateY(-50%);width:20px;height:20px;fill:var(--mu)}
+.faq-search .clr{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:22px;color:var(--mu);cursor:pointer;display:none}
+.faq-count{margin-top:10px;font-size:13.5px;color:var(--mu);min-height:20px}
+.faq-layout{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:start}
+.faq-nav{position:sticky;top:96px;display:grid;gap:4px}
+.faq-nav h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:0 0 6px}
+.faq-jump{display:flex;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:8px;text-decoration:none;font:600 14px var(--head);color:var(--ink)}
+.faq-jump:hover{background:var(--yt)}
+.faq-jump span{color:var(--mu);font-weight:500}
+.faq-jump.dim0{opacity:.35}
+.faq-tools{display:flex;justify-content:flex-end;margin-bottom:10px}
+.faq-sec{scroll-margin-top:96px;margin-bottom:30px}
+.faq-sec h2{font-size:22px;margin:0 0 12px;padding-left:12px;border-left:5px solid var(--y)}
+.acc-b ul{margin:0 0 10px;padding-left:20px}.acc-b li{margin:0 0 4px}
+.acc-i summary .chip{margin-left:6px;vertical-align:2px}
+mark{background:var(--ys);padding:0 1px;border-radius:2px}
+.faq-go mark{background:none;padding:0;color:inherit}
+.faq-go{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.faq-go .lbl{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-right:2px}
+.faq-go .btn{text-decoration:none}
+.acc-b a:not(.btn){color:var(--ink);text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:2px;text-underline-offset:2px}
+.acc-b a:not(.btn):hover{background:var(--yt)}
+.faq-pop{border-bottom:1px solid var(--line);background:#fff}
+.faq-pop .wrap{padding:18px 24px}
+.faq-pop h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:0 0 10px}
+.pop-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.pop{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);border-top:4px solid var(--y);transition:transform .12s,box-shadow .12s}
+.pop:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.pop b{display:block;font:700 14.5px var(--head)}.pop span{display:block;font-size:12.5px;color:var(--mu);margin-top:3px;line-height:1.35}
+@media(max-width:1100px){.pop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.pop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.faq-none{display:none;text-align:center;padding:30px;border:1px dashed var(--line2);border-radius:var(--r);color:var(--mu)}
+.faq-cta{margin-top:10px;background:var(--ink);color:#fff;border-radius:var(--r);padding:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.faq-cta h2{color:#fff;font-size:24px;margin:0 0 6px}.faq-cta p{margin:0;color:#d4d4d8}
+.faq-cta .acts{display:flex;gap:10px;flex-wrap:wrap}
+.faq-cta .btn.sec{background:transparent;color:#fff;border-color:#71717a}
+@media(max-width:880px){.faq-layout{grid-template-columns:1fr}.faq-nav{position:static;display:flex;flex-wrap:wrap;gap:6px}.faq-nav h4{width:100%}.faq-jump{border:1px solid var(--line);padding:6px 10px}.faq-hero h1{font-size:28px}}
+</style></head><body>
+<div class="util"><div class="wrap">
+ <a class="hl" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a Mail Piece</a><a class="hl" href="http://lists.yellowletterhq.com" data-ext="1">Organizer</a><a class="hl" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Returned Mail</a><a href="https://toddswagg.github.io/ylhq-mockup/#/resources">Resources</a><a href="https://toddswagg.github.io/ylhq-mockup/#/checkout">Checkout</a><a href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit Ticket</a><a href="https://toddswagg.github.io/ylhq-mockup/#/account">My Account (Jane Sample)</a>
+</div></div>
+<header class="hdr"><div class="wrap">
+ <a class="logo" href="https://toddswagg.github.io/ylhq-mockup/#/home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAAAA1CAMAAAA07d1XAAAAq1BMVEVHcEwAAAAFBQUFAwgAAAAaGR0AAAAGBQUFBQUAAAABAQEKCgoAAAAAAAAGBgYAAAACAgIAAAAAAAApKChISEg8PDwAAAAAAAAGBgYfGx4yMjIAAAAeHh2XlZbj4+T/xiL///8BAQAbFiJXV1fo6OjZ2dn6+voaGgGQkJBZWhXIyMjyyB3y8vLWwRS7u7tAPxZ1dXWurq6fn59nZ2d6fQhQThtISwS2sA6BgYEGSgjYAAAAH3RSTlMADtKfM+UrgQUZteVBcMWTTCLx9/36Vadlv/td83IuL6UfKQAADAxJREFUeNrtmwl7m7gWhtmEQOw7xb53TFiGMh5qQ+fW//+X3XMkCHaduMk46X3upKd9isIiS6++swg30i/7ZW9v/84/kRfZJ6p/YEw+Kb/89fkl9tdDRI0PSsnIHx6+/vZC+7Z9oMbHJPWv6OEbEHgpqIet/zFB0Ycvv73CPj+o8i9OL+H0yZSNj8zp62379sgpMP9ZnDQveA2n8rb9/shJ/99xMgNTustkW74mUGqXJwKamc9z+s9t+/oDTmYqvzellJGEMP8u7ymvtZOX9gUltSwz4474dItTQEnFxGl54ziOfTVHOKkhzhwa+msUsOA3s6rf7/Z9Qp9YpHzuPoBjfkNz6hOcNuU5eicMqSkZhvH2nGRfjbp6V20kNK/qus76bqwUT25hjOzQdSfl5Y5rKyQQKJRux62NN1d3sQk/U4abTl03ZTc4hfJNTiYrFUqZYlmWq27kN+QUbFRSHfcwgYYgHC1qd7sjuyShbeGGwZWlvIIbT97LXS1qRu4EBkNM9VDvdr37PeY0hmudZ0jeCRrV5hYn4/ozynRp6koJFipMzTJogrLehpPmsOQAYxcW2zAfd4DpbC/VbbAjntQk02pgnor84lS0hfsjHd0BAQ8kI82uLS79du3VjvbAK/tOkdoPONmls2CySkvNNXmJuG5paVecfr9tn684yRuWdE2LrtB3KCJXRgfDFXWk1ZZJHqgkZR3cXLw0Egu+h0xeUFi65HV8PS4MVdQmvmQouEbkco1oHKXn8cl8npNphbl8KbUwtF9ZF3z5npOvTP0ObD8cknCEYwTsA6tGYMbT6+0nLV/vl5qWiM4E4H1kw0SBXHKmEFnX0wJ7ZbpOJ+BVeRdT9Yu2iexbcXzlxEr7agRhqH/H6c/b9sd3nJykR0jHimQ+XfQiZaNwsAtTZxXJCjzSzCFefkFV7xxAJzB2AfjkIfIaFLOSCEgcxwOMo4JjVUP3cUXO3TI7YuS6ySkoKT/meLyGqMj3xCe/qGF0HVF9WZIfo06atAKYkXqu63oIbFaRCh91QJ/McZmoS4hCg6UgVj0vnY+6pMNBkPbG3R6TgwCsmKKLYyaZueq6jJoSOOb3tt+aOmVweWPAOJTmIrB7z3OSwyfTsFM6d3Ay+MgLkQ+yTsSHFZitTMembsatL60q0qK9cCPDK8a6betOREnZGoehUyQTj6dMcrthomJs3a6NTJjdAcsBJBnVqLANgeRRN52iuVV1glUYqmqqRkx61ZRQGnV9XfcTk4We+rNoXOpPcPL4pWuvE6Oz5L/PSS9w5LkEtkYdMZ/ClvKCRy7EIz+qyHDnpGeww15cHlxjfmoXpyKpxzYGpcoXlQ0EnCkXgEeG+aiHRkbjOcMemWwrI0poY6dhj0Rs23aRHNoESrALrEiU4GqPspoZZvxf9lwJb//9fGfH6AgS2KoXMZ9OFT7ZjmML09aEipixJj3OZUiKBqnwmSDm5Yghrpk9IIBnm60vSg1T8gk0eqJWLfzcYVQihh8vvS6i5oVW36GyYeZ5jNBGdw5p+bOcHIHj2rSS/v18pyWYf3DVF72I0gmB8fRWJ57SIKer0onL76hoKghh2szJfBvgEZ9GNgd6lvH7B1FqaFncwB0RRfA9odYeOGmPvRazqOmE7ueqFedkg6MOLUprrb2vPcuFfxXrqei0Cm3Nd99u2p8XnGSE0CS5tEYdIZh4I8qZeGOSPaQmiienx9LJhlH1yEWXsIcplZyJU4D5Cdxqx7UjzFSQMpYaJYmhCXxSNnDwdtwCCFWoSIi6BlHr2xr9zKBw4eTgh43okEO2pK/8ukqzFAxSqvSMhe4d+S5N0EvoGnVE6TTCEs4ry0ZwCJXUq4rWpCe4YJAO+LxcA+aHuCWtaM/zuK50PJbVTY2p7ES0nIN3eCKJ1WRR0UzbYLyS03X0WBK4I4QsXJijujiRc60n5OSXz+52rHs4SU7RY1DK19KpW/2nJiatWgDEROl0nfS0CKkCTVGhrscjRGV9XWuZIVe0tukiKpucK5PVEy7KY6+CsrEMx1QGFKd3gJEwjjCduT9VI7mWsQb4a4whu6fOlGxGUhSR0IsQzDTrpGJZBV4XeclOqMibgxhSxPWWhAzNlIdhT8rncLyJ17JwzRJ9NU1x4mK9xXghm7kHHtHnXqE3QVkEwdAjR5QZrcAnPcIRLnu20rv0OTmwndCSecHwDnGcm7yU2jZGkh7jgljZdux4eeUojVhve0l6c+UeeBWfIZ9Xo8hzkN9QONZETtWUZoz6+AF875b7voYxCzlirhsb6I44AsFZKs1ErhuhyjpkFEJDRdmC0KMGLyYp9dAyxpiiWGEJptzghEq7bx+MrCMRdXA+XCeB1aOLYOl0cDc8Rce5pFm9CGKbouY8oo57j6YckUI6V6rWhMl+ok5yrLq+HyeSz2nsYqcIZ1BiLCWDQJBGs6jB18Xl/TGBXmpQ6mZGaCrdIcP6GLCE3CxFURhTaRq4ofms32H0Mu5+r+J1IstITtzyuGAN+H6pqKrE3WjuyGtBwDSIpJcXNeeiNKiKBzfB82Mm9NBZEwIYQ0WUoch6CkWxsG740KmTKibM98kgEKRFw5OewNQUMVxWNcTUsYCgUC3ZdEcsejEWmaZscJMWY8BpcxnHTXlpOXDhXk6GUmPSw00xrqgrhl4rmqZBhsMggTHI3vYoAIXfhfIzti0CrI54QDcrajx6HSphOjScUc8PjQhAi7EeZRhougHMG96rAQ3Rq1e1HJyuBZKsVnvAZIjq0w6UEQCmnMnK55yTflEXmJY3t4JQMe7mFKDbxamWVVwnLEIgMBG4JKpC7kURNvbJxqu4TqJAt2qRwfCpygGVIQ2qzpmthuDWTowlQ8sFxtaZoRBPFBq+O+1Fr2IT0xB7ToyFBr7ikA6IMVne7hEhemhD0udeGHgYm5QwOM8eobk0NOmS0x+37UlOBZbWRcw37V0JtDpMR0mmunhuD+1QgQm1AC+EobdYDFWsOCKMU7Xt5htwoiE5tXj2ELvgpvtQM2l5RJjRRjrXE6Y51a0A5R7a2Ct231mg3hp7GhUvI4d6V8ceaLrCDpSq2Q1b+7kNnojh6YWg0vkdAiv9V76n+/MJTjIIY7GmGCHJuJjY2n7ANBZP2GzAlZDZUMOZsMc6iEcRutHoQdzQDHAcMLJHdJPqkgewxyThfolc1q0GlEfYFb+3GOdeqwZwD/i0MuJAhr6F50mOqo5nD+4UxPPMNs7h7Nh5hDK4oAJ3Pbfmu9dzkih3uGHEme93feLJ+PoOrZ+UnEerdoxU7nn1yfJ9aIHtR+4EAQ9c+86yevGIa69ZVBgSaVZFGWolOjhWzJl7Jej1GPNdzVyq965QA36/O/JeElVevzR45gs80zoHtSmpkYeh/0bftzhuHEdFzwUlpumzpKoqwlJZ0twYWqoupaSqYoWaMEylOp0mImYh2S7mJmraCtyYsM3SLxWxrQXYBYqlcNYPhFsxn/nYl3haogTzKz5teqSCtkIX5zJxNCRbNeRfb1wWdppVeuYaCkOlZIH0RpxMlRz6FlVTKfl8OrBtTRZNbW7Jmq2Lq4ad57b5qA+8YT6a0mobN54OE849jRBUTNdrgb30JZ93j0fRtIPzlKZf9qxdbVzWzbHJylD1ddMMNIeFJYrpjTg50ShcZMpsQ3pDMzTftwNscVBtpZrLvGXpDrvauFxujn1WzmZRjFDXnK4T3k1Oa3janxr+IkN6L/N5FOsUn8uFFsSW7jA5PE9r15tj03codVLdAJVlT3L6Wl7a1x9ywjco/UPcQuq1pfczUc73letR8PJ9E9l3CdW8OvfMuydWak9x+lxe2ucfcRLfpYU1lH6q9J6mKx3fMR7HoRZfu7+tyWr65MeWrvEmfufiLkLsn6R3NdmL+91s9cENpJ9jXpm/SRynJ1EqQan73ua78djUdTMcCJWln2Qm89+Ek+memqY/kPfHhPWE5xLiqhtT+tl2f10gO8zNnJ+2vuKr9v8/TmjGr/8XfYvTxzP/tZzUj8lJ/vTw9TW/t0F87UNyknSyfTGor1uSazqE0w8JSiVf/nqZkU+pjXL6kGaYtuOpLzEKlDRT/qicDNMMdF3Xrv+sf5efA/MD/lrZfwFnK9EixyHWlAAAAABJRU5ErkJggg==" alt="Yellow Letter HQ"></a>
+ <nav class="nav" id="nav">
+  <a href="https://toddswagg.github.io/ylhq-mockup/#/home" data-r="home">Home</a><a href="https://toddswagg.github.io/ylhq-mockup/#/shop" data-r="shop postcards letters custom-template subscriptions sub">Shop</a><a href="https://toddswagg.github.io/ylhq-mockup/#/orders" data-r="orders detail proof account">My Orders</a><a href="#top" data-r="faq" class="on">FAQ</a><a href="https://toddswagg.github.io/ylhq-mockup/#/contact" data-r="contact">Contact Us</a><a href="https://toddswagg.github.io/ylhq-mockup/#/datahub" data-r="datahub datahub-signup">HQ Data Hub</a><a href="https://toddswagg.github.io/ylhq-mockup/#/rapid" data-r="rapid rapid-proofs">Rapid Orders</a><a href="https://toddswagg.github.io/ylhq-mockup/#/cart" data-r="cart checkout" class="cartlink" aria-label="Cart">&#128722;<span class="n" id="cartN" hidden>0</span></a>
+ </nav>
+ <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div>
+<div class="drawer" id="drawer">
+ <a href="https://toddswagg.github.io/ylhq-mockup/#/home">Home</a><a href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop</a><a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a><a href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Rapid Orders</a><a href="https://toddswagg.github.io/ylhq-mockup/#/account">My Account</a><a href="https://toddswagg.github.io/ylhq-mockup/#/cart">Cart</a><a href="#top">FAQ</a><a href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact Us</a><a href="https://toddswagg.github.io/ylhq-mockup/#/datahub">HQ Data Hub</a><a href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece</a><a href="http://lists.yellowletterhq.com" data-ext="1">Organizer</a><a href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Returned Mail</a><a href="https://toddswagg.github.io/ylhq-mockup/#/resources">Resources</a><a href="https://toddswagg.github.io/ylhq-mockup/#/checkout">Checkout</a><a href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit Ticket</a>
+</div></header>
+<main id="top">
+<section class="faq-hero"><div class="wrap">
+ <div class="crumbs"><a href="https://toddswagg.github.io/ylhq-mockup/#/home">Home</a> / FAQ</div>
+ <h1>Frequently Asked Questions</h1>
+ <p>Answers about ordering, pricing and postage, proofs, Rapid Orders, lists, HQ DataHub, tracking, returned mail and your account.</p>
+ <div class="faq-search"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 0 1 6.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg><input id="faqQ" type="text" enterkeyhint="search" placeholder="Search the FAQ, for example: proof, First Class, batches, refund" aria-label="Search the FAQ" autocomplete="off"><button class="clr" id="faqClr" aria-label="Clear search">&times;</button></div>
+ <div class="faq-count" id="faqCount" aria-live="polite">83 questions</div>
+</div></section>
+<section class="faq-pop"><div class="wrap"><h4>Popular destinations</h4><div class="pop-grid"><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/shop"><b>Shop</b><span>Letters, postcards and handwritten mail</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/rapid"><b>Rapid Orders</b><span>Reorder a past mailer in 3 steps</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard"><b>Mail Tracking</b><span>Every order and every drop</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/datahub"><b>HQ DataHub</b><span>Property data, skip tracing, lists</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer"><b>Budget Maximizer</b><span>Upload and clean your lists</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail"><b>Returned Mail</b><span>Scan returns, stop mailing bad addresses</span></a><a class="pop" href="https://toddswagg.github.io/ylhq-mockup/#/contact"><b>Contact</b><span>Call, email or chat with our team</span></a></div></div></section>
+<div class="wrap page">
+ <div class="faq-layout">
+  <nav class="faq-nav" aria-label="FAQ sections"><h4>Jump to</h4><a class="faq-jump" href="#sec-ordering-products">Ordering &amp; Products <span>18</span></a><a class="faq-jump" href="#sec-pricing-postage">Pricing &amp; Postage <span>9</span></a><a class="faq-jump" href="#sec-proofs-templates">Proofs &amp; Templates <span>9</span></a><a class="faq-jump" href="#sec-rapid-orders">Rapid Orders <span>6</span></a><a class="faq-jump" href="#sec-lists-data-budget-maximizer">Lists &amp; Data / Budget Maximizer <span>8</span></a><a class="faq-jump" href="#sec-hq-datahub">HQ DataHub <span>7</span></a><a class="faq-jump" href="#sec-tracking-delivery">Tracking &amp; Delivery <span>10</span></a><a class="faq-jump" href="#sec-returned-mail">Returned Mail <span>3</span></a><a class="faq-jump" href="#sec-account-billing">Account &amp; Billing <span>10</span></a><a class="faq-jump" href="#sec-support">Support <span>3</span></a></nav>
+  <div>
+   <div class="faq-tools"><button class="btn sec sm" id="faqAll">Expand all</button></div>
+   <section class="faq-sec" id="sec-ordering-products"><h2>Ordering &amp; Products</h2><div class="acc"><details class="acc-i faq-q"><summary>What products and services do you offer?</summary><div class="acc-b"><p>We print and mail direct mail for real estate investors, and we also offer list and data tools:</p><ul><li>Letters: #10, invitation/A6, windowed, <a href="https://toddswagg.github.io/ylhq-mockup/#/letters/fullview">Full View (Street View)</a>, tri-fold, jumbo, <a href="https://toddswagg.github.io/ylhq-mockup/#/letters/check">check letters</a>, and <a href="https://toddswagg.github.io/ylhq-mockup/#/letters/sealed">pressure-sealed (snap pack)</a> letters</li><li>Postcards: First Class, half-page, jumbo, and actual handwritten postcards</li><li>Digital Press folded notes and greeting cards, plus real handwritten folded notes and greeting cards</li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece</a> (custom template), $65 one time</li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/datahub">HQ DataHub</a> (property data, lists, and unlimited skip tracing)</li><li>Skip tracing, List &amp; Leads membership (ListSource), <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">YLHQ List Organizer</a>, Property Values appends</li><li>Returned Mail options</li></ul><p>Start at the Shop. Current prices are on each product page.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/postcards">See postcard options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What do I need to place an order?</summary><div class="acc-b"><ul><li>An account on yellowletterhq.com</li><li>Your mailing list as a CSV (UTF-8) file</li><li>Your agent or company name and phone number</li><li>Your return address</li><li>The product you want, your mail day, and the number of drops</li></ul><p>After checkout we send you a proof. Nothing prints until you approve it in <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a>.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/register">Create an account <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop all products <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/how-to-order">How to order <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I place an order?</summary><div class="acc-b"><p>Pick your product in the <a href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop</a>, then choose the template, font, color, and paper. Pick your mail date from the dates shown on the order form, and choose whether the quantity mails all at once or in batches. Upload your list, add any order notes, set your quantity, and check out.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/how-to-order">How to order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop all products <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Are there minimum order quantities?</summary><div class="acc-b"><p>Yes. The minimum is 100 postcards, or 200 letters or cards. Each product page also shows its minimum.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/postcards">See postcard options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What fields does my mailing list need, and what file format?</summary><div class="acc-b"><p>Upload your list as a CSV (UTF-8) file on the website when you order. Excel files with multiple tabs aren't accepted. Your list needs:</p><ul><li>Mailing address, city, state, and zip</li><li>Property address, city, state, and zip</li><li>Owner first and last name</li></ul><p>If you need help saving a CSV as UTF-8, see our short guide (yellowletterhq.com blog, "How to save CSV file as UTF-8 with Notepad").</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/custom-headers">Match your list columns <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Where do I upload my list or my own mail piece?</summary><div class="acc-b"><p>On the order page, drag and drop your list into the upload box. If you have your own design, logo, or an example piece, upload it in the same box.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I use more than one list, or more than one template, in one order?</summary><div class="acc-b"><p>You can use more than one list and more than one drop date on one order. Each order uses one template or design. For a second design, place a separate order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop all products <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is variable data?</summary><div class="acc-b"><p>Variable data is any field on your list that changes on each piece, such as the owner name, property address, or offer. When you order, you can map 3 extra variable fields yourself. If you send us the file, we can map up to 15 fields in total.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/custom-headers">Match your list columns <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I add special instructions?</summary><div class="acc-b"><p>Yes. Put them in the order notes at checkout: anything about the design, the list, or the drop date. Leaving special requests out can delay your proof.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/cart">Open your cart <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/checkout">Go to checkout <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Are your handwritten pieces written by a person or printed?</summary><div class="acc-b"><p><a href="https://toddswagg.github.io/ylhq-mockup/#/letters/handwritten">Actual Handwritten letters and cards</a> are written by a robot with a real pen. They take about 5 production days after you approve your proof. Our other products use printed handwriting-style text.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters/handwritten">See Real Handwritten options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/postcards/hw">Handwritten postcard <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is a check letter or a pressure-sealed letter?</summary><div class="acc-b"><p>A check letter is a letter made for a check-style offer. A sealed letter (pressure seal or snap pack) is a self-mailer with no separate envelope. Both have a 200-piece minimum. Check letters pair well with the <a href="https://toddswagg.github.io/ylhq-mockup/#/lp/zillow-eos">Easy Offer System</a>.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters/check">See check letters <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters/sealed">See sealed letters <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is a Full View (Street View) letter?</summary><div class="acc-b"><p>It uses a windowed envelope, so more of the letter shows through, often with a street-view style image. It has a 200-piece minimum. The Dynamic Street View image add-on is 3 cents per piece.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters/fullview">See Full View letters <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What envelope and paper options are there?</summary><div class="acc-b"><p>You choose them on the product page. On letters, most printed or invitation-style envelopes add 3 cents each, some holiday styles add 4 cents, a See-Through #10 adds 10 cents, and an Actual Handwritten A6 or #10 envelope adds 35 cents. On postcards, white and pink paper cost nothing extra, yellow and fluorescent colors add 1 cent each, and a glossy finish adds 2 cents each.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters/no10">Letter with #10 envelope <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters/a6">Letter with A6 envelope <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is the Easy Offer System?</summary><div class="acc-b"><p>Easy Offer prints a cash-offer range for each prospect on your mail piece. It adds 3 cents per piece. You can choose Standard EOS or <a href="https://toddswagg.github.io/ylhq-mockup/#/lp/zillow-eos">Zillow-type EOS</a>, use your own offer amounts, or set your own percentage. With Zillow-type EOS, the values come straight from Zillow. After checkout you can preview offers for the first 10 records and adjust them.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/lp/zillow-eos">See Zillow-type EOS <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters/check">See check letters <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can you add home values to a list without a mail order?</summary><div class="acc-b"><p>Yes. Use our <a href="https://toddswagg.github.io/ylhq-mockup/#/zillow-values">Property Values page</a>. Upload a CSV with an address column, and we email it back with Zillow home values in 24 to 48 hours. The price is $0.10 per record.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/zillow-values">Order Property Values <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is Text by Mail?</summary><div class="acc-b"><p>A recipient texts the unique code on your mail piece to get your offer and start a conversation, and you get the property address and phone number. Text START to 81363 to opt in, STOP to cancel, or HELP for instructions. Message and data rates may apply.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/terms">Read our Terms <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can you mail the pieces to me so I can send them myself?</summary><div class="acc-b"><p>No. We are a full-service mail house and mail directly to your prospects from our local bulk post office. We don't send finished mail or blank templates to customers.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop all products <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Do you offer drop shipping?</summary><div class="acc-b"><p>Please <a href="https://toddswagg.github.io/ylhq-mockup/#/contact">contact our team</a> and we'll help.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-pricing-postage"><h2>Pricing &amp; Postage</h2><div class="acc"><details class="acc-i faq-q"><summary>What are your starting prices?</summary><div class="acc-b"><p>At the 10,000+ quantity tier: letters start at $0.723, postcards at $0.589, and <a href="https://toddswagg.github.io/ylhq-mockup/#/letters/handwritten">Real Handwritten Cards</a> at $1.081. Prices go down as quantity goes up, and each product page shows its full price table.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/postcards">See postcard options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters/handwritten">See Real Handwritten options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What does the price include?</summary><div class="acc-b"><p>Mail merge, the printed piece (letter and envelope, or postcard), postage as listed for that product, delivery to the post office, and a tracking link. A standard template with a CSV upload has no setup or list-processing fee.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop all products <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/how-to-order">How to order <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Does the price include postage?</summary><div class="acc-b"><p>Yes. Letter and card prices include Standard postage. First Class on letters adds $0.241 per piece. Postcard prices already include First Class postage.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/postcards">See postcard options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What extra fees should I know about?</summary><div class="acc-b"><ul><li>First Class on letters: +$0.241 per piece</li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece</a> (custom template): $65 one time</li><li>Undeliverable list: $19</li><li>Paying by credit card adds 2.9%. ACH has no fee.</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/payment-methods">Manage payment methods <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>When is my price final?</summary><div class="acc-b"><p>Your price is locked after our quality check, so the price on your proof should be correct. Your final quantity locks when you approve the proof.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is the difference between First Class and Standard Mail?</summary><div class="acc-b"><ul><li><b>First Class</b> costs more. It is forwarded if the recipient moved and filed a change of address, and undeliverable pieces come back to you. It's the only postage that gives you return mail.</li><li><b>Standard Mail</b> is bulk mail with a lower postage rate. It isn't forwarded the same way, there is no return mail, and it doesn't arrive on a consistent weekday.</li></ul><p>For current in-home timing, see our <a href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Holiday Mailing Guide</a> map. We update it from recent tracking. Dates are estimates, not a guarantee.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Open Returned Mail <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How long does mail take to reach the mailbox?</summary><div class="acc-b"><p>That depends on postage and where it's going. Use the <a href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Holiday Mailing Guide</a> map: First Class uses the same dates in every state, and Standard Mail depends on your state's group. Some weeks are marked "Skip, use First-Class" or "Mail early." We can't promise USPS in-home dates. Once mail is in the postal system, delivery is up to USPS.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can you give me a discount or match another quote?</summary><div class="acc-b"><p>Our published website prices are the prices. For a large or unusual order, or if you have another quote, <a href="https://toddswagg.github.io/ylhq-mockup/#/contact">contact our team</a> and they'll review it.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I get nonprofit postage rates?</summary><div class="acc-b"><p>Nonprofit rates require USPS approval. Having IRS nonprofit status isn't enough. <a href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact our team</a> and we'll help with your order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-proofs-templates"><h2>Proofs &amp; Templates</h2><div class="acc"><details class="acc-i faq-q"><summary>How do proofs work?</summary><div class="acc-b"><p>We make a digital proof for every order. Nothing prints until you approve it. Only you can approve it, using the Approve or Disapprove buttons in <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a> (not by replying to an email). There's no deadline to approve, but an order left unanswered for 45 days is canceled automatically and you get full store credit.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/proof/204518">See a sample proof <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/terms-proof-approval">Proof approval terms <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What should I check on my proof?</summary><div class="acc-b"><ul><li>Spelling and your message</li><li>Your name, phone number, and return address</li><li>Any offer amounts and mail dates</li><li>The variable fields on the sample records</li></ul><p>The proof shows sample records, not your whole list, so look those addresses up in your list. For postcards, check that each one goes to the mailing address and mentions the property address.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/proof/204518">See a sample proof <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Why is a mailing address on my proof not on my list?</summary><div class="acc-b"><p>We run NCOA (National Change of Address) on every list at no extra cost. If someone moved and filed a change of address, the proof may show their new address.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Open the Budget Maximizer <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>I didn&#x27;t get a proof email. Where is my proof?</summary><div class="acc-b"><p>Sign in, open <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a>, and select the order to see the proof. Also check your spam folder and any secondary email on your account. If it still isn't there, send us your order number.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/communication-preferences">Email preferences <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>My order says Not Approved. What does that mean?</summary><div class="acc-b"><p>It means a change is needed. Select Disapprove in <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a> and leave a clear note about what to change, and we'll send a revised proof.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How many changes can I make?</summary><div class="acc-b"><p>On a standard template you get 3 proof edits per order. A 4th edit is $65, which moves the order to a custom template with no edit limit after that. You also get 3 free list changes before approval, and each one after that is $70. Once you approve, the proof, the list, and the drop dates can't change, so you'd need a new order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is &quot;Design a New Mail Piece&quot;? <span class="chip y">New</span></summary><div class="acc-b"><p>Use it when you want a design that isn't one of our templates, or when you want a design ready before your list is. It costs $65 one time. After that you can use the design on future orders with no template fee, and custom designs have no proof-edit limit. For small wording or image changes to one of our templates, just add a note to a regular order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/template-on-file">Templates on file <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What will I choose when I design a new mail piece? <span class="chip y">New</span></summary><div class="acc-b"><p>You'll pick your piece from picture cards that show what it looks like, with its size, envelope, and ink. Then you choose postage, paper, font or ink color, return address, and the phone number to print, and upload your artwork and notes. A short note at each step explains why we ask. A summary at the end shows every choice before you check out.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I reorder a design I&#x27;ve used before?</summary><div class="acc-b"><p>Yes. Pick a past-order template, or "letter on file" or "postcard on file," or enter the old order number, using the same product type as before. The fastest way is <a href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Rapid Orders</a> (<a href="#sec-rapid-orders">see below</a>).</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/template-on-file">Templates on file <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-rapid-orders"><h2>Rapid Orders</h2><div class="acc"><details class="acc-i faq-q"><summary>What is Rapid Orders?</summary><div class="acc-b"><p><a href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Rapid Orders</a> lets you send a mailer you've already used to a new list without starting over. It takes three steps:</p><ol><li>Pick one of your previous orders.</li><li>Upload a new list or reuse a saved one.</li><li>Pick your drop date(s), and get your proof fast.</li></ol><p>Approve or delete the proof, check out, and we mail it.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/rapid-proofs">Rapid Order proofs <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How fast is a Rapid proof?</summary><div class="acc-b"><p>Usually in less than 20 minutes, so you can approve it and get your mail moving sooner.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/rapid-proofs">Rapid Order proofs <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Does a Rapid Order cost more?</summary><div class="acc-b"><p>No. It's the same price and the same minimums as a regular order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Which designs can I use with Rapid Orders?</summary><div class="acc-b"><p>Any approved design from a past order that is complete, in production, or has a proof ready, as long as the design file is still on file. Cancelled, refunded, on-hold, failed, and unfinished orders can't be reused in Rapid Orders. If the design file isn't on file, place a regular order instead.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/template-on-file">Templates on file <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I use a brand-new design with Rapid Orders? <span class="chip y">New</span></summary><div class="acc-b"><p>Once your new design's proof is approved, it will appear in <a href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Rapid Orders</a> marked "Ready to mail." Next time, you just pick it, upload a list, choose your drop dates, and check out.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/custom-template">Design a New Mail Piece <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Which mail dates can I pick for a Rapid Order?</summary><div class="acc-b"><p>Choose from the dates shown on the form. Production time after approval still applies.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-lists-data-budget-maximizer"><h2>Lists &amp; Data / Budget Maximizer</h2><div class="acc"><details class="acc-i faq-q"><summary>What is the Budget Maximizer?</summary><div class="acc-b"><p>It's the list-upload tool on every order page, and it's included with every upload. It:</p><ul><li>Combines several small lists into one campaign, so you get a better quantity price</li><li>Gives each list its own tracking phone number</li><li>Removes duplicate property addresses</li><li>Standardizes addresses and runs NCOA, CASS, and Delivery Point Verification</li><li>Turns trust names like "Ontiveros Trust 1997" into "Ontiveros Family"</li><li>Fills in "Property Owner" when the name is blank</li><li>Remembers your column headers</li><li>Gives you a copy of the combined list</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Why is my final quantity lower than the number of rows I uploaded?</summary><div class="acc-b"><p>The <a href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Budget Maximizer</a> removes duplicate property addresses and records that are undeliverable or missing a complete mailing address. Those records aren't mailed. You can add the $19 undeliverable list to your order to see which records were removed.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Open the Budget Maximizer <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can each list have its own tracking phone number?</summary><div class="acc-b"><p>Yes. Upload more than one list and give each one its own tracking number, so you know which list a call came from. If a number on your proof is wrong, tell us before you approve.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Upload a list <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What are NCOA, CASS, and Delivery Point Verification?</summary><div class="acc-b"><p>NCOA updates addresses for people who filed a change of address. CASS checks that an address is accurate and deliverable. Delivery Point Verification checks that the address actually accepts mail. All three run on your list.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/budget-maximizer">Open the Budget Maximizer <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Someone asked me not to mail them again. How do I stop mailing them?</summary><div class="acc-b"><p>Add them as Do Not Mail in <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">YLHQ List Organizer</a>, either one record at a time, by CSV, or with the YLHQ <a href="https://toddswagg.github.io/ylhq-mockup/#/lp/chrome-extension">Chrome extension</a>. If your order is already placed, send us the names and we'll remove them from that order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">Open YLHQ List Organizer <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/lp/chrome-extension">Get the Chrome extension <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is YLHQ List Organizer?</summary><div class="acc-b"><p>A monthly list-cleaning tool at lists.yellowletterhq.com. It removes undeliverable addresses, duplicates, do-not-mail records, and returned mail from your lists. It also finds properties that appear on more than one list, combines lists, and tracks what you sent and when. It's $97 a month and separate from <a href="https://toddswagg.github.io/ylhq-mockup/#/datahub">HQ DataHub</a>.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">Open YLHQ List Organizer <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/lp/chrome-extension">Get the Chrome extension <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can you provide a mailing list?</summary><div class="acc-b"><p>Yes, two ways:</p><ul><li><b><a href="https://toddswagg.github.io/ylhq-mockup/#/datahub">HQ DataHub</a></b> (<a href="#sec-hq-datahub">see below</a>)</li><li><b>List &amp; Leads membership (ListSource):</b> leads are $0.03 each, plus $0.005 for demographics, with unlimited pulls and saved searches. It's $97 a month (3-month minimum) or $997 a year. After you sign up, we create your ListSource account and CoreLogic emails your login. You sign in at ListSource.com, not in your YLHQ account.</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-source">List &amp; Leads membership <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is skip tracing and what does it cost?</summary><div class="acc-b"><p>Upload your list and get up to 5 phone numbers, 3 emails, and 3 mailing addresses per owner, most recent first. We can also <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/skip-tracing">skip trace</a> LLCs, corporations, and trusts. Results are emailed as soon as your list runs. Pricing (100-record minimum): 100–200 records is $29 per order, 201–2,999 is $0.14 each, 3,000–9,999 is $0.12, and 10,000+ is $0.10. Skip tracing isn't refundable.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/sub/skip-tracing">See skip tracing <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-hq-datahub"><h2>HQ DataHub</h2><div class="acc"><details class="acc-i faq-q"><summary>What is HQ DataHub?</summary><div class="acc-b"><p>Our property-data platform. Every plan includes:</p><ul><li>Nationwide property and owner data</li><li>State AI Sellability Score (0–1,000)</li><li>Lien data</li><li>Leadpipes Suite AI tools</li><li>Unlimited skip tracing with no per-record charge</li><li>60,000 records a month, up to 10,000 per download</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What are the plans?</summary><div class="acc-b"><ul><li><b>Trial:</b> $250 for 90 days of full access, then $349 a month</li><li><b>Buy-In:</b> a one-time fee, then $97 a month. The options are State AI $2,500, Lien Data $1,500, Skip Tracing $1,000, State AI + Lien Data $4,000, or all three $5,000.</li><li><b>Month-to-Month:</b> $349 a month, no buy-in, cancel anytime</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/datahub-signup">Sign up for HQ DataHub <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Where does the data come from, and how often is it updated?</summary><div class="acc-b"><p>County public records, licensed data providers, and MLS/IDX listing feeds, with more than 40 years of history and over 1.5 billion data points. The data updates daily, but new sales, ownership changes, and liens show up when counties release them, so some take longer.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How accurate is the skip tracing in HQ DataHub?</summary><div class="acc-b"><p>It typically gets about a 90% hit rate, with about 90% accuracy on the hits it returns. It also includes phone activity scores, phone-type identification, and duplicate filtering. These are estimates, not guarantees, and contact details change over time.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub">Explore HQ DataHub plans <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/sub/skip-tracing">See skip tracing <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I sign up and send a list to mail?</summary><div class="acc-b"><p>Sign up on the <a href="https://toddswagg.github.io/ylhq-mockup/#/datahub">HQ DataHub page</a> with the same email as your Yellow Letter HQ account. Once your list is built, "Send to Direct Mail" sends it to your YLHQ account under CSV Search.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub-signup">Sign up for HQ DataHub <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/app/datahub">Open the HQ DataHub app <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What happens after I sign up?</summary><div class="acc-b"><p>We set up your account after payment. The <a href="https://toddswagg.github.io/ylhq-mockup/#/datahub-status">status page</a> shows when it's being set up and when it's ready, and we email you when it's ready.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/datahub-status">Check sign-up status <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>I already have HQ DataHub. How do I change my plan?</summary><div class="acc-b"><p><a href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact support</a> to make changes to your existing account.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit a ticket <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-tracking-delivery"><h2>Tracking &amp; Delivery</h2><div class="acc"><details class="acc-i faq-q"><summary>What mail day can I choose? Is that the day it arrives?</summary><div class="acc-b"><p>The mail date is the day your order leaves our facility for USPS, not the day it reaches mailboxes. Choose from the dates on the order form. We don't mail on Tuesdays. Drop dates lock once you approve your proof.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/calendar">Open my Mailing Calendar <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How long until my mail goes out?</summary><div class="acc-b"><p>Turnaround means production time, not mailbox delivery. After you approve your proof, letters and postcards go to the post office in about 1 to 3 business days. Actual handwritten pieces take about 5 production days.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Open Mail Tracking Dashboard <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Why can&#x27;t I pick the mail date I wanted?</summary><div class="acc-b"><p>The dates you can pick depend on production time after approval, and payment has to be complete before the order can mail. We don't mail on Tuesdays.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I split my order into several drops?</summary><div class="acc-b"><p>Yes. Each drop (batch) needs at least 500 pieces, and an order can have up to 12 batches.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/rapid">Start a Rapid Order <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I track my mail?</summary><div class="acc-b"><p>Every batch gets a tracking link once it's dropped at the post office. Before that, there's no link yet. Sign in and open the <a href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Mail Tracking Dashboard</a>, or go to <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a> and open the order.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Open Mail Tracking Dashboard <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How does the Mail Tracking Dashboard work? <span class="chip y">New</span></summary><div class="acc-b"><p>You see one row per order: order number and name, product, a progress summary like "4 of 12 drops delivered," the next drop date, and status (In production, Mailing, or Complete). Search by order number or name, or filter by status. Click an order to see every drop, with its mail date, quantity, status, latest USPS scan, and a Track link. Each order also has its own tracking page with all its drops.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Open Mail Tracking Dashboard <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I read my tracking link?</summary><div class="acc-b"><p>Your AccuTrace link sorts pieces by scan status: Early, On Time, Late, En route, Returns, and Not Scanned. "Predicted Delivery" is a USPS estimate, not a guaranteed date.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Open Mail Tracking Dashboard <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Is delivery guaranteed? What if mail is lost?</summary><div class="acc-b"><p>No. Once mail is in the postal system, delivery is up to USPS, and we aren't responsible for lost or stolen mail.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/tracking-dashboard">Open Mail Tracking Dashboard <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/terms">Read our Terms <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>When should I mail for the holidays?</summary><div class="acc-b"><p>Use our <a href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Holiday Mailing Guide</a> map. Find the week you want mail to arrive, then use the leave-the-post-office date for your postage and state group. Some weeks are marked "Skip this week," "Skip, use First-Class," or "Mail early." Remember to allow production time after approval.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Open the Holiday Mailing Guide <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I sync my mailing schedule to Google Calendar?</summary><div class="acc-b"><p>You can sync your YLHQ Mailing Schedule to your <a href="https://toddswagg.github.io/ylhq-mockup/#/calendar">Google Calendar</a>. A new how-to video is coming soon.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/calendar">Open my Mailing Calendar <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-returned-mail"><h2>Returned Mail</h2><div class="acc"><details class="acc-i faq-q"><summary>Which postage gives me returned mail?</summary><div class="acc-b"><p>Only First Class. Standard Mail isn't returned.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Open Returned Mail <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/letters">See letter options <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What&#x27;s the difference between the $19 undeliverable list and the Return Mail List?</summary><div class="acc-b"><ul><li><b>$19 undeliverable list:</b> the addresses our address check removed before mailing. You choose it when you order.</li><li><b>Return Mail List ($49 per order):</b> built after mailing from USPS returns, about 7 days after delivery. It's never 100% complete.</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Open Returned Mail <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/sub/returned-mail">Returned Mail plans <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What are my returned-mail options?</summary><div class="acc-b"><ul><li><b>Self-scan (<a href="https://toddswagg.github.io/ylhq-mockup/#/sub/returned-mail">YLHQ Returned Mail</a>):</b> $49 a month. Scan returns from the <a href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Returned Mail page</a> with your webcam, a file upload, typed barcodes, or a handheld scanner (Zebra DS4308 HD or Honeywell 1900G-HD). Returns feed straight into <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">List Organizer</a> so those addresses come off your lists, and you can <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/skip-tracing">skip trace</a> your returns.</li><li><b>Return Mail List:</b> $49 per order.</li><li><b>Send Us Your Return Mail (Done 4 U):</b> $59 per box. Email support first for an invoice, then ship your returns in a USPS Priority box (you pay shipping) to 45 Broadway, Chula Vista, CA 91910, marked Attention plus your invoice number. We send back a list of the returned records.</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/returned-mail">Open Returned Mail <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/sub/returned-mail">Returned Mail plans <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-account-billing"><h2>Account &amp; Billing</h2><div class="acc"><details class="acc-i faq-q"><summary>How do I pay, and what payment methods do you accept?</summary><div class="acc-b"><p>Credit card or ACH. ACH payments are made through Bill.com. Credit cards add a 2.9% fee, and ACH has none. To pay an open order, go to <a href="https://toddswagg.github.io/ylhq-mockup/#/account">My Account</a> → Orders, open the order, and choose Pay. If you need another way to pay, contact your account manager or support.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/payment-methods">Manage payment methods <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>My order says payment is needed. Will it still mail on my date?</summary><div class="acc-b"><p>Not until it's paid. Payment has to be complete before an order can mail. Once paid, it goes on the next available mail drop, which may not be the date you picked.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/payment-methods">Manage payment methods <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>What is your refund and cancellation policy?</summary><div class="acc-b"><p>The default is store credit toward a future order, not a cash refund.</p><ul><li>Canceled before printing: full store credit.</li><li>Already printed: a disposal fee may apply, and the rest is credited.</li><li>Unapproved for 45 days: canceled automatically with full store credit.</li></ul><p>Skip tracing, memberships, and ListSource accounts aren't refunded or prorated. See our <a href="https://toddswagg.github.io/ylhq-mockup/#/terms">Terms</a>.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/terms">Read our Terms <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/store-credits">View my store credit <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I use my store credit?</summary><div class="acc-b"><p>Your credit is in your account as a coupon or <a href="https://toddswagg.github.io/ylhq-mockup/#/store-credits">Store Credit</a>. Copy the code and paste it at checkout under "Apply Coupons." It works on YLHQ mail products and can't be withdrawn as cash.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/store-credits">View my store credit <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/checkout">Go to checkout <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I prepay for mailer credits?</summary><div class="acc-b"><p><a href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact our team</a> if you'd like to set up mail in advance.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I cancel, upgrade, or downgrade a membership?</summary><div class="acc-b"><p>Open a <a href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">support ticket</a> from your <a href="https://toddswagg.github.io/ylhq-mockup/#/account">account dashboard</a> with your account email, billing address, and first and last name. Monthly subscriptions renew automatically unless you cancel at least 24 business hours before the billing period ends. You keep access until the period ends.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/subscriptions-my">My subscriptions <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit a ticket <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I manage my account, payment methods, and billing addresses?</summary><div class="acc-b"><p>In your <a href="https://toddswagg.github.io/ylhq-mockup/#/account">Account Dashboard</a>:</p><ul><li><b><a href="https://toddswagg.github.io/ylhq-mockup/#/account-details">Account Details</a>:</b> edit your name, email, phone, and password, and add a secondary email that gets order notices, invoices, payment notices, proofs, and promotions. The secondary email isn't a separate login.</li><li><b><a href="https://toddswagg.github.io/ylhq-mockup/#/payment-methods">Payment Methods</a>:</b> add, edit, or remove cards and ACH.</li><li><b>Address:</b> save billing addresses.</li></ul><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/account-details">Account details <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/payment-methods">Manage payment methods <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/addresses">Saved addresses <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>I can&#x27;t log in or can&#x27;t see my order or proof.</summary><div class="acc-b"><p>Sign in at <a href="https://toddswagg.github.io/ylhq-mockup/#/account">My Account</a> and use "<a href="https://toddswagg.github.io/ylhq-mockup/#/lost-password">Forgot password</a>" if needed. Orders and proofs are under <a href="https://toddswagg.github.io/ylhq-mockup/#/orders">My Orders</a>. If you still can't find them, <a href="https://toddswagg.github.io/ylhq-mockup/#/contact">contact us</a> with your order number.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/login">Log in <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/lost-password">Reset my password <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/orders">Open My Orders <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I remove items from my cart?</summary><div class="acc-b"><p><a href="https://toddswagg.github.io/ylhq-mockup/#/cart">Open your Cart</a> and remove what you don't want.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/cart">Open your cart <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Can I send orders from my own software (API)?</summary><div class="acc-b"><p>Yes. With the <a href="https://toddswagg.github.io/ylhq-mockup/#/api-docs">YLHQ API</a> or Zapier you can send lists and place orders from your CRM. Ask us to turn on API access, and your API key will appear under <a href="https://toddswagg.github.io/ylhq-mockup/#/integrations">Integrations</a> in your account.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/integrations">Open Integrations <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/api-docs">Read the API guide <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section><section class="faq-sec" id="sec-support"><h2>Support</h2><div class="acc"><details class="acc-i faq-q"><summary>How do I contact Yellow Letter HQ?</summary><div class="acc-b"><p>Call (858) 412-3370, email support@yellowletterhq.com, use the chat on our site, or open a <a href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">support ticket</a> from your <a href="https://toddswagg.github.io/ylhq-mockup/#/account">account dashboard</a>. Our office is at 45 Broadway, Chula Vista, CA 91910. Office hours are Monday to Friday, 6:00 AM to 2:30 PM Pacific.</p><p>We observe all federal holidays. If a mail day lands on a federal holiday, the mail goes out the next business day.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit a ticket <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>How do I open or manage a support ticket?</summary><div class="acc-b"><p>Open a ticket from the Ticket panel in your <a href="https://toddswagg.github.io/ylhq-mockup/#/account">account dashboard</a>, or on the <a href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit Ticket page</a>, for issues with an order, <a href="https://toddswagg.github.io/ylhq-mockup/#/sub/list-organizer">List Organizer</a>, Returned Mail, a membership, or your account. Describe the issue and attach a screen recording or files if you can. You can review, reply to, or close tickets from the same panel.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit a ticket <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/my-tickets">My tickets <span aria-hidden="true">&rarr;</span></a></div></div></details><details class="acc-i faq-q"><summary>Do you guarantee response rates?</summary><div class="acc-b"><p>No. We can't promise a response rate or a number of calls or deals. Results depend on your list, your offer, and how you follow up.</p><div class="faq-go"><span class="lbl">Go to</span><a class="btn sm" href="https://toddswagg.github.io/ylhq-mockup/#/resources">Browse Resources <span aria-hidden="true">&rarr;</span></a><a class="btn sm sec" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us <span aria-hidden="true">&rarr;</span></a></div></div></details></div></section>
+   <div class="faq-none" id="faqNone">No questions match your search. Try another word, or <a href="https://toddswagg.github.io/ylhq-mockup/#/contact">contact us</a>.</div>
+   <section class="faq-cta" id="contact"><div><h2>Still have questions?</h2><p>Our team is happy to help. Call 858-412-3370, email support@yellowletterhq.com, or send us a message.</p></div>
+   <div class="acts"><a class="btn" href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact us</a><button class="btn sec" id="ctaChat">Chat with us</button><a class="btn sec" href="https://toddswagg.github.io/ylhq-mockup/#/submit-ticket">Submit a ticket</a></div></section>
+  </div>
+ </div>
+</div>
+</main>
+<footer>
+ <div class="wrap fcols">
+  <div><h4>About Us</h4><ul><li><a href="https://toddswagg.github.io/ylhq-mockup/#/home">Home</a></li><li><a href="#top">FAQ</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/contact">Contact Us</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/affiliate">Affiliate Area</a></li></ul></div>
+  <div><h4>Shop</h4><ul><li><a href="https://toddswagg.github.io/ylhq-mockup/#/shop">Shop</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/holiday">Holiday Mailing Guide</a></li></ul></div>
+  <div><h4>Store</h4><ul><li><a href="https://toddswagg.github.io/ylhq-mockup/#/account">My Account</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/resources">Resources Page</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/checkout">Checkout</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/terms">Terms and Conditions Policy</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/privacy">Privacy Policy</a></li><li><a href="https://toddswagg.github.io/ylhq-mockup/#/cart">Cart</a></li></ul></div>
+  <div><h4>Contact</h4>
+   <div class="cline"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>858-412-3370</div>
+   <div class="cline"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>support@yellowletterhq.com</div>
+   <div class="cline">Office hours: Monday to Friday, 6:00 AM to 2:30 PM Pacific</div>
+   <div class="social"><a href="https://x.com/YellowLetter_HQ" data-ext="1" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.2 2h3.4l-7.4 8.5L23 22h-6.8l-5.3-7-6.1 7H1.4l7.9-9L1 2h7l4.8 6.4zM17 20h1.9L7.1 3.9H5.1z"/></svg></a><a href="http://www.facebook.com/yellowletterhq" data-ext="1" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6c0-.6.4-1 1-1h2V2h-3a4 4 0 0 0-4 4v2H8v3h2v11h4V11h3l1-3z"/></svg></a><a href="https://www.google.com/search?q=Yellow+Letter+HQ" data-ext="1" aria-label="Google"><svg viewBox="0 0 24 24"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3zM12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22zM6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9zM12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6z"/></svg></a><a href="https://www.linkedin.com/company/yellow-letter-hq" data-ext="1" aria-label="Linkedin"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a><a href="https://www.youtube.com/@yellowletterhq" data-ext="1" aria-label="Youtube"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-3.2.5-4.8s-.1-3.2-.5-4.8zM9.8 15.1V8.9l5.8 3.1z"/></svg></a><a href="https://www.instagram.com/yellowletter.hq/" data-ext="1" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C4.3 2.3 2.3 4.3 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.2 3.6 2.2 5.6 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.6-.2 5.6-2.2 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.2-3.6-2.2-5.6-5.8-5.8C15 2 14.7 2 12 2zm0 1.8c2.7 0 3 0 4 .1 2.7.1 4 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-4-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C4 5.3 5.3 4 8 3.9c1-.1 1.3-.1 4-.1z"/></svg></a><a href="https://www.tiktok.com/@yellowletterhq" data-ext="1" aria-label="Tiktok"><svg viewBox="0 0 24 24"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.6 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.8a5.7 5.7 0 1 0 4.9 5.6V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.3-1.6z"/></svg></a></div>
+  </div>
+ </div>
+ <div class="copy">&copy; 2026 Yellow Letter HQ. All rights reserved.</div>
+ <div class="copy mock-foot">Design mockup for yellowletterhq.com. Not a live site.</div>
+</footer>
+<div class="hl-chat" id="hlchat">
+ <div class="hl-teaser" id="hlTeaser"><button class="tx" id="hlTx" aria-label="Hide">&times;</button><b>Yellow Letter HQ</b>Hi! Have a question about an order, a proof or mail timing? Send us a message and our team will reply.</div>
+ <div class="hl-pop" id="hlPop" role="dialog" aria-label="Chat with Yellow Letter HQ">
+  <div class="hl-head"><div class="hl-av">YLHQ</div><div><b>Yellow Letter HQ</b><small><span class="hl-on"></span>We reply by chat, text or email</small></div><button class="x" id="hlX" aria-label="Close chat">&times;</button></div>
+  <div class="hl-msgs" id="hlMsgs"><div class="hl-msg">Hi! Have a question about an order, a proof or mail timing? Send us a message and our team will reply.</div>
+   <form class="hl-form" id="hlForm" novalidate>
+    <label class="hl-f"><span>Name</span><input id="hlName" autocomplete="off" placeholder="Jane Sample"></label>
+    <label class="hl-f"><span>Mobile phone <i>*</i></span><input id="hlPhone" type="tel" autocomplete="off" placeholder="555-555-0100"></label>
+    <label class="hl-f"><span>Email <i>*</i></span><input id="hlEmail" type="email" autocomplete="off" placeholder="jane@example.com"></label>
+    <label class="hl-f"><span>Message <i>*</i></span><textarea id="hlMsg" rows="3" placeholder="Type your question"></textarea></label>
+    <label class="hl-cons"><input type="checkbox" id="hlCons"><span>By checking this box, you agree to receive text messages from Yellow Letter HQ with appointment updates, order updates, marketing updates, and special offers. Reply “stop” to Opt-Out</span></label>
+    <div class="hl-err" id="hlErr" role="alert"></div>
+    <button class="btn block" type="submit" id="hlSend2">Send</button>
+   </form>
+  </div>
+  <div class="hl-input" id="hlReply" hidden><input id="hlIn" placeholder="Type your message..." aria-label="Message"><button id="hlSend" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M2 21 23 12 2 3v7l15 2-15 2z"/></svg></button></div>
+  <div class="hl-pow">Chat by LeadConnector (mock, nothing is sent)</div>
+ </div>
+ <button class="hl-btn" id="hlBtn" aria-label="Open chat"><span class="dot"></span><svg class="ic-chat" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 9h10v2H7zm6 5H7v-2h6zm4-6H7V6h10z"/></svg><svg class="ic-x" viewBox="0 0 24 24"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>
+</div>
+
+<script>
+(function(){
+var $=function(q){return document.querySelector(q)},$$=function(q){return [].slice.call(document.querySelectorAll(q))};
+var Q=$$('.faq-q');Q.forEach(function(d){var s=d.querySelector('summary'),b=d.querySelector('.acc-b');d._s=s.innerHTML;d._b=b.innerHTML;d._t=(s.textContent+' '+b.textContent).toLowerCase()});
+function esc(r){return r.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function hi(h,words){if(!words.length)return h;var re=new RegExp('('+words.map(esc).join('|')+')','gi');return h.replace(/(<[^>]+>)|([^<]+)/g,function(m,tag,txt){return tag?tag:txt.replace(re,'<mark>$1</mark>')})}
+function run(){var v=$('#faqQ').value.trim().toLowerCase(),w=v?v.split(/\s+/).filter(Boolean):[],shown=0;
+ $('#faqClr').style.display=v?'block':'none';
+ Q.forEach(function(d){var ok=w.every(function(x){return d._t.indexOf(x)>-1});d.hidden=!ok;if(ok)shown++;
+  d.querySelector('summary').innerHTML=hi(d._s,w);d.querySelector('.acc-b').innerHTML=hi(d._b,w);if(w.length)d.open=ok&&shown<=3;});
+ $$('.faq-sec').forEach(function(s){var c=s.querySelectorAll('.faq-q:not([hidden])').length;s.hidden=!c;var j=$('.faq-jump[href="#'+s.id+'"]');if(j){j.classList.toggle('dim0',!c);j.querySelector('span').textContent=c}});
+ $('#faqNone').style.display=shown?'none':'block';
+ $('#faqCount').textContent=v?(shown+' of '+Q.length+' questions match "'+$('#faqQ').value.trim()+'"'):(Q.length+' questions');}
+$('#faqQ').addEventListener('input',run);
+$('#faqClr').onclick=function(){$('#faqQ').value='';run();Q.forEach(function(d){d.open=false});$('#faqQ').focus()};
+$('#faqAll').onclick=function(){var vis=Q.filter(function(d){return !d.hidden}),open=vis.every(function(d){return d.open});vis.forEach(function(d){d.open=!open});this.textContent=open?'Expand all':'Collapse all'};
+var m=location.hash.match(/[?&]q=([^&]+)/);if(m){$('#faqQ').value=decodeURIComponent(m[1]);run()}
+/* header menu */
+var bg=$('#burger');if(bg)bg.onclick=function(){document.body.classList.toggle('menu-open')};
+/* chat (look only, like the mockup) */
+function me(t){var m=$('#hlMsgs'),d=document.createElement('div');d.className='hl-msg me';d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight}
+function bot(t){var m=$('#hlMsgs'),d=document.createElement('div');d.className='hl-msg';d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight}
+function openChat(){document.body.classList.add('chat-open')}
+$('#hlBtn').onclick=function(){document.body.classList.toggle('chat-open')};
+$('#hlX').onclick=function(){document.body.classList.remove('chat-open')};
+$('#hlTeaser').onclick=function(e){if(e.target.id!=='hlTx')openChat()};
+$('#hlTx').onclick=function(e){e.stopPropagation();document.body.classList.add('teaser-off')};
+$('#ctaChat').onclick=openChat;
+$('#hlForm').addEventListener('submit',function(e){e.preventDefault();var ph=$('#hlPhone').value.trim(),em=$('#hlEmail').value.trim(),msg=$('#hlMsg').value.trim(),err=$('#hlErr');
+ if(!ph||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)||!msg){err.textContent='Please fill in your mobile phone, email and message.';return}
+ err.textContent='';$('#hlForm').remove();me(msg);$('#hlReply').hidden=false;setTimeout(function(){bot('Thanks! We got your message. Our team will reply here, and by text or email if you leave the page. (Mockup: nothing was sent.)')},350)});
+function send(){var i=$('#hlIn'),v=i.value.trim();if(!v)return;me(v);i.value='';setTimeout(function(){bot('Thanks! This chat is a mockup, so no one sees this message.')},350)}
+$('#hlSend').onclick=send;$('#hlIn').addEventListener('keydown',function(e){if(e.key==='Enter')send()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.body.classList.remove('chat-open')});
+})();
+</script>
+</body></html>
