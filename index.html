@@ -1267,6 +1267,40 @@ a.bm-link,.crumbs a:hover{text-decoration-color:var(--y);text-decoration-thickne
   .lt-qtyrow #laddCart{width:100%}
 }
 
+
+.lt-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lt-more-btn{margin-top:10px;width:100%;border-radius:999px}
+.lt-more-hide,
+.lt-split .image-box.lt-more-hide,
+.lt-split .opt-sw.opt-env.lt-more-hide{display:none!important}
+.lt-split .tg-grid,
+.lt-split .env-grid,
+.lt-split .op-env .opt-sws.env-grid{grid-auto-rows:210px;align-items:stretch;min-height:calc(2 * 210px + 10px)}
+.lt-split .image-box,
+.lt-split .opt-sw.opt-env{height:100%;max-height:210px;overflow:hidden}
+.lt-split .opt-env .env-sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.7em}
+.lt-head{scroll-margin-top:150px}
+.lt-split-col>h3{margin:0 0 4px;min-height:1.4em;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.lt-split #tplField{margin:0;padding:0;border:0}
+.lt-split #tplField>label.f{display:none}
+.lt-split #ltTplSel,.lt-split .lt-colsub{margin:0 0 8px;min-height:1.5em;line-height:1.5em}
+.lt-split .tg,.lt-split .tg-one,.lt-split .op-env{margin:0;padding:0;border:0}
+
+.lt-split.lt-split-one{grid-template-columns:1fr}
+.lt-split.lt-split-one .lt-split-div,.lt-split.lt-split-one .lt-envcol{display:none}
+.lt-envcol .op-h{display:none}
+.lt-upbar{padding:16px 18px}
+.lt-upcard .drop{background:#fff;border:1.5px dashed var(--line,#e6dca8);border-radius:14px;text-align:center;padding:18px 14px;min-height:148px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}
+.lt-upcard .drop b{font-size:15px}
+.lt-upcard .drop .muted{font-size:12px;margin:2px 0 8px}
+.lt-csv-link{display:inline-block;margin-top:8px;font-size:13px}
+.lt-tut{position:relative;padding-top:56.25%;background:#111;border-radius:12px;overflow:hidden}
+.lt-tut iframe,.lt-tut video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.lt-tut-ph{padding:48px 20px 40px;text-align:center;background:#1a1a1a;color:#fff;border-radius:12px;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.lt-tut-ph .muted{color:#c8c8c8}
+.lt-tut-play{width:64px;height:64px;border-radius:50%;background:#f5c400;color:#111;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;padding-left:4px}
+#ltPostAcc,#tplField,#ltFontAcc,#ltMoreAcc,#ltUpbar,#lPricePanel,.lt-split{scroll-margin-top:140px}
+
 /* --- Design a New Mail Piece: 3 x 3 even grid, buttons lined up on one baseline --- */
 @media (min-width:901px){.ct-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
 .ct-card{display:flex;flex-direction:column;height:100%}
@@ -3656,6 +3690,90 @@ function lPrice(){
   var err=!(q>=200)?"Minimum order is 200 pieces.":((raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")?"Please choose Greeting Card or Folded Note.":"");
   return {envd:envd,i:i,base:base,add:add,ppc:r3(base+add),flat:flat,total:q>0?q*r3(base+add)+flat:0,err:err};
 }
+var LT_TUTORIAL_URL="";
+var LT_GRID_PREVIEW=6;
+function ltTplCustomFirst(t){
+  var a=(t||[]).slice(), i=-1;
+  a.forEach(function(x,n){if(i<0&&x&&/^New Custom Design/i.test(x[0]))i=n});
+  if(i<0)a.unshift(["New Custom Design ($65)",207,"Custom Designed Letter ($65)"]);
+  else if(i>0){var c=a.splice(i,1)[0];a.unshift(c)}
+  return a;
+}
+function ltEnvCustomFirst(L){
+  var a=(L||[]).slice(), i=-1;
+  a.forEach(function(r,n){if(i<0&&r&&r[4]===1)i=n});
+  if(i>0){var c=a.splice(i,1)[0];a.unshift(c)}
+  return a;
+}
+function ltOpenTutorial(){
+  var body;
+  if(LT_TUTORIAL_URL){
+    var u=LT_TUTORIAL_URL, src=u;
+    if(/youtu\.be\/([^\?&]+)/i.test(u))src="https://www.youtube.com/embed/"+RegExp.$1;
+    else if(/youtube\.com\/watch\?v=([^&]+)/i.test(u))src="https://www.youtube.com/embed/"+RegExp.$1;
+    body=/youtube\.com\/embed|vimeo\.com/i.test(src)?'<div class="lt-tut"><iframe src="'+esc(src)+'" title="Order form tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>':'<div class="lt-tut"><video src="'+esc(u)+'" controls playsinline></video></div>';
+  }else{
+    body='<div class="lt-tut-ph"><div class="lt-tut-play" aria-hidden="true">&#9654;</div><p><b>Tutorial coming soon</b></p><p class="muted" style="margin:0">A walkthrough of this order form will play here.</p></div>';
+  }
+  modal("Watch tutorial",body,[{label:"Close",cls:"btn"}]);
+}
+function ltBalanceGrids(c){
+  if(!c)c=$("#ltCfg");if(!c)return;
+  var N=LT_GRID_PREVIEW, split=c.querySelector(".lt-split");
+  function prep(items,isCustom){
+    var a=[].slice.call(items);if(!a.length)return a;
+    var host=a[0].parentNode, i=-1;
+    a.forEach(function(el,n){if(i<0&&isCustom(el))i=n});
+    if(i>0){host.insertBefore(a[i],a[0]);a=[].slice.call(host.children).filter(function(el){return items[0].matches?el.matches(items[0].tagName+(items[0].className?("."+items[0].className.trim().split(/\s+/).join(".")):"")):true});
+      // recount from grid
+      a=[].slice.call(host.querySelectorAll(items[0].getAttribute("class")?("."+items[0].className.trim().split(/\s+/).filter(function(x){return x&&x!=="on"&&x!=="just-picked"&&x!=="lt-more-hide"}).join(".")):items[0].tagName));
+    }
+    return a;
+  }
+  function apply(grid, items, label){
+    if(!grid)return;
+    var a=[].slice.call(items||[]);
+    var wrap=grid.closest(".lt-split-col")||grid.parentNode;
+    var extra=a.length>N;
+    var expanded=grid.classList.contains("lt-show-more");
+    var sel=a.filter(function(el){return el.classList.contains("on")||el.querySelector&&el.querySelector("input:checked")})[0];
+    if(sel&&a.indexOf(sel)>=N)expanded=true;
+    grid.classList.toggle("lt-show-more",expanded);
+    a.forEach(function(el,i){el.classList.toggle("lt-more-hide", i>=N && !expanded)});
+    var btn=wrap.querySelector(":scope > .lt-more-btn");
+    if(!extra){if(btn)btn.remove();return}
+    if(!btn){btn=document.createElement("button");btn.type="button";btn.className="btn sec sm lt-more-btn";wrap.appendChild(btn)}
+    var left=a.length-N;
+    btn.textContent=expanded?"Show fewer":(label+" ("+left+")");
+    btn.setAttribute("aria-expanded",expanded?"true":"false");
+    btn.onclick=function(){grid.classList.toggle("lt-show-more");apply(grid,a,label)};
+  }
+  var tg=c.querySelector(".lt-split .tg-grid");
+  if(tg){
+    var boxes=tg.querySelectorAll(".image-box");
+    var first=-1;[].forEach.call(boxes,function(el,n){if(first<0&&/New Custom Design/i.test(el.textContent||""))first=n});
+    if(first>0)tg.insertBefore(boxes[first],boxes[0]);
+    apply(tg, tg.querySelectorAll(".image-box"), "More templates");
+  }
+  var eg=c.querySelector(".lt-split .env-grid")||c.querySelector(".lt-split .op-env .opt-sws");
+  if(eg){
+    var tiles=eg.querySelectorAll(".opt-env");
+    var fi=-1;[].forEach.call(tiles,function(el,n){if(fi<0&&(el.querySelector(".env-ph")||/Your design|Custom envelope/i.test(el.textContent||""))&&!/Same custom|Same design as A/i.test(el.textContent||""))fi=n});
+    if(fi>0)eg.insertBefore(tiles[fi],tiles[0]);
+    apply(eg, eg.querySelectorAll(".opt-env"), "More envelopes");
+  }
+  if(split){
+    var envN=(eg&&eg.querySelectorAll(".opt-env").length)||0;
+    split.classList.toggle("lt-split-one", envN===0);
+  }
+}
+function ltGotoStep(el){
+  if(!el)return;
+  var acc=el.matches&&el.matches("details")?el:(el.closest?el.closest("details.lt-acc"):null);
+  if(acc)acc.open=true;
+  if(typeof ffScrollTo==="function")ffScrollTo(el);else el.scrollIntoView({behavior:"smooth",block:"start"});
+  if(typeof ffFlashCls==="function")ffFlashCls(el,"ff-next");
+}
 function ltFontName(v){return String(typeof optFNF==="function"?optFNF(v):v||"").replace(/<[^>]+>/g,"").trim()}
 function ltSyncAcc(){
   var id=(typeof pageProd==="function")?pageProd("lt"):"", st=(typeof OPS!=="undefined"&&id&&OPS[id])?OPS[id]:{};
@@ -3692,7 +3810,7 @@ function renderLCfg(){
   var posts=[["std",!p.hw&&p.k==="fullview"?"Standard":POST_STD]].concat(p.fc||p.hw?[["fc",POST_FC]]:[]).concat(p.k==="jumbo"||!npOK()?[]:[["np",POST_NP]]);window.LPOSTS=posts;
   if(!LS.post||!posts.some(function(x){return x[0]===LS.post}))LS.post="std";
   if(!LS.other)LS.other=[];
-  var gp=galFind("letters",act.k),tsel=-1;if(gp)gp.t.forEach(function(t,i){if(t[0]===LS.tpl)tsel=i});else gp={k:act.k,t:[]};
+  var gp=galFind("letters",act.k),tsel=-1;if(gp){gp=Object.assign({},gp,{t:ltTplCustomFirst((gp.t||[]).slice())});gp.t.forEach(function(t,i){if(t[0]===LS.tpl)tsel=i})}else gp={k:act.k,t:[]};
   var o=function(v,l,s){return '<option value="'+esc(v)+'"'+(s?" selected":"")+'>'+l+'</option>'};
   var pid=(LS.set==="hw"?"hw:":"lt:")+(p.styles?act.k:p.k);
   var st=OPS[pid];
@@ -3703,7 +3821,7 @@ function renderLCfg(){
   var tplBits="";
   if(p.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")tplBits='<div class="note info" style="margin-bottom:12px" id="stylePrompt">Please choose Greeting Card or Folded Note to see templates and continue.</div>';
   else tplBits=tplFieldHTML(gp,tsel,true);
-  var envCol='<div class="fld" style="margin:0"><label class="f" for="ltEnv" hidden>Envelope</label><select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select></div>';
+  var envCol='<p class="lt-colsub muted" id="ltEnvSub">Pick an envelope below.</p><div class="fld" style="margin:0"><label class="f" for="ltEnv" hidden>Envelope</label><select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select></div>';
   var more='';
   if(!p.hw&&secondOK(p.k))more+='<div class="fld sp-fld"><label class="f">Second Page (Circular) <button type="button" class="pill-help" id="spHelp">What is this?</button></label><div class="radios sp-radios"><label><input type="radio" name="lsp" value="0"'+(!LS.second?" checked":"")+'>No second page</label><label><input type="radio" name="lsp" value="1"'+(LS.second&&LS.second!==2?" checked":"")+'>Circular page (+10 cents)</label><label><input type="radio" name="lsp" value="2"'+(LS.second===2?" checked":"")+'>Circular with variable data (+15 cents)</label></div></div>';
   if(!p.hw&&p.k==="trifold")more+=triFoldHTML("lt",LS);
@@ -3714,11 +3832,11 @@ function renderLCfg(){
   more+='<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS);
   more+=listOptsHTML("lt",LS,1);
   var accs='<div class="lt-accs"><details class="lt-acc" id="ltPostAcc"><summary><span class="lt-acc-k">Postage <span class="req">*</span><small id="ltPostSum"></small></span></summary><div class="lt-acc-body"><div id="lpseg"></div></div></details><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Change your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details><details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details><details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small>Lead type, extras and mail schedule</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
-  var upbar='<div class="panel of-form lt-upbar"><div class="lt-listhead"><h3>Upload your list &amp; artwork</h3><button type="button" class="pill-help" id="ltUptHelp">What\'s this?</button></div><div class="lt-upt-pop" id="ltUptPop" hidden><p>When you upload a list, we automatically match your columns, then remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count.</p><ol class="upt-steps"><li>Upload</li><li>Match columns</li><li>Clean list</li><li>Agent and return address</li><li>Review</li></ol><p style="margin:0"><a href="#/budget-maximizer">Learn more</a></p></div><div class="lt-upbar-row">'+dropBox("llist","Upload your list","CSV only. You can add more than one list and we will combine them.","Select files",LS.files)+dropBox("lart","Artwork (optional)","Picture, logo or an example mail piece","Select files",LS.art)+'</div><p class="help" style="margin:8px 0 0"><a href="#" id="lexCsv">Download an example .CSV</a></p></div>';
+  var upbar='<div class="panel of-form lt-upbar" id="ltUpbar"><div class="lt-listhead"><h3>Upload your list &amp; artwork</h3><button type="button" class="pill-help" id="ltUptHelp">What\'s this?</button></div><div class="lt-upt-pop" id="ltUptPop" hidden><p>When you upload a list, we automatically match your columns, then remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count.</p><ol class="upt-steps"><li>Upload</li><li>Match columns</li><li>Clean list</li><li>Agent and return address</li><li>Review</li></ol><p style="margin:0"><a href="#/budget-maximizer">Learn more</a></p></div><div class="lt-upbar-row"><div class="lt-upcard">'+dropBox("llist","Your list","CSV only","Select files",LS.files)+'</div><div class="lt-upcard">'+dropBox("lart","Artwork","Optional","Select files",LS.art)+'</div></div><a href="#" class="lt-csv-link" id="lexCsv">Example CSV</a></div>';
   var qty='<div class="panel of-form lt-qtyrow" id="lPricePanel"><div class="buyrow"><div><div class="fld" style="margin:0"><label class="f" for="lqty">How many pieces?</label><input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'"><p class="help qmin">Filled from your cleaned list when you upload one. Minimum 200.</p></div><div class="err" id="lqerr"></div></div><div class="sumbox" id="lsum" style="margin-top:0"></div><button class="btn lg" id="laddCart">Add to cart</button></div><p class="muted" style="margin:8px 0 0">Mockup: nothing is ordered or charged.</p></div>';
   var notes='<div class="panel of-form"><h3>Notes</h3><div class="fld"><label class="f" for="lnotes">Order notes <span class="req">Required*</span></label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld" style="margin:0 0 8px"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div><div class="fld lt-notes-extra" style="margin:0"><label class="f" style="margin:0">Other information (optional)</label><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><p class="help" style="margin:0">Any other files we should have, such as a logo or an example.</p></div><ul class="files" id="files-lother">'+fileList(LS.other,"lother")+'</ul></div>';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'<p class="help pseg-np"><a href="#" id="npHow">How to apply for nonprofit postage authorization</a></p></div></div>';
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div>'+styleBits+'<div class="panel of-form lt-split"><div class="lt-split-col lt-tpl"><h3>Templates</h3>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><h3>Envelopes</h3>'+envCol+'</div></div>'+accs+upbar+qty+notes+'</div>'+priceModal;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltTutBtn">Watch tutorial</button><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split"><div class="lt-split-col lt-tpl"><h3>Templates</h3>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><h3>Envelopes</h3>'+envCol+'</div></div>'+accs+upbar+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
@@ -3734,6 +3852,8 @@ function renderLCfg(){
   var rh=$("#lretHelp");if(rh)rh.onclick=function(){modal("Return Mail List","<p>A Return Mail List is built after mailing from USPS returns, about 7 days after delivery, and is $49 per order. It is never 100% complete.</p>",[{label:"Close",cls:"btn"}])};
   var cx=$("#lexCsv");if(cx)cx.onclick=function(e){e.preventDefault();demo("Example .CSV","On the live site this downloads an example list file. Nothing downloads in the mockup.")};
   var upt=$("#ltUptHelp"),pop=$("#ltUptPop");if(upt&&pop)upt.onclick=function(){pop.hidden=!pop.hidden};
+  var tut=$("#ltTutBtn");if(tut)tut.onclick=function(){ltOpenTutorial()};
+  if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);
   var see=$("#ltSeePrice"),pm=$("#ltPriceModal"),pc=$("#ltPriceClose");
   if(see&&pm){see.onclick=function(){pm.hidden=false};if(pc)pc.onclick=function(){pm.hidden=true};pm.addEventListener("click",function(e){if(e.target===pm)pm.hidden=true})}
   [["llist",LS.files],["lart",LS.art],["lother",LS.other]].forEach(function(x){var id=x[0],arr=x[1],d=$("#drop-"+id)||$("input[data-for="+id+"]")&&$("#drop-"+id);
@@ -4720,10 +4840,10 @@ function optEnvCustomBox(pfx,st){return '<div class="env-cust"><p class="opt-hel
 function optEnvCustomWire(root,pfx,st,cb){var n=$("#"+pfx+"Note",root);if(n)n.oninput=function(){st.envNote=n.value};var f=$("#"+pfx+"File",root);if(f)f.onchange=function(){st.envArt=(st.envArt||[]).concat([].map.call(f.files,function(q){return q.name}));if(cb)cb()}}
 function optEnvLabel(r){return r[1]+(r[2]?" ("+optCents(r[2])+")":"")}
 function envFor(p,k){if(k==="greeting"||k==="notes"||k==="hwcards"||k==="hwnotes"){var eid=k.indexOf("hw")===0?"hw:"+k:"lt:"+k;var EL=optEnvOf(eid);return EL.length?EL.map(optEnvLabel):["None"]}p=p||"";var id=/Actual Handwritten #6|Handwritten #6/i.test(p)?"lt:hw6":/Actual Handwritten #10|Handwritten #10/i.test(p)?"lt:hw10":/Self Mailer/i.test(p)?"lt:trifold":/Real Handwritten Folded/i.test(p)?"hw:hwnotes":/Real Handwritten Greeting/i.test(p)?"hw:hwcards":/Folded Notes/i.test(p)?"lt:notes":/Greeting/i.test(p)?"lt:greeting":/#10/.test(p)?"lt:no10":/A6|Invitation/i.test(p)?"lt:a6":/Full View/i.test(p)?"lt:fullview":/Check/i.test(p)?"lt:check":/Windowed/i.test(p)?"lt:windowed":"";var L=optEnvOf(id);return L.length?L.map(optEnvLabel):["None"]}
-function optOrderEnv(kind,c,id){var pan=c.querySelector(".cfg .panel")||c.querySelector(".panel"),olds=c.querySelectorAll(".op-env");for(var i=0;i<olds.length;i++)olds[i].remove();if(!pan||kind==="pc"||typeof LS==="undefined")return;var L=optEnvOf(id);var sel=$("#ltEnv",c)||$("#ltEnv");if(!L.length||!sel)return;
+function optOrderEnv(kind,c,id){var pan=c.querySelector(".cfg .panel")||c.querySelector(".panel"),olds=c.querySelectorAll(".op-env");for(var i=0;i<olds.length;i++)olds[i].remove();if(!pan||kind==="pc"||typeof LS==="undefined")return;var L=optEnvOf(id);if(kind==="lt")L=ltEnvCustomFirst(L);var sel=$("#ltEnv",c)||$("#ltEnv");if(!L.length||!sel)return;
   var labels=L.map(optEnvLabel);if(labels.indexOf(LS.env)<0){LS.env=optEnvLabel(optEnvRow(id,optEnvDef(id)));sel.value=LS.env;if(typeof lUpdate==="function")lUpdate()}
   var cur=L[labels.indexOf(LS.env)][0],d=document.createElement("div");d.className="fld op-pick op-env";
-  var OPE=OPS["env:"+id]||(OPS["env:"+id]={});d.innerHTML='<span class="op-h">Envelope</span>'+(L.length===1?'<p class="opt-fixed" style="margin:0">'+esc(L[0][1])+' <span class="muted">(only choice)</span></p>':'<div class="op-row">'+optEnvTiles(L,cur,"openv"+kind)+'</div>'+(optIsCustom(id,cur)?optEnvCustomBox("opEC"+kind,OPE):''));
+  var OPE=OPS["env:"+id]||(OPS["env:"+id]={});d.innerHTML='<span class="op-h">Envelope</span>'+((L.length===1&&kind!=="lt")?'<p class="opt-fixed" style="margin:0">'+esc(L[0][1])+' <span class="muted">(only choice)</span></p>':'<div class="op-row">'+optEnvTiles(L,cur,"openv"+kind)+'</div>'+(optIsCustom(id,cur)?optEnvCustomBox("opEC"+kind,OPE):''));
   var f=sel.closest(".fld");if(f){f.style.display="none";f.insertAdjacentElement("afterend",d)}
   [].forEach.call(d.querySelectorAll("input[type=radio]"),function(i){i.onchange=function(){var r=optEnvRow(id,i.value);LS.env=optEnvLabel(r);sel.value=LS.env;if(typeof lUpdate==="function")lUpdate();optOrderEnv(kind,c,id)}});optEnvCustomWire(d,"opEC"+kind,OPE,function(){optOrderEnv(kind,c,id)})}
 /* round 5: the regular order page gets the live site's Font style, Font color, Paper color (live label "Background") and Envelope font pickers, restyled. Same options as data_template_ylhq.php, nothing new. */
@@ -4741,6 +4861,7 @@ function optOrderPickers(kind,c){var id=pageProd(kind),olds=c.querySelectorAll("
   if(typeof optOrderEnv==="function")optOrderEnv(kind,c,id);
   if(typeof fa14Font==="function")fa14Font(kind,c,id);
   if(typeof ltSyncAcc==="function")ltSyncAcc();
+  if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);
   return;}
   var col=optColOf(id),fo=optFontsOf(id);if(!col.paper.length&&!col.font.length&&!fo.fs.length&&!fo.ef.length){if(typeof optOrderEnv==="function")optOrderEnv(kind,c,id);return;}
   var st=OPS[id]||(OPS[id]={paper:col.paper[0]||"",font:col.font.indexOf("Black")>-1?"Black":(col.font[0]||""),fs:fo.fs.indexOf("Typed")>-1?"Typed":(fo.fs[0]||""),ef:fo.ef.indexOf("Typed")>-1?"Typed":(fo.ef[0]||"")}),pl=OPTFSPLUS[id]||{};
@@ -4939,7 +5060,7 @@ var FFK={
  pc:{host:"pcCfg",sum:"sum",st:function(){return PS},on:function(){return PS.p>-1&&!PS.all},
    steps:[["Postage","#pricePanel",function(){try{return !!PS.post&&!priceNow().err}catch(e){return !!PS.post}}],["Template","#tplField",function(){return PS.tpl>-1}],["Options","#tplField ~ .fld",function(){return PS.tpl>-1}],["Mail date","#day",function(){return !!PS.day&&!!PS.drops&&!!(PS.notes||"").trim()}],["List","#drop-list",function(){return PS.files.length>0||!!leadText(PS)}],["Cart",".cfg-end",function(){return false}]]},
  lt:{host:"ltCfg",sum:"lsum",st:function(){return LS},on:function(){return LS.p>-1&&!LS.all},
-   steps:[["Postage","#lPricePanel",function(){try{return !!LS.post&&!lPrice().err}catch(e){return !!LS.post}}],["Template","#tplField",function(){return !!LS.tpl}],["Options","#tplField ~ .fld",function(){return !!LS.tpl}],["Mail date","#lday",function(){return !!LS.day&&!!LS.drops&&!!(LS.notes||"").trim()}],["List","#drop-llist",function(){return LS.files.length>0||!!leadText(LS)}],["Cart",".cfg-end",function(){return false}]]}
+   steps:[["Postage","#ltPostAcc",function(){try{return !!LS.post&&!lPrice().err}catch(e){return !!LS.post}}],["Template","#tplField",function(){return !!LS.tpl}],["Options","#ltFontAcc",function(){return !!LS.tpl}],["Mail date","#ltMoreAcc",function(){return !!LS.day&&!!LS.drops&&!!(LS.notes||"").trim()}],["List","#ltUpbar",function(){return LS.files.length>0||!!leadText(LS)}],["Cart","#lPricePanel",function(){return false}]]}
 };
 var ffQ=0,ffLastTot={};
 function ffSched(){if(ffQ)return;ffQ=setTimeout(function(){ffQ=0;requestAnimationFrame(ffRun)},60)}
@@ -4950,7 +5071,7 @@ function ffBar(k){var K=FFK[k],host=document.getElementById(K.host);if(!host||!h
   if(!bar){bar=document.createElement("div");bar.className="ff-bar";bar.setAttribute("role","navigation");bar.setAttribute("aria-label","Order steps");
     bar.innerHTML='<ol class="ff-steps">'+K.steps.map(function(s,i){return '<li><button type="button" data-ffs="'+i+'"><span class="ff-n">'+(i+1)+'</span><span class="ff-l">'+s[0]+'</span></button></li>'}).join("")+'</ol><button type="button" class="ff-tot" data-ffs="'+(K.steps.length-1)+'"><small>Total</small><b>&mdash;</b></button>';
     host.insertBefore(bar,host.firstChild);
-    bar.addEventListener("click",function(e){var b=e.target.closest("[data-ffs]");if(!b)return;var s=K.steps[+b.getAttribute("data-ffs")],el=host.querySelector(s[1]);if(el){if(s[1]==="#tplField"){var tg=el.querySelector(".tg");}ffScrollTo(el);ffFlashCls(el,"ff-next")}});
+    bar.addEventListener("click",function(e){var b=e.target.closest("[data-ffs]");if(!b)return;var s=K.steps[+b.getAttribute("data-ffs")],el=host.querySelector(s[1]);if(el){if(s[1]==="#tplField"){var tg=el.querySelector(".tg");}if(el.matches&&el.matches("details"))el.open=true;var acc=el.closest&&el.closest("details.lt-acc");if(acc)acc.open=true;ffScrollTo(el);ffFlashCls(el,"ff-next")}});
   }
   var firstOpen=-1;K.steps.forEach(function(s,i){var d=false;try{d=s[2]()}catch(e){}var li=bar.querySelectorAll(".ff-steps li")[i];if(li.classList.contains("done")!==d)li.classList.toggle("done",d);li.querySelector(".ff-n").textContent=d?"\u2713":(i+1);if(!d&&firstOpen<0)firstOpen=i});
   /* highlight the section in view */
