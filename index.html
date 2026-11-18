@@ -999,6 +999,10 @@ i.del{background:var(--ok)}i.tr{background:var(--info)}i.up{background:var(--lin
 .ct-flow .ct-step{margin:0 0 14px;scroll-margin-top:80px}
 .ct-sh{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px}
 .ct-sh h2{margin:0;font-size:19px}.ct-sh p{margin:2px 0 0;font-size:13.5px}
+.ct-sh{position:relative}
+.ct-sh .ct-tog{margin-left:auto;flex:none;align-self:center}
+.ct-step.ct-collapsed .ct-step-body{display:none}
+.ct-step.ct-collapsed{padding-bottom:8px}
 .ct-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--y);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800}
 .ct-n.ok{background:var(--ok);color:#fff}
 .ct-why{margin:6px 0 0;font-size:13px;color:var(--mu);line-height:1.45}.ct-why b{color:var(--ink);font-weight:700}
@@ -2548,6 +2552,7 @@ var LT=[
  ["Check Letter (Windowed Envelope)","https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png"],
  ["Letter with #10 Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/09/SeeThrough3-768x432.png"],
  ["Letter with A6 Envelope (Invitation)","https://www.yellowletterhq.com/wp-content/uploads/2021/08/Invitation-with-Letter-768x432.png"],
+ ["Letter with Windowed Envelope","https://www.yellowletterhq.com/wp-content/uploads/2017/05/windowed-letter.jpg"],
  ["Full View Letter","https://www.yellowletterhq.com/wp-content/uploads/2026/03/FULL-VIEW-ENV-1-700x700.jpg"],
  ["Tri-Fold Letter","https://www.yellowletterhq.com/wp-content/uploads/2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg"],
  ["Digital Greeting Cards & Folded Notes","https://www.yellowletterhq.com/wp-content/uploads/2021/11/Ornament-Card-768x432.png"],
@@ -2624,7 +2629,7 @@ function renderDHHome(){
 function route(){
   var h=decodeURIComponent(location.hash.replace(/^#\/?/,"")),q="";if(h.indexOf("?")>-1){q=h.slice(h.indexOf("?")+1);h=h.slice(0,h.indexOf("?"))}
   var p=h.split("/"),r=p[0]||"home",arg=p.slice(1).join("/");
-  if(r==="faqs")r="faq";if((r==="postcards"&&arg==="flip")||(r==="product"&&arg==="flip-card-postcard")){location.replace("#/postcards");return}
+  if(r==="faqs")r="faq";if(r==="signup"||r==="sign-up"||r==="register")r="login";if((r==="postcards"&&arg==="flip")||(r==="product"&&arg==="flip-card-postcard")){location.replace("#/postcards");return}
   LOGGED=true;if(typeof closeModal==="function")closeModal();
   var hm=/(?:^|&)hero=([A-Ea-e])/.exec(q);if(r==="home"||r==="")setHero(hm?hm[1].toUpperCase():"A");var hb=document.getElementById("hbBtn");if(hb)hb.style.display=hm?"":"none";
   if(r==="x"){toast((arg||"That page")+" is not part of this mockup. On the live site this opens the "+(arg||"")+" page.");history.replaceState(null,"","#/"+cur);return}
@@ -2806,7 +2811,20 @@ function ltHasEnvFont(){
   }catch(e){return false}
 }
 
-function formKind(){if(document.getElementById("ltCfg"))return "lt";if(document.getElementById("pcCfg"))return "pc";return ""}
+function formOnScreen(el){
+  if(!el)return false;
+  var s=el.closest(".scr");
+  if(s&&!s.classList.contains("on"))return false;
+  return true;
+}
+function formKind(){
+  var lt=document.getElementById("ltCfg"),pc=document.getElementById("pcCfg"),ct=document.getElementById("ct-root");
+  if(formOnScreen(lt)&&lt.innerHTML)return "lt";
+  if(formOnScreen(pc)&&pc.innerHTML)return "pc";
+  if(formOnScreen(ct)&&ct.innerHTML)return "ct";
+  return "";
+}
+window.formKind=formKind;window.formOnScreen=formOnScreen;
 function formSteps(kind){kind=kind||formKind();
   if(kind==="lt"){
     var hasEnv=!!(document.querySelector("#ltCfg .lt-envcol")&&!document.querySelector("#ltCfg .lt-split-one"));
@@ -2840,15 +2858,15 @@ function formSteps(kind){kind=kind||formKind();
 }
 function formEl(step){if(!step)return null;var s=step.sel||"";var parts=s.split(",");for(var i=0;i<parts.length;i++){var el=document.querySelector(parts[i].trim());if(el)return el}return null}
 function formFold(step){var el=formEl(step);if(!el)return;
-  if(step.id==="tpl"||step.id==="env"){
-    if(typeof ltCollapseSide==="function"&&document.getElementById("ltCfg"))ltCollapseSide(step.id==="tpl"?"tpl":"env");
+  if((step.id==="tpl"||step.id==="env")&&formKind()==="lt"){
+    if(typeof ltCollapseSide==="function")ltCollapseSide(step.id==="tpl"?"tpl":"env");
     return;
   }
   if(el.tagName==="DETAILS")el.open=false;
 }
 function formOpen(step){var el=formEl(step);if(!el)return;
-  if(step.id==="tpl"||step.id==="env"){
-    if(typeof ltExpandSide==="function"&&document.getElementById("ltCfg"))ltExpandSide(step.id==="tpl"?"tpl":"env");
+  if((step.id==="tpl"||step.id==="env")&&formKind()==="lt"){
+    if(typeof ltExpandSide==="function")ltExpandSide(step.id==="tpl"?"tpl":"env");
   }
   if(el.tagName==="DETAILS")el.open=true;
   if(typeof formSync==="function")formSync();
@@ -2919,6 +2937,15 @@ function formDecorateAcc(root){
       s.appendChild(b);
     }
   });
+  var nextFor={ltFontAcc:"font",ltEnvFontAcc:"envfont",ltMoreAcc:"more",ltUpbar:"list",pcFontAcc:"font",pcGlossAcc:"gloss",pcMoreAcc:"more",pcUpbar:"list"};
+  Object.keys(nextFor).forEach(function(id){
+    var acc=(root.getElementById?root.getElementById(id):null)||document.getElementById(id);
+    if(!acc||acc.querySelector("[data-form-next]"))return;
+    var body=acc.querySelector(".lt-acc-body")||acc;
+    var b=document.createElement("button");
+    b.type="button";b.className="btn sec sm form-next";b.setAttribute("data-form-next",nextFor[id]);b.textContent="Continue";
+    body.appendChild(b);
+  });
 }
 if(!window.__formNextClick){window.__formNextClick=1;
   document.addEventListener("click",function(ev){
@@ -2935,6 +2962,24 @@ if(!window.__formNextClick){window.__formNextClick=1;
         return;
       }
       if(st)st._mailSendChosen=true;
+    }
+    if(from==="more"){
+      var moreOk=formKind()==="pc"?(typeof pcMoreComplete==="function"?pcMoreComplete():true):(typeof ltMoreComplete==="function"?ltMoreComplete():true);
+      if(!moreOk){
+        var m2=b.parentNode&&b.parentNode.querySelector(".form-next-err");
+        if(!m2){m2=document.createElement("p");m2.className="help form-next-err";b.parentNode.insertBefore(m2,b.nextSibling)}
+        m2.textContent="Choose a lead type, then continue. If List Organizer emails are on, add the email too.";
+        return;
+      }
+    }
+    if(from==="list"){
+      var stL=formKind()==="pc"?window.PS:window.LS;
+      if(!stL||!stL.files||!stL.files.length){
+        var m3=b.parentNode&&b.parentNode.querySelector(".form-next-err");
+        if(!m3){m3=document.createElement("p");m3.className="help form-next-err";b.parentNode.insertBefore(m3,b.nextSibling)}
+        m3.textContent="Upload a CSV list, then continue. The piece count is set from the cleaned list.";
+        return;
+      }
     }
     formAdvance(from);
   });
@@ -3117,8 +3162,19 @@ function pcChoicesHTML(){
 }
 
 var TV={list:[],i:0,last:null,cache:{}};
+function galTplFromBox(b){
+  var p=b?galFind(b.getAttribute("data-scr"),b.getAttribute("data-k")):null;
+  if(!p||!p.t)return {p:p,t:null};
+  var i=+b.getAttribute("data-i"), t=(i>=0&&i<p.t.length)?p.t[i]:null;
+  var lab=((b.querySelector("label")||{}).textContent||"").trim();
+  if(!t||(lab&&t[0]!==lab)){
+    var hit=p.t.filter(function(x){return x&&x[0]===lab})[0];
+    if(hit)t=hit;
+  }
+  return {p:p,t:t};
+}
 function tvList(box){var c=box.closest(".tg-group")||box.closest(".tg"),out=[],at=0;
-  $$(".image-box",c).forEach(function(b){if(b.style.display==="none")return;var p=galFind(b.getAttribute("data-scr"),b.getAttribute("data-k")),t=p.t[+b.getAttribute("data-i")];if(b===box)at=out.length;out.push({n:t[0],p:p.name,img:t[1],box:b})});
+  $$(".image-box",c).forEach(function(b){if(b.style.display==="none")return;var g=galTplFromBox(b),p=g.p,t=g.t;if(!t)return;if(b===box)at=out.length;out.push({n:t[0],p:(p&&p.name)||"",img:t[1],box:b})});
   var g=null;GAL.g.forEach(function(x){if(c.getAttribute("data-g")===x.id)g=x.label});
   return {list:out,at:at,label:g}}
 function tvPre(k){var L=TV.list;if(!L.length)return;var it=L[(k%L.length+L.length)%L.length],u=tUrl(it.img,1);if(!TV.cache[u]){var im=new Image();im.decoding="async";im.src=u;TV.cache[u]=im}}
@@ -3245,7 +3301,7 @@ function wireField(host,p,onSel){
   var tg=$(".tg",f),pv=$(".selected-template-preview",f),btn=$(".divAction",f),inp=$(".tg-search input",f),cnt=$(".tg-search .cnt",f);
   function run(){if(!inp)return;var w=galWords(inp.value),n=0,b=$$(".image-box",tg);b.forEach(function(x){var ok=galMatch(x,w);x.style.display=ok?"":"none";if(ok)n++});$(".tg-empty",tg).hidden=n>0;cnt.textContent=w.length?("Showing "+n+" of "+b.length):(b.length+" templates")}
   if(inp){inp.oninput=ffDeb(run,120);$(".tg-empty button",tg).onclick=function(){inp.value="";run();inp.focus()};run()}
-  tg.addEventListener("click",function(e){var b=e.target.closest(".image-box");if(!b)return;if(e.target.tagName!=="INPUT")e.preventDefault();var i=+b.getAttribute("data-i"),t=p.t[i];
+  tg.addEventListener("click",function(e){var b=e.target.closest(".image-box");if(!b)return;if(e.target.tagName!=="INPUT")e.preventDefault();var i=+b.getAttribute("data-i"),t=p.t[i];if(!t)return;
     $$(".image-box",tg).forEach(function(x){x.classList.toggle("on",x===b);$("input",x).checked=x===b});
     var keep=f.classList.contains("tpl-keep"),slim=$("#ltTplSel",f)||$(".selected-slim",f);if(slim){slim.innerHTML='&#10003; Selected: <b class="tpname">'+esc(t[0])+'</b>';slim.classList.remove("muted")}b.classList.add("just-picked");
     if(!keep){var si=$(".selected-template-image",pv);if(si){si.setAttribute("data-ti",t[1]);si.onerror=function(){tFail(si)};si.src=tUrl(t[1])}
@@ -4595,6 +4651,42 @@ function renderCT(){
     if(miss){$("#ctErr").textContent=miss;modal("Some fields are missing","<p>"+esc(miss)+"</p>",[{label:"Ok",cls:"btn"}]);return}
     $("#ctErr").textContent="";var ctEnvD=hasEnv&&optIsCustom(cid,CT.env);CART.push({name:"Design a New Mail Piece (custom template)",desc:"Template fee · "+CT.tname+" · "+CT.prod+" · "+(isOwn?"Custom design":(CT.tmplName||""))+" · "+CT.post.split(" (")[0],qty:1,ppc:65,flat:0,sub:true});if(ctEnvD)CART.push({name:"Custom envelope design",desc:"Envelope design fee for template "+CT.tname,qty:1,ppc:65,flat:0,sub:true});CT.lastAdd={name:CT.tname,fee:ctEnvD?130:65};cartBadge();
     setTimeout(function(){location.hash="#/cart"},10)};
+  if(typeof ctGuidedFlow==="function")ctGuidedFlow();
+}
+function ctGuidedFlow(){
+  var root=document.getElementById("ct-root");if(!root)return;
+  var steps=[].slice.call(root.querySelectorAll(".ct-step"));
+  if(!steps.length)return;
+  var firstOpen=-1;
+  steps.forEach(function(s,i){
+    var sh=s.querySelector(".ct-sh");
+    if(sh && !s.querySelector(".ct-step-body")){
+      var body=document.createElement("div");
+      body.className="ct-step-body";
+      var n=sh.nextSibling;
+      while(n){var nx=n.nextSibling;body.appendChild(n);n=nx}
+      s.appendChild(body);
+    }
+    if(sh && !sh.querySelector(".ct-tog")){
+      var b=document.createElement("button");
+      b.type="button";b.className="btn sm sec ct-tog";
+      sh.appendChild(b);
+      b.addEventListener("click",function(ev){
+        ev.preventDefault();ev.stopPropagation();
+        s.classList.toggle("ct-collapsed");
+        b.textContent=s.classList.contains("ct-collapsed")?"Open":"Close";
+      });
+    }
+    var done=!!(s.querySelector(".ct-n.ok"));
+    if(!done && firstOpen<0)firstOpen=i;
+  });
+  if(firstOpen<0)firstOpen=steps.length-1;
+  steps.forEach(function(s,i){
+    var open=i===firstOpen;
+    s.classList.toggle("ct-collapsed",!open);
+    var b=s.querySelector(".ct-tog");
+    if(b)b.textContent=open?"Close":"Open";
+  });
 }
 
 /* envFor moved to round 8 envelope block */
@@ -4615,6 +4707,7 @@ var LTP=[
  {k:"check",t:5,std:[1.093,.983,.793,.773,.723],fc:1},
  {k:"no10",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
  {k:"a6",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
+ {k:"windowed",t:5,std:[1.093,.983,.793,.773,.723],fc:0},
  {k:"fullview",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
  {k:"trifold",t:6,std:[1.079,1.029,.849,.819,.799,.739],fc:1},
  {k:"cardsnotes",t:6,fc:1,defStyle:"greeting",styles:{greeting:{k:"greeting",name:"Greeting Card",std:[1.12,1.08,.91,.89,.87,.81],img:"https://www.yellowletterhq.com/wp-content/uploads/2021/11/Ornament-Card-768x432.png"},notes:{k:"notes",name:"Folded Note",std:[1.12,1.08,.91,.89,.87,.81],img:"https://www.yellowletterhq.com/wp-content/uploads/2022/09/Long-Note.png"}}},
@@ -4646,7 +4739,7 @@ function ltList(){return LS.set==="hw"?HW:LTP}
 function renderLT(arg){
   var root=$("#lt-root");
   if(arg==="selfmailer"){try{history.replaceState(null,"","#/letters/trifold")}catch(e){}arg="trifold"}
-  if(arg==="windowed"){try{history.replaceState(null,"","#/letters/check")}catch(e){}arg="check"}
+  /* Windowed is its own product (no envelope picker). Do not alias it to Check Letter. */
   if(arg==="greeting"||arg==="notes"||arg==="cardsnotes"){if(arg==="notes"||arg==="greeting")LS.cardStyle=arg==="notes"?"notes":"greeting";arg="cardsnotes"}
   if(arg==="hwcards"||arg==="hwnotes"||arg==="hwcardsnotes"){if(arg==="hwnotes"||arg==="hwcards")LS.cardStyle=arg==="hwnotes"?"notes":"greeting";arg="hwcardsnotes"}
   if(arg==="no10-stacked"){try{history.replaceState(null,"","#/letters/no10")}catch(e){}arg="no10"}
@@ -4954,7 +5047,7 @@ function ltPacketHTML(o){
   var img=d.tplImg||o.img||"", eimg=d.envImg||o.envImg||"";
   var thumbs=(img||eimg||d.env||d.tpl)?'<div class="lt-packet-thumbs">'+(img?'<img src="'+img+'" alt="'+esc(d.tpl||o.prod||"")+'">':'')+(eimg?'<img src="'+eimg+'" alt="'+esc(d.env||"")+'">':(d.env&&d.env!=="None"?'<span class="env-ph">'+esc(d.env)+'</span>':''))+'</div>':"";
   var kv="";
-  var rows=[["Product",o.prod],["Template",d.tpl||o.tpl||""],["Envelope",d.env||o.env||""],["Quantity",(o.qty||0).toLocaleString("en-US")],["Postage",o.post||""],["Font",d.font||""],["Font color",d.fcol||""],["Paper",d.paper||""],["Lead type",d.lead||o.lead||""],["Add-ons",(d.addons||o.addons||[]).join? (d.addons||o.addons).join(", ") : (d.addons||"")],["List",d.file||o.list||""],["Notes",d.notes||o.notes||""]];
+  var rows=[["Product",o.prod],["Template",d.tpl||o.tpl||""],["Envelope",d.env||o.env||""],["Quantity",(o.qty||0).toLocaleString("en-US")],["Postage",o.post||""],["Font",d.font||""],["Font color",d.fcol||""],["Paper",d.paper||""],["Lead type",d.lead||o.lead||""],["Add-ons",(d.addons||o.addons||[]).join(", ")],["List",d.file||o.list||""],["Notes",d.notes||o.notes||""]];
   kv='<div class="kv">'+rows.filter(function(x){return x[1]}).map(function(x){return "<b>"+esc(x[0])+"</b><span>"+esc(String(x[1]))+"</span>"}).join("")+"</div>";
   var bt=drops.length?'<div class="tw" style="margin-top:10px"><table><thead><tr><th>Batch</th><th>Mail date</th></tr></thead><tbody>'+drops.map(function(dt,i){return "<tr><td>Batch "+(i+1)+"</td><td>"+esc(dt)+"</td></tr>"}).join("")+"</tbody></table></div>":"";
   return '<div class="box lt-packet" style="margin-top:16px"><h4>Print packet</h4><p class="muted" style="margin:0 0 10px">Job data that follows this order through coding, printing and the mail drops.</p>'+thumbs+kv+bt+"</div>";
@@ -5068,12 +5161,14 @@ function renderLCfg(){
   var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-sum" id="ltBuySum"></div><div class="lt-buy-qtyline"><label class="lt-buy-k" for="lqty">Pieces:</label> <input class="inp" id="lqty" type="number" min="0" step="1" inputmode="numeric" value="'+(LS.qty||0)+'" readonly aria-readonly="true" aria-label="How many pieces"><p class="help qmin" style="margin:4px 0 0">0 until you upload your list. Then it is the cleaned count and cannot be changed. Minimum 200.</p></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
   var notes='<details class="panel of-form lt-acc" id="ltNotes"><summary><span class="lt-acc-k">Notes and files<small id="ltNotesSum"></small></span></summary><div class="lt-acc-body"><div class="fld"><label class="f" for="lnotes">Order notes</label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><p class="help lt-files-help">Any other artwork or instructions? Upload them here.</p><ul class="files" id="files-lother">'+fileList((LS.other||[]).concat(LS.art||[]),"lother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div><button type="button" class="btn sec sm form-next" data-form-next="notes">Continue</button></div></details>';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'</div></div>';
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvFonts?' lt-split-stack':'')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+postbar+accs+upbar+mailAcc+art+notes+qty+'</div>'+priceModal;
+  var hideEnvChoice=/^(windowed|fullview)$/.test(p.k)||/^(windowed|fullview)$/.test((act&&act.k)||"");
+  var hasEnvChoice=hasEnvFonts&&!hideEnvChoice;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvChoice?' lt-split-stack':'')+(hasEnvChoice?'':' lt-split-one')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div>'+(hasEnvChoice?'<div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div>':'<select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select>')+'</div>'+postbar+accs+upbar+mailAcc+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
   wireField(c,gp,function(i){LS.tpl=gp.t[i][0];$("#lqerr").textContent="";ltApplyTpl(LS.tpl,pid);fa14Tpl("lt");if(typeof ltCollapseSide==="function")ltCollapseSide("tpl");if(typeof ltAfterTplPick==="function")ltAfterTplPick();if(typeof ltUpdateBuy==="function")ltUpdateBuy()});
-  $("#ltEnv").onchange=function(){LS.env=this.value;lUpdate();if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof formAdvance==="function")formAdvance("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()};$("#lday").onchange=function(){LS.day=this.value;if(typeof ltUpdateBuy==="function")ltUpdateBuy();if(typeof formSync==="function")formSync()};$("#ldrops").onchange=function(){LS.drops=this.value;var bf=$("#ltBatchF");if(bf)bf.hidden=this.value!=="multi";if(this.value!=="multi")LS.batches="";if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()};schedWire(c,"lt",LS);(function(){var b=$("#ltBatch");if(b){var prev=b.onchange;b.onchange=function(){if(prev)prev.apply(this,arguments);LS.batches=this.value;if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}})();listOptsWire(c,"lt",LS);if(typeof listToolWire==="function")listToolWire(c,"lt",LS);$("#lnotes").oninput=function(){LS.notes=this.value;if(typeof formSync==="function")formSync()};if(!stickyOK(p.k))LS.sticky=false;if(!secondOK(p.k)||p.hw)LS.second=false;$("#loname").oninput=function(){LS.oname=this.value;if(typeof formSync==="function")formSync()};
+  var _ltEnv=$("#ltEnv");if(_ltEnv)_ltEnv.onchange=function(){LS.env=this.value;lUpdate();if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof formAdvance==="function")formAdvance("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()};$("#lday").onchange=function(){LS.day=this.value;if(typeof ltUpdateBuy==="function")ltUpdateBuy();if(typeof formSync==="function")formSync()};$("#ldrops").onchange=function(){LS.drops=this.value;var bf=$("#ltBatchF");if(bf)bf.hidden=this.value!=="multi";if(this.value!=="multi")LS.batches="";if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()};schedWire(c,"lt",LS);(function(){var b=$("#ltBatch");if(b){var prev=b.onchange;b.onchange=function(){if(prev)prev.apply(this,arguments);LS.batches=this.value;if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}})();listOptsWire(c,"lt",LS);if(typeof listToolWire==="function")listToolWire(c,"lt",LS);$("#lnotes").oninput=function(){LS.notes=this.value;if(typeof formSync==="function")formSync()};if(!stickyOK(p.k))LS.sticky=false;if(!secondOK(p.k)||p.hw)LS.second=false;$("#loname").oninput=function(){LS.oname=this.value;if(typeof formSync==="function")formSync()};
   if(typeof formLockQty==="function")formLockQty($("#lqty"),LS);
   $$("input[name=cardStyle]",c).forEach(function(r){r.onchange=function(){LS.cardStyle=r.value;LS.tpl="";LS.env="";renderLCfg()}});
   var np=$("#npHow");if(np)np.onclick=function(e){e.preventDefault();modal("How to apply for nonprofit postage authorization",FAQ[0][1],[{label:"Close",cls:"btn"}])};
@@ -6535,7 +6630,10 @@ if(typeof GAL!=="undefined"&&GAL&&GAL.g)GAL.g.forEach(function(g){if(g.prods)g.p
 function postSeg(kind){
   var box=$(kind==="pc"?"#pseg":"#lpseg");if(!box)return;var opts=[],cur,p;
   if(kind==="pc"){p=PC[PS.p];if(!p)return;
-    if(!p.std){box.innerHTML='<div class="pseg-l">Postage</div><div class="pseg"><span class="pseg-b on fixed"><b>First Class</b><small>Included in the price. The only postage for this card.</small></span></div>';return}
+    if(!p.std){PS.post=PS.post||"fc";box.innerHTML='<div class="pseg-l">Postage</div><div class="pseg" role="radiogroup" aria-label="Postage"><button type="button" role="radio" aria-checked="true" class="pseg-b on fixed" data-ps="fc"><b>First Class</b><small>Included in the price. The only postage for this card.</small></button></div>';
+      var fb=box.querySelector("[data-ps]");
+      if(fb)fb.onclick=function(){PS.post="fc";var s=$("#post");if(s)s.value="fc";updatePrice();if(typeof pcUpdateBuy==="function")pcUpdateBuy();if(typeof formAdvance==="function")formAdvance("post")};
+      return}
     opts=[["std","Standard (Marketing Mail)","4\u00a2 less per piece \u00b7 200 minimum"],["fc","First Class","Faster \u00b7 bad addresses come back to you"]];cur=PS.post}
   else{var raw=ltList()[LS.p];p=ltActive(raw);if(!p)return;(window.LPOSTS||[]).forEach(function(x){var v=x[0];opts.push([v,v==="std"?"Standard (Marketing Mail)":v==="fc"?"First Class":"Nonprofit",v==="std"?"Lowest price":v==="fc"?(p.hw?"First Class price row below":"+$0.241 per piece"):"$0.210 less than Standard \u00b7 authorized account"])});
     cur=LS.post}
