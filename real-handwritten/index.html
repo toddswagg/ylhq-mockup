@@ -68,22 +68,38 @@ table.cmp{width:100%;border-collapse:separate;border-spacing:0;border:1px solid 
 .pbox img{width:100%;border-radius:12px;aspect-ratio:16/9;object-fit:cover;background:#fff}
 .pbox{padding:0;overflow:hidden;max-height:calc(100vh - 100px);overflow-y:auto}
 .pb-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:var(--yt);padding:14px 16px;text-align:left;font:inherit;color:inherit;cursor:default}
-.pb-hs small{display:block;font:700 11px/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pb-hs small{display:block;font:700 11px/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}
 .pb-hs b{display:block;font:800 16px/1.25 var(--head)}
 .pb-hp{margin-left:auto;font:800 16px var(--head);white-space:nowrap}
 .pb-ch{display:none;width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-135deg);margin:4px 2px 0 6px}
 .pb-b{padding:14px 16px 16px}
-.st-h .sk{font-weight:700;color:var(--muted);white-space:nowrap}
+.st-h .sk{font-weight:700;color:var(--mu);white-space:nowrap}
+.otg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ot{box-sizing:border-box;min-height:200px;padding:18px;border:2px solid var(--line2);border-radius:20px;background:#fff;display:flex;flex-direction:column;gap:12px}
+.oth{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.oth b{font:800 15px/1.3 var(--head)}
+.chip-help{flex:0 0 auto;white-space:nowrap;border:0;border-radius:999px;background:var(--yt);color:var(--ink);font:700 12px var(--body);padding:5px 12px;cursor:pointer;border:1px solid var(--ys)}
+.ohelp{font-size:13px;color:var(--mu)}.ohelp p{margin:0}
+.oseg{margin-top:auto;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.oseg-b{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:64px;padding:8px 10px;border:2px solid var(--line2);border-radius:999px;background:#fff;font:inherit;cursor:pointer;text-align:center;color:var(--ink)}
+.oseg-b .m{font:700 14px/1.2 var(--body)}.oseg-b .p{font:500 12px/1.2 var(--body);color:var(--mu);min-height:14px}
+.oseg-b.on{background:var(--yt);border-color:var(--ink)}.oseg-b.on .m::before{content:"\2713\00a0"}
+.oseg-b:focus-visible{outline:none;box-shadow:var(--focus)}
+#otLead{justify-content:flex-start}#otLead .inp{margin-top:auto;width:100%;box-sizing:border-box}
+.req{background:var(--y);border-radius:999px;font:800 11px var(--body);padding:3px 9px;text-transform:uppercase}
+.otags{display:flex;flex-wrap:wrap;gap:6px}.otag{display:inline-flex;align-items:center;gap:6px;background:var(--yt);border:1px solid var(--ys);border-radius:999px;padding:3px 6px 3px 12px;font:700 13px var(--body)}
+.otag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;line-height:1}
+.oseg.o3 .oseg-b{border-radius:28px;padding:8px 6px}.oseg.o3 .oseg-b .m{font-size:13px}
+@media (max-width:700px){.otg{grid-template-columns:minmax(0,1fr)}.ot{min-height:0}.oseg.o3{grid-auto-flow:row;grid-auto-columns:auto}}
 .pb-l{list-style:none;margin:0 0 8px;padding:0}
 .pb-l li{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;border-radius:12px;cursor:pointer}
 .pb-l li:hover{background:#fff}
-.pb-i{flex:0 0 24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 12px var(--body);border:2px solid var(--line2);color:var(--muted);background:#fff}
+.pb-i{flex:0 0 24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 12px var(--body);border:2px solid var(--line2);color:var(--mu);background:#fff}
 .pb-l li.done .pb-i{background:#1a1a1a;border-color:#1a1a1a;color:#ffc523}
 .pb-l li.cur .pb-i{background:var(--y);border-color:var(--y);color:#111}
 .pb-l li.cur{background:var(--yt)}
 .pb-t{min-width:0;flex:1}.pb-t b{display:block;font:700 14px/1.25 var(--body)}
-.pb-t small{display:block;font:500 12.5px/1.3 var(--body);color:var(--muted);overflow-wrap:anywhere}
-.pb-l li.next .pb-t b{color:var(--muted);font-weight:600}
+.pb-t small{display:block;font:500 12.5px/1.3 var(--body);color:var(--mu);overflow-wrap:anywhere}
+.pb-l li.next .pb-t b{color:var(--mu);font-weight:600}
 .pbox img{aspect-ratio:16/9}
 .pbox .line{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:14px}
 .pbox .line:last-of-type{border-bottom:0}
@@ -190,33 +206,33 @@ var PRODUCTS={
   desc:"A real pen writes the address on a No. 10 envelope. The letter inside is printed with your design and message. This is the current Letters page, moved here unchanged.",
   hand:"Printed letter inside",handwritten:"The envelope (address)",printed:"The letter inside",std:HW_STD,fc:HW_STD.map(function(x){return x+FC_ADD}),price:"known",
   tpls:[["Probate follow-up","2021/09/SeeThrough3-768x432.png"],["Absentee owner","2021/08/Envelope1-768x432.png"],["Tax delinquent","2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg"],["Pre-foreclosure","2021/09/HandwriteA6.png"]],tplLabel:"Pick your printed letter",
-  steps:["tpl","hand","post","list","mail","notes","cart"]},
+  steps:["tpl","hand","post","more","list","mail","notes","cart"]},
  hw6:{k:"hw6",grp:"env",name:"Letter with Actual Handwritten #6 Envelope",short:"A6 (invitation) handwritten envelope + printed letter",img:IM("2021/09/HandwriteA6.png"),
   desc:"Same idea in the smaller A6 (invitation) size: a real pen writes the address on the envelope, the letter inside is printed.",
   hand:"Printed letter inside",handwritten:"The envelope (address)",printed:"The letter inside",std:HW_STD,fc:HW_STD.map(function(x){return x+FC_ADD}),price:"known",
   tpls:[["Invitation style","2021/08/Invitation-with-Letter-768x432.png"],["Absentee owner","2021/09/HandwriteA6.png"],["Probate follow-up","2021/09/SeeThrough3-768x432.png"],["Pre-foreclosure","2021/08/Envelope1-768x432.png"]],tplLabel:"Pick your printed letter",
-  steps:["tpl","hand","post","list","mail","notes","cart"]},
+  steps:["tpl","hand","post","more","list","mail","notes","cart"]},
  printcard:{k:"printcard",grp:"env",name:"Printed Card with Actual Handwritten Envelope",short:"Printed card + handwritten envelope",img:IM("2021/11/Ornament-Card-768x432.png"),
   desc:"A printed greeting card (digital print inside and out) mailed in an envelope a real pen has addressed. Placed with the No. 10 because only the envelope is handwritten.",
   handwritten:"The envelope (address)",printed:"The card",std:DIG_STD.map(function(x){return x+HWENV_ADD}),fc:DIG_STD.map(function(x){return x+HWENV_ADD+FC_ADD}),price:"placeholder",
   phNote:"Placeholder: the existing printed greeting card price plus the existing $0.35 Actual Handwritten #10 envelope option, plus $0.241 for First Class. Not an approved price.",
   tpls:[["Thinking of you","2021/11/Ornament-Card-768x432.png"],["Seasonal","2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"],["Plain note card","2025/12/HWFolded-Note-768x432.jpg"],["Custom design","2021/11/Ornament-Card-768x432.png"]],tplLabel:"Pick your printed card",
-  steps:["tpl","hand","post","list","mail","notes","cart"]},
+  steps:["tpl","hand","post","more","list","mail","notes","cart"]},
  cards:{k:"cards",grp:"full",name:"Real Handwritten Greeting Cards",short:"Handwritten card + handwritten envelope",img:IM("2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"),
   desc:"Your message is written by a real pen on a greeting card, and the envelope is handwritten too. Nothing inside is printed.",
   handwritten:"The message and the envelope",printed:"Only the card design (artwork)",std:CARD_STD,fc:CARD_FC,price:"known",
   tpls:[["Wishing you well","2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"],["Thank you","2021/11/Ornament-Card-768x432.png"],["Hello neighbor","2025/07/Family-Picture-Actual-Handwritten-768x432.jpg"],["Blank card","2025/12/HWFolded-Note-768x432.jpg"]],tplLabel:"Pick your card",
-  steps:["tpl","hand","msg","post","list","mail","notes","cart"]},
+  steps:["tpl","hand","msg","post","more","list","mail","notes","cart"]},
  flip:{k:"flip",grp:"full",name:"Real Handwritten Flip Notes",short:"Handwritten flip note + handwritten envelope",img:IM("2025/07/Comic-768x432.jpg"),
   desc:"A note that flips open, your message written by a real pen, in a handwritten envelope. Name and exact format to confirm with Josh.",
   handwritten:"The message and the envelope",printed:"Only the note design (artwork)",std:CARD_STD,fc:CARD_FC,price:"placeholder",
   phNote:"Placeholder: borrows the existing real handwritten greeting card price table because no Flip Note price exists in the mockup. Not an approved price. If Flip Notes means the existing Folded Note, use that note's price.",
   tpls:[["Flip note A","2025/07/Comic-768x432.jpg"],["Flip note B","2025/12/HWFolded-Note-768x432.jpg"],["Flip note C","2025/07/Family-Picture-Actual-Handwritten-768x432.jpg"],["Blank flip note","2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"]],tplLabel:"Pick your flip note",
-  steps:["tpl","hand","msg","post","list","mail","notes","cart"]}
+  steps:["tpl","hand","msg","post","more","list","mail","notes","cart"]}
 };
 var ORDER={env:["hw10","hw6","printcard"],full:["cards","flip"]};
 function viewer(src,name,onPick){var v=document.getElementById("rhv");if(v)v.remove();v=document.createElement("div");v.id="rhv";v.className="rhv";v.innerHTML='<div class="rhv-box" role="dialog" aria-modal="true" aria-label="Preview"><img src="'+src+'" alt=""><div class="rhv-row"><b>'+esc(name)+'</b><span><button type="button" class="btn sm" id="rhvSel">Select</button> <button type="button" class="btn sm sec" id="rhvX">Close</button></span></div></div>';document.body.appendChild(v);function close(){v.remove()}v.onclick=function(e){if(e.target===v)close()};document.getElementById("rhvX").onclick=close;document.getElementById("rhvSel").onclick=function(){close();onPick()};document.addEventListener("keydown",function k(e){if(e.key==="Escape"){close();document.removeEventListener("keydown",k)}})}
-var TITLES={tpl:"Design",hand:"Handwriting",msg:"Your handwritten message",post:"Postage",list:"Your list",mail:"Mail dates",notes:"Notes",cart:"Review and add to cart"};
+var TITLES={tpl:"Design",hand:"Handwriting",msg:"Your handwritten message",post:"Postage",more:"Other options",list:"Your list",mail:"Mail dates",notes:"Notes",cart:"Review and add to cart"};
 var HOL=["2026-11-26","2026-12-25","2027-01-01","2027-01-18","2027-02-15"];
 var DAYS=["Su","Mo","Tu","We","Th","Fr","Sa"],MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
 var TODAY=new Date(2026,10,18);
@@ -229,7 +245,12 @@ function okMail(d){var w=d.getDay();return [1,3,4,5].indexOf(w)>=0&&HOL.indexOf(
 function fridayOnOrAfter(d){var x=new Date(d);while(x.getDay()!==5||HOL.indexOf(iso(x))>=0)x.setDate(x.getDate()+1);return x}
 var S=null; /* per-product state */
 function tier(q){var i=0;for(var j=0;j<TQ.length;j++)if(q>=TQ[j])i=j;return i}
-function ppc(){var p=S.p;if(!S.qty)return null;var t=tier(S.qty);return (S.post==="fc"?p.fc:p.std)[t]}
+var OPT_SP={"0":0,"1":0.10,"2":0.15},OPT_PP={sn:0.06,eos:0.03},OPT_ONE={und:19,ret:49};
+function extraPP(){var m=S.more;return OPT_SP[m.sp]+(m.sn==="1"?OPT_PP.sn:0)+(m.eos==="1"?OPT_PP.eos:0)}
+function oneTime(){var m=S.more;return (m.und==="1"?OPT_ONE.und:0)+(m.ret==="1"?OPT_ONE.ret:0)}
+function ppc(){var p=S.p;if(!S.qty)return null;var t=tier(S.qty);return (S.post==="fc"?p.fc:p.std)[t]+extraPP()}
+function totalNow(pp){return pp==null?0:pp*S.qty+oneTime()}
+function moreSum(){var m=S.more,a=[];if(m.sp!=="0")a.push(m.sp==="1"?"Circular page":"Circular with variable data");if(m.sn==="1")a.push("Sticky note");if(m.eos==="1")a.push("Easy Offer System");if(m.und==="1")a.push("Undeliverable list");if(m.ret==="1")a.push("Return mail list");return (a.length?a.join(", "):"No extras")+" \u00b7 Lead: "+(m.lead.join(", ")||"none yet")}
 function route(){document.body.classList.remove("rh-prod");
  var h=location.hash.replace(/^#\/?/,"")||"";
  $$("#nav a").forEach(function(a){a.classList.toggle("on",(a.dataset.r==="menu"&&h==="menu")||(a.dataset.r==="home"&&h!=="menu"))});
@@ -269,7 +290,7 @@ function menuPage(){
 /* ---------- product page ---------- */
 function productPage(k){
  var p=PRODUCTS[k];
- S={p:p,tpl:-1,style:"",ink:"",msg:"",post:"",qty:0,file:"",cols:[],rows:0,map:{},listOk:false,nbatch:1,dates:[],touched:{},activeB:0,calM:null,notes:"",done:{}};
+ S={p:p,more:{sp:"0",sn:"0",eos:"0",und:"0",ret:"0",lead:[]},tpl:-1,style:"",ink:"",msg:"",post:"",qty:0,file:"",cols:[],rows:0,map:{},listOk:false,nbatch:1,dates:[],touched:{},activeB:0,calM:null,notes:"",done:{}};
  var hv=p.grp==="full"?'<div class="hv"><div class="a"><b>&#9997; Handwritten</b>'+esc(p.handwritten)+'</div><div class="b"><b>&#128424; Printed</b>'+esc(p.printed)+'</div></div>':'<div class="hv"><div class="a"><b>&#9997; Handwritten</b>'+esc(p.handwritten)+'</div><div class="b"><b>&#128424; Printed</b>'+esc(p.printed)+'</div></div>';
  var steps=p.steps.map(function(id,i){return '<section class="st" id="st-'+id+'" data-s="'+id+'"><button type="button" class="st-h" data-h="'+id+'"><span class="num">'+(i+1)+'</span><span class="tt"><span class="sk">Step '+(i+1)+' of '+p.steps.length+' \u00b7 </span>'+TITLES[id]+'</span><span class="sm" id="sm-'+id+'"></span><span class="tog">Open</span></button><div class="st-b" id="sb-'+id+'"></div></section>'}).join("");
  $("#app").innerHTML='<div class="crumb"><a href="#/">Real Handwritten</a> / '+(p.grp==="full"?"Fully handwritten":"Handwritten envelope + printed letter")+'</div><div class="pgrid"><div><span class="chip '+(p.grp==="env"?"print":"")+'">'+(p.grp==="env"?"Handwritten envelope + printed letter":"Fully handwritten")+'</span><h1 style="margin-top:8px">'+esc(p.name)+'</h1><p>'+esc(p.desc)+'</p>'+hv+(p.price==="placeholder"?'<div class="note"><b>Placeholder pricing.</b> '+esc(p.phNote)+' <b>Needs Josh\'s price.</b></div>':'')+'<div id="steps">'+steps+'</div></div><aside class="pbox" id="pbox"></aside></div>';
@@ -300,6 +321,18 @@ var BODY={
   g.onclick=function(){mark("msg",S.msg.length+" characters");next("msg")}},
  post:function(el){var p=S.p;el.innerHTML='<span class="lbl">Postage</span><div class="pseg" id="pseg"><button type="button" class="pill-b" data-post="fc"><b>First Class</b><small>Faster. Undeliverable mail is returned to you.</small></button><button type="button" class="pill-b" data-post="std"><b>Standard</b><small>Lowest price (Marketing Mail)</small></button></div><div id="ptab"></div>';
   el.onclick=function(e){var b=e.target.closest("[data-post]");if(!b)return;S.post=b.dataset.post;$$("#pseg .pill-b").forEach(function(x){x.classList.toggle("on",x===b)});priceTable();mark("post",S.post==="fc"?"First Class":"Standard");next("post")};priceTable()},
+
+ more:function(el){var H={sp:"<p>Add a circular page to your letter campaign. It works as a flyer-type page inserted with your letter. Circular page: +10 cents each. Circular with variable data: +15 cents each, printing that owner's name and property address. Both are printed 11\u00d717, cut and folded.</p>",sn:"<p>Add a sticky note outside of the envelope. You can add the phone number of the record.</p>",eos:"<p>Increase response rates and seller engagement with a customized cash offer range for each real estate prospect using the Easy Offer System.</p>",und:"<p>The addresses our address check flagged as undeliverable and removed before mailing. An extra $19 option so you can see which records were taken out.</p>",ret:"<p>A Return Mail List is built after mailing from USPS returns, about 7 days after delivery, and is $49 per order. It is never 100% complete.</p>"};
+  var T=[["sp","Second Page (Circular)","What is this?",[["0","No second page",""],["1","Circular page","+10 cents"],["2","Circular with variable data","+15 cents"]]],["sn","Yellow Sticky Note on Outside of Envelope","What is this?",[["0","No",""],["1","Yes","+6 cents"]]],["eos","Easy Offer System","What is this?",[["0","No",""],["1","Yes","+3 cents"]]],["und","Undeliverable list","Learn more",[["0","No",""],["1","Yes","$19"]]],["ret","Return Mail List after delivery","Learn more",[["0","No",""],["1","Yes","$49"]]]];
+  el.innerHTML='<div class="otg">'+T.map(function(t){return '<div class="ot" data-k="'+t[0]+'"><div class="oth"><b>'+t[1]+'</b><button type="button" class="chip-help" data-help="'+t[0]+'" aria-expanded="false">'+t[2]+'</button></div><div class="ohelp" hidden>'+H[t[0]]+'</div><div class="oseg'+(t[3].length>2?" o3":"")+'">'+t[3].map(function(o){return '<button type="button" class="oseg-b'+(S.more[t[0]]===o[0]?" on":"")+'" data-k="'+t[0]+'" data-v="'+o[0]+'" aria-pressed="'+(S.more[t[0]]===o[0])+'"><span class="m">'+o[1]+'</span><span class="p">'+o[2]+'</span></button>'}).join("")+'</div></div>'}).join("")+(T.length%2?'':'')+'<div class="ot" id="otLead"><div class="oth"><b>Lead type</b><span class="req">Required*</span></div><p class="muted" style="margin:0">Type a lead type, like Probate or Vacant, and press Enter. You can add several.</p><div class="otags" id="otags"></div><input class="inp" id="otIn" type="text" placeholder="Type your lead type, like Probate or Vacant" aria-label="Add a lead type" autocomplete="off"></div></div><p class="bad" id="otErr" hidden style="color:var(--bad);margin:10px 0 0">Add a lead type to continue.</p><div style="margin-top:14px"><button type="button" class="btn sec sm" id="otGo">Continue</button></div>';
+  function tags(){$("#otags",el).innerHTML=S.more.lead.map(function(x,i){return '<span class="otag">'+esc(x)+'<button type="button" data-rm="'+i+'" aria-label="Remove '+esc(x)+'">\u00d7</button></span>'}).join("")}
+  function addTag(){var i=$("#otIn",el),v=i.value.trim();if(v&&S.more.lead.indexOf(v)<0)S.more.lead.push(v);i.value="";tags();$("#otErr",el).hidden=true;if(S.done.more)mark("more",moreSum());else paintBox()}
+  tags();
+  $("#otIn",el).onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();addTag()}};
+  el.onclick=function(e){var h=e.target.closest("[data-help]");if(h){var box=h.closest(".ot").querySelector(".ohelp");box.hidden=!box.hidden;h.setAttribute("aria-expanded",!box.hidden);return}
+   var b=e.target.closest(".oseg-b");if(b){var k=b.dataset.k;S.more[k]=b.dataset.v;$$('.oseg-b[data-k="'+k+'"]',el).forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});if(S.done.more)mark("more",moreSum());else paintBox();return}
+   var r=e.target.closest("[data-rm]");if(r){S.more.lead.splice(+r.dataset.rm,1);tags();if(S.done.more&&!S.more.lead.length){unmark("more")}paintBox();return}
+   if(e.target.id==="otGo"){var iv=$("#otIn",el).value.trim();if(iv)addTag();if(!S.more.lead.length){$("#otErr",el).hidden=false;return}mark("more",moreSum());next("more")}}},
  list:function(el){
   el.innerHTML='<div class="drop" id="drop"><b>Upload your list (CSV)</b><p class="muted" style="margin:4px 0 0">Columns can be in any order. You match them next.</p><div class="row"><label class="btn sm">Choose a CSV file<input type="file" id="lf" accept=".csv,text/csv" hidden></label><button type="button" class="btn sec sm" id="lx">Use the example list (220 records)</button></div></div><div id="lmap"></div>';
   $("#lf",el).onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){loadList(parseCsv(String(r.result)),f.name)};r.readAsText(f)};
@@ -338,10 +371,10 @@ function calPaint(){var m=S.calM,y=m.getFullYear(),mo=m.getMonth(),first=new Dat
  $("#cal").innerHTML='<div class="cal-h"><button type="button" class="btn sec sm" data-cm="-1" aria-label="Previous month">&lsaquo;</button><b>'+MON[mo]+' '+y+'</b><button type="button" class="btn sec sm" data-cm="1" aria-label="Next month">&rsaquo;</button></div><div class="cal-g">'+g+'</div>';
  $("#bdhelp").textContent="Editing Batch "+(S.activeB+1)+". Pick any open day (Mon, Wed, Thu, Fri). Dates stay open until you confirm."}
 /* summary */
-function lines(){var p=S.p,pp=ppc(),q=S.qty;return [["Product",p.name],["Type",p.grp==="full"?"Fully handwritten":"Handwritten envelope + printed letter"],["Design",S.tpl>=0?p.tpls[S.tpl][0]:"Not chosen"],["Handwriting",S.style?cap(S.style)+", "+S.ink+" ink":"Not chosen"]].concat(p.grp==="full"?[["Message",S.msg?S.msg.length+" characters":"Not written"]]:[]).concat([["Postage",S.post==="fc"?"First Class":S.post==="std"?"Standard":"Not chosen"],["List",S.listOk?S.file+" ("+q+" records)":"Not added"],["Mail dates",S.done.mail?S.dates.map(nice).join(", "):"Not confirmed"],["Per piece",pp==null?"Add your list first":money(pp)+(p.price==="placeholder"?" (placeholder)":"")],["Quantity",String(q)],["Total",pp==null?"$0.00":money(pp*q,2)+(p.price==="placeholder"?" (placeholder)":"")]])}
+function lines(){var p=S.p,pp=ppc(),q=S.qty;return [["Product",p.name],["Type",p.grp==="full"?"Fully handwritten":"Handwritten envelope + printed letter"],["Design",S.tpl>=0?p.tpls[S.tpl][0]:"Not chosen"],["Handwriting",S.style?cap(S.style)+", "+S.ink+" ink":"Not chosen"]].concat(p.grp==="full"?[["Message",S.msg?S.msg.length+" characters":"Not written"]]:[]).concat([["Postage",S.post==="fc"?"First Class":S.post==="std"?"Standard":"Not chosen"],["Other options",S.done.more?moreSum():"Not chosen"],["List",S.listOk?S.file+" ("+q+" records)":"Not added"],["Mail dates",S.done.mail?S.dates.map(nice).join(", "):"Not confirmed"],["Per piece",pp==null?"Add your list first":money(pp)+(p.price==="placeholder"?" (placeholder)":"")],["Quantity",String(q)],["Total",pp==null?"$0.00":money(pp*q+oneTime(),2)+(p.price==="placeholder"?" (placeholder)":"")]])}
 function missing(){var m=[],d=S.done;S.p.steps.forEach(function(s){if(s!=="cart"&&s!=="notes"&&!d[s])m.push(TITLES[s])});return m}
 function paintBox(){var p=S.p,pp=ppc(),st=p.steps,cur=-1,box=$("#pbox"),was=box.classList.contains("open");st.forEach(function(id,i){if(cur<0&&!S.done[id]&&id!=="cart")cur=i});if(cur<0)cur=st.length-1;
- var tot=pp==null?"$0.00":money(pp*S.qty,2);
+ var tot=pp==null?"$0.00":money(totalNow(pp),2);
  var rows=st.map(function(id,i){var d=!!S.done[id],c=!d&&i===cur,sm=$("#sm-"+id),v=sm?sm.textContent:"";return '<li class="'+(d?"done":c?"cur":"next")+'" data-go="'+id+'"><span class="pb-i">'+(d?"\u2713":(i+1))+'</span><span class="pb-t"><b>'+esc(TITLES[id])+'</b><small>'+esc(v||(c?"Choose now":""))+'</small></span></li>'}).join("");
  box.innerHTML='<button type="button" class="pb-h" aria-expanded="'+was+'"><span class="pb-hs"><small>Step '+(cur+1)+' of '+st.length+'</small><b>'+esc(TITLES[st[cur]])+'</b></span><span class="pb-hp">'+tot+'</span><span class="pb-ch"></span></button><div class="pb-b"><img src="'+p.img+'" alt=""><h3 style="margin:10px 0 4px">Your order</h3><ol class="pb-l">'+rows+'</ol><div class="line"><span>Per piece</span><b id="bpp">'+(pp==null?"$0.000":money(pp))+'</b></div><div class="line"><span>Quantity</span><b id="bq">'+S.qty+'</b></div><div class="line"><span>Total</span><span class="tot" id="bt">'+tot+'</span></div>'+(p.price==="placeholder"?'<span class="chip ph">Placeholder price</span>':'')+'<p class="muted" style="margin:8px 0 0">Quantity is locked at 0 until your list is added, then it is your cleaned record count.</p></div>';
  box.onclick=function(e){var h=e.target.closest(".pb-h");if(h){if(window.innerWidth<=900){var o=box.classList.toggle("open");h.setAttribute("aria-expanded",o)}return}var li=e.target.closest("[data-go]");if(li){openStep(li.dataset.go);if(window.innerWidth<=900){box.classList.remove("open");$(".pb-h",box).setAttribute("aria-expanded","false")}}};
