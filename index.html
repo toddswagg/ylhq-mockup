@@ -963,6 +963,34 @@ i.del{background:var(--ok)}i.tr{background:var(--info)}i.up{background:var(--lin
 .tkl li>div:last-child{justify-self:end;text-align:right}.tkl-d b{display:block}.tkl-d span{font-size:13px;color:var(--mu)}
 .tkl-s small{display:block;font-size:12.5px;color:var(--mu);margin-top:4px}
 @media(max-width:700px){.tkl li{grid-template-columns:1fr}.tkl li>div:last-child{justify-self:start;text-align:left}}
+/* AccuZip tracking (Nov 17) */
+.tk-from{display:block;color:var(--info);background:var(--infot);border:1px solid #B2CCFF;border-radius:8px;padding:3px 8px;font-size:12.5px;font-weight:700;margin-top:6px;width:fit-content;line-height:1.35}
+.tko-pr .tk-from,.tkl-s .tk-from,td .tk-from{margin-top:6px}
+.tk-map-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tk-map-head h4{margin:0}
+.tk-modes{display:flex;gap:4px;flex-wrap:wrap}
+.tk-modes button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:99px;padding:5px 10px;font-size:12.5px;font-weight:700;cursor:pointer}
+.tk-modes button.on{background:#111;color:#fff;border-color:#111}
+.tk-us{display:block;width:100%;max-width:640px;height:auto}
+.tk-us text{pointer-events:none}
+.tk-us .tk-cell{cursor:pointer}
+.tk-leg{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--mu);margin-top:8px}
+.tk-leg i{display:inline-block;width:12px;height:12px;border-radius:2px;border:1px solid #E4E4E7}
+.tk-fac{list-style:none;margin:10px 0 0;padding:0}
+.tk-fac li{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.tk-fac li:last-child{border-bottom:0}
+.tk-fac .tk-from{margin:0 0 3px}
+.tk-fac b{white-space:nowrap;font-size:14px}
+.tk-dots{display:block;width:100%;height:auto;max-height:220px;background:#F8FAFC;border:1px solid var(--line);border-radius:10px;margin:8px 0 0}
+.tk-tl{display:flex;align-items:flex-end;gap:6px;height:132px}
+.tk-tl .tk-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.tk-tl .tk-col b{display:block;width:100%;border-radius:4px 4px 0 0;background:#15803D;min-height:2px}
+.tk-tl .tk-col small{font-size:10px;color:var(--mu);line-height:1}
+.tk-tl .tk-col em{font-style:normal;font-size:10px;font-weight:700;color:var(--ink)}
+.tk-export{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.tk-from-lg{display:inline-block;color:var(--info);background:var(--infot);border:1px solid #B2CCFF;border-radius:10px;padding:6px 12px;font-size:15px;font-weight:700;margin-top:8px}
+@media(max-width:700px){.tk-us{max-width:100%}}
+
 .ct-subh{font-size:17px;font-weight:600;margin:4px 0 8px}
 .ct-steps{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0}
 .ct-steps a{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none}
@@ -5311,11 +5339,11 @@ function tkAge(s){return Math.round((TK_TODAY-tkD(s))/864e5)}
 function tkFmt(d){var M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return M[d.getMonth()]+" "+d.getDate()}
 function tkAdd(s,n){var d=tkD(s);d.setDate(d.getDate()+n);return d}
 function tkDrop(o,i){var n=o.drops.length,mailed=i<o.done,fc=/First/.test(o.post),age=tkAge(o.drops[i]),del=mailed&&age>=(fc?4:10);
-  var qty=Math.floor(o.qty/n)+(i<o.qty%n?1:0),st,scan,grp;
+  var qty=Math.floor(o.qty/n)+(i<o.qty%n?1:0),st,scan,grp,fromCity="",fromSt="",fromLine="",fac;
   if(!mailed){grp="up";st=o.st==="bad"?["n","Cancelled"]:["n","Not mailed"];scan=o.st==="proof"?"Waiting for proof approval":"No scans yet"}
   else if(del){grp="del";st=["g","Delivered"];scan="Delivered, "+tkFmt(tkAdd(o.drops[i],fc?3:9))+", 2:41 PM"}
-  else{grp="tr";st=["b","In transit"];scan="Arrived at USPS regional facility, Santa Ana CA, "+tkFmt(tkAdd(o.drops[i],1))+", 9:12 AM"}
-  return {o:o,n:i+1,date:o.drops[i],qty:qty,mailed:mailed,st:st,scan:scan,grp:grp}}
+  else{grp="tr";st=["b","In transit"];fac=tkFacFor(o,i);fromCity=fac.city;fromSt=fac.st;fromLine="In transit from "+fac.city;scan="Arrived at USPS "+fac.kind+", "+fac.city+" "+fac.st+", "+tkFmt(tkAdd(o.drops[i],1))+", 9:12 AM"}
+  return {o:o,n:i+1,date:o.drops[i],qty:qty,mailed:mailed,st:st,scan:scan,grp:grp,fromCity:fromCity,fromSt:fromSt,fromLine:fromLine}}
 function tkOrder(o){var D=o.drops.map(function(d,i){return tkDrop(o,i)}),dl=D.filter(function(x){return x.grp==="del"}).length,tr=D.filter(function(x){return x.grp==="tr"}).length,up=D.filter(function(x){return x.grp==="up"});
   var st=dl===D.length?["g","Complete"]:(o.done>0?["b","Mailing"]:["a","In production"]);
   return {o:o,D:D,dl:dl,tr:tr,up:up.length,next:up.length?up[0].date:"-",st:st,pct:Math.round(dl/D.length*100),pcs:D.filter(function(x){return x.grp==="del"}).reduce(function(s,x){return s+x.qty},0)}}
@@ -5323,7 +5351,248 @@ function tkList(){return ORDERS.filter(oActive).map(tkOrder)}
 function tkDropsHTML(t){var G=[["up","Upcoming"],["tr","In transit"],["del","Delivered"]];
   return G.map(function(g){var L=t.D.filter(function(x){return x.grp===g[0]});if(!L.length)return "";
     return '<div class="tko-g"><h4>'+g[1]+' <span class="muted">('+L.length+')</span></h4><div class="tw"><table class="bp-tbl tko-t"><thead><tr><th>Drop</th><th>Mail date</th><th>Qty</th><th>Status</th><th>Latest USPS scan</th><th></th></tr></thead><tbody>'+
-     L.map(function(x){return '<tr><td><b>#'+x.n+'</b></td><td>'+x.date+'</td><td>'+fmtN(x.qty)+'</td><td>'+pill(x.st[0],x.st[1])+'</td><td>'+esc(x.scan)+'</td><td>'+(x.mailed?'<a class="btn sm sec" href="#/track/'+t.o.id+'/'+x.n+'">Track</a>':'<span class="muted">After it mails</span>')+'</td></tr>'}).join("")+'</tbody></table></div></div>'}).join("")}
+     L.map(function(x){return '<tr><td><b>#'+x.n+'</b></td><td>'+x.date+'</td><td>'+fmtN(x.qty)+'</td><td>'+pill(x.st[0],x.st[1])+'</td><td>'+esc(x.scan)+tkFromHTML(x)+'</td><td>'+(x.mailed?'<a class="btn sm sec" href="#/track/'+t.o.id+'/'+x.n+'">Track</a>':'<span class="muted">After it mails</span>')+'</td></tr>'}).join("")+'</tbody></table></div></div>'}).join("")}
+/* AccuZip / AccuTrace tracking helpers (sample data, Nov 17) */
+var TKMAP={mode:"mailed",st:null,zip:null};
+var TK_STNAME={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"District of Columbia",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+var TK_POS=[["AK",0,0],["ME",11,0],["WI",6,1],["VT",10,1],["NH",11,1],["WA",0,2],["ID",1,2],["MT",2,2],["ND",3,2],["MN",4,2],["IL",5,2],["MI",6,2],["NY",9,2],["MA",10,2],["OR",0,3],["NV",1,3],["WY",2,3],["SD",3,3],["IA",4,3],["IN",5,3],["OH",6,3],["PA",7,3],["NJ",8,3],["CT",9,3],["RI",10,3],["CA",0,4],["UT",1,4],["CO",2,4],["NE",3,4],["MO",4,4],["KY",5,4],["WV",6,4],["VA",7,4],["MD",8,4],["DE",9,4],["AZ",1,5],["NM",2,5],["KS",3,5],["AR",4,5],["TN",5,5],["NC",6,5],["SC",7,5],["DC",8,5],["OK",3,6],["LA",4,6],["MS",5,6],["AL",6,6],["GA",7,6],["HI",1,7],["TX",3,7],["FL",7,7]];
+var TK_FACS=[
+  {city:"Santa Ana",st:"CA",kind:"regional facility",lat:33.75,lon:-117.87},
+  {city:"Phoenix",st:"AZ",kind:"SCF",lat:33.45,lon:-112.07},
+  {city:"Dallas",st:"TX",kind:"origin facility",lat:32.78,lon:-96.8},
+  {city:"Atlanta",st:"GA",kind:"NDC",lat:33.75,lon:-84.39},
+  {city:"Chicago",st:"IL",kind:"processing facility",lat:41.88,lon:-87.63},
+  {city:"Las Vegas",st:"NV",kind:"facility",lat:36.17,lon:-115.14},
+  {city:"Denver",st:"CO",kind:"SCF",lat:39.74,lon:-104.99},
+  {city:"Orlando",st:"FL",kind:"regional facility",lat:28.54,lon:-81.38}
+];
+var TK_COUNTIES={
+  CA:[["San Diego",.28],["Orange",.18],["Los Angeles",.22],["Riverside",.12],["San Bernardino",.08],["Sacramento",.06],["Other CA",.06]],
+  TX:[["Harris",.24],["Dallas",.18],["Tarrant",.12],["Travis",.12],["Bexar",.14],["Collin",.08],["Other TX",.12]],
+  FL:[["Miami-Dade",.22],["Broward",.14],["Orange",.14],["Hillsborough",.12],["Palm Beach",.12],["Duval",.08],["Other FL",.18]],
+  AZ:[["Maricopa",.62],["Pima",.16],["Pinal",.08],["Yavapai",.05],["Other AZ",.09]],
+  NV:[["Clark",.72],["Washoe",.16],["Other NV",.12]],
+  OR:[["Multnomah",.38],["Washington",.22],["Clackamas",.16],["Other OR",.24]],
+  WA:[["King",.42],["Pierce",.16],["Snohomish",.14],["Other WA",.28]],
+  CO:[["Denver",.28],["Arapahoe",.18],["Jefferson",.16],["El Paso",.14],["Other CO",.24]],
+  NY:[["New York",.18],["Kings",.16],["Queens",.14],["Nassau",.12],["Other NY",.40]],
+  IL:[["Cook",.48],["DuPage",.12],["Lake",.10],["Other IL",.30]],
+  GA:[["Fulton",.22],["Gwinnett",.16],["Cobb",.14],["DeKalb",.12],["Other GA",.36]],
+  NC:[["Mecklenburg",.22],["Wake",.20],["Guilford",.10],["Other NC",.48]]
+};
+var TK_ZIPS={
+  CA:[["92101","San Diego"],["92110","San Diego"],["91910","Chula Vista"],["92626","Costa Mesa"],["92705","Santa Ana"],["90012","Los Angeles"],["92801","Anaheim"],["95814","Sacramento"]],
+  TX:[["77002","Houston"],["75201","Dallas"],["76102","Fort Worth"],["78701","Austin"],["78205","San Antonio"],["75024","Plano"]],
+  FL:[["33130","Miami"],["33301","Fort Lauderdale"],["32801","Orlando"],["33602","Tampa"],["33401","West Palm Beach"]],
+  AZ:[["85003","Phoenix"],["85251","Scottsdale"],["85701","Tucson"],["85224","Chandler"]],
+  NV:[["89101","Las Vegas"],["89030","North Las Vegas"],["89501","Reno"]],
+  OR:[["97201","Portland"],["97005","Beaverton"]],
+  WA:[["98101","Seattle"],["98402","Tacoma"]],
+  CO:[["80202","Denver"],["80014","Aurora"]],
+  NY:[["10001","New York"],["11201","Brooklyn"]],
+  IL:[["60601","Chicago"],["60101","Addison"]],
+  GA:[["30303","Atlanta"],["30043","Lawrenceville"]],
+  NC:[["28202","Charlotte"],["27601","Raleigh"]]
+};
+function tkFacFor(o,i){if(+o.id===204377)return TK_FACS[0];return TK_FACS[hashN(String(o.id)+"-"+i)%TK_FACS.length]}
+function tkFromHTML(x){return x&&x.fromLine?'<span class="tk-from">'+esc(x.fromLine)+'</span>':""}
+function tkDashFrom(t){var seen={},L=[];t.D.forEach(function(x){if(x.fromCity&&!seen[x.fromCity]){seen[x.fromCity]=1;L.push(x.fromCity)}});return L.length?'<span class="tk-from">In transit from '+L.map(function(c){return esc(c)}).join(", ")+'</span>':""}
+function tkLerp(a,b,t){t=Math.max(0,Math.min(1,t));var r=function(h){return parseInt(h,16)};var ar=r(a.slice(1,3)),ag=r(a.slice(3,5)),ab=r(a.slice(5,7)),br=r(b.slice(1,3)),bg=r(b.slice(3,5)),bb=r(b.slice(5,7));function h(n){var s=Math.round(n).toString(16);return s.length<2?"0"+s:s}return "#"+h(ar+(br-ar)*t)+h(ag+(bg-ag)*t)+h(ab+(bb-ab)*t)}
+function tkFill(mode,val,max){if(!val||!max)return "#F4F4F5";var t=Math.sqrt(val/max);if(mode==="transit")return tkLerp("#DBEAFE","#1D4ED8",t);if(mode==="delivered")return tkLerp("#DCFCE7","#15803D",t);return tkLerp("#FEF3C7","#CA8A04",t)}
+function tkFillInk(fill){var r=parseInt(fill.slice(1,3),16),g=parseInt(fill.slice(3,5),16),b=parseInt(fill.slice(5,7),16);return (r*299+g*587+b*114)/1000<140?"#fff":"#18181B"}
+function tkStateShares(o,b){
+  var base=[["CA",.31],["TX",.17],["FL",.12],["AZ",.08],["NV",.06],["OR",.04],["WA",.04],["CO",.03],["NY",.03],["IL",.03],["GA",.03],["NC",.02],["OH",.01],["PA",.01],["NJ",.01],["MI",.01]];
+  var h=hashN(String((o&&o.id)||"0")+"-"+b),shift=(h%7-3)/120,out=[],s=0,i,row,w;
+  for(i=0;i<base.length;i++){w=Math.max(0.005,base[i][1]+((h>>(i%8))%5-2)/200+ (i===0?shift:0));out.push([base[i][0],w]);s+=w}
+  for(i=0;i<out.length;i++)out[i][1]=out[i][1]/s;
+  return out;
+}
+function tkSplitQty(qty,shares){var L=[],used=0,i,n;for(i=0;i<shares.length;i++){n=(i===shares.length-1)?(qty-used):Math.round(qty*shares[i][1]);if(n<0)n=0;if(i===shares.length-1&&n<0)n=0;used+=n;L.push({st:shares[i][0],qty:n})}return L}
+function tkDropGeo(x){
+  if(!x.mailed)return [];
+  var parts=tkSplitQty(x.qty,tkStateShares(x.o,x.n-1)),delP,trP;
+  if(x.grp==="del"){delP=1;trP=0}else{delP=.16;trP=.71}
+  return parts.map(function(p){var d=Math.round(p.qty*delP),tr=Math.round(p.qty*trP);if(d+tr>p.qty)tr=Math.max(0,p.qty-d);return {st:p.st,mailed:p.qty,delivered:d,transit:tr,rest:Math.max(0,p.qty-d-tr)}});
+}
+function tkAggStates(D){
+  var m={},rows,key;
+  (D||[]).forEach(function(x){tkDropGeo(x).forEach(function(p){key=p.st;if(!m[key])m[key]={st:key,mailed:0,transit:0,delivered:0,rest:0};m[key].mailed+=p.mailed;m[key].transit+=p.transit;m[key].delivered+=p.delivered;m[key].rest+=p.rest})});
+  rows=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.mailed-a.mailed});
+  return rows;
+}
+function tkModeVal(row,mode){return mode==="transit"?row.transit:mode==="delivered"?row.delivered:row.mailed}
+function tkAllDrops(L){return [].concat.apply([], (L||tkList()).map(function(t){return t.D}))}
+function tkHygiene(o){
+  var h=hashN(String(o&&o.id||"0")+"hyg"),qty=(o&&o.qty)||0;
+  var cass=96.8+((h%14)/10), ncoa=1.4+((h%12)/10), vac=.3+((h%8)/10), dups=8+(h%21);
+  if(cass>99.4)cass=99.4;
+  var moves=Math.round(qty*ncoa/100), vacant=Math.round(qty*vac/100);
+  return {cass:+cass.toFixed(1),ncoa:+ncoa.toFixed(1),vac:+vac.toFixed(1),dups:dups,moves:moves,vacant:vacant,fwd:Math.round(moves*.62),ret:Math.max(0,moves-Math.round(moves*.62)+vacant)};
+}
+function tkPostage(o){
+  var qty=(o&&o.qty)||0, each= /First/.test((o&&o.post)||"") ? 0.086 : 0.142;
+  var saved=Math.round(qty*each*100)/100;
+  return {each:each,saved:saved,label:/First/.test((o&&o.post)||"")?"Presort First Class vs single-piece":"Presort Standard vs single-piece"};
+}
+function tkMoney(n){return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
+function tkWindow(x){
+  if(!x||!x.mailed)return "After it mails";
+  var fc=/First/.test((x.o&&x.o.post)||"");
+  var a=fc?2:5,b=fc?5:10;
+  return tkFmt(tkAdd(x.date,a))+" – "+tkFmt(tkAdd(x.date,b));
+}
+function tkPerfOf(D){
+  var mailed=D.filter(function(x){return x.mailed}),pcs=0,early=0,ont=0,late=0,enr=0,ns=0,ofd=0;
+  mailed.forEach(function(x){
+    var h=hashN(String(x.o.id)+"-"+x.n+"perf"), del=x.grp==="del"?Math.round(x.qty*(.86+(h%8)/100)):Math.round(x.qty*.16);
+    var e=Math.round(del*.18),o2=Math.round(del*.62),l=Math.max(0,del-e-o2), rest=x.qty-del, er=x.grp==="del"?Math.round(rest*.25):Math.round(rest*.7);
+    pcs+=x.qty;early+=e;ont+=o2;late+=l;enr+=er;ns+=Math.max(0,x.qty-e-o2-l-er);
+    if(x.grp==="tr")ofd+=Math.round(x.qty*(.06+((h%5)/100)));
+  });
+  return {pcs:pcs,early:early,ont:ont,late:late,enr:enr,ns:ns,ofd:ofd,earlyPct:pcs?Math.round(early/pcs*100):0,ontPct:pcs?Math.round(ont/pcs*100):0};
+}
+function tkTimelineDays(D,days){
+  days=days||10;
+  var mailed=D.filter(function(x){return x.mailed}),pcs=mailed.reduce(function(s,x){return s+x.qty},0),out=[],i,d0,label,pct,cum;
+  if(!pcs){for(i=0;i<days;i++)out.push({label:"–",pct:0,n:0});return out}
+  var first=mailed.slice().sort(function(a,b){return tkD(a.date)-tkD(b.date)})[0];
+  d0=tkD(first.date);
+  var perf=tkPerfOf(D),final=Math.round((perf.early+perf.ont+perf.late)/Math.max(1,perf.pcs)*100);
+  for(i=0;i<days;i++){
+    var dt=new Date(d0.getTime());dt.setDate(d0.getDate()+i);
+    label=(dt.getMonth()+1)+"/"+dt.getDate();
+    var t=(i+1)/days,ease=1-Math.pow(1-t,1.7);
+    pct=Math.round(final*ease);
+    if(i===days-1)pct=final;
+    out.push({label:label,pct:pct,n:Math.round(pcs*pct/100)});
+  }
+  return out;
+}
+function tkFacTotals(D){
+  var m={},list;
+  D.filter(function(x){return x.grp==="tr"}).forEach(function(x){
+    var k=x.fromCity||"Unknown",f=null,i;
+    for(i=0;i<TK_FACS.length;i++)if(TK_FACS[i].city===k){f=TK_FACS[i];break}
+    if(!m[k])m[k]={city:k,st:x.fromSt||(f&&f.st)||"",kind:(f&&f.kind)||"facility",lat:f?f.lat:39,lon:f?f.lon:-98,qty:0,drops:0};
+    m[k].qty+=x.qty;m[k].drops++;
+  });
+  list=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.qty-a.qty});
+  return list;
+}
+function tkMapSVG(rows,mode,sel){
+  var max=1,map={};
+  rows.forEach(function(r){map[r.st]=r;if(tkModeVal(r,mode)>max)max=tkModeVal(r,mode)});
+  var W=12,H=8,cw=36,ch=30,g=4,vbw=W*cw+(W-1)*g+8,vbh=H*ch+(H-1)*g+8;
+  var cells=TK_POS.map(function(p){
+    var st=p[0],r=map[st]||{st:st,mailed:0,transit:0,delivered:0},v=tkModeVal(r,mode),fill=tkFill(mode,v,max),ink=tkFillInk(fill),x=4+p[1]*(cw+g),y=4+p[2]*(ch+g),on=sel===st;
+    return '<g class="tk-cell'+(on?" on":"")+(v?"":" empty")+'" data-tkst="'+st+'" role="button" tabindex="0" aria-label="'+(TK_STNAME[st]||st)+', '+fmtN(v)+' pieces"><rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" rx="5" fill="'+fill+'" stroke="'+(on?"#111":"#E4E4E7")+'" stroke-width="'+(on?2:1)+'"/><text x="'+(x+cw/2)+'" y="'+(y+ch/2+3.5)+'" text-anchor="middle" fill="'+ink+'" font-size="9" font-weight="700" font-family="inherit">'+st+'</text></g>';
+  }).join("");
+  return '<svg class="tk-us" viewBox="0 0 '+vbw+' '+vbh+'" role="img" aria-label="United States map of mail pieces">'+cells+'</svg>';
+}
+function tkLegend(mode){
+  var a,b,lab;
+  if(mode==="transit"){a="#DBEAFE";b="#1D4ED8";lab="In transit"}
+  else if(mode==="delivered"){a="#DCFCE7";b="#15803D";lab="Delivered"}
+  else {a="#FEF3C7";b="#CA8A04";lab="Mailed"}
+  return '<div class="tk-leg"><span>Fewer</span><i style="background:'+a+'"></i><i style="background:'+tkLerp(a,b,.5)+'"></i><i style="background:'+b+'"></i><span>More &middot; '+lab+'</span></div>';
+}
+function tkModesHTML(mode){
+  return '<div class="tk-modes" role="tablist" aria-label="Map totals">'+[["mailed","Mailed"],["transit","In transit"],["delivered","Delivered"]].map(function(m){return '<button type="button" class="'+(mode===m[0]?"on":"")+'" data-tkmode="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div>';
+}
+function tkCountyHTML(rows,st,mode){
+  if(!st)return '<p class="muted" style="margin:8px 0 0;font-size:13px">Click a state to see county totals.</p>';
+  var row=null,i;for(i=0;i<rows.length;i++)if(rows[i].st===st){row=rows[i];break}
+  var total=row?tkModeVal(row,mode):0, list=TK_COUNTIES[st]||[["Statewide",1]],name=TK_STNAME[st]||st;
+  var body=list.map(function(c){var n=Math.round(total*c[1]);return '<tr><td>'+esc(c[0])+'</td><td>'+fmtN(n)+'</td><td>'+ (total?Math.round(c[1]*100):0)+'%</td></tr>'}).join("");
+  return '<div class="tk-county"><h4 style="margin:10px 0 6px">'+esc(name)+' counties</h4><div class="tw"><table class="bp-tbl"><thead><tr><th>County</th><th>Pieces</th><th>Share</th></tr></thead><tbody>'+body+'</tbody></table></div></div>';
+}
+function tkMapPanel(rows,mode,sel,title){
+  var tot=0,val=0;rows.forEach(function(r){tot+=r.mailed;val+=tkModeVal(r,mode)});
+  return '<div class="box tk-map"><div class="tk-map-head"><div><h4>'+(title||"Where your mail is")+'</h4><p class="muted" style="margin:2px 0 0;font-size:13px">'+fmtN(val)+' pieces '+(mode==="mailed"?"mailed":mode==="transit"?"in transit":"delivered")+' across '+rows.filter(function(r){return tkModeVal(r,mode)>0}).length+' states. Sample AccuTrace totals.</p></div>'+tkModesHTML(mode)+'</div>'+tkMapSVG(rows,mode,sel)+tkLegend(mode)+'<div data-tkcounty>'+tkCountyHTML(rows,sel,mode)+'</div></div>';
+}
+function tkFacPanel(D){
+  var L=tkFacTotals(D);
+  if(!L.length)return '<div class="box"><h4>Where mail is in transit</h4><p class="muted" style="margin:0;font-size:14px">Nothing is in transit right now.</p></div>';
+  var maxLon=-66,minLon=-125,maxLat=49,minLat=25,w=360,h=200;
+  function xy(f){var x=(f.lon-minLon)/(maxLon-minLon)* (w-24)+12, y=(maxLat-f.lat)/(maxLat-minLat)*(h-24)+12;return [x,y]}
+  var dots=L.map(function(f){var p=xy(f),r=6+Math.min(10,Math.sqrt(f.qty)/8);return '<g><circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+r.toFixed(1)+'" fill="#1D4ED8" fill-opacity=".2" stroke="#1D4ED8" stroke-width="1.5"/><text x="'+p[0].toFixed(1)+'" y="'+(p[1]-r-5).toFixed(1)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#1D4ED8" font-family="inherit">'+esc(f.city)+'</text></g>'}).join("");
+  var items=L.map(function(f){return '<li><div><span class="tk-from">In transit from '+esc(f.city)+'</span><small class="muted">USPS '+(f.kind)+', '+esc(f.st)+' &middot; '+f.drops+' drop'+(f.drops>1?"s":"")+'</small></div><b>'+fmtN(f.qty)+'</b></li>'}).join("");
+  return '<div class="box"><h4>Where mail is in transit</h4><svg class="tk-dots" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="In-transit facilities">'+dots+'</svg><ul class="tk-fac">'+items+'</ul></div>';
+}
+function tkTimelineHTML(D,title){
+  var days=tkTimelineDays(D,10),max=Math.max.apply(null,days.map(function(d){return d.pct}))||1;
+  var cols=days.map(function(d){return '<div class="tk-col" title="'+d.label+': '+d.pct+'% delivered ('+fmtN(d.n)+' pieces)"><b style="height:'+Math.max(4,d.pct/max*100)+'%"></b><small>'+d.label+'</small><em>'+d.pct+'%</em></div>'}).join("");
+  var last=days[days.length-1];
+  return '<div class="box"><h4>'+(title||"Delivery timeline")+'</h4><p class="muted" style="margin:0 0 10px;font-size:13px">Percent delivered by day after the first mail date. '+ (last?fmtN(last.n)+" pieces, "+last.pct+"% delivered by "+last.label+".":"")+'</p><div class="tk-tl" role="img" aria-label="Delivery timeline">'+cols+'</div></div>';
+}
+function tkPerfCard(perf){
+  return '<div class="bp-card"><small>Early &amp; on-time</small><b>'+fmtN(perf.early+perf.ont)+'</b><em>'+fmtN(perf.early)+' early &middot; '+fmtN(perf.ont)+' on time ('+(perf.earlyPct+perf.ontPct)+'% of mailed)</em></div>';
+}
+function tkHygHTML(o){
+  var h=tkHygiene(o);
+  return '<div class="box"><h4>Address moves &amp; list cleanup</h4><div class="kv"><b>CASS / DPV confirmed</b><span>'+h.cass+'%</span><b>NCOA moves found</b><span>'+h.ncoa+'% &middot; '+fmtN(h.moves)+' addresses</span><b>Forwarded</b><span>'+fmtN(h.fwd)+'</span><b>Returned / vacant</b><span>'+fmtN(h.ret)+' returned, '+fmtN(h.vacant)+' vacant</span><b>Duplicates removed</b><span>'+fmtN(h.dups)+'</span></div><p class="muted" style="margin:8px 0 0;font-size:12.5px">Sample list-hygiene totals, as AccuTrace would show after CASS and NCOA.</p></div>';
+}
+function tkPostageHTML(o){
+  var p=tkPostage(o);
+  return '<div class="box"><h4>Postage savings</h4><div class="kv"><b>Estimated savings</b><span>'+tkMoney(p.saved)+'</span><b>Compared with</b><span>'+esc(p.label)+'</span><b>Per piece</b><span>'+tkMoney(p.each)+'</span></div><p class="muted" style="margin:8px 0 0;font-size:12.5px">Sample estimate for this mock-up, not a live USPS invoice.</p></div>';
+}
+function tkDashRollup(L){
+  var pcs=0,saved=0,moves=0,fwd=0,ret=0;
+  L.forEach(function(t){var h=tkHygiene(t.o),p=tkPostage(t.o);pcs+=t.o.qty;saved+=p.saved;moves+=h.moves;fwd+=h.fwd;ret+=h.ret});
+  return {pcs:pcs,saved:saved,moves:moves,fwd:fwd,ret:ret};
+}
+function tkZipRows(st,total){
+  var z=TK_ZIPS[st]||[["00000","Statewide"]],sum=0,i,rows=[],n;
+  var weights=z.map(function(r,i){return Math.max(4,16-i*1.5)});
+  weights.forEach(function(w){sum+=w});
+  var used=0;
+  for(i=0;i<z.length;i++){n=(i===z.length-1)?Math.max(0,total-used):Math.round(total*weights[i]/sum);used+=n;rows.push({zip:z[i][0],city:z[i][1],qty:n})}
+  return rows;
+}
+function tkZipHTML(st,total,mode){
+  if(!st)return '<p class="muted" style="margin:0;font-size:13px">Click a state on the map or in the table to drill into ZIP Codes, then into sample pieces.</p>';
+  var rows=tkZipRows(st,total);
+  return '<h4 style="margin:0 0 8px">ZIP Codes in '+(TK_STNAME[st]||st)+'</h4><div class="tw"><table class="bp-tbl"><thead><tr><th>ZIP</th><th>City</th><th>Pieces</th><th></th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td><b>'+r.zip+'</b></td><td>'+esc(r.city)+'</td><td>'+fmtN(r.qty)+'</td><td><button type="button" class="btn sm sec" data-tkzip="'+r.zip+'" data-tkzipcity="'+esc(r.city)+'" data-tkzipn="'+r.qty+'">Pieces</button></td></tr>'}).join("")+'</tbody></table></div><div data-tkpieces style="margin-top:12px"></div>';
+}
+function tkPiecesHTML(zip,city,n,st){
+  var k=Math.min(12,Math.max(4,n)),rows=[],i,sts,scan,h;
+  for(i=0;i<k;i++){
+    h=hashN(zip+"-"+i);
+    sts=h%5===0?"Delivered":h%5===1?"Out for delivery":h%5===2?"Not scanned":"In transit";
+    scan=sts==="Delivered"?"Delivered, 2:41 PM":sts==="Out for delivery"?"Out for delivery, 8:06 AM":sts==="Not scanned"?"No scan yet":("Arrived at USPS regional facility, "+(city||st)+", 9:12 AM");
+    rows.push('<tr><td>IMB '+zip+'-'+(1000+i)+'</td><td>'+esc(city)+'</td><td>'+zip+'</td><td>'+sts+'</td><td>'+esc(scan)+(sts==="In transit"?'<span class="tk-from">In transit from '+esc(city)+'</span>':'')+'</td></tr>');
+  }
+  return '<h4 style="margin:0 0 8px">Sample pieces in '+zip+'</h4><p class="muted" style="margin:0 0 8px;font-size:12.5px">Showing '+k+' of '+fmtN(n)+' pieces. Names and streets are sample only; AccuTrace piece lists do not include a facility name on every IMb.</p><div class="tw"><table class="bp-tbl"><thead><tr><th>Piece</th><th>City</th><th>ZIP</th><th>Status</th><th>Latest scan</th></tr></thead><tbody>'+rows.join("")+'</tbody></table></div>';
+}
+function tkExportBtns(scope){
+  return '<div class="tk-export"><button type="button" class="btn sm sec" data-tkexport="csv" data-tkscope="'+esc(scope||"dashboard")+'">Download CSV</button><button type="button" class="btn sm sec" data-tkexport="pdf" data-tkscope="'+esc(scope||"dashboard")+'">Download PDF report</button></div>';
+}
+function tkDoExport(kind,scope,rows,D){
+  if(kind==="pdf"){toast("Mock-up: on the live site this downloads the AccuTrace PDF report for "+scope+".");return}
+  var lines=["state,mailed,in_transit,delivered"],i,r;
+  (rows||[]).forEach(function(r){lines.push([r.st,r.mailed,r.transit,r.delivered].join(","))});
+  var blob=new Blob([lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="ylhq-tracking-"+scope+".csv";a.click();
+  setTimeout(function(){try{URL.revokeObjectURL(a.href)}catch(e){}},1500);
+  toast("Downloaded sample tracking CSV.");
+}
+function tkBindMap(root,rows,redraw){
+  if(!root)return;
+  root.querySelectorAll("[data-tkmode]").forEach(function(b){b.onclick=function(){TKMAP.mode=b.getAttribute("data-tkmode");TKMAP.zip=null;if(redraw)redraw()}});
+  root.querySelectorAll("[data-tkst]").forEach(function(g){
+    function go(){var st=g.getAttribute("data-tkst");TKMAP.st=(TKMAP.st===st)?null:st;TKMAP.zip=null;if(redraw)redraw()}
+    g.onclick=go;g.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}
+  });
+  root.querySelectorAll("[data-tkexport]").forEach(function(b){b.onclick=function(){tkDoExport(b.getAttribute("data-tkexport"),b.getAttribute("data-tkscope")||"dashboard",rows)}});
+  root.querySelectorAll("[data-tkzip]").forEach(function(b){
+    b.onclick=function(){
+      var hold=root.querySelector("[data-tkpieces]");
+      if(!hold)return;
+      hold.innerHTML=tkPiecesHTML(b.getAttribute("data-tkzip"),b.getAttribute("data-tkzipcity")||"",+(b.getAttribute("data-tkzipn")||0),TKMAP.st||"");
+    };
+  });
+}
+
 var TKOPEN={};
 bp("tracking-dashboard","Mail Tracking Dashboard",function(root,arg,Q){
   var v=Q.v||(LOGGED?"":"out");
@@ -5333,17 +5602,28 @@ bp("tracking-dashboard","Mail Tracking Dashboard",function(root,arg,Q){
   root.innerHTML=bpTop("#/orders","My Orders")+mockBar([["","Logged in"],["out","Logged out"]],v,"#/tracking-dashboard")+
    '<div class="ptitle"><div><h1>Mail Tracking Dashboard</h1><p>One row for each order. Click an order to see all of its drops. Sample data.</p></div><a class="btn sec sm" href="#/faq" data-toast="On the live site this opens the How do I read my tracking link? FAQ and video.">How to read tracking</a></div>'+
    '<div class="bp-cards"><div class="bp-card"><small>Orders tracked</small><b>'+L.length+'</b><em>not counting cancelled</em></div><div class="bp-card"><small>Drops mailed</small><b>'+mailed+' of '+all.length+'</b><em>across all orders</em></div><div class="bp-card"><small>Drops delivered</small><b>'+dl+'</b><em>stop scan by USPS</em></div><div class="bp-card"><small>Next drop</small><b>'+(ups[0]||"-")+'</b><em>'+ups.length+' drops coming up</em></div></div>'+
+   '<div id="tkDashExtra"></div>'+
    '<div class="panel"><div class="tools" style="margin-bottom:12px"><input class="inp" id="tdQ" type="search" placeholder="Order number or order name" style="flex:1;min-width:200px" aria-label="Search orders"><select class="inp" id="tdS" aria-label="Status"><option value="">All statuses</option><option value="In production">In production</option><option value="Mailing">Mailing</option><option value="Complete">Complete</option></select></div>'+
    '<div class="tko-head" aria-hidden="true"><span>Order</span><span>Product</span><span>Progress</span><span>Next drop</span><span>Status</span><span></span></div><div id="tdB"></div><p class="muted" id="tdN" style="margin:10px 0 0"></p></div>'+
    '';
   function draw(){var q=$("#tdQ").value.trim().toLowerCase(),s=$("#tdS").value,h="",n=0;
     L.forEach(function(t){var o=t.o;if(s&&t.st[1]!==s)return;if(q&&(String(o.id)+" "+(o.name||"")).toLowerCase().indexOf(q)<0)return;n++;var op=!!TKOPEN[o.id];
-      h+='<div class="tko'+(op?" open":"")+'"><button type="button" class="tko-row" data-tko="'+o.id+'" aria-expanded="'+op+'"><span class="tko-o"><b>#'+o.id+'</b><small>'+(o.name?esc(o.name):"No order name")+'</small></span><span class="tko-p">'+esc(o.prod)+'<small>'+o.post+' &middot; '+fmtN(o.qty)+' pieces</small></span><span class="tko-pr"><b>'+t.dl+' of '+t.D.length+' drop'+(t.D.length>1?"s":"")+' delivered</b><span class="bp-bar"><i style="width:'+t.pct+'%"></i></span>'+(t.tr?'<small>'+t.tr+' in transit</small>':'')+'</span><span class="tko-n"><small class="tko-l">Next drop</small>'+t.next+'</span><span>'+pill(t.st[0],t.st[1])+'</span><span class="tko-c">'+(op?"Hide drops &#9652;":"Show drops &#9662;")+'</span></button>'+
+      h+='<div class="tko'+(op?" open":"")+'"><button type="button" class="tko-row" data-tko="'+o.id+'" aria-expanded="'+op+'"><span class="tko-o"><b>#'+o.id+'</b><small>'+(o.name?esc(o.name):"No order name")+'</small></span><span class="tko-p">'+esc(o.prod)+'<small>'+o.post+' &middot; '+fmtN(o.qty)+' pieces</small></span><span class="tko-pr"><b>'+t.dl+' of '+t.D.length+' drop'+(t.D.length>1?"s":"")+' delivered</b><span class="bp-bar"><i style="width:'+t.pct+'%"></i></span>'+(t.tr?'<small>'+t.tr+' in transit</small>':'')+tkDashFrom(t)+'</span><span class="tko-n"><small class="tko-l">Next drop</small>'+t.next+'</span><span>'+pill(t.st[0],t.st[1])+'</span><span class="tko-c">'+(op?"Hide drops &#9652;":"Show drops &#9662;")+'</span></button>'+
        (op?'<div class="tko-x">'+tkDropsHTML(t)+'<div class="tko-xf"><a class="btn sm" href="#/tracking/order/'+o.id+'">Open the tracking page for this order</a><a class="btn sm sec" href="#/detail/'+o.id+'">Order details</a></div></div>':'')+'</div>'});
     if(!n)h='<div class="empty">No orders match.</div>';
     $("#tdB").innerHTML=h;$("#tdN").textContent="Showing "+n+" of "+L.length+" orders (sample data). Cancelled orders are not shown.";
     $$("[data-tko]").forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-tko");TKOPEN[id]=!TKOPEN[id];draw()}})}
-  $("#tdQ").addEventListener("input",draw);$("#tdS").onchange=draw;draw();
+  var extra=$("#tkDashExtra");
+  function drawExtra(){
+    var rows=tkAggStates(all),perf=tkPerfOf(all),roll=tkDashRollup(L),hyM=0,hyR=0,hyF=0;
+    L.forEach(function(t){var h=tkHygiene(t.o);hyM+=h.moves;hyR+=h.ret;hyF+=h.fwd});
+    extra.innerHTML='<div class="bp-cards">'+tkPerfCard(perf)+'<div class="bp-card"><small>Out for delivery today</small><b>'+fmtN(perf.ofd)+'</b><em>pieces with an out-for-delivery scan</em></div><div class="bp-card"><small>Address moves</small><b>'+fmtN(hyM)+'</b><em>'+fmtN(hyF)+' forwarded &middot; '+fmtN(hyR)+' returned</em></div><div class="bp-card"><small>Postage savings</small><b>'+tkMoney(roll.saved)+'</b><em>estimated presort savings, sample</em></div></div>'+
+      '<div class="bp-grid2" style="margin-top:16px">'+tkMapPanel(rows,TKMAP.mode,TKMAP.st,"Where your mail is")+tkFacPanel(all)+'</div>'+
+      '<div style="margin-top:16px">'+tkTimelineHTML(all,"Delivery timeline")+'</div>'+
+      tkExportBtns("dashboard");
+    tkBindMap(extra,rows,drawExtra);
+  }
+  $("#tdQ").addEventListener("input",draw);$("#tdS").onchange=draw;draw();drawExtra();
 },"orders");
 
 /* per order tracking page: every drop on one timeline */
@@ -5355,12 +5635,24 @@ bp("tracking",function(a){return "Tracking, order #"+((a||"").split("/")[1]||"")
   var mx=Math.max.apply(null,t.D.map(function(x){return x.qty}));
   var bars=t.D.map(function(x){var h=x.grp==="del"?100:(x.grp==="tr"?45:0);return '<div class="tkc-b" title="Drop #'+x.n+': '+x.st[1]+'"><div class="tkc-col"><i class="'+x.grp+'" style="height:'+h+'%"></i></div><small>#'+x.n+'</small></div>'}).join("");
   root.innerHTML=top+'<div class="ptitle"><div><h1>Tracking: Order #'+o.id+'</h1><p>'+(o.name?esc(o.name)+' &middot; ':'')+esc(o.prod)+' &middot; '+o.post+' &middot; '+fmtN(o.qty)+' pieces in '+t.D.length+' drop'+(t.D.length>1?"s":"")+'</p></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+pill(t.st[0],t.st[1])+'<button class="btn sm" id="tkShare">Copy share link</button></div></div>'+
-   '<div class="bp-cards"><div class="bp-card"><small>Delivered</small><b>'+t.dl+' of '+t.D.length+'</b><em>drops</em></div><div class="bp-card"><small>In transit</small><b>'+t.tr+'</b><em>drops</em></div><div class="bp-card"><small>Upcoming</small><b>'+t.up+'</b><em>next: '+t.next+'</em></div><div class="bp-card"><small>Pieces delivered</small><b>'+fmtN(t.pcs)+'</b><em>of '+fmtN(o.qty)+'</em></div></div>'+
+   (function(){var perf=tkPerfOf(t.D);return '<div class="bp-cards"><div class="bp-card"><small>Delivered</small><b>'+t.dl+' of '+t.D.length+'</b><em>drops</em></div><div class="bp-card"><small>In transit</small><b>'+t.tr+'</b><em>drops</em></div><div class="bp-card"><small>Upcoming</small><b>'+t.up+'</b><em>next: '+t.next+'</em></div>'+tkPerfCard(perf)+'<div class="bp-card"><small>Out for delivery today</small><b>'+fmtN(perf.ofd)+'</b><em>pieces</em></div><div class="bp-card"><small>Pieces delivered</small><b>'+fmtN(t.pcs)+'</b><em>of '+fmtN(o.qty)+'</em></div></div>'}())+
    '<div class="box tkc"><h4>Delivery by drop</h4><div class="tkc-chart" role="img" aria-label="Delivery status for each drop">'+bars+'</div><div class="tkc-key"><span><i class="del"></i>Delivered</span><span><i class="tr"></i>In transit</span><span><i class="up"></i>Not mailed yet</span></div></div>'+
-   '<div class="box" style="margin-top:16px"><h4>All drops</h4><ol class="tkl">'+t.D.map(function(x){return '<li class="'+x.grp+'"><div class="tkl-d"><b>Drop #'+x.n+'</b><span>'+x.date+' &middot; '+fmtN(x.qty)+' pieces</span></div><div class="tkl-s">'+pill(x.st[0],x.st[1])+'<small>'+esc(x.scan)+'</small></div><div>'+(x.mailed?'<a class="btn sm sec" href="#/track/'+o.id+'/'+x.n+'">Track</a>':'<span class="muted" style="font-size:13px">Tracking link after it mails</span>')+'</div></li>'}).join("")+'</ol></div>'+
+   '<div id="tkOrderExtra" style="margin-top:16px"></div>'+
+   '<div class="box" style="margin-top:16px"><h4>All drops</h4><ol class="tkl">'+t.D.map(function(x){return '<li class="'+x.grp+'"><div class="tkl-d"><b>Drop #'+x.n+'</b><span>'+x.date+' &middot; '+fmtN(x.qty)+' pieces</span>'+(x.mailed?'<small class="muted" style="display:block;margin-top:4px;white-space:nowrap">In-home window '+tkWindow(x)+'</small>':'')+'</div><div class="tkl-s">'+pill(x.st[0],x.st[1])+'<small>'+esc(x.scan)+'</small>'+tkFromHTML(x)+'</div><div>'+(x.mailed?'<a class="btn sm sec" href="#/track/'+o.id+'/'+x.n+'">Track</a>':'<span class="muted" style="font-size:13px">Tracking link after it mails</span>')+'</div></li>'}).join("")+'</ol></div>'+
    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><a class="btn sec" href="#/detail/'+o.id+'">Order details</a><a class="btn sec" href="#/tracking-dashboard">All orders</a></div>'+
    '<p class="muted" style="margin-top:12px;font-size:12.5px">Share link: anyone with it can see this page without logging in. Sample data.</p>';
   $("#tkShare").onclick=function(){var u="https://www.yellowletterhq.com/order-tracking/"+o.id+"/?share=example";try{if(navigator.clipboard)navigator.clipboard.writeText(u).catch(function(){})}catch(e){}toast("Share link copied (mock): "+u)};
+  (function(){
+    var hold=$("#tkOrderExtra");if(!hold)return;
+    function drawOrderExtra(){
+      var rows=tkAggStates(t.D);
+      hold.innerHTML='<div class="bp-grid2">'+tkMapPanel(rows,TKMAP.mode,TKMAP.st,"Where this order is mailing")+tkFacPanel(t.D)+'</div>'+
+        '<div style="margin-top:16px">'+tkTimelineHTML(t.D,"Delivery timeline")+'</div>'+
+        '<div class="bp-grid2" style="margin-top:16px">'+tkHygHTML(o)+tkPostageHTML(o)+'</div>'+tkExportBtns("order-"+o.id);
+      tkBindMap(hold,rows,drawOrderExtra);
+    }
+    drawOrderExtra();
+  })();
 },"orders");
 
 /* ---------- Fix 141: Tracking page for one batch (the order's tracking link, AccuTrace job page) ---------- */
@@ -5373,14 +5665,35 @@ bp("track",function(a){return "Tracking, order #"+(a.split("/")[0]||"")},functio
   function hb(l,n,col){return '<div class="bp-hbar"><span>'+l+'</span><div class="t"><i style="width:'+n+'%;background:'+col+'"></i></div><b>'+n+'%</b></div>'}
   var states=[["CA",.31],["TX",.17],["FL",.12],["AZ",.08],["NV",.06],["Other",.26]];
   root.innerHTML=top+'<div class="bp-url" title="Tracking pages are hosted by the mail tracking service">&#128274; yellowletterhq.iaccutrace.com/track/?uid='+x.uid+' (sample link)</div>'+
-   '<div class="ptitle"><div><h1>Mail tracking: Order #'+o.id+', Batch #'+b+'</h1><p>Last scanned '+x.last+'. This page updates by itself.</p></div>'+pill(x.st[0],x.st[1])+'</div>'+
-   '<div class="bp-grid2"><div class="box"><h4>Job information</h4><div class="kv"><b>Job ID</b><span>'+o.id+'-'+b+'</span><b>Job description</b><span>'+o.id+' '+esc(o.name||"Sample job")+'</span><b>Mail date</b><span>'+x.date+'</span><b>Mail class and size</b><span>'+o.post+' Mail, '+(/Postcard/.test(o.prod)?"Postcard":"Letter")+'</span><b>Origin ZIP Code</b><span>91910</span><b>Total pieces</b><span>'+fmtN(x.pcs)+'</span></div></div>'+
+   '<div class="ptitle"><div><h1>Mail tracking: Order #'+o.id+', Batch #'+b+'</h1><p>Last scanned '+x.last+'. This page updates by itself.</p>'+(function(){var d=tkDrop(o,b-1);return d.fromLine?'<div class="tk-from-lg">'+esc(d.fromLine)+'</div>':'';}())+'</div>'+pill(x.st[0],x.st[1])+'</div>'+
+   '<div class="bp-grid2"><div class="box"><h4>Job information</h4><div class="kv"><b>Job ID</b><span>'+o.id+'-'+b+'</span><b>Job description</b><span>'+o.id+' '+esc(o.name||"Sample job")+'</span><b>Mail date</b><span>'+x.date+'</span><b>Mail class and size</b><span>'+o.post+' Mail, '+(/Postcard/.test(o.prod)?"Postcard":"Letter")+'</span><b>Origin ZIP Code</b><span>91910</span><b>Total pieces</b><span>'+fmtN(x.pcs)+'</span><b>Expected in-home window</b><span>'+tkWindow(tkDrop(o,b-1))+'</span></div></div>'+
    '<div class="box"><h4>What the numbers mean</h4><p style="margin:0 0 6px;font-size:14px"><b>Scanned</b> is how much the post office has scanned so far. <b>Delivered</b> (stop scan) is how much is out for delivery or delivered. <b>On time</b> is how much is landing in the delivery window.</p><p class="muted" style="margin:0;font-size:13px">A few Not Scanned pieces is normal. Some mail is delivered without a final scan.</p></div></div>'+
+   (function(){var drop=tkDrop(o,b-1),perf=tkPerfOf([drop]),rows=tkAggStates([drop]),hyg=tkHygiene(o);return '<div class="bp-cards" style="margin-bottom:16px">'+tkPerfCard(perf)+'<div class="bp-card"><small>Out for delivery today</small><b>'+fmtN(perf.ofd)+'</b><em>pieces in this batch</em></div><div class="bp-card"><small>Returned &amp; forwarded</small><b>'+fmtN(hyg.ret+hyg.fwd)+'</b><em>'+fmtN(hyg.fwd)+' forwarded &middot; '+fmtN(hyg.ret)+' returned</em></div><div class="bp-card"><small>Postage savings</small><b>'+tkMoney(tkPostage(o).saved)+'</b><em>this order, sample estimate</em></div></div>'}())+
    '<div class="bp-stats"><div class="bp-stat"><b>'+x.sc.toFixed(1)+'%</b><span>Scanned</span></div><div class="bp-stat"><b>'+x.del.toFixed(1)+'%</b><span>Delivered (stop scan)</span></div><div class="bp-stat"><b>'+(x.ontime||0)+'%</b><span>On time</span></div><div class="bp-stat"><b style="font-size:18px;padding:6px 0">'+x.last+'</b><span>Last scanned</span></div></div>'+
    '<div class="bp-grid2"><div class="box"><h4>In-home delivery performance</h4>'+hb("Early",early,"#2E90FA")+hb("On time",ont,"#15803D")+hb("Late",late,"#B54708")+hb("En route",enr,"#A1A1AA")+hb("Not scanned",ns,"#D4D4D8")+'</div>'+
-   '<div class="box"><h4>Results by state</h4><div class="tw"><table><thead><tr><th>State</th><th>Pieces</th><th>Scanned</th></tr></thead><tbody>'+states.map(function(s){return '<tr><td>'+s[0]+'</td><td>'+fmtN(Math.round(x.pcs*s[1]))+'</td><td>'+(x.sc-(s[0]==="Other"?3:0)).toFixed(1)+'%</td></tr>'}).join("")+'</tbody></table></div></div></div>'+
+   '<div class="box"><h4>Results by state</h4><div class="tw"><table class="bp-tbl"><thead><tr><th>State</th><th>Pieces</th><th>Scanned</th></tr></thead><tbody>'+states.map(function(s){return '<tr data-tkstrow="'+s[0]+'" style="cursor:pointer"><td>'+s[0]+'</td><td>'+fmtN(Math.round(x.pcs*s[1]))+'</td><td>'+(x.sc-(s[0]==="Other"?3:0)).toFixed(1)+'%</td></tr>'}).join("")+'</tbody></table></div></div></div>'+
+   '<div id="tkBatchExtra" style="margin-top:16px"></div>'+
    '<div class="bp-help"><div><b>Something look off?</b><br><span style="font-size:14px">Contact our support team. Have your order number (#'+o.id+') and batch number (#'+b+') ready.</span></div><div style="font-size:14px;text-align:right"><b>(858) 412-3370</b><br>support@yellowletterhq.com<br><span class="muted">Monday to Friday, 6:00 AM to 2:30 PM Pacific</span></div></div>'+
    '';
+  (function(){
+    var hold=$("#tkBatchExtra");if(!hold)return;
+    var drop=tkDrop(o,b-1);
+    function drawBatchExtra(){
+      var rows=tkAggStates([drop]),sel=TKMAP.st,row=null,i,total=0;
+      for(i=0;i<rows.length;i++)if(rows[i].st===sel)row=rows[i];
+      total=row?tkModeVal(row,TKMAP.mode):0;
+      hold.innerHTML='<div class="bp-grid2">'+tkMapPanel(rows,TKMAP.mode,TKMAP.st,"Where this batch is mailing")+tkFacPanel([drop])+'</div>'+
+        '<div style="margin-top:16px">'+tkTimelineHTML([drop],"Delivery timeline")+'</div>'+
+        '<div class="bp-grid2" style="margin-top:16px">'+tkHygHTML(o)+tkPostageHTML(o)+'</div>'+
+        '<div class="box" style="margin-top:16px" data-tkdrill>'+tkZipHTML(sel && sel!=="Other"?sel:null,total,TKMAP.mode)+'</div>'+
+        tkExportBtns("batch-"+o.id+"-"+b);
+      tkBindMap(hold,rows,drawBatchExtra);
+    }
+    drawBatchExtra();
+    root.querySelectorAll("[data-tkstrow]").forEach(function(tr){
+      tr.onclick=function(){var s=tr.getAttribute("data-tkstrow");if(s==="Other")return;TKMAP.st=(TKMAP.st===s)?null:s;drawBatchExtra()}
+    });
+  })();
 },"orders");
 
 /* ---------- Fixes 142 to 144 (tier 1) and later: customer emails ---------- */
