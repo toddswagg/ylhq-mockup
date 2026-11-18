@@ -7376,7 +7376,7 @@ window.addEventListener("click",function(e){var s=e.target.closest&&e.target.clo
  var n=(box.querySelector("label,.ft-n")||{}).textContent;if(typeof toast==="function")toast("Selected: "+(n||"").trim());later()},true);
 decorate();setInterval(function(){if(document.querySelector(SEL+":not(:has(> .tg-sel))"))decorate()},1500);
 })();
-</script><script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
+</script><style id="open-once-css">html body .lt-picked .lt-change.btn,html body .lt-picked .lt-change{font-size:0!important;line-height:0!important}html body .lt-picked .lt-change::before{font:800 12px/1 var(--body)!important;line-height:1!important;content:"Open"}html body .lt-picked .lt-change::after{content:none!important}</style><script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
    It repeats the estimated total after the list upload step and presses the same Add to cart button, so the checks and pop-up are unchanged. */
 (function(){
  var F=[["pcCfg","sum","addCart","qerr"],["ltCfg","lsum","laddCart","lqerr"]],q=0;
