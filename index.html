@@ -1488,6 +1488,13 @@ a.bm-link,.crumbs a:hover{text-decoration-color:var(--y);text-decoration-thickne
   .lt-split.lt-split-one .image-box,
   .lt-split.lt-split-one .opt-sw.opt-env{flex:0 0 calc((100% - 24px) / 4)!important;width:calc((100% - 24px) / 4)!important;max-width:calc((100% - 24px) / 4)!important}
 }
+.lt-split.lt-split-stack{grid-template-columns:1fr;gap:12px}
+.lt-split.lt-split-stack .lt-split-div{display:none!important}
+.lt-split.lt-split-stack .lt-tpl,.lt-split.lt-split-stack .lt-envcol{width:100%;max-width:100%}
+@media (min-width:1100px){
+  .lt-split.lt-split-stack .image-box,
+  .lt-split.lt-split-stack .opt-sw.opt-env{flex:0 0 calc((100% - 24px) / 4)!important;width:calc((100% - 24px) / 4)!important;max-width:calc((100% - 24px) / 4)!important}
+}
 @media (min-width:1600px){
   .lt-split .image-box,
   .lt-split .opt-sw.opt-env{flex:0 0 calc((100% - 24px) / 4)!important;width:calc((100% - 24px) / 4)!important;max-width:calc((100% - 24px) / 4)!important}
@@ -4107,6 +4114,9 @@ function renderLT(arg){
   if(arg==="windowed"){try{history.replaceState(null,"","#/letters/check")}catch(e){}arg="check"}
   if(arg==="greeting"||arg==="notes"||arg==="cardsnotes"){if(arg==="notes"||arg==="greeting")LS.cardStyle=arg==="notes"?"notes":"greeting";arg="cardsnotes"}
   if(arg==="hwcards"||arg==="hwnotes"||arg==="hwcardsnotes"){if(arg==="hwnotes"||arg==="hwcards")LS.cardStyle=arg==="hwnotes"?"notes":"greeting";arg="hwcardsnotes"}
+  var stackLayout=arg==="no10-stacked";
+  if(stackLayout)arg="no10";
+  LS.stackLayout=!!stackLayout;
   if(arg==="handwritten"||HW.some(function(h){return h.k===arg})){if(LS.set!=="hw"){LS.set="hw";LS.p=-1;LS.all=false}}
   else if(arg!==undefined){if(LS.set!=="letter"){LS.set="letter";LS.p=-1;if(arg!=="all")LS.all=false}} /* Fix 136 test: switching Letters and Real Handwritten closed the wrong All Templates */
   var L=ltList();L.forEach(function(p,i){if(p.k===arg&&LS.p!==i){LS.p=i;LS.env="";LS.tpl=""}});
@@ -4500,7 +4510,7 @@ function renderLCfg(){
   var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-tiles" id="ltBuyTiles"></div><div class="lt-buy-meta"><div class="lt-buy-kv"><span>Pieces</span><input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:6px 0 0">From your cleaned list when you upload one. Minimum 200.</p></div><div class="lt-buy-kv"><span>Postage</span><b id="ltBuyPost"></b></div><div class="lt-buy-kv"><span>Mail dates</span><b id="ltBuyDates"></b></div></div><div class="lt-buy-addons" id="ltBuyAddons"></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
   var notes='<div class="panel of-form" id="ltNotes"><h3>Notes</h3><div class="fld"><label class="f" for="lnotes">Order notes</label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><ul class="files" id="files-lother">'+fileList((LS.other||[]).concat(LS.art||[]),"lother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div></div>';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'<p class="help pseg-np"><a href="#" id="npHow">How to apply for nonprofit postage authorization</a></p></div></div>';
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+postbar+accs+upbar+art+notes+qty+'</div>'+priceModal;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+(LS.stackLayout?'<p class="note info" id="ltStackNote" style="margin:0 0 12px">Preview: templates and envelopes are stacked full-width, at the same panel size as the Tri-Fold letter. The current <a href="#/letters/no10">No. 10 letter</a> is unchanged.</p>':'')+styleBits+'<div class="panel of-form lt-split'+(LS.stackLayout?' lt-split-stack':'')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+postbar+accs+upbar+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
