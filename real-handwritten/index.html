@@ -95,6 +95,15 @@ table.cmp{width:100%;border-collapse:separate;border-spacing:0;border:1px solid 
 .tpl{border:2px solid var(--line2);border-radius:16px;background:#fff;padding:0;overflow:hidden;cursor:pointer;text-align:left;font:inherit}
 .tpl img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--soft)}
 .tpl span{display:block;padding:8px 10px;font:700 13px var(--head);color:var(--ink)}
+.tplw{display:flex;flex-direction:column;gap:8px}
+.tplw .tpl{width:100%}
+.tplw.on .tpl{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,197,35,.35)}
+.tpl-sel{width:100%;justify-content:center;border-radius:999px}
+.tpl-sel.on{background:var(--y);border-color:var(--y);color:#111}
+.rhv{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px}
+.rhv-box{background:#fff;border-radius:20px;max-width:760px;width:100%;padding:14px;max-height:92vh;overflow:auto}
+.rhv-box img{width:100%;border-radius:12px;display:block}
+.rhv-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 .tpl.on{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,197,35,.35)}
 .drop{border:2px dashed var(--line2);border-radius:16px;padding:20px;text-align:center;background:var(--soft)}
 .drop .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
@@ -187,6 +196,7 @@ var PRODUCTS={
   steps:["tpl","hand","msg","post","list","mail","notes","cart"]}
 };
 var ORDER={env:["hw10","hw6","printcard"],full:["cards","flip"]};
+function viewer(src,name,onPick){var v=document.getElementById("rhv");if(v)v.remove();v=document.createElement("div");v.id="rhv";v.className="rhv";v.innerHTML='<div class="rhv-box" role="dialog" aria-modal="true" aria-label="Preview"><img src="'+src+'" alt=""><div class="rhv-row"><b>'+esc(name)+'</b><span><button type="button" class="btn sm" id="rhvSel">Select</button> <button type="button" class="btn sm sec" id="rhvX">Close</button></span></div></div>';document.body.appendChild(v);function close(){v.remove()}v.onclick=function(e){if(e.target===v)close()};document.getElementById("rhvX").onclick=close;document.getElementById("rhvSel").onclick=function(){close();onPick()};document.addEventListener("keydown",function k(e){if(e.key==="Escape"){close();document.removeEventListener("keydown",k)}})}
 var TITLES={tpl:"Design",hand:"Handwriting",msg:"Your handwritten message",post:"Postage",list:"Your list",mail:"Mail dates",notes:"Notes",cart:"Review and add to cart"};
 var HOL=["2026-11-26","2026-12-25","2027-01-01","2027-01-18","2027-02-15"];
 var DAYS=["Su","Mo","Tu","We","Th","Fr","Sa"],MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -260,8 +270,9 @@ function next(from){var st=S.p.steps,i=st.indexOf(from),j;for(j=i+1;j<st.length;
 function btns(arr,sel,attr){return arr.map(function(a){return '<button type="button" class="pill-b'+(sel===a[0]?' on':'')+'" data-'+attr+'="'+a[0]+'"><b>'+esc(a[1])+'</b>'+(a[2]?'<small>'+esc(a[2])+'</small>':'')+'</button>'}).join("")}
 var STY=[["cursive","Cursive","Flowing, classic"],["print","Print","Neat block letters"],["personal","Personal","Casual, everyday"]],INK=[["blue","Blue ink",""],["black","Black ink",""]];
 var BODY={
- tpl:function(el){var p=S.p;el.innerHTML='<span class="lbl">'+esc(p.tplLabel)+'</span><div class="tpls">'+p.tpls.map(function(t,i){return '<button type="button" class="tpl" data-tpl="'+i+'"><img src="'+IM(t[1])+'" alt="" loading="lazy"><span>'+esc(t[0])+'</span></button>'}).join("")+'</div><p class="muted">Sample designs for the mockup. The real designer opens after you add to cart.</p>';
-  el.onclick=function(e){var b=e.target.closest("[data-tpl]");if(!b)return;S.tpl=+b.dataset.tpl;$$(".tpl",el).forEach(function(x){x.classList.toggle("on",x===b)});mark("tpl",S.p.tpls[S.tpl][0]);next("tpl")}},
+ tpl:function(el){var p=S.p;el.innerHTML='<span class="lbl">'+esc(p.tplLabel)+'</span><div class="tpls">'+p.tpls.map(function(t,i){return '<div class="tplw" data-w="'+i+'"><button type="button" class="tpl" data-tpl="'+i+'" aria-label="Preview '+esc(t[0])+'"><img src="'+IM(t[1])+'" alt="" loading="lazy"><span>'+esc(t[0])+'</span></button><button type="button" class="btn sm sec tpl-sel" data-sel="'+i+'">Select</button></div>'}).join("")+'</div><p class="muted">Click a picture to see it larger, or press Select under it. Sample designs for the mockup. The real designer opens after you add to cart.</p>';
+  function pick(i){S.tpl=i;$$(".tplw",el).forEach(function(w){var on=+w.dataset.w===i;w.classList.toggle("on",on);var b=w.querySelector(".tpl-sel");b.textContent=on?"\u2713 Selected":"Select";b.classList.toggle("on",on)});mark("tpl",S.p.tpls[i][0]);next("tpl")}
+  el.onclick=function(e){var sb=e.target.closest("[data-sel]");if(sb){pick(+sb.dataset.sel);return}var b=e.target.closest("[data-tpl]");if(!b)return;var i=+b.dataset.tpl,t=S.p.tpls[i];viewer(IM(t[1]),t[0],function(){pick(i)})}},
  hand:function(el){el.innerHTML='<span class="lbl">Handwriting style'+(S.p.grp==="env"?' (envelope address)':'')+'</span><div class="seg" id="hsty">'+btns(STY,"","sty")+'</div><span class="lbl">Ink color</span><div class="seg" id="hink">'+btns(INK,"","ink")+'</div><p class="muted" id="hhelp">Pick both. This section closes after your second choice.</p>';
   el.onclick=function(e){var b=e.target.closest("[data-sty],[data-ink]");if(!b)return;if(b.dataset.sty){S.style=b.dataset.sty;$$("#hsty .pill-b").forEach(function(x){x.classList.toggle("on",x===b)})}if(b.dataset.ink){S.ink=b.dataset.ink;$$("#hink .pill-b").forEach(function(x){x.classList.toggle("on",x===b)})}
    if(S.style&&S.ink){mark("hand",cap(S.style)+", "+S.ink+" ink");next("hand")}else{$("#hhelp").textContent=S.style?"Now pick an ink color.":"Now pick a handwriting style."}}},

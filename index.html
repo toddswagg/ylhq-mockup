@@ -2248,7 +2248,7 @@ html{-webkit-tap-highlight-color:rgba(255,197,35,.22)}
  <a href="#/home?hero=E" data-h="E"><i>E</i>Live counter</a>
  <p>A to E pictures are AI-made samples, not YLHQ photos.</p></div>
 <div class="tv" id="tv" role="dialog" aria-modal="true" aria-labelledby="tvName" aria-hidden="true">
- <div class="tv-bar"><div class="tv-title"><h2 id="tvName"></h2><p id="tvGroup"></p></div><div style="display:flex;align-items:center;gap:10px"><button type="button" class="btn sm tv-pick" id="tvPick">Pick this template</button><span class="tv-count" id="tvCount"></span><button type="button" class="tv-x" id="tvX" aria-label="Close">&times;</button></div></div>
+ <div class="tv-bar"><div class="tv-title"><h2 id="tvName"></h2><p id="tvGroup"></p></div><div style="display:flex;align-items:center;gap:10px"><button type="button" class="btn sm tv-pick" id="tvPick">Select</button><span class="tv-count" id="tvCount"></span><button type="button" class="tv-x" id="tvX" aria-label="Close">&times;</button></div></div>
  <div class="tv-stage" id="tvStage">
   <button type="button" class="tv-nav tv-prev" id="tvPrev" aria-label="Previous template"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="#262626" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <img class="tv-img" id="tvImg" alt="" draggable="false">
@@ -3264,7 +3264,7 @@ function tvShow(k){var L=TV.list;if(!L||!L.length)return;TV.i=(k%L.length+L.leng
     else{var w=(TSRC[it.img]||[0,0,0,1024])[3],cap=w/(window.devicePixelRatio||1);if(cap<360)cap=w;img.onerror=function(){img.onerror=null;img.src=tUrl(it.img,0)};img.style.maxWidth=(w>=1200?"min(1600px, 100%)":"min(1024px, 100%, "+Math.floor(cap)+"px)");img.alt=it.n;img.setAttribute("data-ti",it.img);img.src=tUrl(it.img,1)}}
   $("#tvName").textContent=it.n;$("#tvGroup").textContent=[TV.label,it.p].filter(Boolean).join(" \u00b7 ");$("#tvCount").textContent=(TV.i+1)+" of "+L.length;tvPickState();if(!file){tvPre(TV.i+1);tvPre(TV.i-1)}}
 function tvOpen(box){var r=tvList(box);if(!r.list.length)return;TV.list=r.list;TV.label=r.label;TV.kind="tpl";TV.last=document.activeElement;var v=$("#tv");v.classList.add("open");v.classList.remove("tv-env");v.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";var ph=tvPhEl();if(ph)ph.hidden=true;tvShow(r.at);$("#tvNext").focus()}
-function tvPickState(){var it=TV.list[TV.i],b=$("#tvPick");if(!b||!it)return;var isEnv=it.kind==="env"||TV.kind==="env";var inp=it.box&&it.box.querySelector(isEnv?"input[type=radio]":"input.ylhq-template"),on=!!(inp&&inp.checked);b.textContent=on?"\u2713 Selected":"Select";b.classList.toggle("done",on);b.setAttribute("aria-pressed",on?"true":"false");b.setAttribute("aria-label",on?"Selected":(isEnv?"Select this envelope":"Select this template"))}
+function tvPickState(){var it=TV.list[TV.i],b=$("#tvPick");if(!b||!it)return;var isEnv=it.kind==="env"||TV.kind==="env";var inp=it.box&&it.box.querySelector(isEnv?"input[type=radio]":"input.ylhq-template"),on=!!(inp&&inp.checked);b.textContent=on?"\u2713 Selected":"Select";b.classList.toggle("done",on);b.setAttribute("aria-pressed",on?"true":"false");b.setAttribute("aria-label",on?"Selected":(isEnv?"Select this envelope":(it.box.closest&&it.box.closest("#ltCfg")?"Select this letter":"Select this template")))}
 function ltSelectBox(box,isEnv){if(!box)return;window.__ltPicking=1;try{var inp=box.querySelector(isEnv?"input[type=radio]":"input.ylhq-template,input[type=radio]");if(isEnv){if(inp){inp.checked=true;inp.dispatchEvent(new Event("change",{bubbles:true}));if(typeof lUpdate==="function")lUpdate();if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof formAdvance==="function")formAdvance("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}else{if(inp)inp.checked=true;var root=box.closest(".tg")||box.closest("#ltCfg")||box.parentElement;[].forEach.call((root||document).querySelectorAll(".image-box"),function(x){x.classList.toggle("on",x===box);var ii=x.querySelector("input");if(ii)ii.checked=x===box});var lab=box.querySelector("label"),n=(lab&&lab.textContent||"").trim();if(n&&typeof LS!=="undefined"){LS.tpl=n;var slim=$("#ltTplSel")||$(".selected-slim");if(slim){slim.innerHTML="&#10003; Selected: <b class=\"tpname\">"+esc(n)+"</b>";slim.classList.remove("muted")}var err=$("#lqerr");if(err)err.textContent="";if(typeof ltApplyTpl==="function")ltApplyTpl(LS.tpl);if(typeof fa14Tpl==="function")fa14Tpl("lt");if(typeof ltCollapseSide==="function")ltCollapseSide("tpl");if(typeof ltAfterTplPick==="function")ltAfterTplPick();if(typeof ltUpdateBuy==="function")ltUpdateBuy()}else if(inp)inp.click()}}finally{setTimeout(function(){window.__ltPicking=0},50)}}
 $("#tvPick").onclick=function(e){e.stopPropagation();var it=TV.list[TV.i];if(!it||!it.box)return;var isEnv=it.kind==="env"||TV.kind==="env";tvClose();if(it.box.closest&&it.box.closest("#ltCfg"))ltSelectBox(it.box,isEnv);else{window.__ltPicking=1;try{var inp=it.box.querySelector(isEnv?"input[type=radio]":"input.ylhq-template,input[type=radio]");if(inp&&!inp.checked)inp.click();else if(inp)inp.click()}finally{setTimeout(function(){window.__ltPicking=0},50)}}toast("Selected: "+it.n)};
 function tvClose(){var v=$("#tv");if(!v.classList.contains("open"))return;v.classList.remove("open","tv-env","zoom");v.setAttribute("aria-hidden","true");document.body.style.overflow="";var ph=$("#tvPh");if(ph)ph.hidden=true;TV.kind="";if(TV.last&&TV.last.focus)try{TV.last.focus({preventScroll:true})}catch(e){}}
@@ -3303,7 +3303,7 @@ function evOpen(lab){if(!lab)return;var root=lab.closest(".env-grid")||lab.close
 window.__tv={state:function(){return {open:$("#tv").classList.contains("open"),i:TV.i,total:TV.list.length,name:TV.list.length?TV.list[TV.i].n:"",src:$("#tvImg").currentSrc||$("#tvImg").src}},preloaded:function(){return Object.keys(TV.cache)}};
 function claimId(root){var el=$(".tg",root);$$("#templates_new").forEach(function(e){if(e!==el)e.removeAttribute("id")});if(el)el.id="templates_new"}
 function galCard(p,t,i,sel){var id="tg-"+p.k+"-"+i;
-  return '<div class="image-box'+(sel?" on":"")+'" data-n="'+esc(t[0].toLowerCase()+" "+p.name.toLowerCase())+'" data-scr="'+p.scr+'" data-k="'+p.k+'" data-i="'+i+'">'+tplMediaHTML(t,"gallery-image",t[0],' loading="lazy" decoding="async" width="768" height="432"')+'<button type="button" class="tg-zoom" aria-label="Enlarge this template" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button><div><input type="radio" class="ylhq-template" name="imageOption" id="'+id+'" value="'+esc(t[2])+'" data-product-name="'+esc(p.live)+'"'+(sel?" checked":"")+'></div><label for="'+id+'">'+esc(t[0])+'</label></div>'}
+  return '<div class="image-box'+(sel?" on":"")+'" data-n="'+esc(t[0].toLowerCase()+" "+p.name.toLowerCase())+'" data-scr="'+p.scr+'" data-k="'+p.k+'" data-i="'+i+'">'+tplMediaHTML(t,"gallery-image",t[0],' loading="lazy" decoding="async" width="768" height="432"')+'<button type="button" class="tg-zoom" aria-label="Enlarge this design" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button><div><input type="radio" class="ylhq-template" name="imageOption" id="'+id+'" value="'+esc(t[2])+'" data-product-name="'+esc(p.live)+'"'+(sel?" checked":"")+'></div><label for="'+id+'">'+esc(t[0])+'</label></div>'}
 function galHeading(txt,n){return '<div class="product-heading-section"><div class="horizontal-bar left"></div><h6 class="product-heading-all-templates">'+esc(txt)+(/^Actual Handwritten/.test(txt)?' <span class="lpg">Lowest price guaranteed</span>':'')+'</h6><div class="horizontal-bar right"></div></div>'}
 function galWords(v){return String(v||"").toLowerCase().trim().split(/\s+/).filter(Boolean)}
 function galMatch(box,w){var n=box.getAttribute("data-n");return w.every(function(x){return n.indexOf(x)>-1})}
@@ -3360,7 +3360,7 @@ function takePending(scr,k){if(PEND&&PEND.scr===scr&&PEND.k===k){var i=PEND.i;PE
 function tplFieldHTML(p,sel,keepOpen){
   var s=sel>-1?p.t[sel]:null,h='<div class="fld tpl-field'+(keepOpen?' tpl-keep':'')+'" id="tplField"><label class="f">Templates <span class="req">*</span> <span class="tg-c">'+p.t.length+' for this product</span></label>';
   if(keepOpen){
-    h+='<p class="selected-slim" id="ltTplSel">'+(s?'&#10003; Selected: <b class="tpname">'+esc(s[0])+'</b>':'<span class="muted tp-ph">Pick a template below.</span><b class="tpname" hidden></b>')+'</p>';
+    h+='<p class="selected-slim" id="ltTplSel">'+(s?'&#10003; Selected: <b class="tpname">'+esc(s[0])+'</b>':'<span class="muted tp-ph">Pick a letter below.</span><b class="tpname" hidden></b>')+'</p>';
     h+='<div class="tg tg-one">'+(F120&&p.t.length>8?'<div class="picker-search tg-search"><input type="search" placeholder="Search these '+p.t.length+' templates" aria-label="Search these templates"><span class="cnt"></span></div>':'');
     h+='<div class="tg-grid">'+p.t.map(function(t,i){return galCard(p,t,i,i===sel)}).join("")+'</div><div class="pick-empty tg-empty" hidden>No templates match. <button type="button" class="btn sec sm">Clear search</button></div></div></div>';
     return h;
@@ -4420,7 +4420,7 @@ function ctGalOf(cid){var t=(cid||"").split(":")[0],k=(cid||"").split(":")[1],p=
   return p}
 function ctStockOf(cid){var p=ctGalOf(cid);if(!p)return[];var k=(cid||"").split(":")[1]||"",cardish=/^(greeting|notes|hwcards|hwnotes)$/.test(k);return p.t.filter(function(row){if(/New Custom Design|Past Templates|on File/i.test(row[0]))return false;if(cardish&&/letter/i.test(row[0])&&!/note|card/i.test(row[0]))return false;return true})}
 function ctGalCard(p,t,i,sel){var id="ct-tg-"+p.k+"-"+i;
-  return '<div class="image-box'+(sel?" on":"")+'" data-n="'+esc(t[0].toLowerCase()+" "+p.name.toLowerCase())+'" data-scr="'+p.scr+'" data-k="'+p.k+'" data-i="'+i+'" data-ti="'+t[1]+'">'+tplMediaHTML(t,"gallery-image",t[0],' loading="lazy" decoding="async" width="768" height="432"')+'<button type="button" class="tg-zoom" aria-label="Enlarge this template" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button><div><input type="radio" class="ylhq-template" name="ctTpl" id="'+id+'" value="'+esc(t[2])+'" data-name="'+esc(t[0])+'"'+(sel?" checked":"")+'></div><label for="'+id+'">'+esc(t[0])+'</label></div>'}
+  return '<div class="image-box'+(sel?" on":"")+'" data-n="'+esc(t[0].toLowerCase()+" "+p.name.toLowerCase())+'" data-scr="'+p.scr+'" data-k="'+p.k+'" data-i="'+i+'" data-ti="'+t[1]+'">'+tplMediaHTML(t,"gallery-image",t[0],' loading="lazy" decoding="async" width="768" height="432"')+'<button type="button" class="tg-zoom" aria-label="Enlarge this design" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button><div><input type="radio" class="ylhq-template" name="ctTpl" id="'+id+'" value="'+esc(t[2])+'" data-name="'+esc(t[0])+'"'+(sel?" checked":"")+'></div><label for="'+id+'">'+esc(t[0])+'</label></div>'}
 function ctTplSrc(){if(!CT.tmpl||CT.tmpl==="__blank"||CT.start==="own")return "";if(CT.tmplImg>-1)return tUrl(CT.tmplImg);return ""}
 function ctOwnImg(cid){var t=(cid||"").split(":")[0],k=(cid||"").split(":")[1];
   if(t==="pc"&&k==="fc425")return TUP+"2025/11/QP-CUSTOM-3.jpg";
@@ -5020,7 +5020,7 @@ function ltPickedHTML(kind){
   if(kind==="tpl"){
     var t=ltTplRec(), img=t?tUrl(t[1]):"", name=LS.tpl||"No template selected";
     var th=isPastTpl(t)?tplLibHTML("lt-picked-img",name):(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
-    return '<div class="lt-picked" id="ltTplPicked">'+th+'<div class="lt-picked-n">'+esc(name)+'<small>Letter template</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="tpl">Open</button></div>';
+    return '<div class="lt-picked" id="ltTplPicked">'+th+'<div class="lt-picked-n">'+esc(name)+'<small>Letter</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="tpl">Open</button></div>';
   }
   var r=ltEnvRow(), img=(LS.envLib&&LS.envLib.img)||ltEnvThumb(r), name=(LS.envLib&&LS.envLib.name)||(r?((r[4]===1||r[0]==="__custom")?"Upload your design":r[1]):(LS.env||"No envelope selected"));
   var ph=(LS.envLib&&LS.envLib.img)?'<img class="lt-picked-img" src="'+LS.envLib.img+'" alt="">':(r&&(r[4]===3||r[0]==="__envlib"))?tplLibHTML("lt-picked-img","Your Library"):(r&&(r[4]===1||r[0]==="__custom"))?envUpHTML():(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
@@ -5299,7 +5299,7 @@ function renderLCfg(){
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'</div></div>';
   var hideEnvChoice=/^(windowed|fullview)$/.test(p.k)||/^(windowed|fullview)$/.test((act&&act.k)||"");
   var hasEnvChoice=hasEnvFonts&&!hideEnvChoice;
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvChoice?' lt-split-stack':'')+(hasEnvChoice?'':' lt-split-one')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div>'+(hasEnvChoice?'<div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div>':'<select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select>')+'</div>'+postbar+accs+upbar+mailAcc+art+notes+qty+'</div>'+priceModal;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvChoice?' lt-split-stack':'')+(hasEnvChoice?'':' lt-split-one')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Letters</span></div>'+tplBits+'</div>'+(hasEnvChoice?'<div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div>':'<select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select>')+'</div>'+postbar+accs+upbar+mailAcc+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
@@ -6854,7 +6854,7 @@ function ffStepsFor(k){
     return s;
   }
   var hasEnv=!!(document.querySelector("#ltCfg .lt-envcol")&&!document.querySelector("#ltCfg .lt-split-one"));
-  var s=[["Templates","#ltCfg .lt-tpl, #tplField",function(){return !!LS.tpl}]];
+  var s=[["Letters","#ltCfg .lt-tpl, #tplField",function(){return !!LS.tpl}]];
   if(hasEnv)s.push(["Envelopes","#ltCfg .lt-envcol",function(){return fd("env")}]);
   s.push(
     ["Postage","#ltPostAcc",function(){try{return !!LS.post&&!lPrice().err}catch(e){return !!LS.post}}],
@@ -7352,7 +7352,31 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
  var _fs=window.formSync;if(typeof _fs==="function"&&!_fs.__yl){var w=function(){var r=_fs.apply(this,arguments);try{decorate()}catch(e){}return r};w.__yl=1;window.formSync=w}
 })();
 </script>
-<script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
+<style id="ylsel-css">
+.image-box .tg-sel,.opt-env .tg-sel{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 20px);max-width:100%;min-height:38px;margin:8px 10px 10px;padding:6px 14px;border-radius:999px;border:2px solid var(--line2,#d4d4d8);background:#fff;color:var(--ink,#262626);font:700 14px/1.1 var(--body);cursor:pointer;box-sizing:border-box;position:relative;z-index:3}
+.image-box .tg-sel:hover,.opt-env .tg-sel:hover{background:var(--yt,#FFF7DB);border-color:var(--y,#FFC523)}
+.image-box .tg-sel:focus-visible,.opt-env .tg-sel:focus-visible{outline:none;box-shadow:var(--focus,0 0 0 3px rgba(255,197,35,.45))}
+.image-box.ylsel-on,.opt-env.ylsel-on{outline:3px solid var(--y,#FFC523);outline-offset:-3px;background:var(--yt,#FFF7DB)}
+.ylsel-on .tg-sel{background:var(--y,#FFC523);border-color:var(--y,#FFC523)}
+</style><script id="ylsel-js">
+(function(){
+if(window.__ylsel)return;window.__ylsel=1;
+var SEL="#ltCfg .lt-split .image-box, #ltCfg .lt-split .opt-env, #pcCfg #pcDesign .image-box";
+function inp(b){return b.querySelector("input[type=radio]")}
+function sync(){[].forEach.call(document.querySelectorAll(SEL),function(b){var i=inp(b),on=!!(i&&i.checked)||(b.classList.contains("on")&&b.classList.contains("image-box"));b.classList.toggle("ylsel-on",on);var s=b.querySelector(".tg-sel");if(s){s.textContent=on?"\u2713 Selected":"Select";s.setAttribute("aria-pressed",on?"true":"false");var n=(b.querySelector("label,.ft-n")||{}).textContent;s.setAttribute("aria-label",(on?"Selected: ":"Select ")+(n||"").trim())}})}
+function decorate(){[].forEach.call(document.querySelectorAll(SEL),function(b){if(b.querySelector(":scope > .tg-sel"))return;var s=document.createElement("button");s.type="button";s.className="tg-sel";s.textContent="Select";b.appendChild(s)});sync()}
+var busy=0;function later(){if(busy)return;busy=1;setTimeout(function(){busy=0;decorate()},60)}
+new MutationObserver(function(m){for(var i=0;i<m.length;i++){var t=m[i].target;if(t.closest&&t.closest&&(t.closest("#ltCfg")||t.closest("#pcCfg"))){later();return}}}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["class","checked"]});
+document.addEventListener("change",later,true);
+window.addEventListener("click",function(e){var s=e.target.closest&&e.target.closest(".tg-sel");if(!s){later();return}
+ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ var box=s.closest(".image-box,.opt-env");if(!box)return;var isEnv=box.classList.contains("opt-env");
+ if(box.closest("#ltCfg")&&typeof ltSelectBox==="function")ltSelectBox(box,isEnv);
+ else{window.__ltPicking=1;try{var i=inp(box)||box.querySelector("input");if(i)i.click()}finally{setTimeout(function(){window.__ltPicking=0},50)}}
+ var n=(box.querySelector("label,.ft-n")||{}).textContent;if(typeof toast==="function")toast("Selected: "+(n||"").trim());later()},true);
+decorate();setInterval(function(){if(document.querySelector(SEL+":not(:has(> .tg-sel))"))decorate()},1500);
+})();
+</script><script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
    It repeats the estimated total after the list upload step and presses the same Add to cart button, so the checks and pop-up are unchanged. */
 (function(){
  var F=[["pcCfg","sum","addCart","qerr"],["ltCfg","lsum","laddCart","lqerr"]],q=0;
