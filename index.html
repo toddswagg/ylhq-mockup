@@ -2552,6 +2552,8 @@ var LT=[
  ["Check Letter (Windowed Envelope)","https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png"],
  ["Letter with #10 Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/09/SeeThrough3-768x432.png"],
  ["Letter with A6 Envelope (Invitation)","https://www.yellowletterhq.com/wp-content/uploads/2021/08/Invitation-with-Letter-768x432.png"],
+ ["Letter with Actual Handwritten #10 Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/08/Envelope1-768x432.png"],
+ ["Letter with Actual Handwritten #6 Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/09/HandwriteA6.png"],
  ["Letter with Windowed Envelope","https://www.yellowletterhq.com/wp-content/uploads/2017/05/windowed-letter.jpg"],
  ["Full View Letter","https://www.yellowletterhq.com/wp-content/uploads/2026/03/FULL-VIEW-ENV-1-700x700.jpg"],
  ["Tri-Fold Letter","https://www.yellowletterhq.com/wp-content/uploads/2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg"],
@@ -4184,7 +4186,7 @@ function renderHoliday(){
 
 /* ---------- CUSTOM TEMPLATE ($65 template fee product) ---------- */
 var CT={type:"letter",prod:"",files:[],notes:"",tname:"",qty:"",env:"",post:"",paper:"",font:"",fcol:"",phone:"",ret:{n:"",a:"",c:"",s:"",z:""}};
-var CT_LET=["Letter with Pressure Seal","Check Letter with #10 Window envelope","Letter with #10 Envelope","Letter with A6 Envelope (Invitation)","Full View Letter","Tri-Fold Letter","Digital Greeting Cards & Folded Notes","Real Handwritten Greeting Cards & Folded Notes","Jumbo Letter"];
+var CT_LET=["Letter with Pressure Seal","Check Letter with #10 Window envelope","Letter with #10 Envelope","Letter with A6 Envelope (Invitation)","Letter with Actual Handwritten #10 Envelope","Letter with Actual Handwritten #6 Envelope","Full View Letter","Tri-Fold Letter","Digital Greeting Cards & Folded Notes","Real Handwritten Greeting Cards & Folded Notes","Jumbo Letter"];
 var CT_PC=["Postcard (4.25 x 5.5)","Half Page Postcard (8.5 x 5.5)","Jumbo Postcard (5.5 x 11)","Actual Handwritten Postcard (4.25 x 5.5)","Actual Handwritten Postcard Half Page (8.5 x 5.5)"];
 /* round 11 audit (Oct 30, 11:52 AM PT): options the live order pages have that the mock was missing. Live source: product page attribute lists (signed out) and the form fields under them. */
 var TRI_BGS=["Stars & Stripes","Coastline","Painted","Rustic"];
@@ -4707,6 +4709,8 @@ var LTP=[
  {k:"check",t:5,std:[1.093,.983,.793,.773,.723],fc:1},
  {k:"no10",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
  {k:"a6",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
+ {k:"hw10",t:6,std:[1.453,1.413,1.233,1.213,1.193,1.133],fc:1},
+ {k:"hw6",t:6,std:[1.453,1.413,1.233,1.213,1.193,1.133],fc:1},
  {k:"windowed",t:5,std:[1.093,.983,.793,.773,.723],fc:0},
  {k:"fullview",t:6,std:[1.103,1.063,.883,.863,.843,.783],fc:1},
  {k:"trifold",t:6,std:[1.079,1.029,.849,.819,.799,.739],fc:1},
