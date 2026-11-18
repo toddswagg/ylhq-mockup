@@ -73,6 +73,7 @@ table.cmp{width:100%;border-collapse:separate;border-spacing:0;border:1px solid 
 .pb-hp{margin-left:auto;font:800 16px var(--head);white-space:nowrap}
 .pb-ch{display:none;width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-135deg);margin:4px 2px 0 6px}
 .pb-b{padding:14px 16px 16px}
+.st-h .sk{font-weight:700;color:var(--muted);white-space:nowrap}
 .pb-l{list-style:none;margin:0 0 8px;padding:0}
 .pb-l li{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;border-radius:12px;cursor:pointer}
 .pb-l li:hover{background:#fff}
@@ -270,7 +271,7 @@ function productPage(k){
  var p=PRODUCTS[k];
  S={p:p,tpl:-1,style:"",ink:"",msg:"",post:"",qty:0,file:"",cols:[],rows:0,map:{},listOk:false,nbatch:1,dates:[],touched:{},activeB:0,calM:null,notes:"",done:{}};
  var hv=p.grp==="full"?'<div class="hv"><div class="a"><b>&#9997; Handwritten</b>'+esc(p.handwritten)+'</div><div class="b"><b>&#128424; Printed</b>'+esc(p.printed)+'</div></div>':'<div class="hv"><div class="a"><b>&#9997; Handwritten</b>'+esc(p.handwritten)+'</div><div class="b"><b>&#128424; Printed</b>'+esc(p.printed)+'</div></div>';
- var steps=p.steps.map(function(id,i){return '<section class="st" id="st-'+id+'" data-s="'+id+'"><button type="button" class="st-h" data-h="'+id+'"><span class="num">'+(i+1)+'</span><span class="tt">'+TITLES[id]+'</span><span class="sm" id="sm-'+id+'"></span><span class="tog">Open</span></button><div class="st-b" id="sb-'+id+'"></div></section>'}).join("");
+ var steps=p.steps.map(function(id,i){return '<section class="st" id="st-'+id+'" data-s="'+id+'"><button type="button" class="st-h" data-h="'+id+'"><span class="num">'+(i+1)+'</span><span class="tt"><span class="sk">Step '+(i+1)+' of '+p.steps.length+' \u00b7 </span>'+TITLES[id]+'</span><span class="sm" id="sm-'+id+'"></span><span class="tog">Open</span></button><div class="st-b" id="sb-'+id+'"></div></section>'}).join("");
  $("#app").innerHTML='<div class="crumb"><a href="#/">Real Handwritten</a> / '+(p.grp==="full"?"Fully handwritten":"Handwritten envelope + printed letter")+'</div><div class="pgrid"><div><span class="chip '+(p.grp==="env"?"print":"")+'">'+(p.grp==="env"?"Handwritten envelope + printed letter":"Fully handwritten")+'</span><h1 style="margin-top:8px">'+esc(p.name)+'</h1><p>'+esc(p.desc)+'</p>'+hv+(p.price==="placeholder"?'<div class="note"><b>Placeholder pricing.</b> '+esc(p.phNote)+' <b>Needs Josh\'s price.</b></div>':'')+'<div id="steps">'+steps+'</div></div><aside class="pbox" id="pbox"></aside></div>';
  document.body.classList.add("rh-prod");p.steps.forEach(function(id){BODY[id]($("#sb-"+id))});
  $$(".st-h").forEach(function(b){b.onclick=function(){toggle(b.dataset.h)}});

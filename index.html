@@ -6940,6 +6940,15 @@ function ylpUpdate(k){
 var ylpO=ffBar;ffBar=function(k){ylpO.apply(this,arguments);try{ylpUpdate(k)}catch(e){}};
 window.addEventListener("resize",function(){ffSched()});
 }
+function ylStepLabels(k){var K=FFK[k],host=document.getElementById(K.host);if(!host||!host.closest(".scr.on")||!K.on())return;var steps=K.steps||[],T=steps.length;
+  steps.forEach(function(s,i){var el=host.querySelector(s[1]);if(!el)return;var h=null;
+    if(el.matches&&el.matches("details"))h=el.querySelector("summary .lt-acc-k");
+    else h=el.querySelector(".lt-pill,.lt-buy-sum-h,.lt-step-h,h3,h4,.lbl,label");
+    if(!h)return;var t="Step "+(i+1)+" of "+T+" \u00b7 ",sp=h.querySelector(":scope > .ylstep-k");
+    if(!sp){sp=document.createElement("span");sp.className="ylstep-k";h.insertBefore(sp,h.firstChild)}
+    if(sp.textContent!==t){sp.innerHTML="";sp.appendChild(document.createTextNode("Step "+(i+1)+" of "+T));var d=document.createElement("span");d.className="ylstep-d";d.textContent=" \u00b7 ";sp.appendChild(d)}})}
+var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}catch(e){}};
+
 
 cartBadge();route();
 })();
@@ -7416,7 +7425,7 @@ window.addEventListener("click",function(e){var s=e.target.closest&&e.target.clo
  var n=(box.querySelector("label,.ft-n")||{}).textContent;if(typeof toast==="function")toast("Selected: "+(n||"").trim());later()},true);
 decorate();setInterval(function(){if(document.querySelector(SEL+":not(:has(> .tg-sel))"))decorate()},1500);
 })();
-</script><style id="open-once-css">html body .lt-picked .lt-change.btn,html body .lt-picked .lt-change{font-size:0!important;line-height:0!important}html body .lt-picked .lt-change::before{font:800 12px/1 var(--body)!important;line-height:1!important;content:"Open"}html body .lt-picked .lt-change::after{content:none!important}</style><style id="ylp-css">
+</script><style id="open-once-css">html body .lt-picked .lt-change.btn,html body .lt-picked .lt-change{font-size:0!important;line-height:0!important}html body .lt-picked .lt-change::before{font:800 12px/1 var(--body)!important;line-height:1!important;content:"Open"}html body .lt-picked .lt-change::after{content:none!important}</style><style id="ylstep-css">.ylstep-k{font-weight:800;color:var(--muted,#6b6b6b);white-space:nowrap}.lt-acc-k:has(>.ylstep-k){display:block!important}.lt-acc-k:has(>.ylstep-k)>small{display:block}.ylstep-k{display:inline}@media (max-width:520px){.lt-acc-k .ylstep-k{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase}.lt-acc-k .ylstep-d{display:none}}.lt-pill .ylstep-k{color:inherit;opacity:.8}</style><style id="ylp-css">
 .ylp{font-family:var(--body,inherit);background:#fff;border:2px solid var(--line2,#e5dfcb);border-radius:20px;box-shadow:0 8px 26px rgba(0,0,0,.08);overflow:hidden;color:var(--ink,#1a1a1a)}
 .ylp-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:var(--yt,#fff8dc);padding:14px 16px;text-align:left;font:inherit;color:inherit;cursor:default;border-bottom:1px solid var(--line,#eee)}
 .ylp-hs small{display:block;font:700 11px/1.2 var(--body,inherit);letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#6b6b6b)}
