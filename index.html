@@ -2895,7 +2895,7 @@ function formStObj(){return formKind()==="pc"?window.PS:window.LS}
 function formDone(step){var st=formStObj();if(!st)return false;var d=st._done||{};
   switch(step.id){
     case "tpl":return formKind()==="pc"?(st.tpl>-1):!!st.tpl;
-    case "list":return !!(st.files&&st.files.length);
+    case "list":return window.ylListReady?ylListReady(st):!!(st.files&&st.files.length);
     case "notes":case "buy":return false;
     default:return !!d[step.id];
   }}
@@ -2919,13 +2919,13 @@ function formSync(){
   var kind=formKind(),st,bits,el;
   if(kind==="lt"){
     el=document.getElementById("ltPostSum");if(el)el.textContent=(!LS||!LS.post)?"Pick postage":(LS.post==="fc"?"First Class":LS.post==="np"?"Nonprofit":"Standard (Marketing Mail)");
-    el=document.getElementById("ltListSum");if(el)el.textContent=(LS&&LS.files&&LS.files.length)?(LS.files.length+" file"+(LS.files.length===1?"":"s")+(LS.qty?" · "+Number(LS.qty).toLocaleString("en-US")+" pieces":"")):"Upload a CSV list";
+    el=document.getElementById("ltListSum");if(el)el.textContent=(LS&&LS.files&&LS.files.length&&window.ylListReady&&!ylListReady(LS))?"List not ready yet: finish the Do Not Mail check":(LS&&LS.files&&LS.files.length)?(LS.files.length+" file"+(LS.files.length===1?"":"s")+(LS.qty?" · "+Number(LS.qty).toLocaleString("en-US")+" pieces":"")):"Upload a CSV list";
     el=document.getElementById("ltMailSum");if(el){bits=[];try{if(typeof ltMailDateLabels==="function"){var ds=ltMailDateLabels();if(ds&&ds.length)bits=ds.slice()}else if(LS&&LS.day)bits.push(LS.day)}catch(e){if(LS&&LS.day)bits.push(LS.day)}if(LS&&LS.drops==="multi"&&LS.batches)bits.push(LS.batches+" batches");else if(LS&&LS.drops==="all")bits.push("Mail all at once");el.textContent=bits.length?bits.join(" · "):"Choose a mail day"}
     el=document.getElementById("ltNotesSum");if(el)el.textContent=(LS&&((LS.notes&&String(LS.notes).trim())||(LS.oname)||((LS.other||[]).length||(LS.art||[]).length)))?"Added":"Optional";
   }
   if(kind==="pc"){
     el=document.getElementById("pcPostSum");if(el)el.textContent=(!PS||!PS.post)?"Pick postage":(PS.post==="fc"?"First Class":"Standard (Marketing Mail)");
-    el=document.getElementById("pcListSum");if(el)el.textContent=(PS&&PS.files&&PS.files.length)?(PS.files.length+" file"+(PS.files.length===1?"":"s")+(PS.qty?" · "+Number(PS.qty).toLocaleString("en-US")+" pieces":"")):"Upload a CSV list";
+    el=document.getElementById("pcListSum");if(el)el.textContent=(PS&&PS.files&&PS.files.length&&window.ylListReady&&!ylListReady(PS))?"List not ready yet: finish the Do Not Mail check":(PS&&PS.files&&PS.files.length)?(PS.files.length+" file"+(PS.files.length===1?"":"s")+(PS.qty?" · "+Number(PS.qty).toLocaleString("en-US")+" pieces":"")):"Upload a CSV list";
     el=document.getElementById("pcMailSum");if(el){bits=[];try{if(typeof pcMailDateLabels==="function"){var d2=pcMailDateLabels();if(Array.isArray(d2)&&d2.length)bits=d2.slice();else if(d2)bits.push(String(d2))}else if(PS&&PS.day)bits.push(PS.day)}catch(e){if(PS&&PS.day)bits.push(PS.day)}if(PS&&PS.drops==="multi"&&PS.batches)bits.push(PS.batches+" batches");else if(PS&&PS.drops==="all")bits.push("Mail all at once");el.textContent=bits.length?bits.join(" · "):"Choose a mail day"}
     el=document.getElementById("pcNotesSum");if(el)el.textContent=(PS&&((PS.notes&&String(PS.notes).trim())||(PS.oname)||((PS.other||[]).length||(PS.art||[]).length)))?"Added":"Optional";
   }
@@ -3154,7 +3154,7 @@ function ltMissList(){
   if(typeof leadText==="function"?!leadText(LS):!(LS&&LS.leads&&LS.leads.length))miss.push("lead type");
   if(!LS||!LS.day)miss.push("mail day");
   if(LS&&LS.drops==="multi"&&!LS.batches)miss.push("number of batches");
-  if(!LS||!(LS.files&&LS.files.length))miss.push("list");
+  if(!LS||!(window.ylListReady?ylListReady(LS):(LS.files&&LS.files.length)))miss.push("list");
   if(LS&&LS.lo&&LS.lo.mail&&!((LS.lo.email||"").trim()))miss.push("notification email");
   return miss;
 }
@@ -3166,7 +3166,7 @@ function pcMissList(){
   if(typeof leadText==="function"?!leadText(PS):!(PS&&PS.leads&&PS.leads.length))miss.push("lead type");
   if(!PS||!PS.day)miss.push("mail day");
   if(PS&&PS.drops==="multi"&&!PS.batches)miss.push("number of batches");
-  if(!PS||!(PS.files&&PS.files.length))miss.push("list");
+  if(!PS||!(window.ylListReady?ylListReady(PS):(PS.files&&PS.files.length)))miss.push("list");
   if(PS&&PS.lo&&PS.lo.mail&&!((PS.lo.email||"").trim()))miss.push("notification email");
   return miss;
 }
@@ -4979,7 +4979,7 @@ function ltReminders(p){
   if(p&&!p.hw&&LS.env&&false){}
   var hasEnv=false;try{hasEnv=!!(optEnvOf(ltPid())||[]).length}catch(e){}
   if(hasEnv&&!LS.env)R.push("Pick an envelope.");
-  if(!LS.files||!LS.files.length)R.push("Upload a list so we can set the piece count from the cleaned records.");
+  if(!(window.ylListReady?ylListReady(LS):(LS.files&&LS.files.length)))R.push("Upload a list so we can set the piece count from the cleaned records.");
   if(!leadText(LS))R.push("Add a lead type.");
   if(!LS.drops)R.push("Choose whether to mail all at once or in batches.");
   if(LS.drops==="multi"&&!LS.batches)R.push("Choose how many batches.");
@@ -6846,7 +6846,7 @@ function ffStepsFor(k){
     if(document.getElementById("pcGlossAcc"))s.push(["Finish","#pcGlossAcc",function(){return fd("gloss")}]);
     s.push(
       ["Options","#pcMoreAcc",function(){return typeof leadText==="function"?!!leadText(PS):!!(PS.leads&&PS.leads.length)}],
-      ["Your list","#pcUpbar",function(){return !!(PS.files&&PS.files.length)}],
+      ["Your list","#pcUpbar",function(){return window.ylListReady?ylListReady(PS):!!(PS.files&&PS.files.length)}],
       ["Mail dates","#pcMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(PS):!!(PS.day&&PS.drops))}],
       ["Notes","#pcNotes",function(){return !!(PS.notes&&String(PS.notes).trim())||!!PS.oname||fd("notes")}],
       ["Cart","#pPricePanel",function(){return false}]
@@ -6863,7 +6863,7 @@ function ffStepsFor(k){
   if(document.getElementById("ltEnvFontAcc"))s.push(["Envelope font","#ltEnvFontAcc",function(){return fd("envfont")||!!(document.getElementById("ltEnvFontAcc")&&!document.getElementById("ltEnvFontAcc").querySelector("input,select")&&LS.tpl)}]);
   s.push(
     ["Options","#ltMoreAcc",function(){return typeof leadText==="function"?!!leadText(LS):!!(LS.leads&&LS.leads.length)}],
-    ["Your list","#ltUpbar",function(){return !!(LS.files&&LS.files.length)}],
+    ["Your list","#ltUpbar",function(){return window.ylListReady?ylListReady(LS):!!(LS.files&&LS.files.length)}],
     ["Mail dates","#ltMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(LS):!!(LS.day&&LS.drops))}],
     ["Notes","#ltNotes",function(){return !!(LS.notes&&String(LS.notes).trim())||!!LS.oname||fd("notes")}],
     ["Cart","#lPricePanel",function(){return false}]
@@ -6964,6 +6964,11 @@ cartBadge();route();
   return h}
 
 function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false},rows=(window.WZ_N||5214);
+  if(window.ylRP&&W&&W.m){try{
+    if(ylRP.dnmDown())return {rows:rows,d:0,u:0,nc:0,t:0,fin:0,o:o,down:true};
+    var rr=ylRP.evaluate(ylRP.ctx(W,COLS));
+    return {rows:rr.total,d:rr.rm.dup+rr.rm.spelled,u:0,nc:0,t:0,fin:rr.mailed,o:o,dnm:rr.rm.dnm,ret:rr.rm.ret,real:true,sample:rr.sample}
+  }catch(ex){}}
   var sc=rows/5214;
   var d=o.tout?0:Math.round(({mailing_property:37,mailing:52,property:41}[o.dup]||0)*sc),u=o.tout?0:Math.round(112*sc),nc=o.tout?0:Math.round(48*sc),t=(!o.tout&&o.trust)?Math.round(19*sc):0;
   var fin=Math.max(0,rows-d-u);
@@ -6973,14 +6978,14 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   h+=(window.listOptsHTML?listOptsHTML("wz",W.st,0):"");
   h+='<p class="help" style="margin:8px 0 0">Turn off upload tool skips the whole clean up: no duplicate removal and no address checks. You pay for every row.</p>';
   if(!W.ran)return h+'<div style="margin-top:12px"><button type="button" class="btn" id="wzRun">Clean my list</button></div>';
-  var c=counts();if(c.o.tout)return h+'<div class="wz-cnt"><div><span>Rows in your list</span><b>'+n(c.rows)+'</b></div><div><span>Records to mail (nothing removed)</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button>';
+  var c=counts();if(c.down)return h+'<div class="wz-err" role="alert" id="wzDnmDown"><b>We couldn\u2019t check your Do Not Mail list yet, try again.</b> We never mail an address on your Do Not Mail list, so your list is not ready until the check has run.</div><button type="button" class="btn sec sm" id="wzRun">Try again</button>';if(c.o.tout)return h+'<div class="wz-cnt"><div><span>Rows in your list</span><b>'+n(c.rows)+'</b></div><div><span>Records to mail (nothing removed)</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button>';
   return h+'<div class="wz-bar"><i style="width:100%"></i></div><div class="wz-cnt" id="wzCnt">'+
    '<div><span>Rows in your list (file format checked)</span><b>'+n(c.rows)+'</b></div>'+
    '<div><span>Duplicates removed ('+({mailing_property:"mailing and property",mailing:"mailing",property:"property"}[c.o.dup]||"none")+')</span><span class="m">'+(c.d?'&minus; '+n(c.d):'0')+'</span></div>'+
-   '<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
-   '<div><span>Movers updated to their new address (NCOA)</span><span class="u">'+n(c.nc)+' updated</span></div>'+
+   (c.real?'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">'+(c.dnm?'&minus; '+n(c.dnm):'0')+'</span></div><div><span>Mail came back before, removed</span><span class="m">'+(c.ret?'&minus; '+n(c.ret):'0')+'</span></div>':'<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
+   '<div><span>Movers updated to their new address (NCOA)</span><span class="u">'+n(c.nc)+' updated</span></div>')+
    (c.t?'<div><span>Trust names changed (\u201cOntiveros 1997 Trust\u201d to \u201cOntiveros Family\u201d)</span><span class="u">'+n(c.t)+' changed</span></div>':'')+
-   '<div><span>Records to mail</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button> <span class="muted" style="font-size:12.5px">Example counts.</span>'}
+   '<div><span>Records to mail</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button> <span class="muted" style="font-size:12.5px">'+(c.real?(c.sample?'Counts from the example list.':'Counts from your file.'):'Example counts.')+'</span>'}
  function s4(){
   return '<p style="margin-top:0">Two separate things: who the mail is from, and where returned mail goes. We filled both from your last order.</p>'+(window.agretHTML?agretHTML("up"):"")}
  function s5(){var c=counts(),A=window.AGR_PAST&&AGR_PAST[0];var mapped=0;for(var k in W.m)if(W.m[k]&&W.m[k]!=="-")mapped++;
@@ -7004,20 +7009,29 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(window.listOptsWire)listOptsWire(B,"wz",W.st);
   F.innerHTML="";function btn(l,c,fn){var x=document.createElement("button");x.type="button";x.className=c;x.textContent=l;x.onclick=fn;F.appendChild(x);return x}
   btn("Cancel","btn sec",function(){if(confirm("Leave the upload tool? You can upload the list again any time."))closeModal()});
+  if(window.ylRP){var tg=document.createElement("label");tg.className="yl-mocktog";tg.innerHTML='<input type="checkbox" id="ylDnmDownTog"'+(ylRP.dnmDown()?' checked':'')+'> Mockup only: pretend the Do Not Mail check is down';F.appendChild(tg);var cb=tg.querySelector("input");cb.onchange=function(){ylRP.setDown(cb.checked);draw()}}
   var nx=btn("Use "+n(counts().fin)+" records","btn",function(){
    if(!W.files.some(function(f){return /\.(csv|xlsx?)$/i.test(f)})){closeModal();toast("Added as artwork or instructions. No list to match.");return}
    if(missing().length){W.err=1;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});else{var p=B.querySelector('[data-wzpane="2"]');if(p)p.scrollIntoView({block:"start"})}return}
    if(!W.ran){W.ran=true;draw();return}
    if(!grab4()){var p4=B.querySelector('[data-wzpane="4"]');if(p4)p4.scrollIntoView({block:"start"});return}
+   if(window.ylRP){ylRP.run(W,COLS,function(res){commitList(res)},function(){});return}
+   commitList(null);
+  });
+  if(B.scrollTo)B.scrollTop=keep}
+
+ function commitList(res){
+  if(window.ylRP&&ylRP.dnmDown())return;
+  var fin=res?res.mailed:counts().fin;
    if(W.st){
-    var fin=counts().fin;
+    if(res)W.st._ylRes=res;
     W.st.qty=fin;
     W.st.files=W.st.files||[];
     (W.files||[]).forEach(function(f){var nm=typeof f==="string"?f:(f&&f.name)||"";if(nm&&W.st.files.indexOf(nm)<0)W.st.files.push(nm)});
     if(!W.st.files.length)W.st.files.push((window.WZ_FILE||"your-list.csv"));
    }
    var q=$q("#qty")||$q("#lqty");
-   var lock=window.formLockQty||formLockQty;if(typeof lock==="function")lock(q,W.st||{});else if(q){q.value=counts().fin;q.readOnly=true}
+   var lock=window.formLockQty||formLockQty;if(typeof lock==="function")lock(q,W.st||{});else if(q){q.value=fin;q.readOnly=true}
    closeModal();
    var sync=window.formSync||formSync;if(typeof sync==="function")sync();
    var lu=window.lUpdate||lUpdate;if(typeof lu==="function"&&q&&q.id==="lqty")lu();
@@ -7025,10 +7039,11 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    var ltb=window.ltUpdateBuy||ltUpdateBuy;if(typeof ltb==="function")ltb();
    var ptb=window.pcUpdateBuy||pcUpdateBuy;if(typeof ptb==="function")ptb();
    var adv=window.formAdvance||formAdvance;if(typeof adv==="function")adv("list");
-   toast("List ready: "+n(counts().fin)+" records. Piece count is locked to the cleaned list.");
-  });
-  if(B.scrollTo)B.scrollTop=keep}
- window.wzOpen=function(files,opt){W=fresh(files,opt);var d=document.getElementById("dim");d.classList.add("wz");d.classList.add("on");draw()};
+   toast("List ready: "+n(fin)+" records. Piece count is locked to the cleaned list.");
+  
+  if(window.ylDecorate)try{ylDecorate()}catch(e){}
+ }
+ window.wzOpen=function(files,opt){W=fresh(files,opt);if(W.st){W.st._ylRes=null}var d=document.getElementById("dim");d.classList.add("wz");d.classList.add("on");draw()};
  function closeModal(){var d=document.getElementById("dim");d.classList.remove("on");d.classList.remove("wz")}
  function toast(m){var t=document.getElementById("toast");if(t){t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},3200)}}
  window.fa14Match=function(files,opt){if(!files||!files.length)return;wzOpen(files,opt)};
@@ -7052,8 +7067,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
  document.addEventListener("change",function(e){var t=e.target;if(t&&t.type==="file"&&t.files&&t.files.length)window.__LF=[].slice.call(t.files)},true);
  document.addEventListener("drop",function(e){if(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files.length)window.__LF=[].slice.call(e.dataTransfer.files)},true);
  function csv(text){text=text.replace(/^\ufeff/,"");var first=text.split(/\r?\n/)[0]||"",d=[",","\t",";","|"].sort(function(a,b){return first.split(b).length-first.split(a).length})[0];
-  var rows=[],row=[],f="",q=false,i=0,c,n=0;for(;i<text.length;i++){c=text[i];if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===d){row.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;row.push(f);f="";if(row.some(function(x){return x.trim()})){n++;if(rows.length<8)rows.push(row)}row=[]}else f+=c}
-  row.push(f);if(row.some(function(x){return x.trim()})){n++;if(rows.length<8)rows.push(row)}
+  var rows=[],row=[],f="",q=false,i=0,c,n=0;for(;i<text.length;i++){c=text[i];if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===d){row.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;row.push(f);f="";if(row.some(function(x){return x.trim()})){n++;if(rows.length<100001)rows.push(row)}row=[]}else f+=c}
+  row.push(f);if(row.some(function(x){return x.trim()})){n++;if(rows.length<100001)rows.push(row)}
   return {cols:(rows[0]||[]).map(function(x,j){return x.trim()||("Column "+(j+1))}),rows:rows.slice(1),n:Math.max(0,n-1)}}
  async function unzip(buf,want){var dv=new DataView(buf),u8=new Uint8Array(buf),e=-1;for(var i=u8.length-22;i>=Math.max(0,u8.length-66000);i--)if(dv.getUint32(i,true)===0x06054b50){e=i;break}if(e<0)throw new Error("zip");
   var cnt=dv.getUint16(e+10,true),off=dv.getUint32(e+16,true),out={},td=new TextDecoder();
@@ -7065,7 +7080,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(z["xl/sharedStrings.xml"]){var sd=P.parseFromString(z["xl/sharedStrings.xml"],"application/xml");[].forEach.call(sd.getElementsByTagName("si"),function(si){ss.push([].map.call(si.getElementsByTagName("t"),function(t){return t.textContent}).join(""))})}
   var sh=z["xl/worksheets/sheet1.xml"];if(!sh)throw new Error("sheet");var doc=P.parseFromString(sh,"application/xml"),R=doc.getElementsByTagName("row"),rows=[];
   function col(r){var m=/^([A-Z]+)/.exec(r||""),n=0;if(!m)return -1;for(var i=0;i<m[1].length;i++)n=n*26+m[1].charCodeAt(i)-64;return n-1}
-  for(var i=0;i<R.length&&rows.length<8;i++){var row=[];[].forEach.call(R[i].getElementsByTagName("c"),function(c,j){var ix=col(c.getAttribute("r"));if(ix<0)ix=j;var t=c.getAttribute("t"),v=c.getElementsByTagName("v")[0],val="";if(t==="s"&&v)val=ss[+v.textContent]||"";else if(t==="inlineStr")val=[].map.call(c.getElementsByTagName("t"),function(x){return x.textContent}).join("");else if(v)val=v.textContent;row[ix]=val});for(var q=0;q<row.length;q++)if(row[q]==null)row[q]="";if(row.some(function(x){return String(x).trim()}))rows.push(row)}
+  for(var i=0;i<R.length&&rows.length<20001;i++){var row=[];[].forEach.call(R[i].getElementsByTagName("c"),function(c,j){var ix=col(c.getAttribute("r"));if(ix<0)ix=j;var t=c.getAttribute("t"),v=c.getElementsByTagName("v")[0],val="";if(t==="s"&&v)val=ss[+v.textContent]||"";else if(t==="inlineStr")val=[].map.call(c.getElementsByTagName("t"),function(x){return x.textContent}).join("");else if(v)val=v.textContent;row[ix]=val});for(var q=0;q<row.length;q++)if(row[q]==null)row[q]="";if(row.some(function(x){return String(x).trim()}))rows.push(row)}
   return {cols:(rows[0]||[]).map(function(x,j){return String(x).trim()||("Column "+(j+1))}),rows:rows.slice(1),n:Math.max(0,R.length-1)}}
  function read(f){if(/\.xlsx$/i.test(f.name))return f.arrayBuffer().then(xlsx);return f.text().then(csv)}
  var orig=window.wzOpen;if(!orig)return;var C=window.WZ_COLS,RW=window.WZ_ROW,PA=window.WZ_PAST;if(!C||!RW||!PA)return;
@@ -7106,6 +7121,236 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   for(var j=0;j<L.length;j++)for(var i=0;i<N.length;i++){if(/\b2\b|second/.test(N[i])&&k!=="mailing_address2")continue;if(L[j].test(N[i]))return [cols[i],j===0?"ok":"chk"]}
   return null}})();
 
+</script>
+<style id="ylrp-css">
+.ylrp-bd{position:fixed;inset:0;background:rgba(20,20,20,.55);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;z-index:100000;overflow:auto}
+.ylrp-bd.open{display:flex}html.ylrp-lock{overflow:hidden}
+.ylrp-m{background:#fff;border-radius:18px;width:min(560px,100%);box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100vh - 80px)}
+.ylrp-body{overflow:auto;flex:1 1 auto}
+.ylrp-mh{background:#fff;padding:18px 20px 16px 22px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e4e4e7}
+.ylrp-mh h2{margin:0;font:700 18px/1.25 var(--head,Montserrat,sans-serif);flex:1}
+.ylrp-mh h2 small{display:block;font:400 12px var(--body,'Open Sans',Arial,sans-serif);color:#71717a;margin-top:4px}
+.ylrp-x{width:36px;height:36px;border-radius:50%;background:#f4f4f5;border:0;color:#2b2b2b;font-size:22px;cursor:pointer;line-height:1;padding:0;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
+.ylrp-x:hover{background:#e4e4e7}
+.ylrp-hero{margin:20px 22px 0;padding:26px 24px 22px;background:#fff7db;border-radius:18px;text-align:center}
+.ylrp-hero .n{font-size:56px;font-weight:800;color:#2b2b2b;letter-spacing:-1.5px;line-height:1}
+.ylrp-hero .l{font:700 18px var(--head,Montserrat,sans-serif);color:#2b2b2b;margin-top:6px}
+.ylrp-hero .of{font-size:14px;color:#71717a;margin-top:4px}
+.ylrp-sec{margin:14px 22px 0;padding:16px 18px 14px;border:1px solid #e4e4e7;border-radius:14px;background:#fff}
+.ylrp-sh{font-size:15px;font-weight:700;margin:0 0 10px}
+.ylrp-r{display:flex;align-items:center;gap:12px;padding:5px 0;font-size:14px;color:#3f3f46}
+.ylrp-r .pill{min-width:42px;height:26px;padding:0 10px;border-radius:999px;background:#fff7db;color:#2b2b2b;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ylrp-tidy{margin:12px 22px 0;padding:14px 18px;background:#fff7db;border-radius:14px;font-size:14px;color:#2b2b2b}
+.ylrp-dl{margin:16px 22px 8px;text-align:center}.ylrp-dl .btn{width:100%;padding:14px 18px;font-size:15px}
+.ylrp-csv{display:inline-block;margin-top:12px;font:600 14px var(--body,'Open Sans',Arial,sans-serif);color:#3f3f46;text-decoration:underline;background:none;border:0;cursor:pointer;padding:0}
+.ylrp-dl p{margin:10px 0 0;font-size:13px;color:#71717a;line-height:1.45}
+.ylrp-mf{margin-top:16px;padding:14px 22px 18px;border-top:1px solid #e4e4e7;background:#fafafa}
+.ylrp-mf .sp{display:block;font-size:12px;color:#71717a;line-height:1.45;margin-bottom:14px}
+.ylrp-mf .actions{display:flex;justify-content:flex-end;gap:10px}
+.ylrp-err{margin:20px 22px 0;padding:18px;background:#fdecea;border:1px solid #f5b5ae;border-radius:14px;color:#7a1d14}.ylrp-err b{font-size:16px}.ylrp-err p{margin:8px 0 0;font-size:14px;color:#5b2a25}
+.yl-mocktog{margin-left:auto;font-size:12px;color:#71717a;display:inline-flex;align-items:center;gap:6px}
+.yl-seeres{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;background:#fff7db;border-radius:12px;font-size:14px}
+@media(max-width:520px){.ylrp-bd{padding:12px}.ylrp-hero .n{font-size:44px}.ylrp-mf .actions{flex-direction:column-reverse}.ylrp-mf .actions .btn{width:100%}}
+</style>
+<script id="ylrp-js">/* YLHQ list check: Do Not Mail removal, results popup, Excel/CSV report (mockup, invented sample data only). */
+(function(){
+ if(window.ylRP)return;
+ var ST_B64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3R5bGVTaGVldCB4bWxucz0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL3NwcmVhZHNoZWV0bWwvMjAwNi9tYWluIj48bnVtRm10cyBjb3VudD0iMSI+PG51bUZtdCBudW1GbXRJZD0iMTY0IiBmb3JtYXRDb2RlPSIjLCMjMCIvPjwvbnVtRm10cz48Zm9udHMgY291bnQ9IjEzIj48Zm9udD48c3ogdmFsPSIxMSIvPjxjb2xvciByZ2I9IkZGMjYyNjI2Ii8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PGZvbnQ+PGIvPjxzeiB2YWw9IjE4Ii8+PGNvbG9yIHJnYj0iRkYyQjJCMkIiLz48bmFtZSB2YWw9IkNhbGlicmkiLz48ZmFtaWx5IHZhbD0iMiIvPjxzY2hlbWUgdmFsPSJtaW5vciIvPjwvZm9udD48Zm9udD48c3ogdmFsPSIxMSIvPjxjb2xvciByZ2I9IkZGM0YzRjQ2Ii8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PGZvbnQ+PHN6IHZhbD0iMTAiLz48Y29sb3IgcmdiPSJGRjcxNzE3QSIvPjxuYW1lIHZhbD0iQ2FsaWJyaSIvPjxmYW1pbHkgdmFsPSIyIi8+PHNjaGVtZSB2YWw9Im1pbm9yIi8+PC9mb250Pjxmb250PjxiLz48c3ogdmFsPSIxMSIvPjxjb2xvciByZ2I9IkZGRkZDNTIzIi8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PGZvbnQ+PHN6IHZhbD0iMTEiLz48Y29sb3IgcmdiPSJGRjI2MjYyNiIvPjxuYW1lIHZhbD0iQ2FsaWJyaSIvPjxmYW1pbHkgdmFsPSIyIi8+PHNjaGVtZSB2YWw9Im1pbm9yIi8+PC9mb250Pjxmb250PjxiLz48c3ogdmFsPSIxMSIvPjxjb2xvciByZ2I9IkZGMTU4MDNEIi8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PGZvbnQ+PGIvPjxzeiB2YWw9IjExIi8+PGNvbG9yIHJnYj0iRkY4NTREMEUiLz48bmFtZSB2YWw9IkNhbGlicmkiLz48ZmFtaWx5IHZhbD0iMiIvPjxzY2hlbWUgdmFsPSJtaW5vciIvPjwvZm9udD48Zm9udD48Yi8+PHN6IHZhbD0iMTEiLz48Y29sb3IgcmdiPSJGRjNGM0Y0NiIvPjxuYW1lIHZhbD0iQ2FsaWJyaSIvPjxmYW1pbHkgdmFsPSIyIi8+PHNjaGVtZSB2YWw9Im1pbm9yIi8+PC9mb250Pjxmb250PjxiLz48c3ogdmFsPSIxMiIvPjxjb2xvciByZ2I9IkZGMjYyNjI2Ii8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PGZvbnQ+PGIvPjxzeiB2YWw9IjE0Ii8+PGNvbG9yIHJnYj0iRkYyNjI2MjYiLz48bmFtZSB2YWw9IkNhbGlicmkiLz48ZmFtaWx5IHZhbD0iMiIvPjxzY2hlbWUgdmFsPSJtaW5vciIvPjwvZm9udD48Zm9udD48Yi8+PHN6IHZhbD0iMTIiLz48Y29sb3IgcmdiPSJGRjE1ODAzRCIvPjxuYW1lIHZhbD0iQ2FsaWJyaSIvPjxmYW1pbHkgdmFsPSIyIi8+PHNjaGVtZSB2YWw9Im1pbm9yIi8+PC9mb250Pjxmb250PjxiLz48c3ogdmFsPSIxMiIvPjxjb2xvciByZ2I9IkZGODU0RDBFIi8+PG5hbWUgdmFsPSJDYWxpYnJpIi8+PGZhbWlseSB2YWw9IjIiLz48c2NoZW1lIHZhbD0ibWlub3IiLz48L2ZvbnQ+PC9mb250cz48ZmlsbHMgY291bnQ9IjgiPjxmaWxsPjxwYXR0ZXJuRmlsbCBwYXR0ZXJuVHlwZT0ibm9uZSIvPjwvZmlsbD48ZmlsbD48cGF0dGVybkZpbGwgcGF0dGVyblR5cGU9ImdyYXkxMjUiLz48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRkZGQzUyMyIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRkZGRjdEQiIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRjJCMkIyQiIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRkU4RjhFRSIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRkZGRjNDNCIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PGZpbGw+PHBhdHRlcm5GaWxsIHBhdHRlcm5UeXBlPSJzb2xpZCI+PGZnQ29sb3IgcmdiPSJGRkYyRjJGMyIvPjxiZ0NvbG9yIGluZGV4ZWQ9IjY0Ii8+PC9wYXR0ZXJuRmlsbD48L2ZpbGw+PC9maWxscz48Ym9yZGVycyBjb3VudD0iMyI+PGJvcmRlcj48bGVmdC8+PHJpZ2h0Lz48dG9wLz48Ym90dG9tLz48ZGlhZ29uYWwvPjwvYm9yZGVyPjxib3JkZXI+PGxlZnQvPjxyaWdodC8+PHRvcC8+PGJvdHRvbSBzdHlsZT0idGhpbiI+PGNvbG9yIHJnYj0iRkYxMTExMTEiLz48L2JvdHRvbT48ZGlhZ29uYWwvPjwvYm9yZGVyPjxib3JkZXI+PGxlZnQvPjxyaWdodC8+PHRvcC8+PGJvdHRvbSBzdHlsZT0idGhpbiI+PGNvbG9yIHJnYj0iRkZFNEU0RTciLz48L2JvdHRvbT48ZGlhZ29uYWwvPjwvYm9yZGVyPjwvYm9yZGVycz48Y2VsbFN0eWxlWGZzIGNvdW50PSIxIj48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iMCIgZmlsbElkPSIwIiBib3JkZXJJZD0iMCIvPjwvY2VsbFN0eWxlWGZzPjxjZWxsWGZzIGNvdW50PSIxOCI+PHhmIG51bUZtdElkPSIwIiBmb250SWQ9IjAiIGZpbGxJZD0iMCIgYm9yZGVySWQ9IjAiIHhmSWQ9IjAiLz48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iMSIgZmlsbElkPSIyIiBib3JkZXJJZD0iMCIgeGZJZD0iMCIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9ImxlZnQiIHZlcnRpY2FsPSJjZW50ZXIiLz48L3hmPjx4ZiBudW1GbXRJZD0iMCIgZm9udElkPSIyIiBmaWxsSWQ9IjMiIGJvcmRlcklkPSIwIiB4ZklkPSIwIiBhcHBseUZvbnQ9IjEiIGFwcGx5RmlsbD0iMSIgYXBwbHlBbGlnbm1lbnQ9IjEiPjxhbGlnbm1lbnQgdmVydGljYWw9ImNlbnRlciIgd3JhcFRleHQ9IjEiLz48L3hmPjx4ZiBudW1GbXRJZD0iMCIgZm9udElkPSIzIiBmaWxsSWQ9IjAiIGJvcmRlcklkPSIwIiB4ZklkPSIwIiBhcHBseUZvbnQ9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IHZlcnRpY2FsPSJjZW50ZXIiLz48L3hmPjx4ZiBudW1GbXRJZD0iMCIgZm9udElkPSI0IiBmaWxsSWQ9IjQiIGJvcmRlcklkPSIxIiB4ZklkPSIwIiBhcHBseUZvbnQ9IjEiIGFwcGx5RmlsbD0iMSIgYXBwbHlCb3JkZXI9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9ImxlZnQiIHZlcnRpY2FsPSJjZW50ZXIiIHdyYXBUZXh0PSIxIi8+PC94Zj48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iNSIgZmlsbElkPSI1IiBib3JkZXJJZD0iMiIgeGZJZD0iMCIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5Qm9yZGVyPSIxIiBhcHBseUFsaWdubWVudD0iMSI+PGFsaWdubWVudCBob3Jpem9udGFsPSJsZWZ0IiB2ZXJ0aWNhbD0iY2VudGVyIiB3cmFwVGV4dD0iMSIvPjwveGY+PHhmIG51bUZtdElkPSIwIiBmb250SWQ9IjYiIGZpbGxJZD0iNSIgYm9yZGVySWQ9IjIiIHhmSWQ9IjAiIGFwcGx5Rm9udD0iMSIgYXBwbHlGaWxsPSIxIiBhcHBseUJvcmRlcj0iMSIgYXBwbHlBbGlnbm1lbnQ9IjEiPjxhbGlnbm1lbnQgaG9yaXpvbnRhbD0ibGVmdCIgdmVydGljYWw9ImNlbnRlciIgd3JhcFRleHQ9IjEiLz48L3hmPjx4ZiBudW1GbXRJZD0iMCIgZm9udElkPSI1IiBmaWxsSWQ9IjYiIGJvcmRlcklkPSIyIiB4ZklkPSIwIiBhcHBseUZvbnQ9IjEiIGFwcGx5RmlsbD0iMSIgYXBwbHlCb3JkZXI9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9ImxlZnQiIHZlcnRpY2FsPSJjZW50ZXIiIHdyYXBUZXh0PSIxIi8+PC94Zj48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iNyIgZmlsbElkPSI2IiBib3JkZXJJZD0iMiIgeGZJZD0iMCIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5Qm9yZGVyPSIxIiBhcHBseUFsaWdubWVudD0iMSI+PGFsaWdubWVudCBob3Jpem9udGFsPSJsZWZ0IiB2ZXJ0aWNhbD0iY2VudGVyIiB3cmFwVGV4dD0iMSIvPjwveGY+PHhmIG51bUZtdElkPSIwIiBmb250SWQ9IjYiIGZpbGxJZD0iNiIgYm9yZGVySWQ9IjIiIHhmSWQ9IjAiIGFwcGx5Rm9udD0iMSIgYXBwbHlGaWxsPSIxIiBhcHBseUJvcmRlcj0iMSIgYXBwbHlBbGlnbm1lbnQ9IjEiPjxhbGlnbm1lbnQgaG9yaXpvbnRhbD0ibGVmdCIgdmVydGljYWw9ImNlbnRlciIgd3JhcFRleHQ9IjEiLz48L3hmPjx4ZiBudW1GbXRJZD0iMCIgZm9udElkPSI1IiBmaWxsSWQ9IjciIGJvcmRlcklkPSIyIiB4ZklkPSIwIiBhcHBseUZvbnQ9IjEiIGFwcGx5RmlsbD0iMSIgYXBwbHlCb3JkZXI9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9ImxlZnQiIHZlcnRpY2FsPSJjZW50ZXIiIHdyYXBUZXh0PSIxIi8+PC94Zj48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iOCIgZmlsbElkPSI3IiBib3JkZXJJZD0iMiIgeGZJZD0iMCIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5Qm9yZGVyPSIxIiBhcHBseUFsaWdubWVudD0iMSI+PGFsaWdubWVudCBob3Jpem9udGFsPSJsZWZ0IiB2ZXJ0aWNhbD0iY2VudGVyIiB3cmFwVGV4dD0iMSIvPjwveGY+PHhmIG51bUZtdElkPSIwIiBmb250SWQ9IjkiIGZpbGxJZD0iMCIgYm9yZGVySWQ9IjAiIHhmSWQ9IjAiIGFwcGx5Rm9udD0iMSIgYXBwbHlBbGlnbm1lbnQ9IjEiPjxhbGlnbm1lbnQgdmVydGljYWw9ImNlbnRlciIvPjwveGY+PHhmIG51bUZtdElkPSIxNjQiIGZvbnRJZD0iMTAiIGZpbGxJZD0iMCIgYm9yZGVySWQ9IjAiIHhmSWQ9IjAiIGFwcGx5TnVtYmVyRm9ybWF0PSIxIiBhcHBseUZvbnQ9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9InJpZ2h0IiB2ZXJ0aWNhbD0iY2VudGVyIi8+PC94Zj48eGYgbnVtRm10SWQ9IjE2NCIgZm9udElkPSIxMSIgZmlsbElkPSI1IiBib3JkZXJJZD0iMCIgeGZJZD0iMCIgYXBwbHlOdW1iZXJGb3JtYXQ9IjEiIGFwcGx5Rm9udD0iMSIgYXBwbHlGaWxsPSIxIiBhcHBseUFsaWdubWVudD0iMSI+PGFsaWdubWVudCBob3Jpem9udGFsPSJyaWdodCIgdmVydGljYWw9ImNlbnRlciIvPjwveGY+PHhmIG51bUZtdElkPSIxNjQiIGZvbnRJZD0iOCIgZmlsbElkPSI3IiBib3JkZXJJZD0iMiIgeGZJZD0iMCIgYXBwbHlOdW1iZXJGb3JtYXQ9IjEiIGFwcGx5Rm9udD0iMSIgYXBwbHlGaWxsPSIxIiBhcHBseUJvcmRlcj0iMSIgYXBwbHlBbGlnbm1lbnQ9IjEiPjxhbGlnbm1lbnQgaG9yaXpvbnRhbD0icmlnaHQiIHZlcnRpY2FsPSJjZW50ZXIiLz48L3hmPjx4ZiBudW1GbXRJZD0iMTY0IiBmb250SWQ9IjEyIiBmaWxsSWQ9IjYiIGJvcmRlcklkPSIwIiB4ZklkPSIwIiBhcHBseU51bWJlckZvcm1hdD0iMSIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IGhvcml6b250YWw9InJpZ2h0IiB2ZXJ0aWNhbD0iY2VudGVyIi8+PC94Zj48eGYgbnVtRm10SWQ9IjAiIGZvbnRJZD0iNCIgZmlsbElkPSI0IiBib3JkZXJJZD0iMCIgeGZJZD0iMCIgYXBwbHlGb250PSIxIiBhcHBseUZpbGw9IjEiIGFwcGx5QWxpZ25tZW50PSIxIj48YWxpZ25tZW50IHZlcnRpY2FsPSJjZW50ZXIiLz48L3hmPjwvY2VsbFhmcz48Y2VsbFN0eWxlcyBjb3VudD0iMSI+PGNlbGxTdHlsZSBuYW1lPSJOb3JtYWwiIHhmSWQ9IjAiIGJ1aWx0aW5JZD0iMCIvPjwvY2VsbFN0eWxlcz48ZHhmcyBjb3VudD0iMCIvPjx0YWJsZVN0eWxlcyBjb3VudD0iMCIgZGVmYXVsdFRhYmxlU3R5bGU9IlRhYmxlU3R5bGVNZWRpdW05IiBkZWZhdWx0UGl2b3RTdHlsZT0iUGl2b3RTdHlsZUxpZ2h0MTYiLz48L3N0eWxlU2hlZXQ+",TH_B64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8YTp0aGVtZSB4bWxuczphPSJodHRwOi8vc2NoZW1hcy5vcGVueG1sZm9ybWF0cy5vcmcvZHJhd2luZ21sLzIwMDYvbWFpbiIgbmFtZT0iT2ZmaWNlIFRoZW1lIj48YTp0aGVtZUVsZW1lbnRzPjxhOmNsclNjaGVtZSBuYW1lPSJPZmZpY2UiPjxhOmRrMT48YTpzeXNDbHIgdmFsPSJ3aW5kb3dUZXh0IiBsYXN0Q2xyPSIwMDAwMDAiLz48L2E6ZGsxPjxhOmx0MT48YTpzeXNDbHIgdmFsPSJ3aW5kb3ciIGxhc3RDbHI9IkZGRkZGRiIvPjwvYTpsdDE+PGE6ZGsyPjxhOnNyZ2JDbHIgdmFsPSIxRjQ5N0QiLz48L2E6ZGsyPjxhOmx0Mj48YTpzcmdiQ2xyIHZhbD0iRUVFQ0UxIi8+PC9hOmx0Mj48YTphY2NlbnQxPjxhOnNyZ2JDbHIgdmFsPSI0RjgxQkQiLz48L2E6YWNjZW50MT48YTphY2NlbnQyPjxhOnNyZ2JDbHIgdmFsPSJDMDUwNEQiLz48L2E6YWNjZW50Mj48YTphY2NlbnQzPjxhOnNyZ2JDbHIgdmFsPSI5QkJCNTkiLz48L2E6YWNjZW50Mz48YTphY2NlbnQ0PjxhOnNyZ2JDbHIgdmFsPSI4MDY0QTIiLz48L2E6YWNjZW50ND48YTphY2NlbnQ1PjxhOnNyZ2JDbHIgdmFsPSI0QkFDQzYiLz48L2E6YWNjZW50NT48YTphY2NlbnQ2PjxhOnNyZ2JDbHIgdmFsPSJGNzk2NDYiLz48L2E6YWNjZW50Nj48YTpobGluaz48YTpzcmdiQ2xyIHZhbD0iMDAwMEZGIi8+PC9hOmhsaW5rPjxhOmZvbEhsaW5rPjxhOnNyZ2JDbHIgdmFsPSI4MDAwODAiLz48L2E6Zm9sSGxpbms+PC9hOmNsclNjaGVtZT48YTpmb250U2NoZW1lIG5hbWU9Ik9mZmljZSI+PGE6bWFqb3JGb250PjxhOmxhdGluIHR5cGVmYWNlPSJDYW1icmlhIi8+PGE6ZWEgdHlwZWZhY2U9IiIvPjxhOmNzIHR5cGVmYWNlPSIiLz48YTpmb250IHNjcmlwdD0iSnBhbiIgdHlwZWZhY2U9Iu+8re+8syDvvLDjgrTjgrfjg4Pjgq8iLz48YTpmb250IHNjcmlwdD0iSGFuZyIgdHlwZWZhY2U9IuunkeydgCDqs6DrlJUiLz48YTpmb250IHNjcmlwdD0iSGFucyIgdHlwZWZhY2U9IuWui+S9kyIvPjxhOmZvbnQgc2NyaXB0PSJIYW50IiB0eXBlZmFjZT0i5paw57Sw5piO6auUIi8+PGE6Zm9udCBzY3JpcHQ9IkFyYWIiIHR5cGVmYWNlPSJUaW1lcyBOZXcgUm9tYW4iLz48YTpmb250IHNjcmlwdD0iSGViciIgdHlwZWZhY2U9IlRpbWVzIE5ldyBSb21hbiIvPjxhOmZvbnQgc2NyaXB0PSJUaGFpIiB0eXBlZmFjZT0iVGFob21hIi8+PGE6Zm9udCBzY3JpcHQ9IkV0aGkiIHR5cGVmYWNlPSJOeWFsYSIvPjxhOmZvbnQgc2NyaXB0PSJCZW5nIiB0eXBlZmFjZT0iVnJpbmRhIi8+PGE6Zm9udCBzY3JpcHQ9Ikd1anIiIHR5cGVmYWNlPSJTaHJ1dGkiLz48YTpmb250IHNjcmlwdD0iS2htciIgdHlwZWZhY2U9Ik1vb2xCb3JhbiIvPjxhOmZvbnQgc2NyaXB0PSJLbmRhIiB0eXBlZmFjZT0iVHVuZ2EiLz48YTpmb250IHNjcmlwdD0iR3VydSIgdHlwZWZhY2U9IlJhYXZpIi8+PGE6Zm9udCBzY3JpcHQ9IkNhbnMiIHR5cGVmYWNlPSJFdXBoZW1pYSIvPjxhOmZvbnQgc2NyaXB0PSJDaGVyIiB0eXBlZmFjZT0iUGxhbnRhZ2VuZXQgQ2hlcm9rZWUiLz48YTpmb250IHNjcmlwdD0iWWlpaSIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZaSBCYWl0aSIvPjxhOmZvbnQgc2NyaXB0PSJUaWJ0IiB0eXBlZmFjZT0iTWljcm9zb2Z0IEhpbWFsYXlhIi8+PGE6Zm9udCBzY3JpcHQ9IlRoYWEiIHR5cGVmYWNlPSJNViBCb2xpIi8+PGE6Zm9udCBzY3JpcHQ9IkRldmEiIHR5cGVmYWNlPSJNYW5nYWwiLz48YTpmb250IHNjcmlwdD0iVGVsdSIgdHlwZWZhY2U9IkdhdXRhbWkiLz48YTpmb250IHNjcmlwdD0iVGFtbCIgdHlwZWZhY2U9IkxhdGhhIi8+PGE6Zm9udCBzY3JpcHQ9IlN5cmMiIHR5cGVmYWNlPSJFc3RyYW5nZWxvIEVkZXNzYSIvPjxhOmZvbnQgc2NyaXB0PSJPcnlhIiB0eXBlZmFjZT0iS2FsaW5nYSIvPjxhOmZvbnQgc2NyaXB0PSJNbHltIiB0eXBlZmFjZT0iS2FydGlrYSIvPjxhOmZvbnQgc2NyaXB0PSJMYW9vIiB0eXBlZmFjZT0iRG9rQ2hhbXBhIi8+PGE6Zm9udCBzY3JpcHQ9IlNpbmgiIHR5cGVmYWNlPSJJc2tvb2xhIFBvdGEiLz48YTpmb250IHNjcmlwdD0iTW9uZyIgdHlwZWZhY2U9Ik1vbmdvbGlhbiBCYWl0aSIvPjxhOmZvbnQgc2NyaXB0PSJWaWV0IiB0eXBlZmFjZT0iVGltZXMgTmV3IFJvbWFuIi8+PGE6Zm9udCBzY3JpcHQ9IlVpZ2giIHR5cGVmYWNlPSJNaWNyb3NvZnQgVWlnaHVyIi8+PC9hOm1ham9yRm9udD48YTptaW5vckZvbnQ+PGE6bGF0aW4gdHlwZWZhY2U9IkNhbGlicmkiLz48YTplYSB0eXBlZmFjZT0iIi8+PGE6Y3MgdHlwZWZhY2U9IiIvPjxhOmZvbnQgc2NyaXB0PSJKcGFuIiB0eXBlZmFjZT0i77yt77yzIO+8sOOCtOOCt+ODg+OCryIvPjxhOmZvbnQgc2NyaXB0PSJIYW5nIiB0eXBlZmFjZT0i66eR7J2AIOqzoOuUlSIvPjxhOmZvbnQgc2NyaXB0PSJIYW5zIiB0eXBlZmFjZT0i5a6L5L2TIi8+PGE6Zm9udCBzY3JpcHQ9IkhhbnQiIHR5cGVmYWNlPSLmlrDntLDmmI7pq5QiLz48YTpmb250IHNjcmlwdD0iQXJhYiIgdHlwZWZhY2U9IkFyaWFsIi8+PGE6Zm9udCBzY3JpcHQ9IkhlYnIiIHR5cGVmYWNlPSJBcmlhbCIvPjxhOmZvbnQgc2NyaXB0PSJUaGFpIiB0eXBlZmFjZT0iVGFob21hIi8+PGE6Zm9udCBzY3JpcHQ9IkV0aGkiIHR5cGVmYWNlPSJOeWFsYSIvPjxhOmZvbnQgc2NyaXB0PSJCZW5nIiB0eXBlZmFjZT0iVnJpbmRhIi8+PGE6Zm9udCBzY3JpcHQ9Ikd1anIiIHR5cGVmYWNlPSJTaHJ1dGkiLz48YTpmb250IHNjcmlwdD0iS2htciIgdHlwZWZhY2U9IkRhdW5QZW5oIi8+PGE6Zm9udCBzY3JpcHQ9IktuZGEiIHR5cGVmYWNlPSJUdW5nYSIvPjxhOmZvbnQgc2NyaXB0PSJHdXJ1IiB0eXBlZmFjZT0iUmFhdmkiLz48YTpmb250IHNjcmlwdD0iQ2FucyIgdHlwZWZhY2U9IkV1cGhlbWlhIi8+PGE6Zm9udCBzY3JpcHQ9IkNoZXIiIHR5cGVmYWNlPSJQbGFudGFnZW5ldCBDaGVyb2tlZSIvPjxhOmZvbnQgc2NyaXB0PSJZaWlpIiB0eXBlZmFjZT0iTWljcm9zb2Z0IFlpIEJhaXRpIi8+PGE6Zm9udCBzY3JpcHQ9IlRpYnQiIHR5cGVmYWNlPSJNaWNyb3NvZnQgSGltYWxheWEiLz48YTpmb250IHNjcmlwdD0iVGhhYSIgdHlwZWZhY2U9Ik1WIEJvbGkiLz48YTpmb250IHNjcmlwdD0iRGV2YSIgdHlwZWZhY2U9Ik1hbmdhbCIvPjxhOmZvbnQgc2NyaXB0PSJUZWx1IiB0eXBlZmFjZT0iR2F1dGFtaSIvPjxhOmZvbnQgc2NyaXB0PSJUYW1sIiB0eXBlZmFjZT0iTGF0aGEiLz48YTpmb250IHNjcmlwdD0iU3lyYyIgdHlwZWZhY2U9IkVzdHJhbmdlbG8gRWRlc3NhIi8+PGE6Zm9udCBzY3JpcHQ9Ik9yeWEiIHR5cGVmYWNlPSJLYWxpbmdhIi8+PGE6Zm9udCBzY3JpcHQ9Ik1seW0iIHR5cGVmYWNlPSJLYXJ0aWthIi8+PGE6Zm9udCBzY3JpcHQ9Ikxhb28iIHR5cGVmYWNlPSJEb2tDaGFtcGEiLz48YTpmb250IHNjcmlwdD0iU2luaCIgdHlwZWZhY2U9Iklza29vbGEgUG90YSIvPjxhOmZvbnQgc2NyaXB0PSJNb25nIiB0eXBlZmFjZT0iTW9uZ29saWFuIEJhaXRpIi8+PGE6Zm9udCBzY3JpcHQ9IlZpZXQiIHR5cGVmYWNlPSJBcmlhbCIvPjxhOmZvbnQgc2NyaXB0PSJVaWdoIiB0eXBlZmFjZT0iTWljcm9zb2Z0IFVpZ2h1ciIvPjwvYTptaW5vckZvbnQ+PC9hOmZvbnRTY2hlbWU+PGE6Zm10U2NoZW1lIG5hbWU9Ik9mZmljZSI+PGE6ZmlsbFN0eWxlTHN0PjxhOnNvbGlkRmlsbD48YTpzY2hlbWVDbHIgdmFsPSJwaENsciIvPjwvYTpzb2xpZEZpbGw+PGE6Z3JhZEZpbGwgcm90V2l0aFNoYXBlPSIxIj48YTpnc0xzdD48YTpncyBwb3M9IjAiPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIj48YTp0aW50IHZhbD0iNTAwMDAiLz48YTpzYXRNb2QgdmFsPSIzMDAwMDAiLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48YTpncyBwb3M9IjM1MDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjM3MDAwIi8+PGE6c2F0TW9kIHZhbD0iMzAwMDAwIi8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PGE6Z3MgcG9zPSIxMDAwMDAiPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIj48YTp0aW50IHZhbD0iMTUwMDAiLz48YTpzYXRNb2QgdmFsPSIzNTAwMDAiLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48L2E6Z3NMc3Q+PGE6bGluIGFuZz0iMTYyMDAwMDAiIHNjYWxlZD0iMSIvPjwvYTpncmFkRmlsbD48YTpncmFkRmlsbCByb3RXaXRoU2hhcGU9IjEiPjxhOmdzTHN0PjxhOmdzIHBvcz0iMCI+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnNoYWRlIHZhbD0iNTEwMDAiLz48YTpzYXRNb2QgdmFsPSIxMzAwMDAiLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48YTpncyBwb3M9IjgwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6c2hhZGUgdmFsPSI5MzAwMCIvPjxhOnNhdE1vZCB2YWw9IjEzMDAwMCIvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjxhOmdzIHBvcz0iMTAwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6c2hhZGUgdmFsPSI5NDAwMCIvPjxhOnNhdE1vZCB2YWw9IjEzNTAwMCIvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjwvYTpnc0xzdD48YTpsaW4gYW5nPSIxNjIwMDAwMCIgc2NhbGVkPSIwIi8+PC9hOmdyYWRGaWxsPjwvYTpmaWxsU3R5bGVMc3Q+PGE6bG5TdHlsZUxzdD48YTpsbiB3PSI5NTI1IiBjYXA9ImZsYXQiIGNtcGQ9InNuZyIgYWxnbj0iY3RyIj48YTpzb2xpZEZpbGw+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnNoYWRlIHZhbD0iOTUwMDAiLz48YTpzYXRNb2QgdmFsPSIxMDUwMDAiLz48L2E6c2NoZW1lQ2xyPjwvYTpzb2xpZEZpbGw+PGE6cHJzdERhc2ggdmFsPSJzb2xpZCIvPjwvYTpsbj48YTpsbiB3PSIyNTQwMCIgY2FwPSJmbGF0IiBjbXBkPSJzbmciIGFsZ249ImN0ciI+PGE6c29saWRGaWxsPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIi8+PC9hOnNvbGlkRmlsbD48YTpwcnN0RGFzaCB2YWw9InNvbGlkIi8+PC9hOmxuPjxhOmxuIHc9IjM4MTAwIiBjYXA9ImZsYXQiIGNtcGQ9InNuZyIgYWxnbj0iY3RyIj48YTpzb2xpZEZpbGw+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiLz48L2E6c29saWRGaWxsPjxhOnByc3REYXNoIHZhbD0ic29saWQiLz48L2E6bG4+PC9hOmxuU3R5bGVMc3Q+PGE6ZWZmZWN0U3R5bGVMc3Q+PGE6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0THN0PjxhOm91dGVyU2hkdyBibHVyUmFkPSI0MDAwMCIgZGlzdD0iMjAwMDAiIGRpcj0iNTQwMDAwMCIgcm90V2l0aFNoYXBlPSIwIj48YTpzcmdiQ2xyIHZhbD0iMDAwMDAwIj48YTphbHBoYSB2YWw9IjM4MDAwIi8+PC9hOnNyZ2JDbHI+PC9hOm91dGVyU2hkdz48L2E6ZWZmZWN0THN0PjwvYTplZmZlY3RTdHlsZT48YTplZmZlY3RTdHlsZT48YTplZmZlY3RMc3Q+PGE6b3V0ZXJTaGR3IGJsdXJSYWQ9IjQwMDAwIiBkaXN0PSIyMzAwMCIgZGlyPSI1NDAwMDAwIiByb3RXaXRoU2hhcGU9IjAiPjxhOnNyZ2JDbHIgdmFsPSIwMDAwMDAiPjxhOmFscGhhIHZhbD0iMzUwMDAiLz48L2E6c3JnYkNscj48L2E6b3V0ZXJTaGR3PjwvYTplZmZlY3RMc3Q+PC9hOmVmZmVjdFN0eWxlPjxhOmVmZmVjdFN0eWxlPjxhOmVmZmVjdExzdD48YTpvdXRlclNoZHcgYmx1clJhZD0iNDAwMDAiIGRpc3Q9IjIzMDAwIiBkaXI9IjU0MDAwMDAiIHJvdFdpdGhTaGFwZT0iMCI+PGE6c3JnYkNsciB2YWw9IjAwMDAwMCI+PGE6YWxwaGEgdmFsPSIzNTAwMCIvPjwvYTpzcmdiQ2xyPjwvYTpvdXRlclNoZHc+PC9hOmVmZmVjdExzdD48YTpzY2VuZTNkPjxhOmNhbWVyYSBwcnN0PSJvcnRob2dyYXBoaWNGcm9udCI+PGE6cm90IGxhdD0iMCIgbG9uPSIwIiByZXY9IjAiLz48L2E6Y2FtZXJhPjxhOmxpZ2h0UmlnIHJpZz0idGhyZWVQdCIgZGlyPSJ0Ij48YTpyb3QgbGF0PSIwIiBsb249IjAiIHJldj0iMTIwMDAwMCIvPjwvYTpsaWdodFJpZz48L2E6c2NlbmUzZD48YTpzcDNkPjxhOmJldmVsVCB3PSI2MzUwMCIgaD0iMjU0MDAiLz48L2E6c3AzZD48L2E6ZWZmZWN0U3R5bGU+PC9hOmVmZmVjdFN0eWxlTHN0PjxhOmJnRmlsbFN0eWxlTHN0PjxhOnNvbGlkRmlsbD48YTpzY2hlbWVDbHIgdmFsPSJwaENsciIvPjwvYTpzb2xpZEZpbGw+PGE6Z3JhZEZpbGwgcm90V2l0aFNoYXBlPSIxIj48YTpnc0xzdD48YTpncyBwb3M9IjAiPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIj48YTp0aW50IHZhbD0iNDAwMDAiLz48YTpzYXRNb2QgdmFsPSIzNTAwMDAiLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48YTpncyBwb3M9IjQwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjQ1MDAwIi8+PGE6c2hhZGUgdmFsPSI5OTAwMCIvPjxhOnNhdE1vZCB2YWw9IjM1MDAwMCIvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjxhOmdzIHBvcz0iMTAwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6c2hhZGUgdmFsPSIyMDAwMCIvPjxhOnNhdE1vZCB2YWw9IjI1NTAwMCIvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjwvYTpnc0xzdD48YTpwYXRoIHBhdGg9ImNpcmNsZSI+PGE6ZmlsbFRvUmVjdCBsPSI1MDAwMCIgdD0iLTgwMDAwIiByPSI1MDAwMCIgYj0iMTgwMDAwIi8+PC9hOnBhdGg+PC9hOmdyYWRGaWxsPjxhOmdyYWRGaWxsIHJvdFdpdGhTaGFwZT0iMSI+PGE6Z3NMc3Q+PGE6Z3MgcG9zPSIwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjgwMDAwIi8+PGE6c2F0TW9kIHZhbD0iMzAwMDAwIi8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PGE6Z3MgcG9zPSIxMDAwMDAiPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIj48YTpzaGFkZSB2YWw9IjMwMDAwIi8+PGE6c2F0TW9kIHZhbD0iMjAwMDAwIi8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PC9hOmdzTHN0PjxhOnBhdGggcGF0aD0iY2lyY2xlIj48YTpmaWxsVG9SZWN0IGw9IjUwMDAwIiB0PSI1MDAwMCIgcj0iNTAwMDAiIGI9IjUwMDAwIi8+PC9hOnBhdGg+PC9hOmdyYWRGaWxsPjwvYTpiZ0ZpbGxTdHlsZUxzdD48L2E6Zm10U2NoZW1lPjwvYTp0aGVtZUVsZW1lbnRzPjxhOm9iamVjdERlZmF1bHRzLz48YTpleHRyYUNsclNjaGVtZUxzdC8+PC9hOnRoZW1lPg==",CORE_B64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8Y3A6Y29yZVByb3BlcnRpZXMgeG1sbnM6Y3A9Imh0dHA6Ly9zY2hlbWFzLm9wZW54bWxmb3JtYXRzLm9yZy9wYWNrYWdlLzIwMDYvbWV0YWRhdGEvY29yZS1wcm9wZXJ0aWVzIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOmRjdGVybXM9Imh0dHA6Ly9wdXJsLm9yZy9kYy90ZXJtcy8iIHhtbG5zOmRjbWl0eXBlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvIiB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIj48ZGM6Y3JlYXRvcj48L2RjOmNyZWF0b3I+PGNwOmxhc3RNb2RpZmllZEJ5PjwvY3A6bGFzdE1vZGlmaWVkQnk+PGRjdGVybXM6Y3JlYXRlZCB4c2k6dHlwZT0iZGN0ZXJtczpXM0NEVEYiPjIwMjYtMTEtMTJUMDk6MDU6MjlaPC9kY3Rlcm1zOmNyZWF0ZWQ+PGRjdGVybXM6bW9kaWZpZWQgeHNpOnR5cGU9ImRjdGVybXM6VzNDRFRGIj4yMDI2LTExLTEyVDA5OjA1OjI5WjwvZGN0ZXJtczptb2RpZmllZD48L2NwOmNvcmVQcm9wZXJ0aWVzPg==",APP_B64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8UHJvcGVydGllcyB4bWxucz0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL29mZmljZURvY3VtZW50LzIwMDYvZXh0ZW5kZWQtcHJvcGVydGllcyIgeG1sbnM6dnQ9Imh0dHA6Ly9zY2hlbWFzLm9wZW54bWxmb3JtYXRzLm9yZy9vZmZpY2VEb2N1bWVudC8yMDA2L2RvY1Byb3BzVlR5cGVzIj48QXBwbGljYXRpb24+TWljcm9zb2Z0IEV4Y2VsPC9BcHBsaWNhdGlvbj48RG9jU2VjdXJpdHk+MDwvRG9jU2VjdXJpdHk+PFNjYWxlQ3JvcD5mYWxzZTwvU2NhbGVDcm9wPjxIZWFkaW5nUGFpcnM+PHZ0OnZlY3RvciBzaXplPSI0IiBiYXNlVHlwZT0idmFyaWFudCI+PHZ0OnZhcmlhbnQ+PHZ0Omxwc3RyPldvcmtzaGVldHM8L3Z0Omxwc3RyPjwvdnQ6dmFyaWFudD48dnQ6dmFyaWFudD48dnQ6aTQ+MjwvdnQ6aTQ+PC92dDp2YXJpYW50Pjx2dDp2YXJpYW50Pjx2dDpscHN0cj5OYW1lZCBSYW5nZXM8L3Z0Omxwc3RyPjwvdnQ6dmFyaWFudD48dnQ6dmFyaWFudD48dnQ6aTQ+MTwvdnQ6aTQ+PC92dDp2YXJpYW50PjwvdnQ6dmVjdG9yPjwvSGVhZGluZ1BhaXJzPjxUaXRsZXNPZlBhcnRzPjx2dDp2ZWN0b3Igc2l6ZT0iMyIgYmFzZVR5cGU9Imxwc3RyIj48dnQ6bHBzdHI+WW91ciBsaXN0PC92dDpscHN0cj48dnQ6bHBzdHI+U3VtbWFyeTwvdnQ6bHBzdHI+PHZ0Omxwc3RyPidZb3VyIGxpc3QnIVByaW50X1RpdGxlczwvdnQ6bHBzdHI+PC92dDp2ZWN0b3I+PC9UaXRsZXNPZlBhcnRzPjxDb21wYW55PjwvQ29tcGFueT48TGlua3NVcFRvRGF0ZT5mYWxzZTwvTGlua3NVcFRvRGF0ZT48U2hhcmVkRG9jPmZhbHNlPC9TaGFyZWREb2M+PEh5cGVybGlua3NDaGFuZ2VkPmZhbHNlPC9IeXBlcmxpbmtzQ2hhbmdlZD48QXBwVmVyc2lvbj4xMi4wMDAwPC9BcHBWZXJzaW9uPjwvUHJvcGVydGllcz4=";
+ function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+ function nf(n){return Number(n).toLocaleString("en-US")}
+ /* ---------- mock services: invented Do Not Mail list and returned mail list ---------- */
+ var DNM=window.YL_DNM=[
+  {a:"101 Main Street",c:"Austin",s:"TX",z:"78701"},{a:"105 MAIN ST.",c:"austin",s:"Texas",z:"78705"},{a:"110 Main St Apt 4",c:"Austin",s:"TX",z:"78710"},
+  {a:"103 Main St",c:"Dallas",s:"TX",z:"75201"},
+  {a:"957 Cedar Ct",c:"Irvine",s:"CA",z:"92614"},{a:"2379 Elm Street",c:"Irvine",s:"CA",z:"92614"},{a:"14817 Le Grande Drive",c:"Addison",s:"TX",z:"75001"},{a:"4410 Oak Avenue",c:"Garden Grove",s:"California",z:"92840"}];
+ var RET=window.YL_RETURNED=[
+  {a:"108 Main St",c:"Austin",s:"TX",z:"78708"},{a:"6710 Maple Lane",c:"Fullerton",s:"CA",z:"92832"},{a:"2210 Elm Street",c:"Dallas",s:"TX",z:"75201"}];
+ function dnmDown(){try{if(/[?&#]dnm=down/.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmDown")==="1"}catch(e){return false}}
+ /* ---------- address normalizing ---------- */
+ var SUF={STREET:"ST",STR:"ST",AVENUE:"AVE",AV:"AVE",ROAD:"RD",DRIVE:"DR",DRV:"DR",LANE:"LN",COURT:"CT",BOULEVARD:"BLVD",CIRCLE:"CIR",PLACE:"PL",TERRACE:"TER",HIGHWAY:"HWY",PARKWAY:"PKWY",TRAIL:"TRL",WAY:"WAY",SQUARE:"SQ",NORTH:"N",SOUTH:"S",EAST:"E",WEST:"W",NORTHEAST:"NE",NORTHWEST:"NW",SOUTHEAST:"SE",SOUTHWEST:"SW"};
+ var UNIT=/\b(APT|APARTMENT|UNIT|STE|SUITE|BLDG|BUILDING|FL|FLOOR|RM|ROOM|LOT|SPC|SPACE)\b.*$|#.*$/;
+ var STATES={ALABAMA:"AL",ALASKA:"AK",ARIZONA:"AZ",ARKANSAS:"AR",CALIFORNIA:"CA",COLORADO:"CO",CONNECTICUT:"CT",DELAWARE:"DE",FLORIDA:"FL",GEORGIA:"GA",HAWAII:"HI",IDAHO:"ID",ILLINOIS:"IL",INDIANA:"IN",IOWA:"IA",KANSAS:"KS",KENTUCKY:"KY",LOUISIANA:"LA",MAINE:"ME",MARYLAND:"MD",MASSACHUSETTS:"MA",MICHIGAN:"MI",MINNESOTA:"MN",MISSISSIPPI:"MS",MISSOURI:"MO",MONTANA:"MT",NEBRASKA:"NE",NEVADA:"NV","NEW HAMPSHIRE":"NH","NEW JERSEY":"NJ","NEW MEXICO":"NM","NEW YORK":"NY","NORTH CAROLINA":"NC","NORTH DAKOTA":"ND",OHIO:"OH",OKLAHOMA:"OK",OREGON:"OR",PENNSYLVANIA:"PA","RHODE ISLAND":"RI","SOUTH CAROLINA":"SC","SOUTH DAKOTA":"SD",TENNESSEE:"TN",TEXAS:"TX",UTAH:"UT",VERMONT:"VT",VIRGINIA:"VA",WASHINGTON:"WA","WEST VIRGINIA":"WV",WISCONSIN:"WI",WYOMING:"WY"};
+ function clean(s){return String(s==null?"":s).replace(/[\u200B-\u200D\uFEFF\u00A0]/g," ").replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/\s+/g," ").trim()}
+ function hidden(s){return /[\u200B-\u200D\uFEFF\u2018\u2019\u201C\u201D]/.test(String(s==null?"":s))}
+ function streetKey(a){var t=clean(a).toUpperCase().replace(/[.,]/g," ").replace(UNIT,"").replace(/[^A-Z0-9 ]/g," ").replace(/\s+/g," ").trim();
+  return t.split(" ").map(function(w){return SUF[w]||w}).join(" ")}
+ function stdAddr(a){return streetKey(a)}
+ function stState(s){var t=clean(s).toUpperCase().replace(/\./g,"");return STATES[t]||t}
+ function cityKey(c){return clean(c).toUpperCase().replace(/[^A-Z0-9 ]/g," ").replace(/\bSAINT\b/g,"ST").replace(/\bMOUNT\b/g,"MT").replace(/\s+/g," ").trim()}
+ function zip5(z){var m=/\d{5}/.exec(String(z||"").replace(/\D+/g," ").trim().length?String(z):"");var d=String(z==null?"":z).replace(/\D/g,"");if(d.length===4)d="0"+d;return d.slice(0,5)}
+ function fullKey(a,c,s,z){var st=streetKey(a);if(!st)return "";return st+"|"+zip5(z)+"|"+cityKey(c)}
+ function sameAddr(rec,list){ /* streets match only when ZIP and city also match: same street in a different city/ZIP is not a match */
+  var sk=streetKey(rec.a);if(!sk)return false;var rz=zip5(rec.z),rc=cityKey(rec.c);
+  for(var i=0;i<list.length;i++){var e=list[i];if(streetKey(e.a)!==sk)continue;var ez=zip5(e.z),ec=cityKey(e.c);
+   if(rz&&ez){if(rz!==ez)continue}
+   if(rc&&ec){if(rc!==ec)continue}
+   if(!(rz&&ez)&&!(rc&&ec))continue;
+   return true}
+  return false}
+ var DNMIDX=null,RETIDX=null;
+ function idx(list){var m={};list.forEach(function(e){var k=streetKey(e.a)+"|"+zip5(e.z)+"|"+cityKey(e.c);m[k]=1});return m}
+ function listHit(rec,list,cache){return sameAddr(rec,list)}
+ /* ---------- sample list when the customer uses the example file ---------- */
+ var SCOLS=["Owner First Name","Owner Last Name","Owner 2 Full Name","Mail Address","Mail City","Mail State","Mail Zip","Situs Address","SITUS CITY","Situs State","Situs Zip","Phone 1","Equity %"];
+ function sampleRows(){var seed=7,rnd=function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff};
+  var fn=["Robert","Jennifer","David","Susan","Lisa","William","Maria","James","Linda","Michael"],ln=["Lopez","Johnson","Lee","Santos","Brown","Garcia","Miller","Davis","Nguyen","Clark"],st=["Cedar Court","Elm Street","Oak Avenue","Maple Lane","Lakeview Drive","Pine Road","Birch Boulevard","Walnut Way"],city=[["Irvine","92614"],["Tustin","92780"],["Garden Grove","92840"],["Fullerton","92832"],["Orange","92866"]];
+  var out=[];for(var i=0;i<600;i++){var c=city[Math.floor(rnd()*city.length)],a=(100+Math.floor(rnd()*9800))+" "+st[Math.floor(rnd()*st.length)];
+   out.push([fn[Math.floor(rnd()*10)],ln[Math.floor(rnd()*10)],"",a,c[0],"CA",c[1],a,c[0],"CA",c[1],"(714) 555-"+(1000+Math.floor(rnd()*8999)),String(20+Math.floor(rnd()*70))])}
+  out[11][3]="957 Cedar Court";out[11][4]="Irvine";out[11][6]="92614";
+  out[40][3]="2379 Elm St";out[40][4]="Irvine";out[40][6]="92614";out[40][5]="California";
+  out[77][3]="4410 Oak Ave";out[77][4]="Garden Grove";out[77][6]="92840";
+  out[90][3]="6710 Maple Lane";out[90][4]="Fullerton";out[90][6]="92832";
+  out[120][3]=out[5][3];out[120][4]=out[5][4];out[120][6]=out[5][6];
+  out[121][3]=out[6][3].replace(/Court/,"Ct").replace(/Street/,"St").replace(/Avenue/,"Ave");out[121][4]=out[6][4];out[121][6]=out[6][6];
+  out[122][3]=out[7][3].toUpperCase();out[122][4]=out[7][4];out[122][6]=out[7][6];
+  out[200][3]="2379 Elm Street";out[200][4]="Tustin";out[200][6]="92780"; /* same street name and number, different city and ZIP: not a match */
+  out[201][3]="9016 Lakeview Drive \u201cRear\u201d";out[201][4]="Tustin";out[201][6]="92780";
+  return out}
+ /* ---------- evaluate a list ---------- */
+ var CACHE={};
+ function getCtx(W,COLS){var rows=window.WZ_ROWS&&window.WZ_ROWS.length?window.WZ_ROWS:null,cols=COLS,sample=false;
+  if(!rows){rows=sampleRows();cols=SCOLS.slice();sample=true}
+  return {rows:rows,cols:cols,sample:sample,m:W.m,name:window.WZ_FILE||(W.files&&W.files[0])||"YLHQ Sample List.csv",dup:(W.st&&W.st.lo&&W.st.lo.dup)||"mailing_property",tout:!!(W.st&&W.st.lo&&W.st.lo.tout)}}
+ function evaluate(ctx){
+  var key=JSON.stringify([ctx.rows.length,ctx.cols,ctx.m,ctx.dup,ctx.tout,ctx.sample,ctx.rows.length?ctx.rows[0]:0,ctx.rows.length?ctx.rows[ctx.rows.length-1]:0]);
+  if(CACHE.key===key)return CACHE.val;
+  var ci={};ctx.cols.forEach(function(c,i){ci[c]=i});
+  function col(k,row){var v=ctx.m[k];if(v==="=m")v=ctx.m[k.replace("property","mailing")];if(!v||v==="-"||ci[v]==null)return "";var x=row[ci[v]];return x==null?"":String(x)}
+  var res={total:ctx.rows.length,mailed:0,changed:0,rm:{dnm:0,ret:0,dup:0,spelled:0,und:0},recs:[],name:ctx.name,sample:ctx.sample,cols:ctx.cols,ctx:ctx};
+  var seen={},useP=ctx.dup==="property",useM=ctx.dup==="mailing";
+  var dnmList=DNM,retList=RET;
+  ctx.rows.forEach(function(row,i){
+   var rec={n:i+1,raw:row,fn:col("first_name",row),ln:col("last_name",row),pa:col("property_address",row),pc:col("property_city",row),ps:col("property_state",row),pz:col("property_zip",row),ma:col("mailing_address",row),mc:col("mailing_city",row),ms:col("mailing_state",row),mz:col("mailing_zip",row)};
+   var useMail=!!clean(rec.ma);
+   rec.ta=useMail?rec.ma:rec.pa;rec.tc=useMail?rec.mc:rec.pc;rec.ts=useMail?rec.ms:rec.ps;rec.tz=useMail?rec.mz:rec.pz;
+   var mailRec={a:rec.ma,c:rec.mc,s:rec.ms,z:rec.mz},propRec={a:rec.pa,c:rec.pc,s:rec.ps,z:rec.pz};
+   var out={status:"Will be mailed",why:"",yes:"Yes",same:""};
+   if(sameAddr(mailRec,dnmList)||sameAddr(propRec,dnmList)){out={status:"Removed",why:"On your Do Not Mail list. Not mailed.",yes:"No",same:"",k:"dnm"};res.rm.dnm++}
+   else if(sameAddr(mailRec,RET)||sameAddr(propRec,RET)){out={status:"Removed",why:"Mail came back before. Not mailed.",yes:"No",same:"",k:"ret"};res.rm.ret++}
+   else if(!ctx.tout){
+    var kM=fullKey(rec.ta,rec.tc,rec.ts,rec.tz),kP=fullKey(rec.pa,rec.pc,rec.ps,rec.pz);
+    var k=useP?(kP||kM):useM?(kM||kP):(kM+"||"+kP);if(!kM&&!kP)k="";
+    if(k){if(seen[k]){var f=seen[k];var raw1=clean(rec.ta+rec.tc+rec.tz).toLowerCase(),raw0=f.raw;
+      if(raw1===raw0){out={status:"Removed",why:"Same address as row "+f.n+", which is kept.",yes:"No",same:f.n,k:"dup"};res.rm.dup++}
+      else{out={status:"Removed",why:"Same address as row "+f.n+", written a different way. One copy is kept.",yes:"No",same:f.n,k:"spelled"};res.rm.spelled++}}
+     else seen[k]={n:rec.n,raw:clean(rec.ta+rec.tc+rec.tz).toLowerCase()}}
+   }
+   if(out.yes==="Yes"){
+    var why=[],a0=clean(rec.ta),a1=stdAddr(rec.ta);
+    var wordsDiff=a1&&a0.toUpperCase().replace(/[^A-Z0-9 ]/g," ").replace(/\s+/g," ").trim()!==a1;
+    var stFull=clean(rec.ts).length>2&&STATES[clean(rec.ts).toUpperCase()];
+    if(wordsDiff)why.push("Street words written the standard way");
+    if(stFull)why.push(clean(rec.ts)+" to "+STATES[clean(rec.ts).toUpperCase()]);
+    if(hidden(rec.ta)||hidden(rec.tc))why.push("Hidden characters or curly quotes taken out");
+    if(why.length){out.status="Changed";out.why=why.join("; ")+". Same address.";res.changed++}
+    res.mailed++}
+   rec.out=out;rec.mail={a:a1,c:cityKey(rec.tc),s:stState(rec.ts),z:zip5(rec.tz)};
+   res.recs.push(rec)});
+  res.removed=res.rm.dnm+res.rm.ret+res.rm.dup+res.rm.spelled+res.rm.und;
+  CACHE={key:key,val:res};return res}
+ /* ---------- CSV / XLSX ---------- */
+ var STD=["Row in your file","Result","Why","Will be mailed?","First name","Last name","Property address (as uploaded)","Property city","Property state","Property ZIP","Mailing address (as uploaded)","Mailing city","Mailing state","Mailing ZIP","Address we will mail","City we will mail","State we will mail","ZIP we will mail","Same as row"];
+ function usedCols(ctx){var u={};["first_name","last_name","property_address","property_city","property_state","property_zip","mailing_address","mailing_city","mailing_state","mailing_zip"].forEach(function(k){var v=ctx.m[k];if(k.indexOf("property")===0&&v==="=m")v=ctx.m[k.replace("property","mailing")];if(v&&v!=="-")u[v]=1});return u}
+ function table(res){var ctx=res.ctx,u=usedCols(ctx),extra=[],ci={};ctx.cols.forEach(function(c,i){ci[c]=i;if(!u[c])extra.push(c)});
+  var head=STD.concat(extra),data=res.recs.map(function(r){var o=r.out,m=r.mail,rm=o.yes==="No";
+   var base=[r.n,o.status,o.why,o.yes,r.fn,r.ln,r.pa,r.pc,r.ps,r.pz,r.ma,r.mc,r.ms,r.mz,rm?"":m.a,rm?"":m.c,rm?"":m.s,rm?"":m.z,o.same];
+   return base.concat(extra.map(function(c){var v=r.raw[ci[c]];return v==null?"":v}))});
+  return {head:head,data:data}}
+ function csvText(res){var t=table(res);function q(v){v=v==null?"":String(v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+  return "\uFEFF"+[t.head].concat(t.data).map(function(r){return r.map(q).join(",")}).join("\r\n")+"\r\n"}
+ var CRC=null;function crc32(b){if(!CRC){CRC=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;CRC[n]=c>>>0}}var c2=0xFFFFFFFF;for(var i=0;i<b.length;i++)c2=CRC[(c2^b[i])&255]^(c2>>>8);return (c2^0xFFFFFFFF)>>>0}
+ function utf8(s){return new TextEncoder().encode(s)}
+ function b64b(s){var bin=atob(s),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a}
+ function zip(files){var parts=[],cen=[],off=0;
+  function u16(v){return [v&255,(v>>>8)&255]}function u32(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}
+  files.forEach(function(f){var nm=utf8(f.name),d=f.data,crc=crc32(d);
+   var lh=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(crc),u32(d.length),u32(d.length),u16(nm.length),u16(0));
+   parts.push(new Uint8Array(lh),nm,d);
+   cen.push({nm:nm,crc:crc,len:d.length,off:off});off+=lh.length+nm.length+d.length});
+  var cs=off;cen.forEach(function(c){var h=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(c.crc),u32(c.len),u32(c.len),u16(c.nm.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(c.off));parts.push(new Uint8Array(h),c.nm);off+=h.length+c.nm.length});
+  var end=[].concat(u32(0x06054b50),u16(0),u16(0),u16(cen.length),u16(cen.length),u32(off-cs),u32(cs),u16(0));parts.push(new Uint8Array(end));
+  var tot=0;parts.forEach(function(p){tot+=p.length});var out=new Uint8Array(tot),o=0;parts.forEach(function(p){out.set(p,o);o+=p.length});return out}
+ function colL(i){var s="";i++;while(i>0){var m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=Math.floor((i-1)/26)}return s}
+ function cell(r,c,v,s){var ref=colL(c)+r;if(v===""||v==null)return '<c r="'+ref+'" s="'+s+'"/>';if(typeof v==="number")return '<c r="'+ref+'" s="'+s+'"><v>'+v+'</v></c>';return '<c r="'+ref+'" s="'+s+'" t="inlineStr"><is><t xml:space="preserve">'+esc(v)+'</t></is></c>'}
+ function xlsxBytes(res){var t=table(res),nc=t.head.length,last=colL(nc-1),rows=[];
+  var title="Your list results",sub=res.name+"    "+nf(res.total)+" records.",leg="Green = will be mailed as-is.    Yellow = address written the standard way, still mailed.    Gray = removed, will not be mailed.";
+  function rowX(r,cells,ht){return '<row r="'+r+'"'+(ht?' ht="'+ht+'" customHeight="1"':'')+'>'+cells+'</row>'}
+  function band(r,txt,s,ht){var c=cell(r,0,txt,s);for(var i=1;i<nc;i++)c+=cell(r,i,"",s);return rowX(r,c,ht)}
+  rows.push(band(1,title,1,32.25));rows.push(band(2,sub,2,21.75));rows.push(band(3,leg,3,21.75));
+  rows.push(rowX(4,t.head.map(function(h,i){return cell(4,i,h,4)}).join(""),30));
+  t.data.forEach(function(d,ri){var r=ri+5,st=d[1],sset=st==="Removed"?[10,11,10]:st==="Changed"?[7,8,9]:[5,6,5];
+   var cs=d.map(function(v,i){var s=sset[0];if(i===1||i===3)s=sset[1];return cell(r,i,v,s)}).join("");rows.push(rowX(r,cs,21.75))});
+  var widths=[16.7,18.7,48.7,16.7,14.7,14.7,32.7,16.7,14.7,12.7,32.7,16.7,14.7,12.7,30.7,16.7,14.7,14.7,12.7];
+  var cols='<cols>'+t.head.map(function(h,i){return '<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+(widths[i]||18.7)+'" customWidth="1"/>'}).join("")+'</cols>';
+  var lastRow=t.data.length+4;
+  var sheet1='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheetPr><tabColor rgb="FFFFC523"/><pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:'+last+lastRow+'"/><sheetViews><sheetView showGridLines="0" tabSelected="1" zoomScale="110" zoomScaleNormal="110" workbookViewId="0"><pane ySplit="4" topLeftCell="A5" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="21.75" customHeight="1"/>'+cols+'<sheetData>'+rows.join("")+'</sheetData><autoFilter ref="A4:'+last+lastRow+'"/><mergeCells count="3"><mergeCell ref="A1:'+last+'1"/><mergeCell ref="A2:'+last+'2"/><mergeCell ref="A3:'+last+'3"/></mergeCells><pageMargins left="0.4" right="0.4" top="0.5" bottom="0.5" header="0.3" footer="0.3"/><pageSetup paperSize="8" fitToHeight="0" orientation="landscape"/></worksheet>';
+  var s2=[];function b3(r,txt,s,ht){s2.push(rowX(r,cell(r,0,txt,s)+cell(r,1,"",s)+cell(r,2,"",s),ht))}
+  b3(1,"Your list results: summary",1,32.25);b3(2,res.name,2,21.75);
+  s2.push(rowX(4,cell(4,0,"Uploaded",12)+cell(4,1,res.total,13)));
+  s2.push(rowX(5,cell(5,0,"Will be mailed",6)+cell(5,1,res.mailed,14),26.25));
+  s2.push(rowX(6,cell(6,0,"Removed",11)+cell(6,1,res.removed,15),26.25));
+  s2.push(rowX(7,cell(7,0,"Addresses written the standard way, still mailed",8)+cell(7,1,res.changed,16),26.25));
+  s2.push(rowX(9,cell(9,0,"Removed, by reason",17)+cell(9,1,"Count",17)+cell(9,2,"What it means",17)));
+  var reasons=[["Do Not Mail",res.rm.dnm,"These addresses are on your Do Not Mail list (spelling and suffix variants included). We never mail them."],["Mail came back before",res.rm.ret,"Mail to this address was returned to you before. Returned mail is its own reason, never counted as Do Not Mail."],["Duplicate",res.rm.dup,"Same address already in this file. One copy is kept."],["Same address, spelled differently",res.rm.spelled,"Same place written two ways, like 123 Main Street, California and 123 Main St, CA. One copy is kept."],["Undeliverable",res.rm.und,"The post office says it cannot deliver here."]];
+  reasons.forEach(function(x,i){var r=10+i;s2.push(rowX(r,cell(r,0,x[0],11)+cell(r,1,x[1],15)+cell(r,2,x[2],10),27.75))});
+  var sheet2='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheetPr><tabColor rgb="FF2B2B2B"/></sheetPr><dimension ref="A1:C14"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"/></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="48.7" customWidth="1"/><col min="2" max="2" width="14.7" customWidth="1"/><col min="3" max="3" width="90.7" customWidth="1"/></cols><sheetData>'+s2.join("")+'</sheetData><mergeCells count="2"><mergeCell ref="A1:C1"/><mergeCell ref="A2:C2"/></mergeCells><pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/></worksheet>';
+  var wb='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView xWindow="240" yWindow="15" windowWidth="16095" windowHeight="9660"/></bookViews><sheets><sheet name="Your list" sheetId="1" r:id="rId1"/><sheet name="Summary" sheetId="2" r:id="rId2"/></sheets><definedNames><definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">\'Your list\'!$A$4:$'+last+'$'+lastRow+'</definedName></definedNames></workbook>';
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>';
+  var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>';
+  var wrels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';
+  return zip([{name:"[Content_Types].xml",data:utf8(ct)},{name:"_rels/.rels",data:utf8(rels)},{name:"xl/_rels/workbook.xml.rels",data:utf8(wrels)},{name:"xl/workbook.xml",data:utf8(wb)},{name:"xl/worksheets/sheet1.xml",data:utf8(sheet1)},{name:"xl/worksheets/sheet2.xml",data:utf8(sheet2)},{name:"xl/styles.xml",data:b64b(ST_B64)},{name:"xl/theme/theme1.xml",data:b64b(TH_B64)},{name:"docProps/core.xml",data:b64b(CORE_B64)},{name:"docProps/app.xml",data:b64b(APP_B64)}])}
+ function save(name,bytes,type){var blob=new Blob([bytes],{type:type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url)},800);return {name:name,size:blob.size}}
+ /* ---------- popup ---------- */
+ var CUR=null,ONDONE=null;
+ function root(){var b=document.getElementById("ylrp");if(b)return b;b=document.createElement("div");b.id="ylrp";b.className="ylrp-bd";b.setAttribute("role","dialog");b.setAttribute("aria-modal","true");b.setAttribute("aria-labelledby","ylrpT");document.body.appendChild(b);return b}
+ function shut(){var b=document.getElementById("ylrp");if(b)b.classList.remove("open");document.documentElement.classList.remove("ylrp-lock")}
+ function open(){root().classList.add("open");document.documentElement.classList.add("ylrp-lock")}
+ function showResults(res,done){CUR=res;ONDONE=done;var r=res.rm,b=root();
+  var rows=[["Do Not Mail",r.dnm],["Mail came back before",r.ret],["Duplicate",r.dup],["Same address, spelled differently",r.spelled]];if(r.und)rows.push(["Undeliverable",r.und]);
+  b.innerHTML='<div class="ylrp-m" data-ylrp="ok"><div class="ylrp-mh"><h2 id="ylrpT">Your list is ready<small>'+esc(res.name)+'</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
+   '<div class="ylrp-body"><div class="ylrp-hero"><div class="n" id="ylrpN">'+nf(res.mailed)+'</div><div class="l">will be mailed</div><div class="of">of '+nf(res.total)+' uploaded</div></div>'+
+   '<div class="ylrp-sec"><div class="ylrp-sh">'+nf(res.removed)+' removed</div>'+rows.map(function(x){return '<div class="ylrp-r" data-reason="'+esc(x[0])+'"><span class="pill">'+nf(x[1])+'</span> '+esc(x[0])+'</div>'}).join("")+'</div>'+
+   '<div class="ylrp-tidy"><b>'+nf(res.changed)+'</b> addresses written the standard way, still mailed</div>'+
+   '<div class="ylrp-dl"><button type="button" class="btn" id="ylrpXl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download your list (Excel)</button><button type="button" class="ylrp-csv" id="ylrpCsv">or download as CSV</button><p>The Excel is color-coded and has every record and every column from your file, plus what happened and why. The CSV has the same data, for your other tools.</p></div></div>'+
+   '<div class="ylrp-mf"><span class="sp">The final count can still move a little after our mail house checks addresses before printing.</span><div class="actions"><button type="button" class="btn sec" id="ylrpClose">Close</button><button type="button" class="btn" id="ylrpGo">Continue with '+nf(res.mailed)+'</button></div></div></div>';
+  open();var g=document.getElementById("ylrpGo");if(g)g.focus()}
+ function showDown(retry,cancel){CUR=null;var b=root();
+  b.innerHTML='<div class="ylrp-m ylrp-down" data-ylrp="down"><div class="ylrp-mh"><h2 id="ylrpT">We couldn\u2019t check your Do Not Mail list yet<small>Your list is not ready</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
+   '<div class="ylrp-body"><div class="ylrp-err" role="alert"><b>We couldn\u2019t check your Do Not Mail list yet, try again.</b><p>We never mail an address on your Do Not Mail list, so we can\u2019t go on until the check has run. Nothing has been added to your order.</p></div></div>'+
+   '<div class="ylrp-mf"><div class="actions"><button type="button" class="btn sec" id="ylrpCancel">Back</button><button type="button" class="btn" id="ylrpRetry">Try again</button></div></div></div>';
+  b.__retry=retry;b.__cancel=cancel;open();var g=document.getElementById("ylrpRetry");if(g)g.focus()}
+ document.addEventListener("click",function(ev){var t=ev.target;if(!t||!t.closest)return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;
+  if(t.closest("#ylrpXl")){if(CUR)save("your-list-results.xlsx",xlsxBytes(CUR),"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");return}
+  if(t.closest("#ylrpCsv")){if(CUR)save("your-list-results.csv",utf8(csvText(CUR)),"text/csv;charset=utf-8");return}
+  if(t.closest("#ylrpRetry")){var f=b.__retry;if(f)f();return}
+  if(t.closest("#ylrpCancel")||(t.closest("#ylrpX")&&b.querySelector('[data-ylrp="down"]'))){shut();var c=b.__cancel;if(c)c();return}
+  if(t.closest("#ylrpGo")||t.closest("#ylrpClose")||t.closest("#ylrpX")){shut();var d=ONDONE;ONDONE=null;if(d)d(CUR);return}
+  if(t===b&&b.querySelector('[data-ylrp="ok"]')){shut();var d2=ONDONE;ONDONE=null;if(d2)d2(CUR)}
+ });
+ document.addEventListener("keydown",function(ev){if(ev.key!=="Escape")return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;var x=document.getElementById("ylrpX");if(x)x.click()});
+ /* ---------- public ---------- */
+ window.ylRP={
+  ctx:getCtx,evaluate:evaluate,dnmDown:dnmDown,csv:csvText,xlsx:xlsxBytes,table:table,
+  setDown:function(v){try{if(v)localStorage.setItem("ylDnmDown","1");else localStorage.removeItem("ylDnmDown")}catch(e){}},
+  /* run the check for the wizard. onOk(res) is called only when the Do Not Mail check ran and the customer pressed Continue/Close. Fails closed. */
+  run:function(W,COLS,onOk,onBack){
+   function go(){if(dnmDown()){showDown(go,onBack);return}
+    var res=evaluate(getCtx(W,COLS));showResults(res,onOk)}
+   go()},
+  reopen:function(st,onOk){var res=st&&st._ylRes;if(!res)return;if(dnmDown()){showDown(function(){window.ylRP.reopen(st,onOk)},null);return}showResults(res,onOk||function(){})},
+  show:showResults,showDown:showDown,shut:shut
+ };
+ /* "See results" button in the list step */
+ function decorate(){["lt","pc"].forEach(function(k){var st=k==="pc"?window.PS:window.LS,acc=document.getElementById(k==="pc"?"pcUpbar":"ltUpbar");if(!acc)return;var has=acc.querySelector("#ylSeeRes"+k);
+   if(!st||!st._ylRes||!(st.files&&st.files.length)){if(has&&has.parentNode)has.parentNode.removeChild(has);return}
+   var res=st._ylRes;var txt='<b>'+nf(res.mailed)+'</b> will be mailed, '+nf(res.removed)+' removed'+(res.rm.dnm?' ('+nf(res.rm.dnm)+' on your Do Not Mail list)':'');
+   if(!has){has=document.createElement("div");has.id="ylSeeRes"+k;has.className="yl-seeres";var body=acc.querySelector(".lt-acc-body")||acc;body.insertBefore(has,body.firstChild)}
+   has.innerHTML='<span>'+txt+'</span> <button type="button" class="btn sec sm" data-ylsee="'+k+'">See results</button>'})}
+ window.ylDecorate=decorate;
+ window.ylListReady=function(st){return !!(st&&st.files&&st.files.length&&st._ylRes)};
+ document.addEventListener("click",function(ev){var b=ev.target&&ev.target.closest&&ev.target.closest("[data-ylsee]");if(!b)return;ev.preventDefault();var k=b.getAttribute("data-ylsee"),st=k==="pc"?window.PS:window.LS;window.ylRP.reopen(st,function(){})});
+ var _fs=window.formSync;if(typeof _fs==="function"&&!_fs.__yl){var w=function(){var r=_fs.apply(this,arguments);try{decorate()}catch(e){}return r};w.__yl=1;window.formSync=w}
+})();
 </script>
 <script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
    It repeats the estimated total after the list upload step and presses the same Add to cart button, so the checks and pop-up are unchanged. */
