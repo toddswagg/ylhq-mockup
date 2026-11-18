@@ -1714,6 +1714,14 @@ details.lt-acc.panel>summary::-webkit-details-marker{display:none}
 details.lt-acc.panel .lt-acc-body{padding-top:12px}
 .form-next{margin-top:12px}
 .ct-step .ct-tog,.ct-step .ct-tog.btn{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;flex:0 0 auto;min-width:64px;padding:5px 12px;border-radius:999px;border:1px solid var(--line,#d6d3d1);background:#fff;color:#111;font:800 12px/1 var(--body);letter-spacing:.02em;min-height:0}
+/* notes-nov18: calendar grows the box instead of being clipped */
+.lt-acc-body .dp-pop,.lt-bdate .dp-pop{position:static!important;margin-top:8px;width:100%;max-width:340px;box-shadow:none;border:1px solid var(--line2,#ddd)}
+.lt-acc,.lt-acc-body{overflow:visible!important}
+.bd-note{margin:10px 0 6px}.bd-ack{margin:6px 0 0}
+.lt-bdates{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;align-items:start}
+.wz-map .tw{overflow:visible!important;border:0}
+.wz-map .wz-t td,.wz-map .wz-t th{white-space:normal}
+@media(max-width:640px){.wz-map .wz-t,.wz-map .wz-t tbody,.wz-map .wz-t tr,.wz-map .wz-t td{display:block;width:100%}.wz-map .wz-t thead{display:none}.wz-map .wz-t tr{border:1px solid #eee;border-radius:10px;margin:0 0 10px;padding:6px 8px}.wz-map .wz-t td{border:0;padding:4px 0}.wz-map .wz-t td[data-l]::before{content:attr(data-l) ": ";font-weight:700;color:#555;font-size:12px}.wz-map .wz-t select{width:100%;min-width:0}}
 .lt-acc-tog{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;flex:0 0 auto;min-width:64px;padding:5px 12px;border-radius:999px;border:1px solid var(--line,#d6d3d1);background:#fff;color:#111;font:800 12px/1 var(--body);letter-spacing:.02em}
 details.lt-acc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}
 details.lt-acc>summary::-webkit-details-marker,details.lt-acc>summary::marker{display:none}
@@ -2931,7 +2939,7 @@ function formMailFinished(st){
   if(st.drops==="multi"){
     var n=+st.batches||0;if(n<2)return false;
     var dates=st.batchDates||[];
-    return dates.length>=n&&dates.slice(0,n).every(function(x){return !!x});
+    return !!st._bdAck&&dates.length>=n&&dates.slice(0,n).every(function(x){return !!x});
   }
   return false;
 }
@@ -3395,15 +3403,22 @@ function pcRenderBatchDates(){
   n=Math.min(12,Math.max(2,n));
   var rule=ylRuleFor("pc"), df=ylDefaults(rule);
   PS.batchDates=PS.batchDates||[];
-  var prev=ylParse(PS.batchDates[0]||PS.start)||df.asap;
-  for(var i=0;i<n;i++){
-    var t=PS.batchDates[i]?ylParse(PS.batchDates[i]):null;
-    if(!t||!ylValid(t,rule)){t=i===0?prev:ltNextDrop(prev,rule);PS.batchDates[i]=ylISO(t)}
-    prev=ylParse(PS.batchDates[i]);
+  PS._bdUser=PS._bdUser||{};
+  if(PS._bdN!==n){PS._bdN=n;PS._bdAck=false}
+  var d0=ylParse(PS.batchDates[0]||PS.start)||df.asap;
+  if(!ylValid(d0,rule))d0=df.asap;
+  PS.batchDates[0]=ylISO(d0);
+  for(var i=1;i<n;i++){
+    var cur=PS.batchDates[i]?ylParse(PS.batchDates[i]):null;
+    if(PS._bdUser[i]&&cur&&ylValid(cur,rule))continue;
+    var prev=ylParse(PS.batchDates[i-1]),c=ylAdd(prev,7),g=0;
+    while(g<8&&!ylValid(c,rule)){c=ylAdd(c,7);g++}
+    if(!ylValid(c,rule))c=ylNextDropAny(prev,rule);
+    PS.batchDates[i]=ylISO(c);
   }
   PS.batchDates=PS.batchDates.slice(0,n);
   box.hidden=false;
-  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch</label><p class="help">Mail goes to the post office on Mondays, Wednesdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+PS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div></div>';
+  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch</label><p class="help">Mail goes to the post office on Mondays, Wednesdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+PS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div><p class="help bd-note"><b>Drop dates depend on proof approval.</b> Approve your proof the same day, or by 12:00 PM PT the next day, so each batch mails on the date you picked. Later batches default to the same weekday, a week apart.</p><label class="lo-cb bd-ack"><input type="checkbox" id="pcBdAck"'+(PS._bdAck?' checked':'')+'><span>I understand my drop dates depend on proof approval, and these batch dates are final.</span></label></div></div>';
   $$(".lt-bdate",box).forEach(function(row){
     var i=+row.getAttribute("data-bi"), a=$(".lt-bdate-btn",row), pop=$(".dp-pop",row);
     var st={start:PS.batchDates[i]};
@@ -3415,14 +3430,13 @@ function pcRenderBatchDates(){
       var nbtn=e.target.closest("[data-dpm]");
       if(nbtn&&!nbtn.disabled){var vy=+pop.getAttribute("data-vy"),vm=+pop.getAttribute("data-vm")+(+nbtn.getAttribute("data-dpm"));if(vm<1){vm=12;vy--}if(vm>12){vm=1;vy++}ylCal("pc",st,pop,vy,vm);return}
       var d=e.target.closest("[data-dpd]");if(!d||d.disabled)return;
-      st.start=d.getAttribute("data-dpd");PS.batchDates[i]=st.start;
+      st.start=d.getAttribute("data-dpd");PS.batchDates[i]=st.start;PS._bdUser=PS._bdUser||{};if(i===0){PS._bdUser={0:1}}else PS._bdUser[i]=1;PS._bdAck=false;
       $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
       if(i===0){PS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("pc",PS,st.start,df)}
-      close();a.focus();pcUpdateBuy();
-      if(typeof PS!=="undefined"&&PS.drops==="multi")PS._mailSendChosen=true;
-      if(typeof formMailMaybeClose==="function")formMailMaybeClose("pc");
+      close();pcUpdateBuy();pcRenderBatchDates();
     };
   });
+  var ack=$("#pcBdAck",box);if(ack)ack.onchange=function(){PS._bdAck=ack.checked;PS._mailSendChosen=true;if(ack.checked&&typeof formMailMaybeClose==="function")formMailMaybeClose("pc");if(typeof formSync==="function")formSync()};
   if(typeof pcUpdateBuy==="function")pcUpdateBuy();
 }
 function renderCfg(){
@@ -3509,7 +3523,7 @@ function wire(){
       if(acc.id==="pcMoreAcc"){if(typeof pcOnMoreChange==="function")pcOnMoreChange();return}
       if(acc.id==="pcFontAcc"||acc.id==="pcGlossAcc"){if(typeof pcSyncAcc==="function")pcSyncAcc();if(typeof pcUpdateBuy==="function")pcUpdateBuy();return}
       if(acc.id==="pcMailAcc"){
-        if(t.id==="drops"||t.id==="pcBatch"){if(typeof PS!=="undefined"&&t.id==="drops")PS._mailSendChosen=true;if(typeof formMailMaybeClose==="function")formMailMaybeClose("pc")}
+        if(t.id==="drops"||t.id==="pcBatch"){if(typeof PS!=="undefined"&&t.id==="drops")PS._mailSendChosen=true;setTimeout(function(){if(typeof formMailMaybeClose==="function")formMailMaybeClose("pc")},30)}
         if(typeof formSync==="function")formSync();
         if(typeof pcUpdateBuy==="function")pcUpdateBuy();
         return;
@@ -5026,6 +5040,7 @@ function ltUpdateBuy(){
 }
 window.ltUpdateBuy=ltUpdateBuy;
 
+function ylNextDropAny(from,rule){var t=ylAdd(from,1),i=0;while(i<60&&!ylValid(t,rule)){t=ylAdd(t,1);i++}return t}
 function ltNextDrop(from,rule){
   var t=ylAdd(from,1), i=0;
   while(i<60&&!ylValid(t,rule)){t=ylAdd(t,1);i++}
@@ -5038,15 +5053,22 @@ function ltRenderBatchDates(){
   n=Math.min(12,Math.max(2,n));
   var rule=ylRuleFor("lt"), df=ylDefaults(rule);
   LS.batchDates=LS.batchDates||[];
-  var prev=ylParse(LS.batchDates[0]||LS.start)||df.asap;
-  for(var i=0;i<n;i++){
-    var t=LS.batchDates[i]?ylParse(LS.batchDates[i]):null;
-    if(!t||!ylValid(t,rule)){t=i===0?prev:ltNextDrop(prev,rule);LS.batchDates[i]=ylISO(t)}
-    prev=ylParse(LS.batchDates[i]);
+  LS._bdUser=LS._bdUser||{};
+  if(LS._bdN!==n){LS._bdN=n;LS._bdAck=false}
+  var d0=ylParse(LS.batchDates[0]||LS.start)||df.asap;
+  if(!ylValid(d0,rule))d0=df.asap;
+  LS.batchDates[0]=ylISO(d0);
+  for(var i=1;i<n;i++){
+    var cur=LS.batchDates[i]?ylParse(LS.batchDates[i]):null;
+    if(LS._bdUser[i]&&cur&&ylValid(cur,rule))continue;
+    var prev=ylParse(LS.batchDates[i-1]),c=ylAdd(prev,7),g=0;
+    while(g<8&&!ylValid(c,rule)){c=ylAdd(c,7);g++}
+    if(!ylValid(c,rule))c=ylNextDropAny(prev,rule);
+    LS.batchDates[i]=ylISO(c);
   }
   LS.batchDates=LS.batchDates.slice(0,n);
   box.hidden=false;
-  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch <span class="req">*</span></label><p class="help">Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+LS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div></div>';
+  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch <span class="req">*</span></label><p class="help">Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+LS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div><p class="help bd-note"><b>Drop dates depend on proof approval.</b> Approve your proof the same day, or by 12:00 PM PT the next day, so each batch mails on the date you picked. Later batches default to the same weekday, a week apart.</p><label class="lo-cb bd-ack"><input type="checkbox" id="ltBdAck"'+(LS._bdAck?' checked':'')+'><span>I understand my drop dates depend on proof approval, and these batch dates are final.</span></label></div></div>';
   $$(".lt-bdate",box).forEach(function(row){
     var i=+row.getAttribute("data-bi"), a=$(".lt-bdate-btn",row), pop=$(".dp-pop",row);
     var st={start:LS.batchDates[i]};
@@ -5058,14 +5080,13 @@ function ltRenderBatchDates(){
       var nbtn=e.target.closest("[data-dpm]");
       if(nbtn&&!nbtn.disabled){var vy=+pop.getAttribute("data-vy"),vm=+pop.getAttribute("data-vm")+(+nbtn.getAttribute("data-dpm"));if(vm<1){vm=12;vy--}if(vm>12){vm=1;vy++}ylCal("lt",st,pop,vy,vm);return}
       var d=e.target.closest("[data-dpd]");if(!d||d.disabled)return;
-      st.start=d.getAttribute("data-dpd");LS.batchDates[i]=st.start;
+      st.start=d.getAttribute("data-dpd");LS.batchDates[i]=st.start;LS._bdUser=LS._bdUser||{};if(i===0){LS._bdUser={0:1}}else LS._bdUser[i]=1;LS._bdAck=false;
       $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
       if(i===0){LS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("lt",LS,st.start,df)}
-      close();a.focus();ltUpdateBuy();
-      if(typeof LS!=="undefined"&&LS.drops==="multi")LS._mailSendChosen=true;
-      if(typeof formMailMaybeClose==="function")formMailMaybeClose("lt");
+      close();ltUpdateBuy();ltRenderBatchDates();
     };
   });
+  var ack=$("#ltBdAck",box);if(ack)ack.onchange=function(){LS._bdAck=ack.checked;LS._mailSendChosen=true;if(ack.checked&&typeof formMailMaybeClose==="function")formMailMaybeClose("lt");if(typeof formSync==="function")formSync()};
   if(typeof ltUpdateBuy==="function")ltUpdateBuy();
 }
 function ltPacketHTML(o){
@@ -5115,7 +5136,7 @@ if(!window.__ltAccClose){window.__ltAccClose=3;
     if(acc.id==="ltMoreAcc"){if(typeof ltOnMoreChange==="function")ltOnMoreChange();return}
     if(acc.id==="ltFontAcc"||acc.id==="ltEnvFontAcc"){if(typeof ltSyncAcc==="function")ltSyncAcc();if(typeof ltUpdateBuy==="function")ltUpdateBuy();return}
     if(acc.id==="ltMailAcc"){
-      if(el.id==="ldrops"||el.id==="ltBatch"){if(typeof LS!=="undefined"&&el.id==="ldrops")LS._mailSendChosen=true;if(typeof formMailMaybeClose==="function")formMailMaybeClose("lt")}
+      if(el.id==="ldrops"||el.id==="ltBatch"){if(typeof LS!=="undefined"&&el.id==="ldrops")LS._mailSendChosen=true;setTimeout(function(){if(typeof formMailMaybeClose==="function")formMailMaybeClose("lt")},30)}
       if(typeof formSync==="function")formSync();
       if(typeof ltUpdateBuy==="function")ltUpdateBuy();
       return;
@@ -6832,13 +6853,13 @@ cartBadge();route();
   if(l==="blank"||v==="-")return '<span class="am-lvl blank"><i>&ndash;</i>Left blank</span>';return window.amLvl?amLvl(l):""}
  function exv(k){var v=W.m[k];if(v==="=m"){var mk=k.replace("property","mailing");v=W.m[mk]}return v&&v!=="-"&&ROW[v]?e(ROW[v]):'<span style="color:#aaa">&mdash;</span>'}
  function missing(){var bad=[];G.forEach(function(g){g.f.forEach(function(f){if(f[2]&&(!W.m[f[0]]||W.m[f[0]]==="-"))bad.push(f)})});return bad}
- function s2(){var c={ok:0,chk:0,no:0};G.forEach(function(g){g.f.forEach(function(f){var l=W.lv[f[0]];if(l==="ok"||l==="past"||l==="you")c.ok++;else if(l==="chk")c.chk++;else if(l==="no")c.no++})});
+ function s2(){W.showOpt=true;var c={ok:0,chk:0,no:0};G.forEach(function(g){g.f.forEach(function(f){var l=W.lv[f[0]];if(l==="ok"||l==="past"||l==="you")c.ok++;else if(l==="chk")c.chk++;else if(l==="no")c.no++})});
   var bad=W.err?missing():[];
   var req=[], optf=[];
   G.forEach(function(g,gi){g.f.forEach(function(f){ (f[2]?req:optf).push({g:g,gi:gi,f:f}) })});
   function row(item){var f=item.f,k=f[0],l=W.lv[k],isBad=bad.some(function(b){return b[0]===k})||l==="no"||l==="chk";
     var cls=isBad?' class="bad"':'';
-    return '<tr'+cls+'><td><b>'+f[1]+'</b>'+(f[2]?'<span class="wz-req">Required</span>':'<span class="wz-opt">Optional</span>')+'</td><td><select class="inp" data-wzk="'+k+'" aria-label="Your column for '+f[1]+'">'+opt(k)+'</select></td><td class="ex">'+exv(k)+'</td><td>'+lvl(k)+'</td></tr>'}
+    return '<tr'+cls+'><td data-l="Our field"><b>'+f[1]+'</b>'+(f[2]?'<span class="wz-req">Required</span>':'<span class="wz-opt">Optional</span>')+'</td><td data-l="Your column"><select class="inp" data-wzk="'+k+'" aria-label="Your column for '+f[1]+'">'+opt(k)+'</select></td><td class="ex" data-l="First row">'+exv(k)+'</td><td data-l="Match">'+lvl(k)+'</td></tr>'}
   var h='<p style="margin-top:0">We matched your columns automatically. Check any row marked with a problem, change the dropdown if needed, then press Next.</p><div class="am-sum"><span>'+c.ok+' matched</span><span>'+c.chk+' to check</span><span>'+c.no+' not found</span></div>';
   if(bad.length)h+='<div class="wz-err" role="alert"><b>A few fields still need a column.</b><ul>'+bad.map(function(f){return '<li><b style="color:inherit">'+f[1]+'</b>: pick the column with this, for example '+(HINT[f[0]]||"the matching column")+'.</li>'}).join("")+'</ul></div>';
   h+='<label class="wz-one"><input type="checkbox" id="wzOne"'+(W.one?' checked':'')+'><span><b>My list has only one address.</b> The owner lives in the house, so the property is the mailing address. We copy it over for you.</span></label>';
@@ -6846,7 +6867,6 @@ cartBadge();route();
   h+=req.map(row).join("");
   if(W.showOpt)h+=optf.map(row).join("");
   h+='</tbody></table></div>';
-  h+='<button type="button" class="btn sec sm btn-pill" id="wzOptBtn" style="margin-top:10px">'+(W.showOpt?"Hide optional fields":"Show optional and extra fields")+'</button>';
   if(W.showOpt){var used={};for(var k in W.m)used[W.m[k]]=1;var left=COLS.filter(function(c){return !used[c]});
     if(left.length)h+='<p class="help" style="margin-top:10px">Columns not used yet:</p><div class="wz-chips">'+left.map(function(c){return '<button type="button" class="btn sec sm btn-pill" data-wzx="'+e(c)+'">Add '+e(c)+' as an extra column</button>'}).join("")+'</div>';
     h+='<p class="help" style="margin-top:10px">Optional fields include a second mailing line, property city/state/zip, last or full name, and extra columns your template can print.</p>'}
@@ -7064,5 +7084,29 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
 .np-acct .help{margin:12px 0 0}
 .np-state{margin:10px 0 0;font-weight:700;font-size:14px}
 .np-state.on{color:var(--ok,#15803d)}.np-state.off{color:var(--mu)}
+</style>
+<style id="sym-nov18">
+/* width + FAQ toggles */
+#s-postcards .wrap.page,#s-letters .wrap.page{max-width:1240px}
+.acc-i>summary{display:flex!important;align-items:center;justify-content:space-between;gap:12px;padding-right:18px!important}
+.acc-i>summary::after,.acc-i[open]>summary::after{position:static!important;transform:none!important;content:"Open"!important;display:inline-flex!important;align-items:center;justify-content:center;width:72px;min-width:72px;height:30px;margin-left:auto;flex:0 0 72px;border-radius:999px;border:1px solid var(--line2,#d6d3d1);background:#fff!important;color:#111!important;font:800 12px/1 var(--body)!important;letter-spacing:.02em;box-sizing:border-box}
+.acc-i[open]>summary::after{content:"Close"!important}
+
+/* sym-nov18: one header + toggle style everywhere */
+.lt-accs{padding:0!important;margin:0!important;border:0!important;background:none!important;box-shadow:none!important;width:100%!important;gap:12px!important}
+details.lt-acc,details.lt-acc.panel,.ct-step.panel,.lt-picked{box-sizing:border-box!important;width:100%!important;margin:0!important;border:1px solid var(--line,#eadfa8)!important;border-radius:12px!important;background:#fff!important;padding:0!important}
+details.lt-acc>summary,details.lt-acc.panel>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;min-height:68px!important;padding:12px 18px!important;box-sizing:border-box!important;cursor:pointer}
+details.lt-acc .lt-acc-body{padding:0 18px 18px!important}
+details.lt-acc>summary .lt-acc-k,.lt-picked .lt-picked-n,.ct-sh>div{font-size:16px!important}
+details.lt-acc>summary .lt-acc-k small{font-size:13px!important}
+.lt-acc-tog,.ct-step .ct-tog,.ct-step .ct-tog.btn,.lt-picked .lt-change,.lt-picked .lt-change.btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:72px!important;min-width:72px!important;height:30px!important;min-height:30px!important;padding:0 12px!important;margin:0 0 0 auto!important;border-radius:999px!important;border:1px solid var(--line2,#d6d3d1)!important;background:#fff!important;color:#111!important;font:800 12px/1 var(--body)!important;letter-spacing:.02em;flex:0 0 72px!important;align-self:center!important;cursor:pointer}
+.ct-step.panel{padding:0!important}
+.ct-step .ct-sh{padding:12px 18px!important;margin:0!important;min-height:68px;box-sizing:border-box;align-items:center!important}
+.ct-step .ct-step-body{padding:0 18px 18px!important}
+.ct-step.ct-collapsed{padding:0!important}
+.lt-picked{min-height:68px;padding:12px 18px!important;display:none}.lt-collapsed .lt-picked{display:flex!important}
+.lt-picked .lt-change{font-size:0!important}.lt-picked .lt-change::before{content:"Open";font:800 12px/1 var(--body)}
+.lt-split-col,.lt-split .lt-envcol,.lt-split .lt-tpl{box-sizing:border-box}
+.faq-q,details.faq>summary{display:flex;align-items:center;justify-content:space-between;gap:12px}
 </style>
 </body></html>
