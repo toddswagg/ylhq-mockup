@@ -1301,6 +1301,109 @@ a.bm-link,.crumbs a:hover{text-decoration-color:var(--y);text-decoration-thickne
 .lt-tut-play{width:64px;height:64px;border-radius:50%;background:#f5c400;color:#111;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;padding-left:4px}
 #ltPostAcc,#tplField,#ltFontAcc,#ltMoreAcc,#ltUpbar,#lPricePanel,.lt-split{scroll-margin-top:140px}
 
+/* --- Cart-round Nov 17: yellow pills, shaded envelope pane, 4-tile scroll rows, no divider --- */
+#ltCfg .cfg-end{display:none!important}
+.lt-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lt-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.lt-split-div{display:none!important}
+.lt-split-col{min-width:0;padding:12px 12px 14px;border-radius:16px;box-sizing:border-box}
+.lt-tpl{background:#fffdf6}
+.lt-envcol{background:#efe8d2}
+.lt-split.lt-split-one{grid-template-columns:1fr}
+.lt-split.lt-split-one .lt-envcol{display:none}
+.lt-pillbar{display:inline-flex;align-items:center;background:#111;border-radius:999px;padding:3px;margin:0 0 10px}
+.lt-pill{display:inline-block;background:#f5c400;color:#111;font-weight:800;font-size:13.5px;letter-spacing:.02em;border-radius:999px;padding:6px 16px;line-height:1.2}
+.lt-split #tplField{margin:0;padding:0;border:0}
+.lt-split #tplField>label.f{display:none}
+.lt-split #ltTplSel,.lt-split .lt-colsub{margin:0 0 8px;min-height:1.4em;line-height:1.4em}
+.lt-split .tg,.lt-split .tg-one,.lt-split .op-env{margin:0;padding:0;border:0;background:transparent}
+.lt-envcol .op-h{display:none}
+.lt-split-col,.lt-rail{overflow:hidden;min-width:0;max-width:100%}
+.lt-rail{display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box}
+.lt-rail-btn{flex:0 0 34px;width:34px;height:34px;border:0;border-radius:50%;background:#111;color:#f5c400;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 2px;position:relative;z-index:2}
+.lt-rail-btn:hover:not(:disabled){background:#222}
+.lt-rail-btn:disabled{opacity:.32;cursor:default;color:#c8c8c8}
+.lt-rail-track,
+.lt-split .tg-grid,
+.lt-split .env-grid,
+.lt-split .op-env .opt-sws.env-grid,
+.lt-split .op-env .env-grid{display:flex!important;flex-wrap:nowrap!important;grid-template-columns:none!important;grid-auto-rows:auto!important;min-height:0!important;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex:1 1 0;min-width:0;max-width:100%;width:auto;align-items:stretch;overscroll-behavior-x:contain}
+.lt-rail-track::-webkit-scrollbar,
+.lt-split .tg-grid::-webkit-scrollbar,
+.lt-split .env-grid::-webkit-scrollbar{display:none}
+.lt-split .image-box,
+.lt-split .opt-sw.opt-env{flex:0 0 calc((100% - 24px) / 4);width:calc((100% - 24px) / 4);max-width:calc((100% - 24px) / 4);scroll-snap-align:start;height:auto;max-height:176px;min-height:0;min-width:0;margin:0;padding:6px;border-radius:10px;box-sizing:border-box;overflow:hidden}
+.lt-split .image-box img,
+.lt-split .opt-env img,
+.lt-split .opt-env .env-ph{width:100%;height:68px;object-fit:cover;border-radius:7px;background:#fff;margin:0}
+.lt-split .opt-env img,.lt-split .opt-env .env-ph{object-fit:contain;height:62px}
+.lt-split .opt-env .env-ph{display:flex;align-items:center;justify-content:center;border:2px dashed var(--line2,#ddd);font-size:11px;font-weight:700;color:var(--mu)}
+.lt-split .image-box label,
+.lt-split .opt-env .ft-n{font-size:12px;font-weight:600;line-height:1.25;display:block;margin-top:5px}
+.lt-split .opt-env .env-sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.5em;font-size:11px}
+.lt-picked{display:none;align-items:center;gap:12px;padding:8px 10px;background:#fff;border:1px solid var(--line,#eadfa8);border-radius:12px}
+.lt-collapsed .lt-picked{display:flex}
+.lt-collapsed .lt-rail,
+.lt-collapsed .lt-colsub,
+.lt-collapsed #ltTplSel,
+.lt-collapsed .picker-search,
+.lt-collapsed .tg-search{display:none!important}
+.lt-picked-img{width:76px;height:54px;object-fit:cover;border-radius:8px;background:#fff;flex:0 0 76px;border:1px solid var(--line,#eadfa8)}
+.lt-picked .env-ph{width:76px;height:54px;flex:0 0 76px;display:flex;align-items:center;justify-content:center;border:2px dashed var(--line2,#ddd);border-radius:8px;font-size:11px;font-weight:700;background:#fff}
+.lt-picked .lt-picked-n{font-weight:700;font-size:14px;min-width:0}
+.lt-picked .lt-picked-n small{display:block;font-weight:600;color:var(--mu,#6b6248);font-size:12px}
+.lt-picked .lt-change{margin-left:auto;flex:0 0 auto}
+.lt-upbar{padding:16px 18px}
+.lt-upbar-row{display:block}
+.lt-artacc{margin:0}
+.lt-artrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lt-buy{display:flex;flex-direction:column;gap:14px}
+.lt-buy-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lt-buy-tile{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line,#eadfa8);border-radius:12px;background:#fff;min-height:74px}
+.lt-buy-tile img,.lt-buy-tile .env-ph{width:88px;height:62px;object-fit:cover;border-radius:8px;background:#fff;flex:0 0 88px;border:1px solid var(--line,#eadfa8)}
+.lt-buy-tile .env-ph{display:flex;align-items:center;justify-content:center;object-fit:contain;font-size:12px;font-weight:700;border-style:dashed}
+.lt-buy-tile b{display:block;font-size:14px}
+.lt-buy-tile small{color:var(--mu,#6b6248)}
+.lt-buy-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lt-buy-kv{background:#fff;border:1px solid var(--line,#eadfa8);border-radius:12px;padding:10px 12px}
+.lt-buy-kv span{display:block;font-size:12px;font-weight:600;color:var(--mu,#6b6248)}
+.lt-buy-kv b{font-size:16px}
+.lt-buy-kv .inp{max-width:120px;margin-top:4px}
+.lt-buy-addons{font-size:13.5px;line-height:1.45}
+.lt-buy #laddCart{align-self:flex-start;min-width:200px;border-radius:999px}
+.lt-bdates{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:8px}
+.lt-bdate{display:flex;flex-direction:column;gap:6px}
+.lt-bdate-k{font-weight:700;font-size:13px}
+.cart-cards{display:flex;flex-direction:column;gap:14px}
+.cart-card{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;padding:16px;border:1px solid var(--line,#eadfa8);border-radius:16px;background:#fff}
+.cart-card-main{min-width:0}
+.cart-thumbs{display:flex;gap:10px;margin:0 0 10px}
+.cart-thumbs img,.cart-thumbs .env-ph{width:108px;height:74px;object-fit:cover;border-radius:8px;border:1px solid var(--line,#eadfa8);background:#fff}
+.cart-thumbs .env-ph{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border-style:dashed}
+.cart-card h3{margin:0 0 4px;font-size:18px}
+.cart-card .cart-meta{font-size:13.5px;line-height:1.5;color:#333}
+.cart-card .cart-remind{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#fff6d6;font-size:13px}
+.cart-card-side{text-align:right;min-width:140px}
+.cart-card-side .cq{width:110px;margin:6px 0;display:inline-block}
+.lt-packet .lt-packet-thumbs{display:flex;gap:10px;margin:0 0 10px}
+.lt-packet .lt-packet-thumbs img,.lt-packet .lt-packet-thumbs .env-ph{width:96px;height:66px;object-fit:cover;border-radius:8px;border:1px solid var(--line,#eadfa8);background:#fff}
+@media (max-width:900px){
+  .lt-split{grid-template-columns:1fr;gap:10px}
+  .lt-buy-tiles,.lt-buy-meta,.cart-card{grid-template-columns:1fr}
+  .cart-card-side{text-align:left}
+  .lt-split .image-box,
+  .lt-split .opt-sw.opt-env{flex-basis:calc((100% - 8px) / 2);width:calc((100% - 8px) / 2);max-width:calc((100% - 8px) / 2)}
+}
+@media (max-width:640px){
+  .lt-qtyrow #laddCart,.lt-buy #laddCart{width:100%}
+}
+
+.cart-card{grid-template-columns:minmax(0,1fr) 180px;align-items:start}
+.cart-card-side{text-align:right;min-width:160px}
+.cart-card-side .cq{display:block;width:100%;margin:6px 0}
+
+
+
 /* --- Design a New Mail Piece: 3 x 3 even grid, buttons lined up on one baseline --- */
 @media (min-width:901px){.ct-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
 .ct-card{display:flex;flex-direction:column;height:100%}
@@ -2586,11 +2689,25 @@ function renderCart(){
     cartBadge();
   }
   if(!CART.length){r.innerHTML='<div class="ptitle"><div><h1>Cart</h1></div></div><div class="note info" style="margin-bottom:18px">Your cart is currently empty.</div><a class="btn" href="#/shop">Return to shop</a><p class="muted" style="margin-top:14px">Tip: open the Half Page postcard, pick a postage option and press Add to cart to see a filled cart.</p>';return}
-  var sub=0,rows="";
-  CART.forEach(function(it,i){var t=it.qty*it.ppc+it.flat;sub+=t;
-    if(it.sub){rows+='<tr><td><div class="cart-item"><div class="ci-ph">YLHQ</div><div><b>'+esc(it.name)+'</b><small>'+esc(it.desc||"")+'</small><button class="rm" data-i="'+i+'">Remove</button></div></div></td><td>'+money(it.ppc)+'</td><td>1</td><td><b>'+money(t)+'</b></td></tr>';return}
-    rows+='<tr><td><div class="cart-item"><img src="'+it.img+'" alt=""><div><b>'+esc(it.name)+'</b><small>Postage: '+esc(it.post)+'<br>Template: '+esc(it.tpl)+(it.extra?'<br>'+esc(it.extra):"")+(it.gloss?" &middot; Glossy":"")+(it.eos?" &middot; EOS":"")+(it.undel?" &middot; Undeliverable list ($19)":"")+(it.ret?" &middot; Returned mail list ($49)":"")+'<br>Mail day: '+esc(it.day)+'<br>List: '+esc(it.list)+(it.lead?'<br>Lead type: '+esc(it.lead):"")+(it.oname?'<br>Order name: '+esc(it.oname):"")+'</small><button class="rm" data-i="'+i+'">Remove</button></div></div></td><td>'+money(it.ppc,3)+'</td><td><input class="inp cq" type="number" min="1" step="1" inputmode="numeric" data-i="'+i+'" value="'+it.qty+'" aria-label="Quantity for '+esc(it.name)+'" style="width:110px"></td><td><b>'+money(t)+'</b></td></tr>'});
-  r.innerHTML='<div class="ptitle"><div><h1>Cart</h1><p>Sample cart. Nothing here is a real order.</p></div></div><div class="cart-grid"><div><div class="tw cart-table"><table><thead><tr><th>Product</th><th>Price per piece</th><th>Quantity</th><th>Subtotal</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="panel" style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><label for="ccIn" style="font-weight:600">Coupon:</label><input class="inp" id="ccIn" placeholder="Coupon code" style="width:180px"><button class="btn sec" id="ccGo" type="button">Apply coupon</button></div><button class="btn sec" id="cUpd" type="button" disabled>Update cart</button></div><div id="ccMsg" style="margin-top:8px"></div></div><div class="panel"><h3 style="font-size:18px;margin-bottom:12px">Cart totals</h3><div class="sumrow"><span>Subtotal</span><b>'+money(sub)+'</b></div><div class="sumrow"><span>Postage</span><b>Included</b></div><div class="sumrow big"><span>Total</span><b>'+money(sub)+'</b></div><button class="btn lg block" id="checkout" style="margin-top:16px">Proceed to checkout</button><a class="btn sec block" href="#/postcards" style="margin-top:10px">Continue shopping</a></div></div>';
+  var sub=0,cards="";
+  function thumb(src,ph){return src?'<img src="'+src+'" alt="">':'<span class="env-ph">'+esc(ph||"")+'</span>'}
+  CART.forEach(function(it,i){var t=it.qty*it.ppc+(it.flat||0);sub+=t;
+    if(it.sub){cards+='<div class="cart-card"><div class="cart-card-main"><h3>'+esc(it.name)+'</h3><div class="cart-meta">'+esc(it.desc||"")+'</div><button class="rm" data-i="'+i+'">Remove</button></div><div class="cart-card-side"><div>'+money(it.ppc)+'</div><b>'+money(t)+'</b></div></div>';return}
+    var add=(it.addons&&it.addons.length)?it.addons:((it.extra?it.extra.split(" · "):[]).filter(Boolean));
+    if(it.gloss)add.push("Glossy");
+    if(it.eos&&add.indexOf("Easy Offer System (EOS) +3¢")<0&&!/EOS/.test(add.join(" ")))add.push("Easy Offer System (EOS)");
+    var dates=it.batchDates&&it.batchDates.length?it.batchDates.map(function(d,n){return "Batch "+(n+1)+": "+d}).join(" · "):(it.start?("Mail date: "+(typeof ylFmt==="function"&&it.start.length===10?ylFmt(ylParse(it.start)):it.start)):("Mail day: "+(it.day||"")));
+    var fonts=it.fonts?([it.fonts.fs,it.fonts.fc,it.fonts.paper,it.fonts.ef].filter(Boolean).join(" · ")):"";
+    var rem=(it.reminders&&it.reminders.length)?'<div class="cart-remind">'+it.reminders.map(function(x){return esc(x)}).join("<br>")+"</div>":"";
+    cards+='<div class="cart-card"><div class="cart-card-main"><div class="cart-thumbs">'+thumb(it.img,it.tpl||it.name)+(it.envName||it.envImg?thumb(it.envImg,it.envName||"Envelope"):"")+'</div><h3>'+esc(it.name)+'</h3><div class="cart-meta">'+
+      (it.tpl?"Template: "+esc(it.tpl)+"<br>":"")+(it.envName?"Envelope: "+esc(it.envName)+"<br>":"")+
+      "Postage: "+esc(it.post||"")+"<br>"+
+      (dates?esc(dates)+"<br>":"")+(fonts?"Fonts: "+esc(fonts)+"<br>":"")+
+      (add.length?"Add-ons: "+esc(add.join(", "))+"<br>":"")+
+      (it.list?"List: "+esc(it.list)+"<br>":"")+(it.lead?"Lead type: "+esc(it.lead)+"<br>":"")+(it.oname?"Order name: "+esc(it.oname)+"<br>":"")+
+      (it.notes?"Notes: "+esc(it.notes)+"<br>":"")+(it.files&&it.files.length?"Files: "+esc(it.files.join(", ")):"")+
+      '</div>'+rem+'<button class="rm" data-i="'+i+'">Remove</button></div><div class="cart-card-side"><div class="muted">Price per piece</div><b>'+money(it.ppc,3)+'</b><input class="inp cq" type="number" min="1" step="1" inputmode="numeric" data-i="'+i+'" value="'+it.qty+'" aria-label="Quantity for '+esc(it.name)+'"><div class="muted">'+it.qty.toLocaleString("en-US")+' pieces</div>'+(it.flat?'<div class="muted">Fees '+money(it.flat)+'</div>':'')+'<div style="margin-top:8px">Line total</div><b>'+money(t)+'</b></div></div>'});
+  r.innerHTML='<div class="ptitle"><div><h1>Cart</h1><p>Sample cart. Nothing here is a real order.</p></div></div><div class="cart-grid"><div class="cart-cards">'+cards+'<div class="panel" style="margin-top:4px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><label for="ccIn" style="font-weight:600">Coupon:</label><input class="inp" id="ccIn" placeholder="Coupon code" style="width:180px"><button class="btn sec" id="ccGo" type="button">Apply coupon</button></div><button class="btn sec" id="cUpd" type="button" disabled>Update cart</button></div><div id="ccMsg" style="margin-top:8px"></div></div><div class="panel"><h3 style="font-size:18px;margin-bottom:12px">Cart totals</h3><div class="sumrow"><span>Subtotal</span><b>'+money(sub)+'</b></div><div class="sumrow"><span>Postage</span><b>Included</b></div><div class="sumrow big"><span>Total</span><b>'+money(sub)+'</b></div><button class="btn lg block" id="checkout" style="margin-top:16px">Proceed to checkout</button><a class="btn sec block" href="#/letters" style="margin-top:10px">Continue shopping</a></div></div>';
   $$(".rm",r).forEach(function(b){b.onclick=function(){CART.splice(+b.getAttribute("data-i"),1);cartBadge();renderCart()}});
   $("#checkout").onclick=function(){location.hash="#/checkout"};
   fa14CartWire(r);
@@ -2821,7 +2938,7 @@ function renderDetail(id){
   var tr='<div class="track"><div class="bar" style="width:'+(o.st==="bad"?0:Math.max(0,(Math.min(step,5)-1)/4*80))+'%"></div>';
   names.forEach(function(n,i){var k=i+1,cls=o.st==="ok"||k<step?"done":(k===step&&o.st!=="bad"?"cur":"");if(o.st==="bad"&&k===1)cls="done";tr+='<div class="st '+cls+'"><div class="c">'+(cls==="done"?"&#10003;":k)+'</div>'+n+(subs[i]?'<small>'+subs[i]+'</small>':"")+'</div>'});
   tr+='</div>';
-  var mail=o.drops.length>3?'<b>Drops</b><span>'+o.done+' of '+o.drops.length+' mailed, '+o.drops[0]+' to '+o.drops[o.drops.length-1]+'</span>':o.drops.map(function(d,i){var mailed=i<o.done;return '<b>Batch #'+(i+1)+'</b><span>'+d+' '+(mailed?'<a class="linkbtn" href="#/track/'+o.id+'/'+(i+1)+'">View your tracking link</a>':'<span class="muted">No tracking link found</span>')+'</span>'}).join("");
+  var mail=o.drops.map(function(d,i){var mailed=i<o.done;return '<b>Batch #'+(i+1)+'</b><span>'+d+' '+(mailed?'<a class="linkbtn" href="#/track/'+o.id+'/'+(i+1)+'">View your tracking link</a>':'<span class="muted">No tracking link found</span>')+'</span>'}).join("");
   if(o.st!=="bad")mail+='<b>Tracking</b><span><a class="linkbtn" href="#/tracking/order/'+o.id+'">See all '+o.drops.length+' drop'+(o.drops.length>1?"s":"")+' for this order</a></span>';
   var ups=[];
   if(o.st==="proof")ups=[["Oct 27 2026, 9:00 AM","This order needs your proof approval to proceed.",1],["Oct 26 2026, 4:12 PM","Your proof is ready. Please approve or disapprove it on the proof page.",1],["Oct 26 2026, 11:03 AM","Order received. We are preparing your proof.",0]];
@@ -2843,7 +2960,7 @@ function renderDetail(id){
    '<div class="panel">'+tr+'</div>'+
    '<div class="two"><div class="box"><h4>Mailing information</h4><div class="kv">'+mail+'<b>Product</b><span>'+esc(o.prod)+'</span><b>Postage</b><span>'+o.post+'</span><b>Quantity</b><span>'+o.qty.toLocaleString("en-US")+'</span></div></div>'+
    '<div class="box"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h4 style="margin:0">Payment information</h4><button class="btn sm btn-pill" data-demo="receipt" data-id="'+o.id+'" aria-label="Download receipt (PDF) for order '+o.id+'">Download receipt (PDF)</button></div><div class="kv"><b>Billing</b><span>Jane Sample, 100 Sample St, Anytown, CA 90000</span><b>Payment method</b><span>'+(o.paid?"Credit card ending in 4242":"-")+'</span><b>Payment date</b><span>'+(o.paid?o.placed:"-")+'</span><b>Amount</b><span>'+money(otot(o))+'</span><b>Confirmation</b><span>'+(o.paid?"confirmed":"not confirmed")+'</span></div></div></div>'+
-   fa14DetailHTML(o)+'<div class="box" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:10px;flex-wrap:wrap"><h4 style="margin:0">Order updates</h4><span class="muted">Newest first. Showing '+ups.length+' of '+ups.length+'</span></div><ul class="upd">'+ul+'</ul></div>'+
+   fa14DetailHTML(o)+(typeof ltPacketHTML==='function'?ltPacketHTML(o):'')+'<div class="box" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:10px;flex-wrap:wrap"><h4 style="margin:0">Order updates</h4><span class="muted">Newest first. Showing '+ups.length+' of '+ups.length+'</span></div><ul class="upd">'+ul+'</ul></div>'+
    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">'+(oActive(o)?'<a class="btn" href="#/proof/'+o.id+'">View Proof</a><button class="btn sec" data-yproof="'+o.id+'">Preview proof with records</button>':"")+'<button class="btn sec" data-demo="csv" data-id="'+o.id+'">Download CSV</button><button class="btn btn-pill" data-demo="receipt" data-id="'+o.id+'" aria-label="Download receipt (PDF) for order '+o.id+'">Download receipt (PDF)</button></div>';
   fa14DetailWire();
 }
@@ -3221,25 +3338,27 @@ function ylAdd(t,n){return new Date(t.getTime()+n*864e5)}
 function ylFmt(t,long){return t?t.toLocaleDateString("en-US",{timeZone:"UTC",weekday:"short",month:"short",day:"numeric",year:long===false?undefined:"numeric"}):""}
 function ylMDY(t){return t?ylISO(t).replace(/^(\d{4})-(\d{2})-(\d{2})$/,"$2/$3/$1"):""}
 function ylHol(t){return YL_HOL.indexOf(ylISO(t))>-1}
-function ylDrop(t,rapid){var w=t.getUTCDay();return (w===1||w===3||w===5||(rapid&&w===4))&&!ylHol(t)}
+function ylDrop(t,rule){var rapid=rule===true||(rule&&rule.rapid),thu=rapid||(rule&&rule.thu),w=t.getUTCDay();return (w===1||w===3||w===5||(thu&&w===4))&&!ylHol(t)}
 var YL_THU="Thursday (order by Saturday 3:30 PM Pacific)";
-function ylCut(kind){return kind==="hwl"?{1:11,3:9,5:9}:kind==="hwp"?{1:10,3:8,5:8}:{1:5,3:5,5:3}}
+function ylCut(kind){return kind==="hwl"?{1:11,3:9,4:9,5:9}:kind==="hwp"?{1:10,3:8,4:8,5:8}:{1:5,3:5,4:5,5:3}}
 function ylRapidMin(days,now){var c=ylAdd(ylD(now.y,now.m,now.d),1),n=0;for(var g=0;g<60;g++){var w=c.getUTCDay();if(w>=1&&w<=5&&!ylHol(c))n++;if(n>=days)break;c=ylAdd(c,1)}c=ylAdd(c,1);for(var i=0;i<30;i++){if(ylDrop(c,true))return c;c=ylAdd(c,1)}return c}
-function ylValid(t,rule,now){if(!t||!ylDrop(t,rule&&rule.rapid))return false;now=now||ylNowPT();
-  if(rule.rapid)return t>=ylRapidMin(rule.days,now);
-  var lim=ylAdd(t,-ylCut(rule.kind)[t.getUTCDay()]),today=ylD(now.y,now.m,now.d);
+function ylValid(t,rule,now){if(!t||!ylDrop(t,rule))return false;now=now||ylNowPT();
+  if(rule&&rule.rapid)return t>=ylRapidMin(rule.days,now);
+  var cut=ylCut((rule&&rule.kind)||"std")[t.getUTCDay()];if(cut==null)return false;
+  var lim=ylAdd(t,-cut),today=ylD(now.y,now.m,now.d);
   return today<lim||(+today===+lim&&now.hm<=1530)}
 function ylDefaults(rule){var now=ylNowPT(),t=ylD(now.y,now.m,now.d),r={};for(var i=0;i<150;i++){var c=ylAdd(t,i);if(ylValid(c,rule,now)){var w=c.getUTCDay();if(!r.asap)r.asap=c;if(!r[w])r[w]=c;if(r[1]&&r[3]&&r[5]&&(!rule.rapid||r[4]))break}}return r}
 function ylRapidDays(prod){prod=(prod||"").toLowerCase();return /handwritten/.test(prod)?{days:5,label:"Handwritten products"}:/pressure|snap|sealed/.test(prod)?{days:3,label:"Pressure seals"}:/postcard/.test(prod)?{days:1,label:"Postcards"}:{days:3,label:"Letters"}}
 function ylRuleFor(pfx){
-  if(pfx==="lt"){var p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}return {kind:p&&p.hw?"hwl":"std",min:200,unit:"pieces"}}
+  if(pfx==="lt"){var p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}return {kind:p&&p.hw?"hwl":"std",min:200,unit:"pieces",thu:true}}
   if(pfx==="pc"){var q=PC[PS.p]||{};return {kind:/^hw/.test(q.k||"")?"hwp":"std",min:q.std?0:100,unit:"cards",pc:true,std:!!q.std}}
   if(pfx==="ro"){var o=null;try{o=(typeof ROO!=="undefined"&&ROO)||null}catch(e){}var rd=ylRapidDays(window.RO_PROD||"");return {rapid:true,days:rd.days,label:rd.label}}
   return {kind:"std"}}
 function ylHelp(rule,df){var e='Earliest start for this order: <b>'+ylFmt(df.asap)+'</b>.';
   if(rule.rapid)return 'Rapid Orders: '+rule.label.toLowerCase()+' need '+rule.days+' production day'+(rule.days===1?'':'s')+', not counting the approval day or the mailing day (weekdays only, holidays skipped). Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+e+' Rapid proofs: approve the same day, or by 12:00&nbsp;PM Pacific the next day, to keep this date. Later approval moves your mail date back.';
   var c=ylCut(rule.kind),hw=rule.kind!=="std";
-  var s=(hw?'<b>Actual Handwritten Products require 5 days of production after proof approval.</b> ':'')+'Mail goes to the post office on Mondays, Wednesdays and Fridays. ';
+  var days=rule.thu?'Mondays, Wednesdays, Thursdays and Fridays':'Mondays, Wednesdays and Fridays';
+  var s=(hw?'<b>Actual Handwritten Products require 5 days of production after proof approval.</b> ':'')+'Mail goes to the post office on '+days+'. ';
   s+=hw?'Order by 3:30 PM Pacific '+c[1]+' days before a Monday drop, or '+c[3]+' days before a Wednesday or Friday drop. ':'Order by 3:30 PM Pacific on the Wednesday before a Monday drop, the Friday before a Wednesday drop, or the Tuesday before a Friday drop. ';
   return s+e+' Greyed-out dates are past the cutoff, not a drop day, or a holiday. '+YL_CAV}
 function schedStartHTML(pfx,st){var rule=ylRuleFor(pfx),df=ylDefaults(rule),now=ylNowPT();
@@ -3250,7 +3369,7 @@ function schedStartHTML(pfx,st){var rule=ylRuleFor(pfx),df=ylDefaults(rule),now=
 function schedBatchHTML(pfx,st){return '<div class="fld" id="'+pfx+'BatchF"'+(st.drops==="multi"?'':' hidden')+'><label class="f" for="'+pfx+'Batch">Number of batches <span class="req">Required*</span></label><select class="inp" id="'+pfx+'Batch"><option value="">Please make a selection</option>'+[2,3,4,5,6,7,8,9,10,11,12].map(function(n){return '<option value="'+n+'"'+(+st.batches===n?" selected":"")+'>'+n+' Batches</option>'}).join("")+'</select><p class="help">Up to 12 batches. The first batch mails on your campaign start date.</p></div>'}
 function ylDaySel(pfx){return $(pfx==="pc"?"#day":pfx==="lt"?"#lday":pfx==="ro"?"#roDay":"#none")}
 function ylCal(pfx,st,box,vy,vm){var rule=ylRuleFor(pfx),now=ylNowPT(),df=ylDefaults(rule),sel=st.start,first=ylD(vy,vm,1),startW=first.getUTCDay(),dim=new Date(Date.UTC(vy,vm,0)).getUTCDate(),minM=df.asap?df.asap.getUTCFullYear()*12+df.asap.getUTCMonth():0,curM=vy*12+vm-1;
-  var h='<div class="dp-hd"><button type="button" class="dp-nav" data-dpm="-1" aria-label="Previous month"'+(curM<=minM?' disabled':'')+'>&lsaquo;</button><b>'+first.toLocaleDateString("en-US",{timeZone:"UTC",month:"long",year:"numeric"})+'</b><button type="button" class="dp-nav" data-dpm="1" aria-label="Next month"'+(curM>=minM+5?' disabled':'')+'>&rsaquo;</button></div><div class="dp-grid">'+["Su","Mo","Tu","We","Th","Fr","Sa"].map(function(d,i){return '<span class="dp-wd'+((i%2&&i<6)||(rule.rapid&&i===4)?' dp-mwf':'')+'">'+d+'</span>'}).join("");
+  var h='<div class="dp-hd"><button type="button" class="dp-nav" data-dpm="-1" aria-label="Previous month"'+(curM<=minM?' disabled':'')+'>&lsaquo;</button><b>'+first.toLocaleDateString("en-US",{timeZone:"UTC",month:"long",year:"numeric"})+'</b><button type="button" class="dp-nav" data-dpm="1" aria-label="Next month"'+(curM>=minM+5?' disabled':'')+'>&rsaquo;</button></div><div class="dp-grid">'+["Su","Mo","Tu","We","Th","Fr","Sa"].map(function(d,i){return '<span class="dp-wd'+((i%2&&i<6)||((rule.rapid||rule.thu)&&i===4)?' dp-mwf':'')+'">'+d+'</span>'}).join("");
   for(var i=0;i<startW;i++)h+='<span></span>';
   for(var d=1;d<=dim;d++){var t=ylD(vy,vm,d),iso=ylISO(t),ok=ylValid(t,rule,now),hol=ylHol(t)&&[1,3,5].indexOf(t.getUTCDay())>-1;
     h+='<button type="button" class="dp-d'+(ok?'':' off')+(iso===sel?' on':'')+(df.asap&&iso===ylISO(df.asap)?' first':'')+(hol?' hol':'')+'" data-dpd="'+iso+'"'+(ok?'':' disabled aria-disabled="true"')+' title="'+(ok?ylFmt(t):hol?'Holiday, no mail drop':'Not available')+'">'+d+'</button>'}
@@ -3690,7 +3809,6 @@ function lPrice(){
   var err=!(q>=200)?"Minimum order is 200 pieces.":((raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")?"Please choose Greeting Card or Folded Note.":"");
   return {envd:envd,i:i,base:base,add:add,ppc:r3(base+add),flat:flat,total:q>0?q*r3(base+add)+flat:0,err:err};
 }
-var LT_TUTORIAL_URL="";
 var LT_GRID_PREVIEW=6;
 function ltTplCustomFirst(t){
   var a=(t||[]).slice(), i=-1;
@@ -3705,67 +3823,267 @@ function ltEnvCustomFirst(L){
   if(i>0){var c=a.splice(i,1)[0];a.unshift(c)}
   return a;
 }
-function ltOpenTutorial(){
-  var body;
-  if(LT_TUTORIAL_URL){
-    var u=LT_TUTORIAL_URL, src=u;
-    if(/youtu\.be\/([^\?&]+)/i.test(u))src="https://www.youtube.com/embed/"+RegExp.$1;
-    else if(/youtube\.com\/watch\?v=([^&]+)/i.test(u))src="https://www.youtube.com/embed/"+RegExp.$1;
-    body=/youtube\.com\/embed|vimeo\.com/i.test(src)?'<div class="lt-tut"><iframe src="'+esc(src)+'" title="Order form tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>':'<div class="lt-tut"><video src="'+esc(u)+'" controls playsinline></video></div>';
-  }else{
-    body='<div class="lt-tut-ph"><div class="lt-tut-play" aria-hidden="true">&#9654;</div><p><b>Tutorial coming soon</b></p><p class="muted" style="margin:0">A walkthrough of this order form will play here.</p></div>';
+function ltPid(){
+  var p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}
+  if(!p)return "lt:";
+  var k=p.styles&&LS.cardStyle?LS.cardStyle:p.k;
+  return (LS.set==="hw"?"hw:":"lt:")+k;
+}
+function ltEnvRow(){
+  var id=ltPid(), sel=$("#ltEnv"), k=sel?sel.value:LS.env;
+  if(!k)return null;
+  var r=typeof optEnvRow==="function"?optEnvRow(id,k):null;
+  if(r)return r;
+  var L=typeof optEnvOf==="function"?optEnvOf(id):[];
+  for(var i=0;i<L.length;i++){if(optEnvLabel(L[i])===k||L[i][0]===k||L[i][1]===k)return L[i]}
+  return null;
+}
+function ltEnvThumb(r){
+  if(r&&r[3]>-1&&typeof OPTENVIMG!=="undefined"&&OPTENVIMG[r[3]])return OPTENVIMG[r[3]];
+  return "";
+}
+function ltTplRec(){
+  var p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}
+  if(!p||!LS.tpl)return null;
+  var gp=typeof galFind==="function"?galFind("letters",p.k):null;
+  var t=(gp&&gp.t)||[];
+  for(var i=0;i<t.length;i++)if(t[i][0]===LS.tpl)return t[i];
+  return null;
+}
+function ltTplImg(){
+  var t=ltTplRec();
+  return t?tUrl(t[1]):"";
+}
+function ltFontSummary(){
+  var id=ltPid(), st=(typeof OPS!=="undefined"&&OPS[id])||{}, ev=(typeof OPS!=="undefined"&&OPS["env:"+id])||{};
+  return {fs:st.fs||"",fc:st.fc||st.color||"",paper:st.bg||st.pc||st.paper||"",ef:ev.ef||st.ef||""};
+}
+function ltAddonLines(){
+  var L=[], p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}
+  var r=ltEnvRow();
+  if(r&&r[1]&&r[0]!=="NA"){
+    var cents=r[2]?Math.round(r[2]*100):0;
+    L.push(r[1]+(cents?(" +"+cents+"\u00a2"):""));
+    if(r[4]===1)L.push("Custom envelope design fee $65");
   }
-  modal("Watch tutorial",body,[{label:"Close",cls:"btn"}]);
+  if(LS.sticky)L.push("Yellow sticky note +6\u00a2");
+  if(LS.second===2)L.push("Circular with variable data +15\u00a2");
+  else if(LS.second)L.push("Circular page +10\u00a2");
+  if(LS.eos)L.push("Easy Offer System (EOS) +3\u00a2");
+  var id=ltPid();
+  if(typeof OPS!=="undefined"&&OPS[id]&&OPS[id].ef==="Print"&&typeof OPTEFPRINT!=="undefined"&&OPTEFPRINT[id])L.push("Envelope font: Print +"+Math.round(OPTEFPRINT[id]*100)+"\u00a2");
+  if(LS.undel)L.push("Undeliverable list $19");
+  if(LS.ret)L.push("Return mail list $49");
+  return L;
+}
+function ltMailDateLabels(){
+  if(LS.drops==="multi"&&LS.batchDates&&LS.batchDates.length){
+    return LS.batchDates.map(function(iso,i){return "Batch "+(i+1)+": "+(iso?ylFmt(ylParse(iso)): "Not set")});
+  }
+  if(LS.start)return [ylFmt(ylParse(LS.start))+(LS.day?" ("+String(LS.day).replace(/ \(.*/,"")+")":"")];
+  if(LS.day)return [LS.day];
+  return [];
+}
+function ltReminders(p){
+  var R=[];
+  if(p&&p.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")R.push("Choose Greeting Card or Folded Note.");
+  if(!LS.tpl)R.push("Pick a letter template.");
+  if(p&&!p.hw&&LS.env&&false){}
+  var hasEnv=false;try{hasEnv=!!(optEnvOf(ltPid())||[]).length}catch(e){}
+  if(hasEnv&&!LS.env)R.push("Pick an envelope.");
+  if(!LS.files||!LS.files.length)R.push("Upload a list so we can set the piece count from the cleaned records.");
+  if(!leadText(LS))R.push("Add a lead type.");
+  if(!LS.drops)R.push("Choose whether to mail all at once or in batches.");
+  if(LS.drops==="multi"&&!LS.batches)R.push("Choose how many batches.");
+  if(LS.drops==="multi"&&LS.batches&&(!LS.batchDates||LS.batchDates.length<+LS.batches))R.push("Pick a mail date for each batch.");
+  if(!LS.day&&!LS.start)R.push("Pick a mail date.");
+  if(!(LS.notes||"").trim())R.push("You can add order notes anytime.");
+  return R;
+}
+function ltWrapRail(grid,label){
+  if(!grid)return null;
+  var rail=grid.closest(".lt-rail");
+  if(!rail){
+    rail=document.createElement("div");rail.className="lt-rail";
+    var prev=document.createElement("button");prev.type="button";prev.className="lt-rail-btn lt-rail-prev";prev.setAttribute("aria-label","Previous "+label);prev.innerHTML="&#8249;";
+    var next=document.createElement("button");next.type="button";next.className="lt-rail-btn lt-rail-next";next.setAttribute("aria-label","Next "+label);next.innerHTML="&#8250;";
+    grid.parentNode.insertBefore(rail,grid);
+    rail.appendChild(prev);rail.appendChild(grid);rail.appendChild(next);
+  }
+  grid.classList.add("lt-rail-track");
+  var prev=rail.querySelector(".lt-rail-prev"), next=rail.querySelector(".lt-rail-next");
+  function stepSize(){var tile=grid.querySelector(".image-box,.opt-env");var r=tile&&tile.getBoundingClientRect();return r?r.width+8:Math.max(120,grid.clientWidth/4)}
+  function upd(){
+    var max=Math.max(0,grid.scrollWidth-grid.clientWidth-2);
+    prev.disabled=grid.scrollLeft<=2;
+    next.disabled=grid.scrollLeft>=max;
+  }
+  if(!grid._ltRailWired){
+    grid._ltRailWired=true;
+    prev.addEventListener("click",function(){if(prev.disabled)return;grid.scrollBy({left:-stepSize(),behavior:"smooth"})});
+    next.addEventListener("click",function(){if(next.disabled)return;grid.scrollBy({left:stepSize(),behavior:"smooth"})});
+    grid.addEventListener("scroll",upd,{passive:true});
+    window.addEventListener("resize",upd);
+  }
+  requestAnimationFrame(function(){requestAnimationFrame(upd)});
+  return rail;
+}
+function ltPickedHTML(kind){
+  if(kind==="tpl"){
+    var t=ltTplRec(), img=t?tUrl(t[1]):"", name=LS.tpl||"No template selected";
+    return '<div class="lt-picked" id="ltTplPicked">'+(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>')+'<div class="lt-picked-n">'+esc(name)+'<small>Letter template</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="tpl">Change</button></div>';
+  }
+  var r=ltEnvRow(), img=ltEnvThumb(r), name=r?r[1]:(LS.env||"No envelope selected");
+  var ph=r&&r[4]?'<span class="env-ph">Your design</span>':(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
+  return '<div class="lt-picked" id="ltEnvPicked">'+ph+'<div class="lt-picked-n">'+esc(name)+'<small>Envelope</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="env">Change</button></div>';
+}
+function ltEnsurePicked(col,kind){
+  if(!col)return;
+  var id=kind==="tpl"?"ltTplPicked":"ltEnvPicked";
+  var el=col.querySelector("#"+id);
+  var html=ltPickedHTML(kind);
+  if(el)el.outerHTML=html;
+  else{
+    var pill=col.querySelector(".lt-pillbar");
+    if(pill)pill.insertAdjacentHTML("afterend",html);
+    else col.insertAdjacentHTML("afterbegin",html);
+  }
+  var btn=col.querySelector(".lt-change[data-ltchg="+kind+"]");
+  if(btn)btn.onclick=function(){ltExpandSide(kind)};
+}
+function ltCollapseSide(kind){
+  var c=$("#ltCfg");if(!c)return;
+  var col=c.querySelector(kind==="tpl"?".lt-tpl":".lt-envcol");
+  if(!col)return;
+  if(kind==="tpl"&&!LS.tpl){col.classList.remove("lt-collapsed");return}
+  if(kind==="env"&&!LS.env){col.classList.remove("lt-collapsed");return}
+  ltEnsurePicked(col,kind);
+  col.classList.add("lt-collapsed");
+}
+function ltExpandSide(kind){
+  var c=$("#ltCfg");if(!c)return;
+  var col=c.querySelector(kind==="tpl"?".lt-tpl":".lt-envcol");
+  if(col)col.classList.remove("lt-collapsed");
+  var rail=col&&col.querySelector(".lt-rail-track");
+  if(rail){var on=rail.querySelector(".on, input:checked");if(on)on.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})}
 }
 function ltBalanceGrids(c){
   if(!c)c=$("#ltCfg");if(!c)return;
-  var N=LT_GRID_PREVIEW, split=c.querySelector(".lt-split");
-  function prep(items,isCustom){
-    var a=[].slice.call(items);if(!a.length)return a;
-    var host=a[0].parentNode, i=-1;
-    a.forEach(function(el,n){if(i<0&&isCustom(el))i=n});
-    if(i>0){host.insertBefore(a[i],a[0]);a=[].slice.call(host.children).filter(function(el){return items[0].matches?el.matches(items[0].tagName+(items[0].className?("."+items[0].className.trim().split(/\s+/).join(".")):"")):true});
-      // recount from grid
-      a=[].slice.call(host.querySelectorAll(items[0].getAttribute("class")?("."+items[0].className.trim().split(/\s+/).filter(function(x){return x&&x!=="on"&&x!=="just-picked"&&x!=="lt-more-hide"}).join(".")):items[0].tagName));
-    }
-    return a;
-  }
-  function apply(grid, items, label){
-    if(!grid)return;
-    var a=[].slice.call(items||[]);
-    var wrap=grid.closest(".lt-split-col")||grid.parentNode;
-    var extra=a.length>N;
-    var expanded=grid.classList.contains("lt-show-more");
-    var sel=a.filter(function(el){return el.classList.contains("on")||el.querySelector&&el.querySelector("input:checked")})[0];
-    if(sel&&a.indexOf(sel)>=N)expanded=true;
-    grid.classList.toggle("lt-show-more",expanded);
-    a.forEach(function(el,i){el.classList.toggle("lt-more-hide", i>=N && !expanded)});
-    var btn=wrap.querySelector(":scope > .lt-more-btn");
-    if(!extra){if(btn)btn.remove();return}
-    if(!btn){btn=document.createElement("button");btn.type="button";btn.className="btn sec sm lt-more-btn";wrap.appendChild(btn)}
-    var left=a.length-N;
-    btn.textContent=expanded?"Show fewer":(label+" ("+left+")");
-    btn.setAttribute("aria-expanded",expanded?"true":"false");
-    btn.onclick=function(){grid.classList.toggle("lt-show-more");apply(grid,a,label)};
-  }
+  var split=c.querySelector(".lt-split");
+  var more=c.querySelectorAll(".lt-more-btn");
+  for(var i=0;i<more.length;i++)more[i].remove();
+  var hid=c.querySelectorAll(".lt-more-hide");
+  for(var j=0;j<hid.length;j++)hid[j].classList.remove("lt-more-hide");
   var tg=c.querySelector(".lt-split .tg-grid");
   if(tg){
     var boxes=tg.querySelectorAll(".image-box");
     var first=-1;[].forEach.call(boxes,function(el,n){if(first<0&&/New Custom Design/i.test(el.textContent||""))first=n});
     if(first>0)tg.insertBefore(boxes[first],boxes[0]);
-    apply(tg, tg.querySelectorAll(".image-box"), "More templates");
+    ltWrapRail(tg,"templates");
   }
   var eg=c.querySelector(".lt-split .env-grid")||c.querySelector(".lt-split .op-env .opt-sws");
   if(eg){
     var tiles=eg.querySelectorAll(".opt-env");
     var fi=-1;[].forEach.call(tiles,function(el,n){if(fi<0&&(el.querySelector(".env-ph")||/Your design|Custom envelope/i.test(el.textContent||""))&&!/Same custom|Same design as A/i.test(el.textContent||""))fi=n});
     if(fi>0)eg.insertBefore(tiles[fi],tiles[0]);
-    apply(eg, eg.querySelectorAll(".opt-env"), "More envelopes");
+    ltWrapRail(eg,"envelopes");
+    [].forEach.call(eg.querySelectorAll("input[type=radio]"),function(inp){
+      if(inp._ltCollapse)return;inp._ltCollapse=true;
+      inp.addEventListener("change",function(){
+        var lab=inp.closest(".opt-env");
+        var name=lab?((lab.querySelector(".ft-n")||{}).textContent||inp.value):inp.value;
+        LS.env=($("#ltEnv")&&$("#ltEnv").value)||name;
+        ltCollapseSide("env");
+        if(typeof lUpdate==="function")lUpdate();
+        if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+      });
+    });
   }
   if(split){
     var envN=(eg&&eg.querySelectorAll(".opt-env").length)||0;
     split.classList.toggle("lt-split-one", envN===0);
   }
+  if(!c._ltChgWired){
+    c._ltChgWired=true;
+    c.addEventListener("click",function(e){var b=e.target.closest(".lt-change");if(!b)return;ltExpandSide(b.getAttribute("data-ltchg"))});
+  }
+  if(LS.tpl)ltCollapseSide("tpl");
+}
+function ltUpdateBuy(){
+  var tiles=$("#ltBuyTiles"), qty=$("#ltBuyQty"), post=$("#ltBuyPost"), dates=$("#ltBuyDates"), add=$("#ltBuyAddons"), hid=$("#lqty");
+  if(hid&&LS.qty)hid.value=LS.qty;
+  if(qty){
+    var qinp=qty.querySelector("#lqtyVis")||qty;
+    if(qty.querySelector){var v=qty.querySelector("#lqtyVis");if(v)v.value=LS.qty||""}
+    else qty.textContent=(LS.qty||0).toLocaleString("en-US");
+  }
+  if(post)post.textContent=LS.post==="fc"?"First Class":LS.post==="np"?"Nonprofit Presort":LS.post==="std"?"Standard (Marketing Mail)":"Not chosen yet";
+  if(dates){
+    var L=ltMailDateLabels();
+    dates.innerHTML=L.length?L.map(function(x){return esc(x)}).join("<br>"):"Not chosen yet";
+  }
+  if(add){
+    var A=ltAddonLines();
+    add.innerHTML=A.length?("<b>Add-ons per piece</b><div>"+A.map(function(x){return esc(x)}).join("<br>")+"</div>"):"";
+  }
+  if(tiles){
+    var t=ltTplRec(), img=t?tUrl(t[1]):"", tn=LS.tpl||"No template selected yet";
+    var r=ltEnvRow(), eimg=ltEnvThumb(r), en=r?r[1]:(LS.env||"No envelope selected yet");
+    var ehtml=r&&r[4]&&!eimg?'<span class="env-ph">Your design</span>':(eimg?'<img src="'+eimg+'" alt="">':'<span class="env-ph">Envelope</span>');
+    var th=img?'<img src="'+img+'" alt="">':'<span class="env-ph">Letter</span>';
+    var hasEnv=true;try{hasEnv=((optEnvOf(ltPid())||[]).length>0)}catch(e){}
+    tiles.innerHTML='<div class="lt-buy-tile">'+th+'<div><small>Letter</small><b>'+esc(tn)+'</b></div></div>'+(hasEnv?'<div class="lt-buy-tile">'+ehtml+'<div><small>Envelope</small><b>'+esc(en)+'</b></div></div>':'');
+  }
+}
+function ltNextDrop(from,rule){
+  var t=ylAdd(from,1), i=0;
+  while(i<60&&!ylValid(t,rule)){t=ylAdd(t,1);i++}
+  return t;
+}
+function ltRenderBatchDates(){
+  var box=$("#ltBatchDates");if(!box)return;
+  var n=(LS.drops==="multi")?(+LS.batches||0):0;
+  if(n<2){box.hidden=true;box.innerHTML="";if(typeof ltUpdateBuy==="function")ltUpdateBuy();return}
+  n=Math.min(12,Math.max(2,n));
+  var rule=ylRuleFor("lt"), df=ylDefaults(rule);
+  LS.batchDates=LS.batchDates||[];
+  var prev=ylParse(LS.batchDates[0]||LS.start)||df.asap;
+  for(var i=0;i<n;i++){
+    var t=LS.batchDates[i]?ylParse(LS.batchDates[i]):null;
+    if(!t||!ylValid(t,rule)){t=i===0?prev:ltNextDrop(prev,rule);LS.batchDates[i]=ylISO(t)}
+    prev=ylParse(LS.batchDates[i]);
+  }
+  LS.batchDates=LS.batchDates.slice(0,n);
+  box.hidden=false;
+  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch <span class="req">*</span></label><p class="help">Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+LS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div></div>';
+  $$(".lt-bdate",box).forEach(function(row){
+    var i=+row.getAttribute("data-bi"), a=$(".lt-bdate-btn",row), pop=$(".dp-pop",row);
+    var st={start:LS.batchDates[i]};
+    var open=function(){var t=ylParse(st.start)||df.asap;ylCal("lt",st,pop,t.getUTCFullYear(),t.getUTCMonth()+1);pop.hidden=false;a.setAttribute("aria-expanded","true")};
+    var close=function(){pop.hidden=true;a.setAttribute("aria-expanded","false")};
+    a.onclick=function(e){e.stopPropagation();pop.hidden?open():close()};
+    pop.onclick=function(e){
+      e.stopPropagation();
+      var nbtn=e.target.closest("[data-dpm]");
+      if(nbtn&&!nbtn.disabled){var vy=+pop.getAttribute("data-vy"),vm=+pop.getAttribute("data-vm")+(+nbtn.getAttribute("data-dpm"));if(vm<1){vm=12;vy--}if(vm>12){vm=1;vy++}ylCal("lt",st,pop,vy,vm);return}
+      var d=e.target.closest("[data-dpd]");if(!d||d.disabled)return;
+      st.start=d.getAttribute("data-dpd");LS.batchDates[i]=st.start;
+      $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
+      if(i===0){LS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("lt",LS,st.start,df)}
+      close();a.focus();ltUpdateBuy();
+    };
+  });
+  if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+}
+function ltPacketHTML(o){
+  var d=(typeof ODET!=="undefined"&&ODET[o.id])||{}, drops=o.drops||[];
+  var img=d.tplImg||o.img||"", eimg=d.envImg||o.envImg||"";
+  var thumbs=(img||eimg||d.env||d.tpl)?'<div class="lt-packet-thumbs">'+(img?'<img src="'+img+'" alt="'+esc(d.tpl||o.prod||"")+'">':'')+(eimg?'<img src="'+eimg+'" alt="'+esc(d.env||"")+'">':(d.env&&d.env!=="None"?'<span class="env-ph">'+esc(d.env)+'</span>':''))+'</div>':"";
+  var kv="";
+  var rows=[["Product",o.prod],["Template",d.tpl||o.tpl||""],["Envelope",d.env||o.env||""],["Quantity",(o.qty||0).toLocaleString("en-US")],["Postage",o.post||""],["Font",d.font||""],["Font color",d.fcol||""],["Paper",d.paper||""],["Lead type",d.lead||o.lead||""],["Add-ons",(d.addons||o.addons||[]).join? (d.addons||o.addons).join(", ") : (d.addons||"")],["List",d.file||o.list||""],["Notes",d.notes||o.notes||""]];
+  kv='<div class="kv">'+rows.filter(function(x){return x[1]}).map(function(x){return "<b>"+esc(x[0])+"</b><span>"+esc(String(x[1]))+"</span>"}).join("")+"</div>";
+  var bt=drops.length?'<div class="tw" style="margin-top:10px"><table><thead><tr><th>Batch</th><th>Mail date</th></tr></thead><tbody>'+drops.map(function(dt,i){return "<tr><td>Batch "+(i+1)+"</td><td>"+esc(dt)+"</td></tr>"}).join("")+"</tbody></table></div>":"";
+  return '<div class="box lt-packet" style="margin-top:16px"><h4>Print packet</h4><p class="muted" style="margin:0 0 10px">Job data that follows this order through coding, printing and the mail drops.</p>'+thumbs+kv+bt+"</div>";
 }
 function ltGotoStep(el){
   if(!el)return;
@@ -3829,19 +4147,20 @@ function renderLCfg(){
   more+='<div class="fld"><label class="f">Easy Offer System <button type="button" class="pill-help" id="leosHelp">What is this?</button></label><div class="radios"><label><input type="radio" name="leos" value="0"'+(!LS.eos?" checked":"")+'>No</label><label><input type="radio" name="leos" value="1"'+(LS.eos?" checked":"")+'>Yes (+3 cents)</label></div></div>'+eosxHTML("lt",LS.eos);
   more+='<div class="fld"><label class="f">Undeliverable list <button type="button" class="pill-help" id="lundHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lundel" value="1"'+(LS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="lundel" value="0"'+(!LS.undel?" checked":"")+'>No</label></div></div>';
   more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="lretHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lret" value="1"'+(LS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="lret" value="0"'+(!LS.ret?" checked":"")+'>No</label></div></div>';
-  more+='<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS);
+  more+='<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+[YL_DAYS[0],YL_DAYS[1],YL_DAYS[2],YL_THU,YL_DAYS[3]].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS)+'<div id="ltBatchDates"></div>';
   more+=listOptsHTML("lt",LS,1);
   var accs='<div class="lt-accs"><details class="lt-acc" id="ltPostAcc"><summary><span class="lt-acc-k">Postage <span class="req">*</span><small id="ltPostSum"></small></span></summary><div class="lt-acc-body"><div id="lpseg"></div></div></details><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Change your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details><details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details><details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small>Lead type, extras and mail schedule</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
-  var upbar='<div class="panel of-form lt-upbar" id="ltUpbar"><div class="lt-listhead"><h3>Upload your list &amp; artwork</h3><button type="button" class="pill-help" id="ltUptHelp">What\'s this?</button></div><div class="lt-upt-pop" id="ltUptPop" hidden><p>When you upload a list, we automatically match your columns, then remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count.</p><ol class="upt-steps"><li>Upload</li><li>Match columns</li><li>Clean list</li><li>Agent and return address</li><li>Review</li></ol><p style="margin:0"><a href="#/budget-maximizer">Learn more</a></p></div><div class="lt-upbar-row"><div class="lt-upcard">'+dropBox("llist","Your list","CSV only","Select files",LS.files)+'</div><div class="lt-upcard">'+dropBox("lart","Artwork","Optional","Select files",LS.art)+'</div></div><a href="#" class="lt-csv-link" id="lexCsv">Example CSV</a></div>';
-  var qty='<div class="panel of-form lt-qtyrow" id="lPricePanel"><div class="buyrow"><div><div class="fld" style="margin:0"><label class="f" for="lqty">How many pieces?</label><input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'"><p class="help qmin">Filled from your cleaned list when you upload one. Minimum 200.</p></div><div class="err" id="lqerr"></div></div><div class="sumbox" id="lsum" style="margin-top:0"></div><button class="btn lg" id="laddCart">Add to cart</button></div><p class="muted" style="margin:8px 0 0">Mockup: nothing is ordered or charged.</p></div>';
-  var notes='<div class="panel of-form"><h3>Notes</h3><div class="fld"><label class="f" for="lnotes">Order notes <span class="req">Required*</span></label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld" style="margin:0 0 8px"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div><div class="fld lt-notes-extra" style="margin:0"><label class="f" style="margin:0">Other information (optional)</label><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><p class="help" style="margin:0">Any other files we should have, such as a logo or an example.</p></div><ul class="files" id="files-lother">'+fileList(LS.other,"lother")+'</ul></div>';
+  var upbar='<div class="panel of-form lt-upbar" id="ltUpbar"><div class="lt-listhead"><h3>Upload your list</h3><button type="button" class="pill-help" id="ltUptHelp">What\'s this?</button></div><div class="lt-upt-pop" id="ltUptPop" hidden><p>When you upload a list, we automatically match your columns, then remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count.</p><ol class="upt-steps"><li>Upload</li><li>Match columns</li><li>Clean list</li><li>Agent and return address</li><li>Review</li></ol><p style="margin:0"><a href="#/budget-maximizer">Learn more</a></p></div>'+dropBox("llist","Your list","CSV only","Select files",LS.files)+'<a href="#" class="lt-csv-link" id="lexCsv">Example CSV</a></div>';
+  var art='<details class="lt-acc lt-artacc" id="ltArtAcc"><summary><span class="lt-acc-k">Additional files and/or artwork</span></summary><div class="lt-acc-body lt-artrow"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lartInp"></label><button type="button" class="btn sm" id="lartUp">Upload</button><ul class="files" id="files-lart">'+fileList(LS.art||[],"lart")+'</ul></div></details>';
+  var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-tiles" id="ltBuyTiles"></div><div class="lt-buy-meta"><div class="lt-buy-kv"><span>Pieces</span><input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:6px 0 0">From your cleaned list when you upload one. Minimum 200.</p></div><div class="lt-buy-kv"><span>Postage</span><b id="ltBuyPost"></b></div><div class="lt-buy-kv"><span>Mail dates</span><b id="ltBuyDates"></b></div></div><div class="lt-buy-addons" id="ltBuyAddons"></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
+  var notes='<div class="panel of-form"><h3>Notes</h3><div class="fld"><label class="f" for="lnotes">Order notes</label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld" style="margin:0 0 8px"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div><div class="fld lt-notes-extra" style="margin:0"><label class="f" style="margin:0">Other information (optional)</label><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><p class="help" style="margin:0">Any other files we should have, such as a logo or an example.</p></div><ul class="files" id="files-lother">'+fileList(LS.other,"lother")+'</ul></div>';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'<p class="help pseg-np"><a href="#" id="npHow">How to apply for nonprofit postage authorization</a></p></div></div>';
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltTutBtn">Watch tutorial</button><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split"><div class="lt-split-col lt-tpl"><h3>Templates</h3>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><h3>Envelopes</h3>'+envCol+'</div></div>'+accs+upbar+notes+qty+'</div>'+priceModal;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+accs+upbar+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
-  wireField(c,gp,function(i){LS.tpl=gp.t[i][0];$("#lqerr").textContent="";ltApplyTpl(LS.tpl,pid);fa14Tpl("lt")});
-  $("#ltEnv").onchange=function(){LS.env=this.value;lUpdate()};$("#lday").onchange=function(){LS.day=this.value};$("#ldrops").onchange=function(){LS.drops=this.value;var bf=$("#ltBatchF");if(bf)bf.hidden=this.value!=="multi"};schedWire(c,"lt",LS);listOptsWire(c,"lt",LS);$("#lnotes").oninput=function(){LS.notes=this.value};if(!stickyOK(p.k))LS.sticky=false;if(!secondOK(p.k)||p.hw)LS.second=false;$("#loname").oninput=function(){LS.oname=this.value};
+  wireField(c,gp,function(i){LS.tpl=gp.t[i][0];$("#lqerr").textContent="";ltApplyTpl(LS.tpl,pid);fa14Tpl("lt");if(typeof ltCollapseSide==="function")ltCollapseSide("tpl");if(typeof ltUpdateBuy==="function")ltUpdateBuy()});
+  $("#ltEnv").onchange=function(){LS.env=this.value;lUpdate();if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()};$("#lday").onchange=function(){LS.day=this.value;if(typeof ltUpdateBuy==="function")ltUpdateBuy()};$("#ldrops").onchange=function(){LS.drops=this.value;var bf=$("#ltBatchF");if(bf)bf.hidden=this.value!=="multi";if(this.value!=="multi")LS.batches="";if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()};schedWire(c,"lt",LS);(function(){var b=$("#ltBatch");if(b){var prev=b.onchange;b.onchange=function(){if(prev)prev.apply(this,arguments);LS.batches=this.value;if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}})();listOptsWire(c,"lt",LS);$("#lnotes").oninput=function(){LS.notes=this.value};if(!stickyOK(p.k))LS.sticky=false;if(!secondOK(p.k)||p.hw)LS.second=false;$("#loname").oninput=function(){LS.oname=this.value};
   $("#lqty").oninput=function(){LS.qty=parseInt(this.value,10)||0;lUpdate()};
   $$("input[name=cardStyle]",c).forEach(function(r){r.onchange=function(){LS.cardStyle=r.value;LS.tpl="";LS.env="";renderLCfg()}});
   var np=$("#npHow");if(np)np.onclick=function(e){e.preventDefault();modal("How to apply for nonprofit postage authorization",FAQ[0][1],[{label:"Close",cls:"btn"}])};
@@ -3852,15 +4171,17 @@ function renderLCfg(){
   var rh=$("#lretHelp");if(rh)rh.onclick=function(){modal("Return Mail List","<p>A Return Mail List is built after mailing from USPS returns, about 7 days after delivery, and is $49 per order. It is never 100% complete.</p>",[{label:"Close",cls:"btn"}])};
   var cx=$("#lexCsv");if(cx)cx.onclick=function(e){e.preventDefault();demo("Example .CSV","On the live site this downloads an example list file. Nothing downloads in the mockup.")};
   var upt=$("#ltUptHelp"),pop=$("#ltUptPop");if(upt&&pop)upt.onclick=function(){pop.hidden=!pop.hidden};
-  var tut=$("#ltTutBtn");if(tut)tut.onclick=function(){ltOpenTutorial()};
   if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);
+  if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();
+  if(typeof ltUpdateBuy==="function")ltUpdateBuy();
   var see=$("#ltSeePrice"),pm=$("#ltPriceModal"),pc=$("#ltPriceClose");
   if(see&&pm){see.onclick=function(){pm.hidden=false};if(pc)pc.onclick=function(){pm.hidden=true};pm.addEventListener("click",function(e){if(e.target===pm)pm.hidden=true})}
-  [["llist",LS.files],["lart",LS.art],["lother",LS.other]].forEach(function(x){var id=x[0],arr=x[1],d=$("#drop-"+id)||$("input[data-for="+id+"]")&&$("#drop-"+id);
-    if(id==="lother"){
-      var inp=$("#lotherInp"),fl=$("#files-lother");
-      if(inp)inp.onchange=function(){[].forEach.call(this.files,function(f){arr.push(f.name)});fl.innerHTML=fileList(arr,id);this.value=""};
+  [["llist",LS.files],["lart",LS.art||(LS.art=[])],["lother",LS.other]].forEach(function(x){var id=x[0],arr=x[1],d=$("#drop-"+id)||$("input[data-for="+id+"]")&&$("#drop-"+id);
+    if(id==="lother"||id==="lart"){
+      var inp=$(id==="lart"?"#lartInp":"#lotherInp"),fl=$("#files-"+id);
+      if(inp)inp.onchange=function(){[].forEach.call(this.files,function(f){arr.push(f.name)});if(fl)fl.innerHTML=fileList(arr,id);this.value=""};
       if(fl)fl.onclick=function(e){var b=e.target.closest("[data-rm]");if(!b)return;arr.splice(+b.getAttribute("data-rm").split(":")[1],1);fl.innerHTML=fileList(arr,id)};
+      if(id==="lart"){var up=$("#lartUp");if(up)up.onclick=function(){up.textContent=arr.length?"Uploaded":"Upload"}};
       return;
     }
     var add=function(list){[].forEach.call(list,function(f){arr.push(f.name)});$("#files-"+id).innerHTML=fileList(arr,id);if(id==="llist"&&list.length&&upCheck(list,$("#drop-llist")))fa14Match([].map.call(list,function(f){return f.name}),{st:LS})};
@@ -3870,19 +4191,22 @@ function renderLCfg(){
     $("#files-"+id).onclick=function(e){var b=e.target.closest("[data-rm]");if(!b)return;arr.splice(+b.getAttribute("data-rm").split(":")[1],1);$("#files-"+id).innerHTML=fileList(arr,id)}});
   $("#laddCart").onclick=function(){
     if(p.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes"){$("#lqerr").textContent="Please choose Greeting Card or Folded Note.";var n=$("#styleNeed")||$("#stylePrompt");if(n)n.scrollIntoView({behavior:"smooth",block:"center"});return}
-    if(!LS.tpl){$("#lqerr").textContent="Please choose a template.";$("#tplField").scrollIntoView({behavior:"smooth",block:"center"});return}
-    if(!LS.day){$("#lqerr").textContent="Please choose a Mail Day.";$("#lday").focus();var acc=$("#ltMoreAcc");if(acc)acc.open=true;return}
-    if(!LS.drops){$("#lqerr").textContent="Please choose how to send this mailing.";$("#ldrops").focus();var acc2=$("#ltMoreAcc");if(acc2)acc2.open=true;return}
-    if(LS.drops==="multi"&&!LS.batches){$("#lqerr").textContent="Please choose how many batches.";$("#ltBatches").focus();return}
-    if(!LS.post){$("#lqerr").textContent="Please choose a Postage option.";var pa=$("#ltPostAcc");if(pa)pa.open=true;$("#lpseg").scrollIntoView({behavior:"smooth",block:"center"});return}
-    if(!(LS.notes||"").trim()){$("#lqerr").textContent="Order Notes are required.";$("#lnotes").focus();return}
-    if($("#ltStart")&&!ylStartOK("lt",LS)){$("#lqerr").textContent="That campaign start date is no longer open. Pick another start date.";$("#ltStart").scrollIntoView({behavior:"smooth",block:"center"});return}
-    if(fa14Fail("lt"))return;
-    if(!leadText(LS)){$("#lqerr").textContent="Add at least one Lead Type for your list.";var acc3=$("#ltMoreAcc");if(acc3)acc3.open=true;$("#ltLeadIn").focus();$("#ltLO").scrollIntoView({behavior:"smooth",block:"center"});return}
-    var pr=lPrice();if(pr.err){$("#lqerr").textContent=pr.err;$("#lqty").focus();return}
-    modal("Ready to add to your cart?","<p>Your list"+(LS.files.length?" ("+esc(LS.files.join(", "))+")":" (sample list)")+" is ready. Press Cancel to keep editing, or Add to Cart to continue.</p>",[{label:"Cancel",cls:"btn sec"},{label:"Add to Cart",cls:"btn",fn:function(){
-      CART.push({name:p.name,img:p.img,post:{std:POST_STD,fc:POST_FC,np:POST_NP}[LS.post],tpl:LS.tpl,eos:LS.eos,undel:LS.undel,ret:LS.ret,day:LS.day,list:LS.files.length?LS.files.join(", "):"sample-list.csv (sample)",qty:LS.qty,ppc:pr.ppc,flat:pr.flat,oname:LS.oname,extra:(LS.env&&LS.env!=="None"?"Envelope: "+LS.env:"")+(LS.sticky?" · Yellow sticky note":"")+(LS.second?" · Second page: "+(LS.second===2?"Circular with variable data (+15 cents)":"Circular page (+10 cents)"):"")+(!p.hw&&p.k==="trifold"?" · Stamp: Live Stamp"+(LS.bgs?" · Background Style: "+LS.bgs:""):"")+(LS.drops==="multi"&&LS.batches?" · "+LS.batches+" batches":"")+(LS.start?" · Start "+ylMDY(ylParse(LS.start)):""),lead:leadText(LS),desc:"Lead type: "+leadText(LS)});
-      cartBadge();setTimeout(function(){location.hash="#/cart"},10)}}]);
+    if(!LS.post)LS.post="std";
+    if(!(LS.qty>=200))LS.qty=200;
+    if(!LS.day)LS.day="ASAP";
+    if(!LS.start){var df=ylDefaults(ylRuleFor("lt"));if(df.asap)LS.start=ylISO(df.asap)}
+    if(!LS.drops)LS.drops="all";
+    if(LS.drops==="multi"&&typeof ltRenderBatchDates==="function")ltRenderBatchDates();
+    var pr=lPrice();
+    var fonts=ltFontSummary();
+    var addons=ltAddonLines();
+    var r=ltEnvRow();
+    var dates=LS.drops==="multi"&&LS.batchDates&&LS.batchDates.length?LS.batchDates.map(function(iso){return ylMDY(ylParse(iso))||ylFmt(ylParse(iso))}):(LS.start?[ylMDY(ylParse(LS.start))||ylFmt(ylParse(LS.start))]:[]);
+    var reminders=ltReminders(p);
+    var extra=(addons.length?addons.join(" · "):"")+(LS.drops==="multi"&&LS.batches?" · "+LS.batches+" batches":"")+(!p.hw&&p.k==="trifold"?" · Stamp: Live Stamp"+(LS.bgs?" · Background Style: "+LS.bgs:""):"");
+    CART.push({kind:"lt",name:p.name,img:ltTplImg()||p.img,envImg:ltEnvThumb(r),envName:r?r[1]:(LS.env||""),post:{std:POST_STD,fc:POST_FC,np:POST_NP}[LS.post]||POST_STD,postKey:LS.post,tpl:LS.tpl||"",eos:LS.eos,undel:LS.undel,ret:LS.ret,day:LS.day,start:LS.start,drops:LS.drops,batches:LS.batches,batchDates:dates,list:LS.files.length?LS.files.join(", "):"",qty:LS.qty,ppc:pr.ppc||pr.base||0,flat:pr.flat||0,oname:LS.oname,notes:LS.notes||"",files:(LS.art||[]).concat(LS.other||[]),addons:addons,fonts:fonts,lead:leadText(LS),reminders:reminders,extra:extra,desc:(leadText(LS)?"Lead type: "+leadText(LS):"")});
+    cartBadge();
+    location.hash="#/cart";
   };
   if(typeof ltSyncAcc==="function")ltSyncAcc();
   lUpdate();
@@ -3896,9 +4220,10 @@ function lUpdate(){
   $("#lptable").innerHTML=d+m;$("#lqerr").textContent=pr.err;
   var h=$("#lpostHelp");if(h)h.innerHTML=!LS.post?"Pick a postage tab above.":LS.post==="fc"?"<b>First Class:</b> Faster, and undeliverable mail is returned to you."+(p.hw?"":" Adds $0.241 each."):LS.post==="np"?"<b>Nonprofit:</b> For USPS-authorized nonprofits. Standard price minus $0.435 standard postage plus the $0.225 USPS nonprofit rate, so $0.210 less per piece.":"<b>Standard:</b> Cheaper and slower. Bad addresses aren't returned.";
   var s=$("#lsum");
-  if(raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes"){s.innerHTML='<div class="sumrow"><span>Your price</span><b>Please choose Greeting Card or Folded Note</b></div>';$("#laddCart").disabled=true;$("#lqerr").textContent=pr.err||"Please choose Greeting Card or Folded Note.";return}
-  if(pr.err||!LS.post){s.innerHTML='<div class="sumrow"><span>Your price</span><b>'+(!LS.post?"Choose a Postage option":"Fix the quantity")+'</b></div>';$("#laddCart").disabled=!!pr.err;return}
-  $("#laddCart").disabled=false;
+  if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+  var addBtn=$("#laddCart");if(addBtn)addBtn.disabled=false;
+  if(raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes"){s.innerHTML='<div class="sumrow"><span>Your price</span><b>Please choose Greeting Card or Folded Note</b></div>';return}
+  if(pr.err||!LS.post){s.innerHTML='<div class="sumrow"><span>Your price</span><b>'+(!LS.post?"Choose a Postage option":"Fix the quantity")+'</b></div>';return}
   s.innerHTML='<div class="sumrow"><span>'+{std:"Standard",fc:"First Class",np:"Nonprofit Presort"}[LS.post]+' price per piece ('+TL[pr.i].replace("&infin;","+")+')</span><b>'+money(pr.base,3)+'</b></div>'+(LS.second&&!p.hw&&secondOK(p.k)?'<div class="sumrow"><span>Second page: '+(LS.second===2?"Circular with variable data":"Circular page")+'</span><b>+'+money(LS.second===2?.15:.10,3)+' each</b></div>':'')+(pr.add?'<div class="sumrow"><span>All add-ons per piece</span><b>+'+money(pr.add,3)+'</b></div>':'')+'<div class="sumrow"><span>'+LS.qty.toLocaleString("en-US")+' pieces x '+money(pr.ppc,3)+'</span><b>'+money(LS.qty*pr.ppc)+'</b></div>'+(pr.flat-(pr.envd||0)?'<div class="sumrow"><span>List services</span><b>+'+money(pr.flat-(pr.envd||0))+'</b></div>':'')+(pr.envd?'<div class="sumrow"><span>Custom envelope design fee</span><b>+'+money(pr.envd)+'</b></div>':'')+'<div class="sumrow big"><span>Estimated total</span><b id="ltotalAmt">'+money(pr.total)+'</b></div>';
 }
 
@@ -4037,7 +4362,14 @@ window.__bpLogin=function(v){LOGGED=v!==false};
 /* ---------- Fix 138: Order received / Thank you (woocommerce/checkout/thankyou.php) ---------- */
 var LASTORDER=null;
 function sampleNewOrder(){return {id:204519,placed:"Oct 29, 2026",time:"Oct 29, 2026, 8:41 AM",email:"jane@example.com",items:[{name:"Letter with #10 Envelope",desc:"Template: Yellow Letter Classic. First Class postage. 1 drop: 11/03/26",qty:1000,ppc:.829,flat:0}],pay:"Credit card (example)",file:"jane-sample-list-oct29.csv",hw:false}}
-function placeOrder(){var o=sampleNewOrder();if(CART.length){o.items=CART.map(function(it){return {name:it.name,desc:it.desc||"",qty:it.qty,ppc:it.ppc,flat:it.flat||0}});o.hw=CART.some(function(it){return /handwritten/i.test(it.name)})}LASTORDER=o;return o}
+function placeOrder(){var o=sampleNewOrder();if(CART.length){var it=CART[0];
+    o.items=CART.map(function(x){return {name:x.name,desc:x.desc||"",qty:x.qty,ppc:x.ppc,flat:x.flat||0,tpl:x.tpl,envName:x.envName,img:x.img,envImg:x.envImg,addons:x.addons,batchDates:x.batchDates,post:x.post}});
+    o.hw=CART.some(function(x){return /handwritten/i.test(x.name)});
+    o.prod=it.name;o.qty=it.qty;o.ppc=it.ppc;o.post=it.post||o.post;o.tpl=it.tpl;o.env=it.envName;o.img=it.img;o.envImg=it.envImg;o.addons=it.addons||[];o.fonts=it.fonts;o.lead=it.lead;o.notes=it.notes;o.list=it.list;o.name=it.oname||o.name;o.paid=true;o.st=o.st||"proof";o.done=0;
+    o.drops=(it.batchDates&&it.batchDates.length)?it.batchDates.slice():(it.start?[((typeof ylMDY==="function"?ylMDY(ylParse(it.start)):it.start)||it.start)]:(o.drops||[]));
+    if(typeof ODET!=="undefined")ODET[o.id]={tpl:it.tpl||"",env:it.envName||"None",font:(it.fonts&&it.fonts.fs)||"",fcol:(it.fonts&&it.fonts.fc)||"",paper:(it.fonts&&it.fonts.paper)||"",sticky:it.sticky?"Yes":"NA",second:it.second?(it.second===2?"Circular with variable data":"Circular page"):"NA",notes:it.notes||"",file:it.list||"",addons:it.addons||[],batchDates:o.drops.slice(),tplImg:it.img||"",envImg:it.envImg||"",lead:it.lead||""};
+    if(typeof ORDERS!=="undefined"&&!ofind(o.id))ORDERS.unshift({id:o.id,date:o.date||"2026-10-29",placed:o.placed,st:o.st||"proof",prod:o.prod,post:(/First/i.test(o.post||"")?"First Class":"Standard"),qty:o.qty,ppc:o.ppc,drops:o.drops,done:0,name:o.name,paid:true,img:o.img,envImg:o.envImg,eos:!!it.eos});
+  }LASTORDER=o;return o}
 function ordTot(o){return o.items.reduce(function(s,it){return s+it.qty*it.ppc+(it.flat||0)},0)}
 bp("order-received","Order received",function(root,arg,Q){
   var o=LASTORDER||sampleNewOrder(),v=Q.v||"",tot=ordTot(o),base="#/order-received/"+o.id;
@@ -4845,7 +5177,7 @@ function optOrderEnv(kind,c,id){var pan=c.querySelector(".cfg .panel")||c.queryS
   var cur=L[labels.indexOf(LS.env)][0],d=document.createElement("div");d.className="fld op-pick op-env";
   var OPE=OPS["env:"+id]||(OPS["env:"+id]={});d.innerHTML='<span class="op-h">Envelope</span>'+((L.length===1&&kind!=="lt")?'<p class="opt-fixed" style="margin:0">'+esc(L[0][1])+' <span class="muted">(only choice)</span></p>':'<div class="op-row">'+optEnvTiles(L,cur,"openv"+kind)+'</div>'+(optIsCustom(id,cur)?optEnvCustomBox("opEC"+kind,OPE):''));
   var f=sel.closest(".fld");if(f){f.style.display="none";f.insertAdjacentElement("afterend",d)}
-  [].forEach.call(d.querySelectorAll("input[type=radio]"),function(i){i.onchange=function(){var r=optEnvRow(id,i.value);LS.env=optEnvLabel(r);sel.value=LS.env;if(typeof lUpdate==="function")lUpdate();optOrderEnv(kind,c,id)}});optEnvCustomWire(d,"opEC"+kind,OPE,function(){optOrderEnv(kind,c,id)})}
+  [].forEach.call(d.querySelectorAll("input[type=radio]"),function(i){i.onchange=function(){var r=optEnvRow(id,i.value);LS.env=optEnvLabel(r);sel.value=LS.env;if(typeof lUpdate==="function")lUpdate();optOrderEnv(kind,c,id);if(kind==="lt"){if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}});optEnvCustomWire(d,"opEC"+kind,OPE,function(){optOrderEnv(kind,c,id)})}
 /* round 5: the regular order page gets the live site's Font style, Font color, Paper color (live label "Background") and Envelope font pickers, restyled. Same options as data_template_ylhq.php, nothing new. */
 var OPS={};
 function optOrderPickers(kind,c){var id=pageProd(kind),olds=c.querySelectorAll(".op-pick:not(.op-env)");for(var i=0;i<olds.length;i++)olds[i].remove();var pan=c.querySelector(".cfg .panel")||c.querySelector(".panel");if(!id||!pan)return;if(kind==="lt"){
@@ -4931,6 +5263,8 @@ var ODET={204518:{tpl:"Yellow Half Page",env:"None",font:"Typed",fcol:"Black",pa
  202640:{tpl:"Yellow Half Page",env:"None",font:"Typed",fcol:"Black",paper:"White",sticky:"NA",second:"NA",notes:"",file:"tax-delinquent.csv"}};
 function fa14DetailHTML(o){var d=ODET[o.id]||ODET[204518],post=/First/i.test(o.post)?POST_FC:POST_STD,t=otot(o);
   var at=[["Templates",d.tpl],["Postage",post],["Envelope",d.env],["Font Selection",d.font],["Font Color",d.fcol],["Paper Color",d.paper],["Sticky note",d.sticky],["Second page",d.second]];
+  if(d.lead)at.push(["Lead type",d.lead]);
+  if(d.addons&&d.addons.length)at.push(["Add-ons per piece", (d.addons.join?d.addons.join(", "):d.addons)]);
   return '<div class="two" style="margin-top:16px"><div class="box"><h4>Files processed</h4><div class="kv"><b>Mailing List</b><span><a href="#" class="linkbtn" data-fa14f="'+esc(d.file)+'">Mailing List</a></span><b>Your original list is</b><span><a href="#" class="linkbtn" data-fa14f="'+esc(d.file)+'">'+esc(d.file)+'</a></span></div></div>'+
    '<div class="box"><h4>Order notes</h4><p style="margin:0">'+(d.notes?esc(d.notes):'<span class="muted">No order notes.</span>')+'</p></div></div>'+
    '<div class="box" style="margin-top:16px"><h4>Order details</h4><div class="tw"><table><thead><tr><th>Product</th><th style="text-align:right">Total</th></tr></thead><tbody><tr><td><b>'+esc(o.prod)+' &times; '+o.qty.toLocaleString("en-US")+'</b><div class="kv" style="margin-top:8px">'+at.map(function(a){return '<b>'+a[0]+':</b><span>'+esc(a[1])+'</span>'}).join("")+'</div></td><td style="text-align:right;vertical-align:top">'+money(t)+'</td></tr><tr><td><b>Subtotal:</b></td><td style="text-align:right">'+money(t)+'</td></tr><tr><td><b>Total:</b></td><td style="text-align:right"><b>'+money(t)+'</b></td></tr></tbody></table></div></div>'}
