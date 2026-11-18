@@ -241,6 +241,32 @@ section.s{padding:76px 0}.alt{background:#F7F7F5}
 .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .tools .inp{width:auto}
 .otable td{font-size:13px}.otable td .acts{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:150px}
+
+#s-orders .otable{overflow:hidden;width:100%;max-width:100%}
+#s-orders .otable table{width:100%;table-layout:fixed}
+#s-orders .otable th,#s-orders .otable td{padding:8px 8px;vertical-align:top;font-size:12.5px}
+#s-orders .otable th{white-space:nowrap;padding:8px 8px;font-size:11px;letter-spacing:.04em}
+#s-orders .otable td.o-id{width:22%}
+#s-orders .otable td.o-prod{width:20%}
+#s-orders .otable td.o-tot{width:14%}
+#s-orders .otable td.o-drops{width:18%;word-break:break-word}
+#s-orders .otable .o-id b{display:block}
+#s-orders .otable .o-id small,#s-orders .otable .o-prod small{display:block;color:var(--mu);font-size:11.5px;margin-top:2px}
+#s-orders .otable .o-id .chip{margin-top:6px;display:inline-flex;max-width:100%;white-space:normal;line-height:1.25;font-size:11px}
+#s-orders .otable .o-nm{display:block;margin-top:4px;font-size:11.5px;color:var(--ink)}
+#s-orders .otable .o-tot b{display:block;margin-bottom:4px}
+#s-orders .o-acts{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:0}
+#s-orders .o-act{appearance:none;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 8px;font:600 11px/1.2 var(--body);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap}
+#s-orders .o-act:hover{border-color:var(--y);background:var(--yt)}
+#s-orders .o-act-pdf{background:#262626;color:#fff;border-color:#262626}
+#s-orders .o-act-pdf:hover{background:#111;color:#fff}
+#s-orders .ocard .o-card-date{display:block;color:var(--mu);font-size:12px;font-weight:500;margin-top:2px}
+#s-orders .ocard .f .o-acts{padding:10px 14px}
+@media (max-width:767px){
+  #s-orders .otable{display:none}
+  #s-orders .ocards{display:block}
+}
+
 .ocards{display:none}
 .ocard{border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);margin-bottom:12px;overflow:hidden}
 .ocard .h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
@@ -1779,7 +1805,7 @@ html{-webkit-tap-highlight-color:rgba(255,197,35,.22)}
    <select class="inp" id="os" aria-label="Status"><option value="">Select Status</option><option value="proof">Proof waiting for approval</option><option value="prod">Processing</option><option value="ok">Completed</option><option value="hold">On hold</option><option value="fail">Payment failed</option><option value="refund">Refunded</option><option value="incomplete">Not finished</option><option value="bad">Cancelled</option></select>
   </div>
   <div class="muted" id="ocount" style="margin-bottom:10px"></div>
-  <div class="tw otable"><table><thead><tr><th>Order</th><th>Date<br>placed</th><th>Status</th><th>Total</th><th>Qty</th><th>Product</th><th>Drop<br>dates</th><th>Total<br>drops</th><th>Order<br>name</th><th>Payment</th><th>Receipt</th><th>Actions</th></tr></thead><tbody id="obody"></tbody></table></div>
+  <div class="tw otable"><table><thead><tr><th>Order</th><th>Product</th><th>Total</th><th>Drops</th><th>Actions</th></tr></thead><tbody id="obody"></tbody></table></div>
   <div class="ocards" id="ocards"></div>
  </div>
 </div></div>
@@ -2985,12 +3011,13 @@ function filtered(){
 }
 function renderOrders(){
   var EMP=/[?&]v=empty/.test(location.hash),L=EMP?[]:filtered(),b="",c="";
-  L.forEach(function(o){var st=ST[o.st],pay=o.paid?'<span class="chip ok">Paid</span>':'<span class="chip amb">Not Paid</span>',nm=o.name?esc(o.name)+' <button class="linkbtn" data-oname="'+o.id+'" aria-label="Rename order '+o.id+'">&#9998;</button>':'<button class="chip" data-oname="'+o.id+'">&#9998; Add</button>';
-    var proofBtn=!oActive(o)?"":'<a class="btn sm'+(o.st==="proof"?"":" sec")+'" href="#/proof/'+o.id+'">View Proof</a>';
-    b+='<tr><td><b>#'+o.id+'</b></td><td>'+o.placed+'</td><td><span class="chip '+st[0]+'">'+st[1]+'</span></td><td>'+money(otot(o))+'</td><td>'+o.qty.toLocaleString("en-US")+'</td><td>'+esc(o.prod)+'</td><td>'+(o.drops.length>3?o.drops.slice(0,2).join("<br>")+'<br><a href="#/tracking/order/'+o.id+'">+'+(o.drops.length-2)+' more</a>':o.drops.join("<br>"))+'</td><td>'+o.done+' of '+o.drops.length+'</td><td>'+nm+'</td><td>'+pay+'</td><td><button class="btn sm sec btn-pill" data-demo="receipt" data-id="'+o.id+'" title="Download receipt (PDF)" aria-label="Download receipt (PDF) for order '+o.id+'">Receipt (PDF)</button></td><td><div class="acts"><a class="btn sm sec" href="#/detail/'+o.id+'">View Order Details</a>'+proofBtn+(!oActive(o)?"":'<a class="btn sm sec" href="#/tracking/order/'+o.id+'">Track Drops</a>')+'<button class="btn sm sec" data-demo="csv" data-id="'+o.id+'">Download CSV</button></div></td></tr>';
-    c+='<div class="ocard"><div class="h"><b>#'+o.id+'</b><span class="chip '+st[0]+'">'+st[1].split(":")[0]+'</span></div><div class="b"><div class="kv"><b>Placed</b><span>'+o.placed+'</span><b>Product</b><span>'+esc(o.prod)+'</span><b>Qty</b><span>'+o.qty.toLocaleString("en-US")+'</span><b>Drops</b><span>'+o.done+' of '+o.drops.length+' ('+(o.drops.length>3?o.drops.slice(0,2).join(", ")+', <a href="#/tracking/order/'+o.id+'">+'+(o.drops.length-2)+' more</a>':o.drops.join(", "))+')</span><b>Order name</b><span>'+(o.name?esc(o.name):"-")+' <button class="linkbtn" data-oname="'+o.id+'">'+(o.name?"Rename":"Add")+'</button></span><b>Total</b><span>'+money(otot(o))+' '+pay+'</span></div></div><div class="f">'+(!oActive(o)?"":'<a class="btn sm'+(o.st==="proof"?"":" sec")+'" href="#/proof/'+o.id+'">View Proof</a>')+'<a class="btn sm sec" href="#/detail/'+o.id+'">View Order Details</a>'+(!oActive(o)?"":'<a class="btn sm sec" href="#/tracking/order/'+o.id+'">Track Drops</a>')+'<button class="btn sm sec" data-demo="csv" data-id="'+o.id+'">Download CSV</button><button class="btn sm sec btn-pill" data-demo="receipt" data-id="'+o.id+'" title="Download receipt (PDF)" aria-label="Download receipt (PDF) for order '+o.id+'">Receipt (PDF)</button></div></div>'});
-  if(!L.length){b='<tr><td colspan="12" style="text-align:center;padding:26px">No orders match these filters. <button class="btn sec sm" id="clrF" style="margin-left:8px">Clear filters</button></td></tr>';c='<div class="empty">No orders match these filters.<br><button class="btn sec sm" id="clrF2" style="margin-top:10px">Clear filters</button></div>'}
-  if(EMP){b='<tr><td colspan="12" style="text-align:center;padding:26px">No order has been made yet. <a class="btn sm" href="#/shop" style="margin-left:8px">Browse products</a></td></tr>';c='<div class="empty">No order has been made yet.<br><a class="btn sm" href="#/shop" style="margin-top:10px">Browse products</a></div>'}$("#obody").innerHTML=b;$("#ocards").innerHTML=c;
+  L.forEach(function(o){var st=ST[o.st],pay=o.paid?'<span class="chip ok">Paid</span>':'<span class="chip amb">Unpaid</span>',nm=o.name?esc(o.name)+' <button class="linkbtn" data-oname="'+o.id+'" aria-label="Rename order '+o.id+'">&#9998;</button>':'<button class="linkbtn" data-oname="'+o.id+'">&#9998; Name</button>';
+    var drops=o.done+" of "+o.drops.length+(o.drops.length?(o.drops.length>3?" · "+o.drops.slice(0,2).join(", ")+' <a href="#/tracking/order/'+o.id+'">+'+(o.drops.length-2)+'</a>':" · "+o.drops.join(", ")):"");
+    var acts='<div class="o-acts"><a class="o-act" href="#/detail/'+o.id+'" title="View order details">Details</a>'+(!oActive(o)?"":'<a class="o-act" href="#/proof/'+o.id+'" title="View proof">Proof</a>')+(!oActive(o)?"":'<a class="o-act" href="#/tracking/order/'+o.id+'" title="Track drops">Track</a>')+'<button type="button" class="o-act" data-demo="csv" data-id="'+o.id+'" title="Download CSV">CSV</button><button type="button" class="o-act o-act-pdf" data-demo="receipt" data-id="'+o.id+'" title="Download receipt (PDF)" aria-label="Download receipt (PDF) for order '+o.id+'">PDF</button></div>';
+    b+='<tr><td class="o-id"><b>#'+o.id+'</b><small>'+o.placed+'</small><span class="chip '+st[0]+'">'+st[1]+'</span><span class="o-nm">'+nm+'</span></td><td class="o-prod">'+esc(o.prod)+'<small>'+o.qty.toLocaleString("en-US")+' pcs</small></td><td class="o-tot"><b>'+money(otot(o))+'</b>'+pay+'</td><td class="o-drops">'+drops+'</td><td>'+acts+'</td></tr>';
+    c+='<div class="ocard"><div class="h"><div><b>#'+o.id+'</b><small class="o-card-date">'+o.placed+'</small></div><span class="chip '+st[0]+'">'+st[1].split(":")[0]+'</span></div><div class="b"><div class="kv"><b>Product</b><span>'+esc(o.prod)+' · '+o.qty.toLocaleString("en-US")+' pcs</span><b>Drops</b><span>'+(o.drops.length>3?o.done+" of "+o.drops.length+" · "+o.drops.slice(0,2).join(", ")+', <a href="#/tracking/order/'+o.id+'">+'+(o.drops.length-2)+' more</a>':o.done+" of "+o.drops.length+(o.drops.length?" · "+o.drops.join(", "):""))+'</span><b>Name</b><span>'+(o.name?esc(o.name):"—")+' <button class="linkbtn" data-oname="'+o.id+'">'+(o.name?"Rename":"Add")+'</button></span><b>Total</b><span>'+money(otot(o))+' '+pay+'</span></div></div><div class="f">'+acts+'</div></div>'});
+  if(!L.length){b='<tr><td colspan="5" style="text-align:center;padding:26px">No orders match these filters. <button class="btn sec sm" id="clrF" style="margin-left:8px">Clear filters</button></td></tr>';c='<div class="empty">No orders match these filters.<br><button class="btn sec sm" id="clrF2" style="margin-top:10px">Clear filters</button></div>'}
+  if(EMP){b='<tr><td colspan="5" style="text-align:center;padding:26px">No order has been made yet. <a class="btn sm" href="#/shop" style="margin-left:8px">Browse products</a></td></tr>';c='<div class="empty">No order has been made yet.<br><a class="btn sm" href="#/shop" style="margin-top:10px">Browse products</a></div>'}$("#obody").innerHTML=b;$("#ocards").innerHTML=c;
   $("#ocount").textContent=EMP?"Showing 0 of 0 orders (mock empty state)":"Showing "+L.length+" of "+ORDERS.length+" orders (sample data)";
   ["#clrF","#clrF2"].forEach(function(id){var x=$(id);if(x)x.onclick=function(){$("#oq").value="";$("#om").value="";$("#os").value="";renderOrders()}});
 }
