@@ -989,6 +989,11 @@ i.del{background:var(--ok)}i.tr{background:var(--info)}i.up{background:var(--lin
 .ct-hwenv,.ct-inside,.ct-class{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin:12px 0;background:#fafafa}
 .ct-inside .ct-choice,.ct-class .radios{margin-top:8px}
 .ct-opt-note{font-size:12.5px;color:var(--mu);margin:8px 0 0}
+.ct-post-tiles{margin:10px 0 8px}
+.ct-post-tile{padding:22px 24px;min-height:132px;gap:8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.ct-post-tile.on{border-color:var(--y);background:var(--yt);box-shadow:0 0 0 2px var(--y)}
+.ct-post-price{font:800 22px/1.15 var(--head);color:var(--ink)}
+.ct-post-tile small{color:var(--mu);font-size:13px;line-height:1.4}
 
 /* merged FAQ (categories, search, in-page nav) */
 .faq-search{position:relative;max-width:640px;margin:6px 0 8px}
@@ -3811,15 +3816,26 @@ function renderCT(){
   var hasPcClass=!!(CT.prod&&ctHasPcClass(CT.prod));
   var sh=(hasInside||hasStyle)?1:0;
   var isStock=CT.start==="stock",isOwn=CT.start==="own";
+  var isPc=CT.type!=="letter";
   var retOk=!!(CT.ret.n&&CT.ret.a&&CT.ret.c&&CT.ret.s&&CT.ret.z&&CT.phone),noteOk=(isOwn?!!CT.notes.trim():true)&&!!CT.tname.trim();
   var ok,SN,stepId;
   var midOk=hasInside?insideOk:styleOk, midName=hasInside?"Inside message":"Card or folded note";
   if(isOwn){
-    if(hasInside||hasStyle){ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.notes.trim(),6:envOk,7:!!CT.post,8:retOk,9:noteOk};SN=["Product type","Mail piece",midName,"How to start","Your design","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s5",6:"ct-s6",7:"ct-s7",8:"ct-s8",9:"ct-s9"}[n]}}
-    else{ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.notes.trim(),5:envOk,6:!!CT.post,7:retOk,8:noteOk};SN=["Product type","Mail piece","How to start","Your design","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s5",5:"ct-s6",6:"ct-s7",7:"ct-s8",8:"ct-s9"}[n]}}
+    if(hasInside||hasStyle){
+      if(isPc){ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.notes.trim(),6:!!CT.post,7:retOk,8:noteOk};SN=["Product type","Mail piece",midName,"How to start","Your design","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s5",6:"ct-s7",7:"ct-s8",8:"ct-s9"}[n]}}
+      else{ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.notes.trim(),6:envOk,7:!!CT.post,8:retOk,9:noteOk};SN=["Product type","Mail piece",midName,"How to start","Your design","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s5",6:"ct-s6",7:"ct-s7",8:"ct-s8",9:"ct-s9"}[n]}}
+    }else{
+      if(isPc){ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.notes.trim(),5:!!CT.post,6:retOk,7:noteOk};SN=["Product type","Mail piece","How to start","Your design","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s5",5:"ct-s7",6:"ct-s8",7:"ct-s9"}[n]}}
+      else{ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.notes.trim(),5:envOk,6:!!CT.post,7:retOk,8:noteOk};SN=["Product type","Mail piece","How to start","Your design","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s5",5:"ct-s6",6:"ct-s7",7:"ct-s8",8:"ct-s9"}[n]}}
+    }
   }else{
-    if(hasInside||hasStyle){ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.tmpl,6:!!CT.tmpl,7:envOk,8:!!CT.post,9:retOk,10:noteOk};SN=["Product type","Mail piece",midName,"How to start","Stock template","Options and adjustments","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s4",6:"ct-s5",7:"ct-s6",8:"ct-s7",9:"ct-s8",10:"ct-s9"}[n]}}
-    else{ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.tmpl,5:!!CT.tmpl,6:envOk,7:!!CT.post,8:retOk,9:noteOk};SN=["Product type","Mail piece","How to start","Stock template","Options and adjustments","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s4",5:"ct-s5",6:"ct-s6",7:"ct-s7",8:"ct-s8",9:"ct-s9"}[n]}}
+    if(hasInside||hasStyle){
+      if(isPc){ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.tmpl,6:!!CT.tmpl,7:!!CT.post,8:retOk,9:noteOk};SN=["Product type","Mail piece",midName,"How to start","Stock template","Options and adjustments","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s4",6:"ct-s5",7:"ct-s7",8:"ct-s8",9:"ct-s9"}[n]}}
+      else{ok={1:!!CT.type,2:!!CT.prod,3:midOk,4:!!CT.start,5:!!CT.tmpl,6:!!CT.tmpl,7:envOk,8:!!CT.post,9:retOk,10:noteOk};SN=["Product type","Mail piece",midName,"How to start","Stock template","Options and adjustments","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-sInside",4:"ct-s3",5:"ct-s4",6:"ct-s5",7:"ct-s6",8:"ct-s7",9:"ct-s8",10:"ct-s9"}[n]}}
+    }else{
+      if(isPc){ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.tmpl,5:!!CT.tmpl,6:!!CT.post,7:retOk,8:noteOk};SN=["Product type","Mail piece","How to start","Stock template","Options and adjustments","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s4",5:"ct-s5",6:"ct-s7",7:"ct-s8",8:"ct-s9"}[n]}}
+      else{ok={1:!!CT.type,2:!!CT.prod,3:!!CT.start,4:!!CT.tmpl,5:!!CT.tmpl,6:envOk,7:!!CT.post,8:retOk,9:noteOk};SN=["Product type","Mail piece","How to start","Stock template","Options and adjustments","Envelope","Postage","Return address and phone","Review"];stepId=function(n){return {1:"ct-s1",2:"ct-s2",3:"ct-s3",4:"ct-s4",5:"ct-s5",6:"ct-s6",7:"ct-s7",8:"ct-s8",9:"ct-s9"}[n]}}
+    }
   }
   var head=function(n,t,sub){return '<div class="ct-sh"><span class="ct-n'+(ok[n]?" ok":"")+'">'+(ok[n]?"&#10003;":n)+'</span><div><h2>'+t+'</h2>'+(sub?'<p class="muted">'+sub+'</p>':'')+'</div></div>'};
   var picked=function(){if(!CT.prod||isOwn||!CT.tmpl)return "";var src=ctTplSrc(),label=CT.tmplName||"";if(!label&&!src)return "";return '<div class="ct-picked">'+(src?'<img src="'+src+'" alt="">':'')+'<div><b>'+esc(label||CT.prod)+'</b><div class="muted">'+esc(CT.prod)+'</div></div></div>'};
@@ -3882,28 +3898,30 @@ function renderCT(){
     }
     var look=optRow("ctFont","Font style",fo.fs,CT.font||(fo.fs.indexOf("Typed")>-1?"Typed":(fo.fs[0]||"")),"fs")+
       optRow("ctFcol","Font color",co.font,CT.fcol||(co.font.indexOf("Black")>-1?"Black":(co.font[0]||"")),"font")+
-      optRow("ctPaper","Paper color",co.paper,CT.paper||(co.paper[0]||""),"paper");
+      ((isPc&&isStock)?"":optRow("ctPaper","Paper color",co.paper,CT.paper||(co.paper[0]||""),"paper"));
+    if(isPc&&isStock&&!CT.paper&&co.paper&&co.paper.length)CT.paper=co.paper[0];
     if(cid==="lt:trifold")look=triFoldHTML("ct",CT)+look;
     if(CT.type==="letter"&&(cid.indexOf("lt:")===0||cid.indexOf("hw:")===0)&&secondOK(ck))look+='<div class="fld"><label class="f">Second Page (Circular)</label><div class="radios"><label><input type="radio" name="ctSp" value=""'+(!CT.sp?" checked":"")+'>No</label><label><input type="radio" name="ctSp" value="1"'+(CT.sp==="1"?" checked":"")+'>Circular page (+10 cents)</label><label><input type="radio" name="ctSp" value="2"'+(CT.sp==="2"?" checked":"")+'>Circular with variable data (+15 cents)</label></div><p class="help">Printed 11&times;17, cut and folded. The circular is part of your one letter design, on the same sheet, so it never adds another design file.</p></div>';
     if(CT.type!=="letter"&&ck!=="hw"&&ck!=="hw425")look+='<div class="fld"><label class="f">Glossy</label><div class="radios"><label><input type="radio" name="ctGl" value=""'+(!CT.gl?" checked":"")+'>No</label><label><input type="radio" name="ctGl" value="1"'+(CT.gl?" checked":"")+'>Yes (+2 cents)</label></div></div>';
-    if(hasPcClass){var stds=ctStdPcOf(ck),sLow=stds.length?Math.min.apply(null,stds):0,fLow=(PC.filter(function(x){return x.k===ck})[0]||{fc:[0]}).fc;fLow=fLow?Math.min.apply(null,fLow):0;look='<div class="ct-class"><label class="f">Mail class</label><p class="muted" style="margin:4px 0 8px">Standard is new on this product. Standard is 4 cents less than First Class at every quantity.</p><div class="radios"><label><input type="radio" name="ctClass" value="'+esc(POST_FC)+'"'+(CT.post===POST_FC?" checked":"")+'>First Class — from '+money(fLow,3)+' each</label><label><input type="radio" name="ctClass" value="'+esc(POST_STD)+'"'+(CT.post===POST_STD?" checked":"")+'>Standard — from '+money(sLow,3)+' each</label></div></div>'+look}
+    var offerBox=isPc?'<div class="fld" id="ctOfferBox"><label class="f">Do you want to put an offer number on this mail piece?</label><div class="radios"><label><input type="radio" name="ctOffer" value="yes"'+(CT.offer==="yes"?" checked":"")+'>Yes</label><label><input type="radio" name="ctOffer" value="no"'+(CT.offer==="no"?" checked":"")+'>No</label></div></div>':'';
+    if(hasPcClass&&!isPc){var stds=ctStdPcOf(ck),sLow=stds.length?Math.min.apply(null,stds):0,fLow=(PC.filter(function(x){return x.k===ck})[0]||{fc:[0]}).fc;fLow=fLow?Math.min.apply(null,fLow):0;look='<div class="ct-class"><label class="f">Mail class</label><p class="muted" style="margin:4px 0 8px">Standard is new on this product. Standard is 4 cents less than First Class at every quantity.</p><div class="radios"><label><input type="radio" name="ctClass" value="'+esc(POST_FC)+'"'+(CT.post===POST_FC?" checked":"")+'>First Class — from '+money(fLow,3)+' each</label><label><input type="radio" name="ctClass" value="'+esc(POST_STD)+'"'+(CT.post===POST_STD?" checked":"")+'>Standard — from '+money(sLow,3)+' each</label></div></div>'+look}
     look+='<p class="ct-opt-note">These are the same variables the live product form offers for this piece. You can leave them on the stock defaults.</p>';
     var adjBox='<div class="fld"><label class="f" for="ctAdjust">Adjustments</label><textarea class="inp" id="ctAdjust" rows="4" placeholder="Logo swaps, wording changes, or anything else to change. Tap a personal field below to add it. Leave blank to keep the stock template as is.">'+esc(CT.adjust||"")+'</textarea>'+why("One box, like the live site. Tell us about a logo swap, wording changes, or any other change.")+ctPfHTML()+'</div>';
     var nameQty='<div class="fld"><label class="f" for="ctName">Template Name <span class="req">*</span></label><input class="inp" id="ctName" placeholder="Set a name for your Template" value="'+esc(CT.tname)+'" maxlength="40" autocomplete="off">'+why("After you approve the proof, you pick the template by this name in Rapid Orders.")+'<p class="help ct-one">Each template is <b>1 letter design + 1 envelope</b>. Want a different design? Make it its own template with its own name.</p></div>';
     if(isStock){
-      s5='<div class="panel ct-step" id="ct-s5">'+head(5+sh,"Step "+(5+sh)+": Options and adjustments","The same font, color and paper choices as the live product page, then one box for anything else.")+picked()+look+adjBox+nameQty+'</div>';
+      s5='<div class="panel ct-step" id="ct-s5">'+head(5+sh,"Step "+(5+sh)+": Options and adjustments",(isPc?"Font, glossy, offer number and adjustments. The template sets the paper color.":"The same font, color and paper choices as the live product page, then one box for anything else."))+picked()+look+offerBox+adjBox+nameQty+'</div>';
     }
     if(isOwn){
       s5='<div class="panel ct-step" id="ct-s5">'+head(4+sh,"Step "+(4+sh)+": Tell us about your design","We will design this from scratch from your notes and any files you upload.")+
         '<div class="fld"><label class="f" for="ctNotes">What should it look like and say? <span class="req">*</span></label><textarea class="inp" id="ctNotes" rows="5" placeholder="What should it look like and say? Include the offer, names, phone numbers, and any layout notes.">'+esc(CT.notes)+'</textarea>'+why("The more detail you give, the closer the first proof will be.")+'</div>'+
         '<div class="fld"><label class="f">Upload your artwork or an example</label>'+dropBox("ctart","Drag and drop your artwork here","Logo, photo, PDF or a picture of a mail piece you like","Select files",CT.files)+why("A sketch, a logo or a photo of a piece you like is enough to start.")+'</div>'+
-        look+adjBox+nameQty+'</div>';
+        look+offerBox+adjBox+nameQty+'</div>';
     }
     var stickyHtml=((cid.indexOf("lt:")===0||cid.indexOf("hw:")===0)&&stickyOK(ck)?'<div class="fld"><label class="f">'+(hasEnv?"Yellow Sticky Note on Outside of Envelope":"Yellow Sticky Note")+'</label><div class="radios"><label><input type="radio" name="ctSn" value=""'+(!CT.sn?" checked":"")+'>No</label><label><input type="radio" name="ctSn" value="1"'+(CT.sn?" checked":"")+'>Yes (+6 cents)</label></div></div>':'');
-    var envStep=isOwn?(5+sh):(isStock?(6+sh):(5+sh)),postStep=envStep+1,retStep=postStep+1,revStep=retStep+1;
+    var envStep=isOwn?(5+sh):(isStock?(6+sh):(5+sh)),postStep=isPc?envStep:envStep+1,retStep=postStep+1,revStep=retStep+1;
     var hwEnvHtml=hasEnv?'<div class="ct-hwenv"><label class="f">True handwritten envelope</label><p class="muted" style="margin:4px 0 8px">Real pen, handwritten — not a printed font. +35 cents each, across every product that has an envelope.</p><div class="radios"><label><input type="radio" name="ctHwEnv" value="no"'+(CT.hwEnv==="no"?" checked":"")+'>No</label><label'+(hwWhy?' class="ct-dis" title="'+esc(hwWhy)+'"':'')+'><input type="radio" name="ctHwEnv" value="yes"'+(CT.hwEnv==="yes"?" checked":"")+(hwWhy?' disabled aria-disabled="true"':'')+'>Yes (+35 cents each)</label></div>'+(hwWhy?'<p class="help ct-hw-why" role="note">&#9888; '+esc(hwWhy)+'</p>':'')+
       (CT.hwEnv==="yes"?'<div class="fld ct-hwfont" id="ctHwFontF"><label class="f">Handwriting style <span class="req">*</span></label><p class="muted" style="margin:2px 0 8px">Pick how the envelope is written. The samples use the real fonts.</p><div class="opt-sws ct-hwf" role="radiogroup" aria-label="Handwriting style">'+["Cursive","Print"].map(function(v){var on=CT.hwFont===v;return '<label class="opt-sw opt-ft opt-fs'+(on?" on":"")+'"><input type="radio" name="ctHwFont" value="'+v+'"'+(on?" checked":"")+'><span class="ft-s ct-hwf-s" style="'+optFam(v)+'">John Smith<br>123 Main St<br>San Diego, CA 92101</span><span class="ft-n">'+v+'</span><b class="ft-ck" aria-hidden="true">&#10003;</b></label>'}).join("")+'</div>'+(!CT.hwFont?'<p class="err" style="margin:6px 0 0">Choose Cursive or Print.</p>':'')+'</div>':'')+'</div>':'';
-    if(!CT.start){s6=""}
+    if(!CT.start||isPc){s6=""}
     else if(!hasEnv){
       s6='<div class="panel ct-step" id="ct-s6">'+head(envStep,"Step "+envStep+": Envelope")+'<p class="ct-none">'+esc(info(CT.prod).env)+'. There is no envelope to pick for this piece.</p>'+stickyHtml+why("The envelope is the first thing the owner sees, so it decides whether your letter gets opened. This piece mails without one.")+'</div>';
     }else{
@@ -3924,10 +3942,21 @@ function renderCT(){
     }else{
       PO=(CT.prod.indexOf("Half Page")>-1&&CT.prod.indexOf("Handwritten")<0?[POST_FC,POST_STD]:[POST_FC]);
     }
-    var sPost=CT.start?'<div class="panel ct-step" id="ct-s7">'+head(postStep,"Step "+postStep+": Postage class")+sel("ctPost","Postage",PO,CT.post,1)+(hasPcClass?'<p class="muted" style="font-size:12.5px">Standard is 4 cents less than First Class at every quantity.</p>':'')+why("First Class is faster and returns undeliverable mail; Standard is cheaper and slower, and bad addresses aren't returned.")+'</div>':'';
+    var postTiles=(function(){
+      var pc=PC.filter(function(x){return x.k===ck})[0],fLow=pc&&pc.fc?Math.min.apply(null,pc.fc):0,sLow=hasPcClass&&ctStdPcOf(ck).length?Math.min.apply(null,ctStdPcOf(ck)):0;
+      return '<div class="ct-choice ct-post-tiles" role="radiogroup" aria-label="Postage class">'+PO.map(function(o){
+        var v=typeof o==="string"?o:o[0], isStd=v===POST_STD||/^Standard/.test(String(v));
+        var on=CT.post===v, price=isStd?sLow:fLow;
+        var title=isStd?"Standard (Marketing Mail)":"First Class";
+        var sub=isStd?"4¢ less per piece · 200 minimum":"Faster · bad addresses come back to you";
+        if(!hasPcClass&&!isStd)sub="Included in the price. The only postage for this card.";
+        return '<button type="button" class="ct-choice-card ct-post-tile'+(on?" on":"")+'" data-ctpost="'+esc(v)+'" aria-pressed="'+on+'"><b>'+title+'</b><span class="ct-post-price">'+(price?("From "+money(price,3)+" each"):"")+'</span><small>'+sub+'</small></button>';
+      }).join("")+'</div>';
+    })();
+    var sPost=CT.start?'<div class="panel ct-step" id="ct-s7">'+head(postStep,"Step "+postStep+": Postage class")+(isPc?postTiles:sel("ctPost","Postage",PO,CT.post,1))+(hasPcClass?'<p class="muted" style="font-size:12.5px">Standard is 4 cents less than First Class at every quantity.</p>':'')+why("First Class is faster and returns undeliverable mail; Standard is cheaper and slower, and bad addresses aren't returned.")+'</div>':'';
   }
   var R=CT.ret;
-  var retN=CT.start?(isOwn?(7+sh):(8+sh)):(7+sh),revN=retN+1;
+  var retN=CT.start?(isOwn?(7+sh):(8+sh)):(7+sh);if(isPc&&CT.start)retN-=1;var revN=retN+1;
   var sRet=(CT.prod&&CT.start)?'<div class="panel ct-step" id="ct-s8">'+head(retN,"Step "+retN+": Default return address and phone","Saved to your account. They fill personal fields in the template, they are not printed as fixed text.")+ctRetSavedHTML()+
     '<div class="ct-grid"><div class="fld" style="grid-column:1/-1"><label class="f" for="ctRn">Return name or company <span class="req">*</span></label><input class="inp" id="ctRn" data-ret="n" value="'+esc(R.n)+'" autocomplete="off"></div><div class="fld" style="grid-column:1/-1"><label class="f" for="ctRa">Return street address <span class="req">*</span></label><input class="inp" id="ctRa" data-ret="a" value="'+esc(R.a)+'" autocomplete="off"></div><div class="fld"><label class="f" for="ctRc">City <span class="req">*</span></label><input class="inp" id="ctRc" data-ret="c" value="'+esc(R.c)+'" autocomplete="off"></div><div class="fld"><label class="f" for="ctRs">State <span class="req">*</span></label><input class="inp" id="ctRs" data-ret="s" value="'+esc(R.s)+'" maxlength="2" autocomplete="off"></div><div class="fld"><label class="f" for="ctRz">ZIP <span class="req">*</span></label><input class="inp" id="ctRz" data-ret="z" value="'+esc(R.z)+'" inputmode="numeric" maxlength="10" autocomplete="off"></div></div>'+
     why("Your account's default return address. It fills the @ReturnAddressStreet@ and @ReturnAddressCityStateZip@ personal fields. Undeliverable First Class mail comes back here.")+
@@ -3945,6 +3974,9 @@ function renderCT(){
     var rows=[["Product type",CT.type==="letter"?"Letter":"Postcard"],["Mail piece",CT.prod?('<span class="ct-sum-prod"><img src="'+ctImgOf(CT.prod)+'" alt="">'+esc(CT.prod)+'</span>'):""],["Inside message",hasInside?(CT.inside==="truehw"?"True handwritten (real pen, +$"+CT_INSIDE_UP.toFixed(3)+" each)":(CT.inside==="digital"?"Digital handwritten":"")):""],["How you started",isOwn?"Create my own design":(isStock?"Use one of our templates with minor adjustments":"")],["Stock template",isStock&&tpl?esc(tpl):""],["Adjustments",clip(CT.adjust)],["Envelope",envSum()],["Postage",(CT.post||"").split(" (")[0]],["Paper color",CT.paper||(CT.prod&&optColOf(cid).paper.length===1?optColOf(cid).paper[0]:"")],["Font",CT.font||(CT.prod&&optFontsOf(cid).fs.length===1?optFontsOf(cid).fs[0]:"")],["Ink color",CT.fcol||(CT.prod&&optColOf(cid).font.length===1?optColOf(cid).font[0]:"")],["Return address",(function(){var a=[R.n,R.a,[R.c,R.s].filter(Boolean).join(", ")+(R.z?" "+R.z:"")].filter(function(x){return x&&x.trim()}).map(esc).join("<br>");return a?a+'<br><small class="muted">Saved default. Fills @ReturnAddressStreet@ and @ReturnAddressCityStateZip@. A list column overrides it per order.</small>':""})()],["Phone",CT.phone?esc(CT.phone)+'<br><small class="muted">Saved default. Fills @AgentNumber@. A list column overrides it per order.</small>':""],["Artwork",CT.files.length?CT.files.map(esc).join(", "):"None uploaded"],["Notes",clip(CT.notes)],["Template name",esc(CT.tname)],["Design files","1 letter design"+(CT.sp?" (circular on the same sheet)":"")+(hasEnv?" + 1 envelope"+(optIsCustom(cid,CT.env)?" (custom design)":""):"")]];
     if(isOwn)rows=rows.filter(function(x){return ["Stock template"].indexOf(x[0])<0});
     if(!hasInside)rows=rows.filter(function(x){return x[0]!=="Inside message"});
+    if(isPc)rows=rows.filter(function(x){return x[0]!=="Envelope"});
+    if(isPc&&isStock)rows=rows.filter(function(x){return x[0]!=="Paper color"});
+    if(isPc){var oi=rows.findIndex(function(x){return x[0]==="Adjustments"});rows.splice(oi<0?rows.length:oi+1,0,["Offer number",CT.offer==="yes"?"Yes":(CT.offer==="no"?"No":"")]);}
     if(hasStyle)rows.splice(2,0,["Style",CT.cardStyle==="notes"?"Folded note":"Greeting card"]);
     $("#ctSum").innerHTML='<div class="kv ct-kv">'+rows.map(function(x){return '<b>'+x[0]+'</b><span>'+(x[1]?x[1]:'<span class="muted">Not chosen yet</span>')+'</span>'}).join("")+'</div>'}
   if($("#ctSum"))sum();
@@ -3962,6 +3994,8 @@ function renderCT(){
   [["ctPost","post"],["ctPaper","paper"],["ctFont","font"],["ctFcol","fcol"]].forEach(function(p){var e=$("#"+p[0]);if(e)e.onchange=function(){CT[p[1]]=e.value;if(p[0]==="ctPost")renderCT();else if($("#ctSum"))sum()}});
   $$("input[name=ctFont],input[name=ctFcol],input[name=ctPaper]",r).forEach(function(i){i.onchange=function(){var map={ctFont:"font",ctFcol:"fcol",ctPaper:"paper"};CT[map[i.name]]=i.value;renderCT()}});
   $$("input[name=ctClass]",r).forEach(function(i){i.onchange=function(){CT.post=i.value;renderCT()}});
+  $$("input[name=ctOffer]",r).forEach(function(i){i.onchange=function(){CT.offer=i.value;if($("#ctSum"))sum()}});
+  $$("[data-ctpost]",r).forEach(function(b){b.onclick=function(){CT.post=b.getAttribute("data-ctpost");renderCT();var s=$("#ct-s7");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
   $$("input[name=ctEnvRad]",r).forEach(function(i){i.onchange=function(){CT.env=i.value;renderCT();var s=$("#ct-s6");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
   $$("input[name=ctHwEnv]",r).forEach(function(i){i.onchange=function(){if(i.disabled)return;CT.hwEnv=i.value;if(CT.hwEnv!=="yes")CT.hwFont="";var y=window.pageYOffset;renderCT();window.scrollTo(0,y);if(CT.hwEnv==="yes"){var f=$("#ctHwFontF");if(f&&window.ffScrollTo)f.scrollIntoView({behavior:"smooth",block:"nearest"})}}});
   $$("input[name=ctHwFont]",r).forEach(function(i){i.onchange=function(){CT.hwFont=i.value;var y=window.pageYOffset;renderCT();window.scrollTo(0,y)}});
