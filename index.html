@@ -1438,6 +1438,18 @@ a.bm-link,.crumbs a:hover{text-decoration-color:var(--y);text-decoration-thickne
 .lt-choice.miss .lt-choice-v{color:#8a1a00}
 .lt-choice .chip,.lt-choice-v .chip{display:inline-block;background:#f5c400;color:#111;border-radius:999px;padding:1px 7px;font-size:11px;margin-left:4px}
 
+.lt-buy-tiles,.lt-choices,.lt-choice,.lt-buy-meta,.lt-buy-addons{display:none!important}
+.lt-buy-sum{border:0;background:transparent;padding:0;border-radius:0;gap:8px}
+.lt-buy-sum-h{font-size:16px;font-weight:800;margin:0}
+.lt-buy-miss{background:transparent;border:0;padding:0;border-radius:0;font-size:14px;font-weight:700;color:#8a1a00}
+.lt-buy-lines{display:flex;flex-direction:column;gap:4px}
+.lt-buy-line{font-size:15px;line-height:1.45}
+.lt-buy-line.miss .lt-buy-v{color:#8a1a00;font-weight:700}
+.lt-buy-k{font-weight:700}
+.lt-buy-qtyline{display:block;margin-top:8px}
+.lt-buy-qtyline .inp{display:inline-block;max-width:120px;margin-left:6px;vertical-align:middle}
+
+
 .lt-bdates{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:8px}
 .lt-bdate{display:flex;flex-direction:column;gap:6px}
 .lt-bdate-k{font-weight:700;font-size:13px}
@@ -2603,20 +2615,25 @@ document.addEventListener("click",function(e){if(!e.target.closest("#pmenu,#pmBt
 /* ---------- product picker (Option B + search) ---------- */
 function picker(root,items,sel,onPick,allLabel,allImg,all){
   all=all||{};
-  var html='<div class="sect-t">Select Product</div><div class="picker-search"><input type="search" placeholder="Search products" aria-label="Search products"><span class="cnt"></span></div><div class="tiles-p" id="products-button-container">';
+  var html='<div class="sect-t">Select Product</div>';
+  if(all.on)html+='<div class="picker-search"><input type="search" placeholder="Search all templates by name" aria-label="Search templates"><span class="cnt"></span></div>';
+  html+='<div class="tiles-p" id="products-button-container">';
   items.forEach(function(it,i){html+='<button type="button" class="ptile normal ylhq_products'+(sel===i&&!all.on?" on":"")+'" data-i="'+i+'" data-value="'+esc(it.name)+'"><img src="'+it.img+'" alt="">'+esc(it.name)+'</button>'});
-  html+='<div class="pick-empty" hidden>No products match your search. <button type="button" class="btn sec sm" style="margin-left:8px">Clear search</button></div>';
+  if(all.on)html+='<div class="pick-empty" hidden>No templates match your search. <button type="button" class="btn sec sm" style="margin-left:8px">Clear search</button></div>';
   if(allLabel&&!all.hide)html+='<button type="button" class="ptile all normal ylhq-products-all'+(all.on?" on":"")+'" data-value="all templates" aria-pressed="'+!!all.on+'"><img src="'+allImg+'" alt="">'+allLabel+' <span class="all-n">'+(all.sameSize?('Same size'+(all.sizeLabel?(' · '+all.sizeLabel):'')):(F120?GTOT+' templates for every product':galGroupN(all.st&&all.st.tab)+' templates'))+'</span></button></div>';
   else html+='</div>';
   root.innerHTML=html;
   var inp=$("input",root),cnt=$(".cnt",root),tiles=$$(".ptile:not(.all)",root),empty=$(".pick-empty",root);
-  function run(){var w=galWords(inp.value),n=0;
-    tiles.forEach(function(b){var ok=w.every(function(x){return b.textContent.toLowerCase().indexOf(x)>-1});b.style.display=ok?"":"none";if(ok)n++});
-    empty.hidden=n>0;cnt.textContent=w.length?("Showing "+n+" of "+tiles.length):(tiles.length+" products")}
-  $("button",empty).onclick=function(){inp.value="";run();inp.focus()};
   tiles.forEach(function(b){b.onclick=function(){onPick(+b.getAttribute("data-i"))}});
   var allBtn=$(".ptile.all",root);if(allBtn)allBtn.onclick=function(){if(all.onAll)all.onAll()};
-  if(all.on&&all.host&&wireAll(all.host,all.st,inp,cnt,pickFromAll)!==false){}else{inp.addEventListener("input",run);run()}
+  if(all.on&&all.host&&inp&&cnt&&wireAll(all.host,all.st,inp,cnt,pickFromAll)!==false){}
+  else if(inp){
+    function run(){var w=galWords(inp.value),n=0;
+      tiles.forEach(function(b){var ok=w.every(function(x){return b.textContent.toLowerCase().indexOf(x)>-1});b.style.display=ok?"":"none";if(ok)n++});
+      if(empty)empty.hidden=n>0;if(cnt)cnt.textContent=w.length?("Showing "+n+" of "+tiles.length):(tiles.length+" products")}
+    if(empty){var cb=$("button",empty);if(cb)cb.onclick=function(){inp.value="";run();inp.focus()}}
+    inp.addEventListener("input",run);run()
+  }
 }
 
 /* ---------- template gallery: All Templates + each product's templates ----------
@@ -2805,21 +2822,24 @@ function ltChoicesHTML(){
   var notes=(LS.notes&&String(LS.notes).trim())?String(LS.notes).trim():"No notes";
   var dates=(typeof ltMailDateLabels==="function"?ltMailDateLabels():[])||[];
   var add=(typeof ltAddonLines==="function"?ltAddonLines():[])||[];
-  var post=LS.post==="fc"?"First Class":LS.post==="np"?"Nonprofit Presort":LS.post==="std"?"Standard (Marketing Mail)":"";
-  var html='<div class="lt-buy-sum-h">Your order <span class="chip">'+(miss.length?"Missing "+miss.length:"Ready")+'</span></div>';
-  if(miss.length)html+='<div class="lt-buy-miss">Still needed: <b>'+miss.map(function(x){return esc(x)}).join(", ")+'</b></div>';
-  html+='<div class="lt-choices">';
-  html+=choiceChip("Template",LS.tpl||"",!!LS.tpl,!LS.tpl);
-  if(hasEnv)html+=choiceChip("Envelope",LS.env||"",!!LS.env,!LS.env);
-  html+=choiceChip("Letter font",(typeof ltFontName==="function"?ltFontName(st.fs||""):st.fs)||st.fs||"",!!st.fs,false);
-  if(hasEnv)html+=choiceChip("Envelope font",(typeof ltFontName==="function"?ltFontName(st.ef||""):st.ef)||st.ef||"",!!st.ef,false);
-  html+=choiceChip("Postage",post,!!LS.post,!LS.post);
-  html+=choiceChip("Lead type",(typeof leadText==="function"?leadText(LS):""),!!(typeof leadText==="function"?leadText(LS):""),!(typeof leadText==="function"?leadText(LS):""));
-  html+=choiceChip("Mail dates",dates.length?dates.join(" · "):(LS.day||""),!!(dates.length||LS.day),!(LS.day));
-  html+=choiceChip("Add-ons",add.length?add.join(" · "):"None",true,false);
-  html+=choiceChip("List",files,(LS.files||[]).length>0,false);
-  html+=choiceChip("Files",art,(LS.other||[]).length>0,false);
-  html+=choiceChip("Notes",notes,!!(LS.notes&&String(LS.notes).trim()),false);
+  var post=LS.post==="fc"?"First Class":LS.post==="np"?"Nonprofit Presort":LS.post==="std"?"Standard (Marketing Mail)":"Needed";
+  var lf=(typeof ltFontName==="function"?ltFontName(st.fs||""):st.fs)||st.fs||"";
+  var ef=(typeof ltFontName==="function"?ltFontName(st.ef||""):st.ef)||st.ef||"";
+  var fonts=hasEnv?((lf||ef)?((lf||"None")+(ef?(" / "+ef+" on envelope"):"")):"None"):(lf||"None");
+  function line(k,v,needed){return '<div class="lt-buy-line'+(needed?" miss":"")+'"><span class="lt-buy-k">'+k+':</span> <span class="lt-buy-v">'+esc(v||(needed?"Needed":"None"))+'</span></div>'}
+  var html='<div class="lt-buy-sum-h">Your order</div>';
+  if(miss.length)html+='<p class="lt-buy-miss">Still needed: '+esc(miss.join(", "))+'</p>';
+  html+='<div class="lt-buy-lines">';
+  html+=line("Template",LS.tpl||"",!LS.tpl);
+  if(hasEnv)html+=line("Envelope",LS.env||"",!LS.env);
+  html+=line("Fonts",fonts,false);
+  html+=line("Postage",post,!LS.post);
+  html+=line("Add-ons",add.length?add.join(", "):"None",false);
+  html+=line("Lead type",(typeof leadText==="function"?leadText(LS):"")||"",!(typeof leadText==="function"?leadText(LS):""));
+  html+=line("Mail dates",dates.length?dates.join(", "):(LS.day||""),!LS.day);
+  html+=line("List",files,false);
+  html+=line("Files",art,false);
+  html+=line("Notes",notes,false);
   html+="</div>";
   return html;
 }
@@ -2833,26 +2853,27 @@ function pcChoicesHTML(){
   var art=(((PS.other||[]).concat(PS.art||[])).length?(((PS.other||[]).concat(PS.art||[])).length+" file"+((((PS.other||[]).concat(PS.art||[])).length)===1?"":"s")):"No files");
   var notes=(PS.notes&&String(PS.notes).trim())?String(PS.notes).trim():"No notes";
   var dates=(typeof pcMailDateLabels==="function"?pcMailDateLabels():[])||[];
-  var dateStr=Array.isArray(dates)?dates.join(" · "):String(dates||"");
+  var dateStr=Array.isArray(dates)?dates.join(", "):String(dates||"");
   var add=[];
   if(PS.gloss)add.push("Glossy +2¢");
   if(PS.eos)add.push("Easy Offer System +3¢");
   if(PS.undel)add.push("Undeliverable list $19");
   if(PS.ret)add.push("Return Mail List $49");
-  var post=p&&p.std?(PS.post==="std"?"Standard (Marketing Mail)":PS.post==="fc"?"First Class":""):"First Class";
-  var html='<div class="lt-buy-sum-h">Your order <span class="chip">'+(miss.length?"Missing "+miss.length:"Ready")+'</span></div>';
-  if(miss.length)html+='<div class="lt-buy-miss">Still needed: <b>'+miss.map(function(x){return esc(x)}).join(", ")+'</b></div>';
-  html+='<div class="lt-choices">';
-  html+=choiceChip("Template",tname,!!tname,!tname);
-  html+=choiceChip("Font",(st.fs||"")+(st.font?(" · "+st.font):"")+(st.paper?(" · "+st.paper+" paper"):""),!!st.fs,false);
-  html+=choiceChip("Postage",post,!!(PS.post||(p&&!p.std)),!PS.post&&!(!p||p.std===false||p.std));
-  // jumbo/hw first class only still has post
-  html+=choiceChip("Lead type",(typeof leadText==="function"?leadText(PS):""),!!(typeof leadText==="function"?leadText(PS):""),!(typeof leadText==="function"?leadText(PS):""));
-  html+=choiceChip("Mail dates",dateStr||(PS.day||""),!!(dateStr||PS.day),!PS.day);
-  html+=choiceChip("Add-ons",add.length?add.join(" · "):"None",true,false);
-  html+=choiceChip("List",files,(PS.files||[]).length>0,false);
-  html+=choiceChip("Files",art,((PS.other||[]).concat(PS.art||[])).length>0,false);
-  html+=choiceChip("Notes",notes,!!(PS.notes&&String(PS.notes).trim()),false);
+  var post=p&&p.std?(PS.post==="std"?"Standard (Marketing Mail)":PS.post==="fc"?"First Class":"Needed"):"First Class";
+  var fonts=(st.fs||"")+(st.font?(", "+st.font):"")+(st.paper?(", "+st.paper+" paper"):"")||"None";
+  function line(k,v,needed){return '<div class="lt-buy-line'+(needed?" miss":"")+'"><span class="lt-buy-k">'+k+':</span> <span class="lt-buy-v">'+esc(v||(needed?"Needed":"None"))+'</span></div>'}
+  var html='<div class="lt-buy-sum-h">Your order</div>';
+  if(miss.length)html+='<p class="lt-buy-miss">Still needed: '+esc(miss.join(", "))+'</p>';
+  html+='<div class="lt-buy-lines">';
+  html+=line("Template",tname,!tname);
+  html+=line("Fonts",fonts,false);
+  html+=line("Postage",post,!PS.post);
+  html+=line("Add-ons",add.length?add.join(", "):"None",false);
+  html+=line("Lead type",(typeof leadText==="function"?leadText(PS):"")||"",!(typeof leadText==="function"?leadText(PS):""));
+  html+=line("Mail dates",dateStr||(PS.day||""),!PS.day);
+  html+=line("List",files,false);
+  html+=line("Files",art,false);
+  html+=line("Notes",notes,false);
   html+="</div>";
   return html;
 }
@@ -3032,11 +3053,10 @@ function pcMailDateLabels(){
   return PS.day||"ASAP";
 }
 function pcUpdateBuy(){
-  var tiles=$("#pcBuyTiles"),p=PC[PS.p];if(!tiles||!p)return;
+  var tiles=$("#pcBuyTiles"),p=PC[PS.p];if(!p)return;
   var g=galFind("postcards",p.k), rec=(PS.tpl>-1&&g&&g.t[PS.tpl])?g.t[PS.tpl]:null, tname=rec?rec[0]:"No template selected yet";
   var src=pcTplImg();
-  var th=isPastTpl(rec)?tplLibHTML("",tname):(src?'<img src="'+src+'" alt="">':'<span class="env-ph">Postcard</span>');
-  tiles.innerHTML='<div class="lt-buy-tile">'+th+'<div><b>Postcard</b><small>'+esc(tname)+'</small></div></div>';
+  if(tiles){var th=isPastTpl(rec)?tplLibHTML("",tname):(src?'<img src="'+src+'" alt="">':'<span class="env-ph">Postcard</span>');tiles.innerHTML='<div class="lt-buy-tile">'+th+'<div><b>Postcard</b><small>'+esc(tname)+'</small></div></div>'}
   var sum=$("#pcBuySum");if(sum&&typeof pcChoicesHTML==="function")sum.innerHTML=pcChoicesHTML();
   var more=$("#pcMoreAcc");if(more&&more.open&&typeof pcMoreComplete==="function"&&pcMoreComplete()){more.open=false;if(typeof PS!=="undefined")PS._guidedMore=true;if(typeof pcSyncAcc==="function")pcSyncAcc()}
   var post=$("#pcBuyPost");if(post)post.textContent=p.std?(PS.post==="std"?"Standard (Marketing Mail)":"First Class"):"First Class";
@@ -3121,7 +3141,7 @@ function renderCfg(){
   var accs='<div class="lt-accs">'+fontAcc+glossAcc+'<details class="lt-acc" id="pcMoreAcc"><summary><span class="lt-acc-k">Other options<small id="pcMoreSum"></small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
   var upbar='<div class="panel of-form lt-upbar" id="pcUpbar"><div class="lt-listhead"><h3>Your list</h3></div><p class="of-lead" style="margin:0 0 10px">When you upload a list, we automatically remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count. <a href="#/budget-maximizer">Learn more</a></p>'+dropBox("list","Your list","CSV only","Select files",PS.files)+'<a href="#" class="lt-csv-link" id="exCsv">Example CSV</a></div>';
   var notes='<div class="panel of-form" id="pcNotes"><h3>Notes</h3><div class="fld"><label class="f" for="pnotes">Order notes</label><textarea class="inp" id="pnotes" rows="3" placeholder="Special instructions for this order">'+esc(PS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="potherInp"></label><ul class="files" id="files-pother">'+fileList((PS.other||[]).concat(PS.art||[]),"pother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="oname">Order name</label><input class="inp" id="oname" placeholder="Optional name for this order" value="'+esc(PS.oname)+'" maxlength="40"></div></div>';
-  var buy='<div class="panel of-form lt-buy" id="pPricePanel"><div class="lt-buy-tiles" id="pcBuyTiles"></div><div class="lt-buy-sum" id="pcBuySum"></div><div class="lt-buy-meta"><div class="lt-buy-kv"><span>Pieces</span><input class="inp" id="qty" type="number" min="100" step="1" inputmode="numeric" value="'+PS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:6px 0 0">'+(p.std?"From your cleaned list when you upload one. Minimum 100 First Class, 200 Standard.":"From your cleaned list when you upload one. Minimum 100 cards.")+'</p></div><div class="lt-buy-kv"><span>Postage</span><b id="pcBuyPost"></b></div><div class="lt-buy-kv"><span>Mail dates</span><b id="pcBuyDates"></b></div></div><div class="lt-buy-addons" id="pcBuyAddons"></div><div class="err" id="qerr"></div><div class="sumbox" id="sum" hidden></div><button class="btn lg" id="addCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
+  var buy='<div class="panel of-form lt-buy" id="pPricePanel"><div class="lt-buy-sum" id="pcBuySum"></div><div class="lt-buy-qtyline"><label class="lt-buy-k" for="qty">Pieces:</label> <input class="inp" id="qty" type="number" min="100" step="1" inputmode="numeric" value="'+PS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:4px 0 0">'+(p.std?"From your cleaned list when you upload one. Minimum 100 First Class, 200 Standard.":"From your cleaned list when you upload one. Minimum 100 cards.")+'</p></div><div class="err" id="qerr"></div><div class="sumbox" id="sum" hidden></div><button class="btn lg" id="addCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
   var priceModal='<div class="lt-price-modal" id="pcPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="pcPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">'+(p.std?"100 minimum First Class. 200 minimum Standard.":"100 minimum.")+'</p><p class="help pseg-help" id="postHelp"></p><div id="ptable"></div>'+(p.std?'<p class="pc-stdnote"><b>Standard is 4&cent; less per piece than First Class.</b> Same card and design. Standard needs at least 200 cards.</p>':'')+(p.k==="hw"?'<p class="lpg" style="margin:8px 0 0;font-size:14px;font-weight:700;color:var(--ink)">Lowest price guaranteed</p>':'')+(p.std?'<p class="help" id="postPrice" style="color:var(--ink);font-size:14.5px"></p>':'')+'</div></div>';
   c.innerHTML='<div class="cfg lt-wide">'+head+L+postbar+accs+upbar+notes+buy+'</div>'+priceModal;
   wire();updatePrice();if(typeof postSeg==="function")postSeg("pc");if(typeof pcRenderBatchDates==="function")pcRenderBatchDates();if(typeof pcUpdateBuy==="function")pcUpdateBuy();if(typeof pcSyncAcc==="function")pcSyncAcc();
@@ -4363,9 +4383,8 @@ function renderLT(arg){
   if(arg==="windowed"){try{history.replaceState(null,"","#/letters/check")}catch(e){}arg="check"}
   if(arg==="greeting"||arg==="notes"||arg==="cardsnotes"){if(arg==="notes"||arg==="greeting")LS.cardStyle=arg==="notes"?"notes":"greeting";arg="cardsnotes"}
   if(arg==="hwcards"||arg==="hwnotes"||arg==="hwcardsnotes"){if(arg==="hwnotes"||arg==="hwcards")LS.cardStyle=arg==="hwnotes"?"notes":"greeting";arg="hwcardsnotes"}
-  var stackLayout=arg==="no10-stacked";
-  if(stackLayout)arg="no10";
-  LS.stackLayout=!!stackLayout;
+  if(arg==="no10-stacked"){try{history.replaceState(null,"","#/letters/no10")}catch(e){}arg="no10"}
+  LS.stackLayout=false;
   if(arg==="handwritten"||HW.some(function(h){return h.k===arg})){if(LS.set!=="hw"){LS.set="hw";LS.p=-1;LS.all=false}}
   else if(arg!==undefined){if(LS.set!=="letter"){LS.set="letter";LS.p=-1;if(arg!=="all")LS.all=false}} /* Fix 136 test: switching Letters and Real Handwritten closed the wrong All Templates */
   var L=ltList();L.forEach(function(p,i){if(p.k===arg&&LS.p!==i){LS.p=i;LS.env="";LS.tpl=""}});
@@ -4731,7 +4750,7 @@ function ltApplyTpl(name,id){
 }
 function renderLCfg(){
   var c=$("#ltCfg"),L=ltList();if(!c)return;if(cfgHook("lt",c))return;
-  if(LS.p<0){c.innerHTML='<div class="note info" style="margin-top:22px">Pick '+(LS.set==="hw"?"a card":"a letter")+' above to see its options, the upload tool and prices. Type in the search box to filter the list, for example "envelope".</div>';return}
+  if(LS.p<0){c.innerHTML='<div class="note info" style="margin-top:22px">Pick '+(LS.set==="hw"?"a card":"a letter")+' above to see its options, the upload tool and prices.</div>';return}
   var p=L[LS.p],act=ltActive(p),envs=envFor(p.name,act.k);
   var posts=[["std",!p.hw&&p.k==="fullview"?"Standard":POST_STD]].concat(p.fc||p.hw?[["fc",POST_FC]]:[]).concat(p.k==="jumbo"||!npOK()?[]:[["np",POST_NP]]);window.LPOSTS=posts;
   if(!LS.post||!posts.some(function(x){return x[0]===LS.post}))LS.post="std";
@@ -4766,10 +4785,10 @@ function renderLCfg(){
   var accs='<div class="lt-accs"><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Change your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details>'+(hasEnvFonts?'<details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details>':'')+'<details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small id="ltMoreSum">Lead type, extras and mail schedule</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
   var upbar='<div class="panel of-form lt-upbar" id="ltUpbar"><div class="lt-listhead"><h3>Upload your list</h3><button type="button" class="pill-help" id="ltUptHelp">What\'s this?</button></div><div class="lt-upt-pop" id="ltUptPop" hidden><p>When you upload a list, we automatically match your columns, then remove undeliverable addresses and duplicates. You pay at checkout only for the records that get mailed. Quantity is filled from that cleaned count.</p><ol class="upt-steps"><li>Upload</li><li>Match columns</li><li>Clean list</li><li>Agent and return address</li><li>Review</li></ol><p style="margin:0"><a href="#/budget-maximizer">Learn more</a></p></div>'+dropBox("llist","Your list","CSV only","Select files",LS.files)+'<a href="#" class="lt-csv-link" id="lexCsv">Example CSV</a></div>';
   var art="";
-  var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-tiles" id="ltBuyTiles"></div><div class="lt-buy-sum" id="ltBuySum"></div><div class="lt-buy-meta"><div class="lt-buy-kv"><span>Pieces</span><input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:6px 0 0">From your cleaned list when you upload one. Minimum 200.</p></div><div class="lt-buy-kv"><span>Postage</span><b id="ltBuyPost"></b></div><div class="lt-buy-kv"><span>Mail dates</span><b id="ltBuyDates"></b></div></div><div class="lt-buy-addons" id="ltBuyAddons"></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
+  var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-sum" id="ltBuySum"></div><div class="lt-buy-qtyline"><label class="lt-buy-k" for="lqty">Pieces:</label> <input class="inp" id="lqty" type="number" min="200" step="1" inputmode="numeric" value="'+LS.qty+'" aria-label="How many pieces"><p class="help qmin" style="margin:4px 0 0">From your cleaned list when you upload one. Minimum 200.</p></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
   var notes='<div class="panel of-form" id="ltNotes"><h3>Notes</h3><div class="fld"><label class="f" for="lnotes">Order notes</label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><ul class="files" id="files-lother">'+fileList((LS.other||[]).concat(LS.art||[]),"lother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div></div>';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'<p class="help pseg-np"><a href="#" id="npHow">How to apply for nonprofit postage authorization</a></p></div></div>';
-  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+(LS.stackLayout?'<p class="note info" id="ltStackNote" style="margin:0 0 12px">Preview: templates and envelopes are stacked full-width, at the same panel size as the Tri-Fold letter. The current <a href="#/letters/no10">No. 10 letter</a> is unchanged.</p>':'')+styleBits+'<div class="panel of-form lt-split'+(LS.stackLayout?' lt-split-stack':'')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+postbar+accs+upbar+art+notes+qty+'</div>'+priceModal;
+  c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvFonts?' lt-split-stack':'')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Templates</span></div>'+tplBits+'</div><div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div></div>'+postbar+accs+upbar+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
   var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
