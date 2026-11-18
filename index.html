@@ -1676,6 +1676,22 @@ details.lt-acc.panel>summary{cursor:pointer;list-style:none;display:flex;align-i
 details.lt-acc.panel>summary::-webkit-details-marker{display:none}
 details.lt-acc.panel .lt-acc-body{padding-top:12px}
 .form-next{margin-top:12px}
+.lt-acc-tog{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;flex:0 0 auto;min-width:64px;padding:5px 12px;border-radius:999px;border:1px solid var(--line,#d6d3d1);background:#fff;color:#111;font:800 12px/1 var(--body);letter-spacing:.02em}
+details.lt-acc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}
+details.lt-acc>summary::-webkit-details-marker,details.lt-acc>summary::marker{display:none}
+details.lt-acc>summary .lt-acc-tog::before{content:"Open"}
+details.lt-acc[open]>summary .lt-acc-tog::before{content:"Close"}
+.lt-acc>summary:after,.lt-acc[open]>summary:after{content:none!important;display:none!important}
+.env-up{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;aspect-ratio:16/9;border-radius:8px;background:#f4f4f5;color:#111;box-sizing:border-box;padding:10px 8px;text-align:center;border:1px dashed #c4c4c4}
+.env-up-ico{width:34px;height:34px;border-radius:50%;background:#111;color:#f5c400;display:flex;align-items:center;justify-content:center;font:800 22px/1 var(--body)}
+.env-up-k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.env-up small{font-size:10px;color:#52525b;line-height:1.3;font-weight:600}
+.opt-env.env-lead .ft-n{font-weight:800}
+.wz-all{display:flex;flex-direction:column;gap:18px}
+.wz-pane{border:1px solid var(--line,#eadfa8);border-radius:12px;padding:14px 16px;background:#fff}
+.wz-pane h3{margin:0 0 4px;font-size:16px}
+.wz-pane > .help{margin:0 0 10px}
+.wz-steps li.on,.wz-steps li.done{opacity:1}
 .ct-im{cursor:pointer;position:relative}
 .ct-kind-badge{position:absolute;left:10px;bottom:10px;z-index:2;display:inline-block;padding:4px 8px;border-radius:999px;font:800 11px/1 var(--body);letter-spacing:.02em;box-shadow:0 1px 3px rgba(0,0,0,.25)}
 .ct-kind-print{background:#262626;color:#FFC523}
@@ -2710,6 +2726,44 @@ function tplLibSVG(){
 function tplLibHTML(cls,alt){
   return '<div class="tpl-lib'+(cls?(" "+cls):"")+'" role="img" aria-label="'+esc(alt||"Past Templates — Your Library")+'">'+tplLibSVG()+'</div>';
 }
+function envUpHTML(){
+  return '<div class="env-up" role="img" aria-label="Upload your design"><span class="env-up-ico" aria-hidden="true">+</span><span class="env-up-k">Upload your design</span><small>Your artwork, or a design we make for you</small></div>';
+}
+var ENV_LIB=[
+  {id:"el1",name:"Acme Investments #10 (on file)",img:"https://www.yellowletterhq.com/wp-content/uploads/2022/03/10Yellow-700x700.png",note:"Last used Oct 22, 2026 · order #204518"},
+  {id:"el2",name:"Blue honeycomb return #10 (on file)",img:"https://www.yellowletterhq.com/wp-content/uploads/2024/09/New-envelope-700x700.png",note:"Last used Sep 30, 2026 · order #203902"},
+  {id:"el3",name:"Logo white #10 (on file)",img:"https://www.yellowletterhq.com/wp-content/uploads/2022/03/10Pink-700x700.png",note:"Last used Sep 2, 2026 · order #203455"}
+];
+function envLibRow(){return ["__envlib","Your Library",0,-1,3]}
+function envLibOpen(){
+  var items=ENV_LIB.map(function(x){
+    return '<button type="button" class="ct-choice-card" data-envlib="'+esc(x.id)+'" style="text-align:left"><img class="ct-choice-img" src="'+x.img+'" alt="'+esc(x.name)+'"><span class="ct-choice-b"><b>'+esc(x.name)+'</b><span>'+esc(x.note)+'</span></span></button>';
+  }).join("");
+  modal("Your Library — saved custom envelopes",
+    '<p class="help" style="margin-top:0">Custom envelopes you have on file. Pick one to use it on this order.</p><div class="ct-choice">'+items+'</div>',
+    [{label:"Close",cls:"btn sec"}]);
+  var box=document.querySelector(".modal .ct-choice")||document.querySelector("#dim .ct-choice");
+  if(box)box.addEventListener("click",function(ev){
+    var b=ev.target.closest("[data-envlib]");if(!b)return;
+    var it=ENV_LIB.filter(function(x){return x.id===b.getAttribute("data-envlib")})[0];
+    if(!it)return;
+    if(typeof LS!=="undefined"){LS.envLib=it;LS.env=it.name;}
+    var sel=document.getElementById("ltEnv");
+    if(sel){
+      var ok=false;[].forEach.call(sel.options,function(o){if(o.value===it.name)ok=true});
+      if(!ok){var o=document.createElement("option");o.value=it.name;o.textContent=it.name;sel.appendChild(o)}
+      sel.value=it.name;
+    }
+    if(typeof lUpdate==="function")lUpdate();
+    if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+    if(typeof formAdvance==="function")formAdvance("env");
+    else if(typeof ltCollapseSide==="function")ltCollapseSide("env");
+    var closer=document.querySelector("#dim .btn, .modal .btn");
+    if(typeof closeModal==="function")try{closeModal()}catch(e){}
+    var dim=document.getElementById("dim");if(dim)dim.classList.remove("on");
+  });
+}
+
 function tplMediaHTML(t,cls,alt,extra){
   if(isPastTpl(t))return tplLibHTML(cls,alt||(t&&t[0])||"Past Templates");
   var i=typeof t==="number"?t:(t&&t[1]);
@@ -2799,6 +2853,7 @@ function formSync(){
   }
   if(kind==="lt"&&typeof ltSyncAcc==="function")ltSyncAcc();
   if(kind==="pc"&&typeof pcSyncAcc==="function")pcSyncAcc();
+  if(typeof formDecorateAcc==="function")formDecorateAcc();
 }
 function formLockQty(inp,st){
   if(!inp||!st)return;
@@ -2810,14 +2865,53 @@ function formLockQty(inp,st){
   inp.setAttribute("aria-readonly","true");
   inp.title=has?"Set from your cleaned list and cannot be changed":"Stays at 0 until you upload your list";
 }
+function formMailFinished(st){
+  if(!st)return false;
+  if(st.drops==="all")return !!(st.start||st.day);
+  if(st.drops==="multi"){
+    var n=+st.batches||0;if(n<2)return false;
+    var dates=st.batchDates||[];
+    return dates.length>=n&&dates.slice(0,n).every(function(x){return !!x});
+  }
+  return false;
+}
+function formMailMaybeClose(pfx){
+  var st=pfx==="pc"?window.PS:window.LS;
+  if(!st||!st._mailSendChosen||!formMailFinished(st))return false;
+  if(typeof formAdvance==="function")formAdvance("mail");
+  return true;
+}
+function formDecorateAcc(root){
+  root=root||document;
+  [].forEach.call(root.querySelectorAll("details.lt-acc > summary"),function(s){
+    if(!s.querySelector(".lt-acc-tog")){
+      var b=document.createElement("span");
+      b.className="lt-acc-tog";
+      b.setAttribute("aria-hidden","true");
+      s.appendChild(b);
+    }
+  });
+}
 if(!window.__formNextClick){window.__formNextClick=1;
   document.addEventListener("click",function(ev){
     var b=ev.target&&ev.target.closest&&ev.target.closest("[data-form-next]");
     if(!b)return;
     ev.preventDefault();
-    formAdvance(b.getAttribute("data-form-next"));
+    var from=b.getAttribute("data-form-next");
+    if(from==="mail"){
+      var st=formKind()==="pc"?window.PS:window.LS;
+      if(!formMailFinished(st)){
+        var msg=b.parentNode&&b.parentNode.querySelector(".form-next-err");
+        if(!msg){msg=document.createElement("p");msg.className="help form-next-err";b.parentNode.insertBefore(msg,b.nextSibling)}
+        msg.textContent=(!st||!st.drops)?"Choose whether to send all at once or in drops, then set every date.":(st.drops==="multi"?"Set a mail date for every drop, then continue.":"Pick your mail date, then continue.");
+        return;
+      }
+      if(st)st._mailSendChosen=true;
+    }
+    formAdvance(from);
   });
 }
+
 function ltOpenAcc(id){
   var el=document.getElementById(id);if(el)el.open=true;
   if(typeof ltSyncAcc==="function")ltSyncAcc();
@@ -3222,6 +3316,8 @@ function pcRenderBatchDates(){
       $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
       if(i===0){PS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("pc",PS,st.start,df)}
       close();a.focus();pcUpdateBuy();
+      if(typeof PS!=="undefined"&&PS.drops==="multi")PS._mailSendChosen=true;
+      if(typeof formMailMaybeClose==="function")formMailMaybeClose("pc");
     };
   });
   if(typeof pcUpdateBuy==="function")pcUpdateBuy();
@@ -3299,16 +3395,23 @@ function wire(){
     var cl=$("#pcPriceClose");if(cl)cl.onclick=closeP;
     pm.addEventListener("click",function(e){if(e.target===pm)closeP()});
   }
-  if(!window.__pcAccClose){window.__pcAccClose=2;
+  if(!window.__pcAccClose){window.__pcAccClose=3;
     document.addEventListener("change",function(ev){
       var t=ev.target;if(!t||!t.closest)return;
       if(!t.closest("#pcCfg"))return;
-      if(t.matches("textarea,input[type=text],input[type=email],input[type=number],input[type=search]"))return;
-      if(t.closest(".of-more,.lo-more,.pill-help"))return;
+      if(t.matches("textarea,input[type=text],input[type=email],input[type=number],input[type=search],input[type=file]"))return;
+      if(t.closest(".of-more,.lo-more,.pill-help,.dp-pop"))return;
       var acc=t.closest("details.lt-acc");
       if(!acc)return;
       if(acc.id==="pcMoreAcc"){if(typeof pcOnMoreChange==="function")pcOnMoreChange();return}
-      if(acc.id==="pcFontAcc"){if(typeof pcSyncAcc==="function")pcSyncAcc();if(typeof pcUpdateBuy==="function")pcUpdateBuy();return}
+      if(acc.id==="pcFontAcc"||acc.id==="pcGlossAcc"){if(typeof pcSyncAcc==="function")pcSyncAcc();if(typeof pcUpdateBuy==="function")pcUpdateBuy();return}
+      if(acc.id==="pcMailAcc"){
+        if(t.id==="drops"||t.id==="pcBatch"){if(typeof PS!=="undefined"&&t.id==="drops")PS._mailSendChosen=true;if(typeof formMailMaybeClose==="function")formMailMaybeClose("pc")}
+        if(typeof formSync==="function")formSync();
+        if(typeof pcUpdateBuy==="function")pcUpdateBuy();
+        return;
+      }
+      if(acc.id==="pcNotes"||acc.id==="pcUpbar"||acc.id==="pcPostAcc"){if(typeof formSync==="function")formSync();return}
       if(acc.open&&t.matches("input,select")){acc.open=false;if(typeof pcSyncAcc==="function")pcSyncAcc();if(typeof pcUpdateBuy==="function")pcUpdateBuy()}
     },true);
   }
@@ -4081,13 +4184,11 @@ function listOptsHTML(pfx,st,lead){var o=st.lo||(st.lo={dup:"mailing_property",t
   var cb=function(attr,val,on,txt,sub){return '<label class="lo-cb"><input type="checkbox" '+attr+'="'+val+'"'+(on?" checked":"")+'><span>'+txt+(sub?'<small class="muted">'+sub+'</small>':'')+'</span></label>'};
   return '<div class="lo" id="'+pfx+'LO">'+cb("data-lodup","mailing_property",o.dup==="mailing_property","Remove duplicates","Considering: Property Address, City, State and Mailing Address")+
    cb("data-lo","tout",o.tout,"Turn off upload tool","Skip cleaning; you pay for every row")+
-   '<details class="lo-more"'+(o.dup==="mailing"||o.dup==="property"||o.mail?" open":"")+'><summary>More list options</summary>'+cb("data-lodup","mailing",o.dup==="mailing","Remove mailing duplicates","Considering: Mailing Address, City, State")+cb("data-lodup","property",o.dup==="property","Remove property duplicates","Considering: Property Address, City, State")+cb("data-lo","trust",o.trust,'Change Trust names, ex: "Ontiveros 1997 Trust" to "Ontiveros Family"',"")+cb("data-lo","mail",o.mail,"Email notifications","")+
-   '<div class="fld lo-mail"'+(o.mail?'':' hidden')+' style="margin:6px 0 0"><label class="f" for="'+pfx+'LoEmail">Email address (required)</label><input class="inp" id="'+pfx+'LoEmail" type="email" placeholder="you@example.com" value="'+esc(o.email)+'"></div></details>'+
+   '<details class="lo-more"'+(o.dup==="mailing"||o.dup==="property"?" open":"")+'><summary>More list options</summary>'+cb("data-lodup","mailing",o.dup==="mailing","Remove mailing duplicates","Considering: Mailing Address, City, State")+cb("data-lodup","property",o.dup==="property","Remove property duplicates","Considering: Property Address, City, State")+cb("data-lo","trust",o.trust,'Change Trust names, ex: "Ontiveros 1997 Trust" to "Ontiveros Family"',"")+'</details>'+
    (lead?'<div class="fld lo-lead" style="margin:14px 0 0"><label class="f" for="'+pfx+'LeadIn">Lead type <span class="req">Required*</span></label><p class="help" style="margin-top:0">Type a lead type, like Probate or Vacant, and press Enter. You can add several.</p><div class="lt-tags" id="'+pfx+'LeadBox">'+leadTagsHTML(st)+'<input class="lt-in" id="'+pfx+'LeadIn" type="text" placeholder="Type your lead type, like Probate or Vacant" autocomplete="off" aria-label="Add a lead type"></div></div>':'')+'</div>'}
 
 function listLeadHTML(pfx,st){var o=st.lo||(st.lo={dup:"mailing_property",tout:false,trust:true,mail:false,email:""});st.leads=st.leads||[];
-  return '<div class="fld lo-lead" id="'+pfx+'LeadWrap" style="margin:0 0 12px"><label class="f" for="'+pfx+'LeadIn">Lead type <span class="req">Required*</span></label><p class="help" style="margin-top:0">Type a lead type, like Probate or Vacant, and press Enter. You can add several.</p><div class="lt-tags" id="'+pfx+'LeadBox">'+leadTagsHTML(st)+'<input class="lt-in" id="'+pfx+'LeadIn" type="text" placeholder="Type your lead type, like Probate or Vacant" autocomplete="off" aria-label="Add a lead type"></div></div>'+
-   '<div class="fld"><label class="lo-cb"><input type="checkbox" data-lo="mail"'+(o.mail?" checked":"")+'><span>Email notifications</span></label><div class="fld lo-mail"'+(o.mail?'':' hidden')+' style="margin:6px 0 0"><label class="f" for="'+pfx+'LoEmail">Email address (required)</label><input class="inp" id="'+pfx+'LoEmail" type="email" placeholder="you@example.com" value="'+esc(o.email)+'"></div></div>'}
+  return '<div class="fld lo-lead" id="'+pfx+'LeadWrap" style="margin:0 0 12px"><label class="f" for="'+pfx+'LeadIn">Lead type <span class="req">Required*</span></label><p class="help" style="margin-top:0">Type a lead type, like Probate or Vacant, and press Enter. You can add several.</p><div class="lt-tags" id="'+pfx+'LeadBox">'+leadTagsHTML(st)+'<input class="lt-in" id="'+pfx+'LeadIn" type="text" placeholder="Type your lead type, like Probate or Vacant" autocomplete="off" aria-label="Add a lead type"></div></div>'}
 function listToolHTML(pfx,st){var o=st.lo||(st.lo={dup:"mailing_property",tout:false,trust:true,mail:false,email:"",auto:true});
   if(o.auto==null)o.auto=true;
   var toolOn=!o.tout;
@@ -4131,7 +4232,7 @@ var CT_IMG={
   "lt:greeting":TUP+"2021/11/Ornament-Card-768x432.png",
   "lt:notes":TUP+"2022/09/Long-Note.png",
   "lt:jumbo":TUP+"2024/11/MEGA_LETTER_CHECK_V2_TEST-01-663x1024.png",
-  "hw:hwnotes":TUP+"2018/10/20180831_172731-1-e1538873276197.jpg",
+  "hw:hwnotes":TUP+"2025/12/HWFolded-Note-768x432.jpg",
   "hw:hwcards":TUP+"2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png",
   "pc:fc425":TUP+"2025/07/Just-Listed-Postcard-1-768x432.jpg",
   "pc:half":TUP+"2025/07/Yellow-Letter-Postcard-1-768x432.jpg",
@@ -4299,7 +4400,7 @@ function renderCT(){
     gFrom=(function(k){var o=PROD_K[k];return o&&o.std?Math.min.apply(null,o.std):0})( /Handwritten/.test(CT.prod)?"hwcards":"greeting");
     nFrom=(function(k){var o=PROD_K[k];return o&&o.std?Math.min.apply(null,o.std):0})( /Handwritten/.test(CT.prod)?"hwnotes":"notes");
     var gImg=(function(k){var o=PROD_K[k];return (o&&o.img)||CT_IMG[/Handwritten/.test(CT.prod)?"hw:hwcards":"lt:greeting"]||""})(/Handwritten/.test(CT.prod)?"hwcards":"greeting");
-    var nImg=(function(k){var o=PROD_K[k];return (o&&o.img)||CT_IMG[/Handwritten/.test(CT.prod)?"hw:hwnotes":"lt:notes"]||""})(/Handwritten/.test(CT.prod)?"hwnotes":"notes");
+    var nImg=TUP+(/Handwritten/.test(CT.prod)?"2025/12/HWFolded-Note-768x432.jpg":"2022/09/Long-Note.png");
     sInside='<div class="panel ct-step" id="ct-sInside">'+head(3,"Step 3: Greeting card or folded note","Please choose one. Both styles use the same price.")+
       '<div class="ct-inside"><div class="ct-choice">'+
         '<button type="button" class="ct-choice-card'+(CT.cardStyle==="greeting"?" on":"")+'" data-ctstyle="greeting">'+(gImg?'<img class="ct-choice-img" src="'+gImg+'" alt="Example greeting card">':'')+'<span class="ct-choice-b"><b>Greeting Card</b><span>A 6 x 9 in greeting card in an envelope. From '+money(gFrom,3)+' each.</span><span class="btn sm'+(CT.cardStyle==="greeting"?"":" sec")+' block">'+(CT.cardStyle==="greeting"?"&#10003; Selected":"Choose greeting card")+'</span></span></button>'+
@@ -4492,7 +4593,7 @@ var LTP=[
  {k:"jumbo",t:6,std:[1.152,1.122,1.082,1.067,1.052,1.022],fc:1}
 ];
 var HW=[
- {k:"hwcardsnotes",name:"Real Handwritten Greeting Cards & Folded Notes",img:"https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png",t:6,hw:1,fc:1,defStyle:"greeting",styles:{greeting:{k:"hwcards",name:"Greeting Card",std:[1.19,1.15,0.99,0.99,0.96,0.88],fcT:[1.64,1.60,1.44,1.41,1.39,1.33],img:"https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"},notes:{k:"hwnotes",name:"Folded Note",std:[1.19,1.15,0.99,0.99,0.96,0.88],fcT:[1.64,1.60,1.44,1.41,1.39,1.33],img:"https://www.yellowletterhq.com/wp-content/uploads/2018/10/20180831_172731-1-e1538873276197.jpg"}}}
+ {k:"hwcardsnotes",name:"Real Handwritten Greeting Cards & Folded Notes",img:"https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png",t:6,hw:1,fc:1,defStyle:"greeting",styles:{greeting:{k:"hwcards",name:"Greeting Card",std:[1.19,1.15,0.99,0.99,0.96,0.88],fcT:[1.64,1.60,1.44,1.41,1.39,1.33],img:"https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"},notes:{k:"hwnotes",name:"Folded Note",std:[1.19,1.15,0.99,0.99,0.96,0.88],fcT:[1.64,1.60,1.44,1.41,1.39,1.33],img:"https://www.yellowletterhq.com/wp-content/uploads/2025/12/HWFolded-Note-768x432.jpg"}}}
 ];
 LT.forEach(function(x,i){LTP[i].name=x[0];LTP[i].img=x[1]});
 var PROD_K={};
@@ -4554,9 +4655,12 @@ function ltTplCustomFirst(t){
   return a;
 }
 function ltEnvCustomFirst(L){
-  var a=(L||[]).slice(), i=-1;
-  a.forEach(function(r,n){if(i<0&&r&&r[4]===1)i=n});
-  if(i>0){var c=a.splice(i,1)[0];a.unshift(c)}
+  var a=(L||[]).slice(), i=-1, lib=-1;
+  a.forEach(function(r,n){if(r&&r[4]===1&&i<0)i=n;if(r&&(r[0]==="__envlib"||r[4]===3))lib=n});
+  if(i>0){var c=a.splice(i,1)[0];a.unshift(c);if(lib>i)lib--;else if(lib===i)lib=0}
+  if(i<0){var has=(a||[]).some(function(r){return r&&r[0]&&r[0]!=="NA"&&r[1]!=="None"});if(has){a.unshift(["__custom","Custom envelope design",0.03,-1,1]);i=0;if(lib>=0)lib++}}
+  if(lib>=0){var row=a.splice(lib,1)[0];a.splice(i>=0?1:0,0,row)}
+  else if(i>=0||(a&&a.length&&a[0]&&a[0][1]!=="None")) a.splice(i>=0?1:0,0,envLibRow());
   return a;
 }
 function ltPid(){
@@ -4668,11 +4772,11 @@ function ltPickedHTML(kind){
   if(kind==="tpl"){
     var t=ltTplRec(), img=t?tUrl(t[1]):"", name=LS.tpl||"No template selected";
     var th=isPastTpl(t)?tplLibHTML("lt-picked-img",name):(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
-    return '<div class="lt-picked" id="ltTplPicked">'+th+'<div class="lt-picked-n">'+esc(name)+'<small>Letter template</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="tpl">Change</button></div>';
+    return '<div class="lt-picked" id="ltTplPicked">'+th+'<div class="lt-picked-n">'+esc(name)+'<small>Letter template</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="tpl">Open</button></div>';
   }
-  var r=ltEnvRow(), img=ltEnvThumb(r), name=r?r[1]:(LS.env||"No envelope selected");
-  var ph=r&&r[4]?'<span class="env-ph">Your design</span>':(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
-  return '<div class="lt-picked" id="ltEnvPicked">'+ph+'<div class="lt-picked-n">'+esc(name)+'<small>Envelope</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="env">Change</button></div>';
+  var r=ltEnvRow(), img=(LS.envLib&&LS.envLib.img)||ltEnvThumb(r), name=(LS.envLib&&LS.envLib.name)||(r?((r[4]===1||r[0]==="__custom")?"Upload your design":r[1]):(LS.env||"No envelope selected"));
+  var ph=(LS.envLib&&LS.envLib.img)?'<img class="lt-picked-img" src="'+LS.envLib.img+'" alt="">':(r&&(r[4]===3||r[0]==="__envlib"))?tplLibHTML("lt-picked-img","Your Library"):(r&&(r[4]===1||r[0]==="__custom"))?envUpHTML():(img?'<img class="lt-picked-img" src="'+img+'" alt="">':'<div class="lt-picked-img"></div>');
+  return '<div class="lt-picked" id="ltEnvPicked">'+ph+'<div class="lt-picked-n">'+esc(name)+'<small>Envelope</small></div><button type="button" class="btn sec sm lt-change" data-ltchg="env">Open</button></div>';
 }
 function ltEnsurePicked(col,kind){
   if(!col)return;
@@ -4811,6 +4915,8 @@ function ltRenderBatchDates(){
       $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
       if(i===0){LS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("lt",LS,st.start,df)}
       close();a.focus();ltUpdateBuy();
+      if(typeof LS!=="undefined"&&LS.drops==="multi")LS._mailSendChosen=true;
+      if(typeof formMailMaybeClose==="function")formMailMaybeClose("lt");
     };
   });
   if(typeof ltUpdateBuy==="function")ltUpdateBuy();
@@ -4851,16 +4957,23 @@ function ltSyncAcc(){
   var a=$("#ltArtSum");
   if(a){var n=(LS.art||[]).length;a.textContent=n?(n+" file"+(n===1?"":"s")+" added"):""}
 }
-if(!window.__ltAccClose){window.__ltAccClose=2;
+if(!window.__ltAccClose){window.__ltAccClose=3;
   document.addEventListener("change",function(ev){
     var el=ev.target;if(!el||!el.closest)return;
     var acc=el.closest("#ltCfg details.lt-acc");
     if(!acc)return;
-    if(el.closest(".of-more,.lo-more,.pill-help"))return;
+    if(el.closest(".of-more,.lo-more,.pill-help,.dp-pop"))return;
     var typ=(el.type||"").toLowerCase();
-    if(el.tagName==="TEXTAREA"||typ==="text"||typ==="email"||typ==="search")return;
+    if(el.tagName==="TEXTAREA"||typ==="text"||typ==="email"||typ==="search"||typ==="file")return;
     if(acc.id==="ltMoreAcc"){if(typeof ltOnMoreChange==="function")ltOnMoreChange();return}
     if(acc.id==="ltFontAcc"||acc.id==="ltEnvFontAcc"){if(typeof ltSyncAcc==="function")ltSyncAcc();if(typeof ltUpdateBuy==="function")ltUpdateBuy();return}
+    if(acc.id==="ltMailAcc"){
+      if(el.id==="ldrops"||el.id==="ltBatch"){if(typeof LS!=="undefined"&&el.id==="ldrops")LS._mailSendChosen=true;if(typeof formMailMaybeClose==="function")formMailMaybeClose("lt")}
+      if(typeof formSync==="function")formSync();
+      if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+      return;
+    }
+    if(acc.id==="ltNotes"||acc.id==="ltUpbar"||acc.id==="ltPostAcc"){if(typeof formSync==="function")formSync();return}
     acc.open=false;if(typeof ltSyncAcc==="function")ltSyncAcc();if(typeof ltUpdateBuy==="function")ltUpdateBuy();
   },true);
 }
@@ -5939,7 +6052,7 @@ function ctEnvRow(id,k){var L=ctEnvOf(id);for(var i=0;i<L.length;i++)if(L[i][0]=
 function optEnvDef(id){var L=optEnvOf(id);if(!L.length)return "";for(var i=0;i<L.length;i++)if(/white/i.test(L[i][1])&&!L[i][2])return L[i][0];return L[0][0]}
 function optEnvRow(id,k){if(k==="__sameA"&&id&&optEnvOf(id).some(function(r){return r[4]===1}))return ["__sameA","Same custom envelope as A",0.03,-1,2];var L=optEnvOf(id);for(var i=0;i<L.length;i++)if(L[i][0]===k)return L[i];return null}
 function optCents(a){return "+"+Math.round(a*100)+" cents"}
-function optEnvTiles(L,cur,nm){return '<div class="opt-sws env-grid" role="radiogroup" aria-label="Envelope">'+L.map(function(r){var on=r[0]===cur;return '<label class="opt-sw opt-ft opt-env'+(on?" on":"")+'"><input type="radio" name="'+nm+'" value="'+esc(r[0])+'"'+(on?" checked":"")+'><button type="button" class="tg-zoom env-zoom" aria-label="Enlarge this envelope" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button>'+(r[4]===2?'<span class="env-ph">Same design as A</span>':r[4]?'<span class="env-ph">Your design</span>':(r[3]>-1&&OPTENVIMG[r[3]])?'<img src="'+OPTENVIMG[r[3]]+'" alt="'+esc(r[1])+'" loading="lazy">':'<span class="env-ph">'+esc(r[1])+'</span>')+(r[0]==="__hwCursive"||r[0]==="__hwPrint"?'<span class="ft-s" style="'+optFam(r[1])+'">'+OPTSAMPLE+'</span>':'')+'<span class="lt-cap"><span class="ft-n">'+esc(r[1])+'</span>'+(r[4]===2?'<span class="env-sub">B uses A&#39;s custom envelope. No second design fee.</span><small class="env-pr up">'+optCents(r[2])+' each</small>':r[4]?'<span class="env-sub">Your own printed envelope. We design it for you. $65 design fee, plus 3 cents per piece.</span><small class="env-pr up">'+optCents(r[2])+' each + $65 design fee</small>':'<small class="env-pr'+(r[2]?' up':'')+'">'+(r[2]?optCents(r[2])+" each":"No extra cost")+'</small>')+'</span>'+'<b class="ft-ck" aria-hidden="true">&#10003;</b></label>'}).join("")+'</div>'}
+function optEnvTiles(L,cur,nm){return '<div class="opt-sws env-grid" role="radiogroup" aria-label="Envelope">'+L.map(function(r){var on=r[0]===cur||(r[4]===3&&typeof LS!=="undefined"&&LS.envLib);var isLib=r[4]===3||r[0]==="__envlib",isUp=r[4]===1||r[0]==="__custom";return '<label class="opt-sw opt-ft opt-env'+(isLib||isUp?" env-lead":"")+(on?" on":"")+'"><input type="radio" name="'+nm+'" value="'+esc(r[0])+'"'+(on?" checked":"")+'><button type="button" class="tg-zoom env-zoom" aria-label="Enlarge this envelope" title="Enlarge"><span aria-hidden="true">&#10530;</span><span class="tz-l"> Enlarge</span></button>'+(r[4]===3||r[0]==="__envlib"?tplLibHTML("gallery-image","Your Library — saved custom envelopes"):r[4]===2?'<span class="env-ph">Same design as A</span>':r[4]===1||r[0]==="__custom"?envUpHTML():(r[3]>-1&&OPTENVIMG[r[3]])?'<img src="'+OPTENVIMG[r[3]]+'" alt="'+esc(r[1])+'" loading="lazy">':'<span class="env-ph">'+esc(r[1])+'</span>')+(r[0]==="__hwCursive"||r[0]==="__hwPrint"?'<span class="ft-s" style="'+optFam(r[1])+'">'+OPTSAMPLE+'</span>':'')+'<span class="lt-cap"><span class="ft-n">'+esc(r[4]===3||r[0]==="__envlib"?"Your Library":r[4]===1||r[0]==="__custom"?"Upload your design":r[1])+'</span>'+(r[4]===3||r[0]==="__envlib"?'<span class="env-sub">Saved custom envelopes on your account.</span><small class="env-pr">On file</small>':r[4]===2?'<span class="env-sub">B uses A&#39;s custom envelope. No second design fee.</span><small class="env-pr up">'+optCents(r[2])+' each</small>':r[4]===1||r[0]==="__custom"?'<span class="env-sub">Your own printed envelope. We design it for you.</span><small class="env-pr up">+3 cents each + $65 design fee</small>':'<small class="env-pr'+(r[2]?' up':'')+'">'+(r[2]?optCents(r[2])+" each":"No extra cost")+'</small>')+'</span>'+'<b class="ft-ck" aria-hidden="true">&#10003;</b></label>'}).join("")+'</div>'}
 /* round 9 (Oct 30, Todd 11:30 AM PT): stock envelopes cost only their per piece price. "Custom envelope design" = we design the customer's own envelope, one time estimate $65 (separate from the $65 template fee). Per piece: +3 cents on every product that offers a custom printed envelope, confirmed Nov 17, 2026 (Josh). The $65 design fee is separate from the $65 template fee. */
 function optIsCustom(id,k){var r=optEnvRow(id,k);return !!(r&&r[4])}
 function optEnvCustomBox(pfx,st){return '<div class="env-cust"><p class="opt-help" style="margin:0 0 6px"><b>Custom printed envelope.</b> Tell us what you want, or upload your art. We design it and you approve it on the proof. $65 design fee, plus 3 cents per piece.</p><textarea class="inp" id="'+pfx+'Note" rows="2" placeholder="Example: blue envelope, our logo top left, &quot;Open for your cash offer&quot; on the front">'+esc(st.envNote||"")+'</textarea><div class="drop env-drop"><b>Upload your envelope art (optional)</b><div class="muted">PDF, PNG or JPG</div><label class="btn sec sm" style="margin-top:8px">Choose files<input type="file" multiple hidden id="'+pfx+'File"></label></div><ul class="files" id="'+pfx+'Files">'+(st.envArt||[]).map(function(f){return '<li><span class="ok">&#10003;</span><span>Uploaded file: <b>'+esc(f)+'</b> <span class="muted">(stays on your computer, mock only)</span></span></li>'}).join("")+'</ul></div>'}
@@ -5951,7 +6064,7 @@ function optOrderEnv(kind,c,id){var pan=c.querySelector(".cfg .panel")||c.queryS
   var cur=L[labels.indexOf(LS.env)][0],d=document.createElement("div");d.className="fld op-pick op-env";
   var OPE=OPS["env:"+id]||(OPS["env:"+id]={});d.innerHTML='<span class="op-h">Envelope</span>'+((L.length===1&&kind!=="lt")?'<p class="opt-fixed" style="margin:0">'+esc(L[0][1])+' <span class="muted">(only choice)</span></p>':'<div class="op-row">'+optEnvTiles(L,cur,"openv"+kind)+'</div>'+(optIsCustom(id,cur)?optEnvCustomBox("opEC"+kind,OPE):''));
   var f=sel.closest(".fld");if(f){f.style.display="none";f.insertAdjacentElement("afterend",d)}
-  [].forEach.call(d.querySelectorAll("input[type=radio]"),function(i){i.onchange=function(){var r=optEnvRow(id,i.value);LS.env=optEnvLabel(r);sel.value=LS.env;if(typeof lUpdate==="function")lUpdate();optOrderEnv(kind,c,id);if(kind==="lt"){if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}});optEnvCustomWire(d,"opEC"+kind,OPE,function(){optOrderEnv(kind,c,id)})}
+  [].forEach.call(d.querySelectorAll("input[type=radio]"),function(i){i.onchange=function(){if(i.value==="__envlib"){if(typeof envLibOpen==="function")envLibOpen();return}var r=optEnvRow(id,i.value);LS.envLib=null;LS.env=optEnvLabel(r);sel.value=LS.env;if(typeof lUpdate==="function")lUpdate();optOrderEnv(kind,c,id);if(kind==="lt"){if(typeof ltBalanceGrids==="function")ltBalanceGrids(c);if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof formAdvance==="function")formAdvance("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}});optEnvCustomWire(d,"opEC"+kind,OPE,function(){optOrderEnv(kind,c,id)})}
 /* round 5: the regular order page gets the live site's Font style, Font color, Paper color (live label "Background") and Envelope font pickers, restyled. Same options as data_template_ylhq.php, nothing new. */
 var OPS={};
 function optOrderPickers(kind,c){var id=pageProd(kind),olds=c.querySelectorAll(".op-pick:not(.op-env)");for(var i=0;i<olds.length;i++)olds[i].remove();var pan=c.querySelector(".cfg .panel")||c.querySelector(".panel");if(!id||!pan)return;if(kind==="lt"){
@@ -6233,7 +6346,7 @@ cartBadge();route();
    r=(window.wzAuto&&wzAuto(k,COLS))||(window.amatch?amatch(k,COLS):["","no"]);m[k]=r[0];lv[k]=r[1]})});
   return {files:files,opt:opt||{},step:opt&&opt.start||1,m:m,lv:lv,one:false,err:"",ran:false,showOpt:false,st:(opt&&opt.st)||{}}}
  var STEPS=[["Upload","your list"],["Match columns","we do it for you"],["Clean list","duplicates and more"],["Agent and return address","on the card, return mail"],["Review","and use your list"]];
- function bar(){return '<ol class="wz-steps">'+STEPS.map(function(x,i){var c=i+1<W.step?"done":i+1===W.step?"on":"";return '<li class="'+c+'"'+(c==="on"?' aria-current="step"':'')+'>'+(i+1)+'. '+x[0]+'<span>'+x[1]+'</span></li>'}).join("")+'</ol>'}
+ function bar(){return '<ol class="wz-steps">'+STEPS.map(function(x,i){return '<li class="on">'+(i+1)+'. '+x[0]+'<span>'+x[1]+'</span></li>'}).join("")+'</ol>'}
  function ext(f){var m=/\.([a-z0-9]+)$/i.exec(f);return m?m[1].toLowerCase():""}
  function s1(){var ok=0;var h=W.files.map(function(f){var x=ext(f),good=x==="csv";if(good)ok++;
    return '<div class="wz-file'+(good?'':' bad')+'"><div class="ic">'+(x||"?").toUpperCase()+'</div><div><b>'+e(f)+'</b>'+(good?'<small>'+n(window.WZ_N||5214)+' rows and '+COLS.length+' columns found'+(window.WZ_FILE?' in your file':' (example list)')+'. Read OK.</small>':'<small style="color:#c62828">This is not a list file. We added it to your order as artwork or instructions. For a list, save it as a CSV file and add it here.</small>')+'</div></div>'}).join("");
@@ -6297,21 +6410,24 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if($q("#agr-up-ret-addr"))W.ra=r[0]+", "+r[1]+", "+r[2]+", "+r[3]+" "+r[4];
   var bad=[];if(!W.ag)bad.push("Agent name");if(!W.ph)bad.push("Agent phone");if(!r[1])bad.push("Return address");if(!r[2]||!r[3]||!r[4])bad.push("Return city, state and zip");
   if(bad.length){var b=document.getElementById("wzE4");if(b)b.innerHTML='<div class="wz-err" role="alert"><b>Please fill in: '+bad.join(", ")+'.</b> The post office needs a return address to mail, and sellers need a name and number to call.</div>';return false}return true}
- function draw(){var B=$q("#mB"),F=$q("#mF");$q("#mT").textContent="Upload your list: step "+W.step+" of 5";
-  B.innerHTML=bar()+'<div id="wzBody">'+[s1,s2,s3,s4,s5][W.step-1]()+'</div><div id="wzE4"></div>';
-  if(W.step===3&&window.listOptsWire)listOptsWire(B,"wz",W.st);
+ function draw(){var B=$q("#mB"),F=$q("#mF"),keep=B.scrollTop||0;
+  $q("#mT").textContent="Upload your list";
+  if(!W.ran)W.ran=true;
+  W.step=5;
+  function pane(i,fn){return '<section class="wz-pane" data-wzpane="'+i+'"><h3>'+i+'. '+STEPS[i-1][0]+'</h3><p class="help">'+STEPS[i-1][1]+'</p>'+fn()+'</section>'}
+  B.innerHTML=bar()+'<div id="wzBody" class="wz-all">'+pane(1,s1)+pane(2,s2)+pane(3,s3)+pane(4,s4)+pane(5,s5)+'</div><div id="wzE4"></div>';
+  if(window.listOptsWire)listOptsWire(B,"wz",W.st);
   F.innerHTML="";function btn(l,c,fn){var x=document.createElement("button");x.type="button";x.className=c;x.textContent=l;x.onclick=fn;F.appendChild(x);return x}
-  btn(W.step===1?"Cancel":"Back","btn sec",function(){if(W.step===1){if(confirm("Leave the upload steps? You can upload the list again any time."))closeModal();return}W.step--;draw()});
-  var nx=btn(W.step===5?"Use "+n(counts().fin)+" records":"Next","btn",function(){
-   if(W.step===1&&!W.files.some(function(f){return /\.(csv|xlsx?)$/i.test(f)})){closeModal();toast("Added as artwork or instructions. No list to match.");return}
-   if(W.step===2&&missing().length){W.err=1;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});return}
-   if(W.step===3&&!W.ran){W.ran=true;draw();return}
-   if(W.step===4&&!grab4())return;
-   if(W.step===5){if(W.st)W.st.qty=counts().fin;var q=$q("#qty")||$q("#lqty");if(typeof formLockQty==="function")formLockQty(q,W.st||{});else if(q){q.value=counts().fin;q.readOnly=true}if(typeof formSync==="function")formSync();if(typeof formAdvance==="function")formAdvance("list");if(typeof lUpdate==="function"&&q&&q.id==="lqty")lUpdate();if(typeof updatePrice==="function"&&q&&q.id==="qty")updatePrice();if(typeof ltUpdateBuy==="function")ltUpdateBuy();if(typeof pcUpdateBuy==="function")pcUpdateBuy();
-    closeModal();toast("List ready: "+n(counts().fin)+" records. Piece count is locked to the cleaned list.");return}
-   W.step++;draw()});
-  if(W.step===3&&!W.ran)nx.textContent="Clean my list and continue";
-  if(B.scrollTo)B.scrollTop=0}
+  btn("Cancel","btn sec",function(){if(confirm("Leave the upload tool? You can upload the list again any time."))closeModal()});
+  var nx=btn("Use "+n(counts().fin)+" records","btn",function(){
+   if(!W.files.some(function(f){return /\.(csv|xlsx?)$/i.test(f)})){closeModal();toast("Added as artwork or instructions. No list to match.");return}
+   if(missing().length){W.err=1;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});else{var p=B.querySelector('[data-wzpane="2"]');if(p)p.scrollIntoView({block:"start"})}return}
+   if(!W.ran){W.ran=true;draw();return}
+   if(!grab4()){var p4=B.querySelector('[data-wzpane="4"]');if(p4)p4.scrollIntoView({block:"start"});return}
+   if(W.st)W.st.qty=counts().fin;var q=$q("#qty")||$q("#lqty");if(typeof formLockQty==="function")formLockQty(q,W.st||{});else if(q){q.value=counts().fin;q.readOnly=true}if(typeof formSync==="function")formSync();if(typeof formAdvance==="function")formAdvance("list");if(typeof lUpdate==="function"&&q&&q.id==="lqty")lUpdate();if(typeof updatePrice==="function"&&q&&q.id==="qty")updatePrice();if(typeof ltUpdateBuy==="function")ltUpdateBuy();if(typeof pcUpdateBuy==="function")pcUpdateBuy();
+    closeModal();toast("List ready: "+n(counts().fin)+" records. Piece count is locked to the cleaned list.");
+  });
+  if(B.scrollTo)B.scrollTop=keep}
  window.wzOpen=function(files,opt){W=fresh(files,opt);var d=document.getElementById("dim");d.classList.add("wz");d.classList.add("on");draw()};
  function closeModal(){var d=document.getElementById("dim");d.classList.remove("on");d.classList.remove("wz")}
  function toast(m){var t=document.getElementById("toast");if(t){t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},3200)}}
