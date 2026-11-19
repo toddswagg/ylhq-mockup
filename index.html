@@ -2725,9 +2725,10 @@ function picker(root,items,sel,onPick,allLabel,allImg,all){
   if(allLabel&&!all.hide)html+='<button type="button" class="ptile all normal ylhq-products-all'+(all.on?" on":"")+'" data-value="all templates" aria-pressed="'+!!all.on+'"><img src="'+allImg+'" alt="">'+allLabel+' <span class="all-n">'+(all.sameSize?('Same size'+(all.sizeLabel?(' · '+all.sizeLabel):'')):(F120?GTOT+' templates for every product':galGroupN(all.st&&all.st.tab)+' templates'))+'</span></button></div>';
   else html+='</div>';
   root.innerHTML=html;
-  (function(){var hws=$$(".ptile:not(.all)",root).filter(function(b){return /handwritten/i.test(b.getAttribute("data-value")||"")});if(!hws.length)return;hws.forEach(function(b){b.remove()});
+  (function(){var wt=$$(".ptile:not(.all)",root).filter(function(b){return b.getAttribute("data-value")==="Letter with Windowed Envelope"})[0];if(wt){var dg=$$(".ptile:not(.all)",root).filter(function(b){return /^Digital Greeting/i.test(b.getAttribute("data-value")||"")})[0];if(dg)wt.parentNode.insertBefore(dg,wt);wt.remove()}
+  var hws=$$(".ptile:not(.all)",root).filter(function(b){return /handwritten/i.test(b.getAttribute("data-value")||"")});if(!hws.length)return;hws.forEach(function(b){b.remove()});
     var a=document.createElement("a");a.className="ptile normal ylhq_products ylhw-tile";a.href="real-handwritten/";a.setAttribute("data-value","Handwritten");a.innerHTML='<img src="https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png" alt="">Handwritten<span class="ylhw-sub">Cards, flip notes, postcards, #10 envelopes</span>';var tp=root.querySelector(".tiles-p"),al=tp&&tp.querySelector(".ptile.all");if(tp){if(al)tp.insertBefore(a,al);else tp.appendChild(a)}})();
-  $$(".ptile:not(.all)",root).forEach(function(b){if(/^Digital Greeting/i.test(b.getAttribute("data-value")||""))b.classList.add("ylgreen")});
+  $$(".ptile:not(.all)",root).forEach(function(b){if(/^Digital Greeting/i.test(b.getAttribute("data-value")||""))b.classList.add("ylprinted")});
   var inp=$("input",root),cnt=$(".cnt",root),tiles=$$(".ptile:not(.all)",root).filter(function(b){return b.hasAttribute("data-i")}),empty=$(".pick-empty",root);
   tiles.forEach(function(b){b.onclick=function(){onPick(+b.getAttribute("data-i"))}});
   var allBtn=$(".ptile.all",root);if(allBtn)allBtn.onclick=function(){if(all.onAll)all.onAll()};
@@ -7762,13 +7763,13 @@ html body .scr.on .lt-pillbar .lt-pill{background:none!important;border:0!import
 .ft-cur b{font-weight:800}
 </style>
 <style id="ylhw-css">
-.ptile.ylhw-tile{background:#C62828!important;border-color:#8E1B1B!important;color:#fff!important;text-decoration:none;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ptile.ylhw-tile{background:#111!important;border-color:#111!important;color:#FFC72C!important;text-decoration:none;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .ptile.ylhw-tile .ylhw-sub{flex-basis:100%;font:600 12px var(--body);opacity:.92;margin-top:-4px}
-.ptile.ylhw-tile:hover{background:#A81F1F!important}
-.ptile.ylgreen{background:#2E7D32!important;border-color:#1B5E20!important;color:#fff!important}
-.ptile.ylgreen:hover{background:#256628!important}
-.pcard:has(.ylhw-btn){border:3px solid #C62828!important;border-radius:16px}
-.btn.ylhw-btn{background:#C62828!important;border-color:#C62828!important;color:#fff!important}
+.ptile.ylhw-tile:hover{background:#2a2a2a!important}
+
+
+.pcard:has(.ylhw-btn){border:3px solid #111!important;border-radius:16px}
+.btn.ylhw-btn{background:#111!important;border-color:#111!important;color:#FFC72C!important}
 </style>
 <style id="snex-css">
 a.snlk,.ylp-ov a.ylp-lk{color:#1558d6!important;text-decoration:underline;font-weight:700;font-size:13px;margin-left:8px;cursor:pointer}
@@ -7783,4 +7784,38 @@ a.snlk{display:block;margin:2px 0 4px!important}
 .snex-addr{position:absolute;left:96px;right:28px;bottom:22px}.snex-addr i{display:block;height:7px;background:#c9c3b4;border-radius:3px;margin-top:8px;width:80%}.snex-addr i:first-child{width:60%}
 .snex-note{position:absolute;left:14px;top:50px;width:104px;min-height:70px;background:#ffe45c;padding:8px;font:700 12px/1.25 "Open Sans",sans-serif;color:#333;transform:rotate(-4deg);box-shadow:0 4px 8px rgba(0,0,0,.2);word-break:break-word}
 </style>
+<style id="clean-css">
+/* cleanup Nov 19: spacing, consistent cards, no overlaps */
+.ptile.on{padding-right:52px!important}
+.ptile .zbtn{display:none!important}
+#ltTplSel .tp-ph,.selected-slim .tp-ph{display:none!important}
+.lt-colsub[hidden]{display:none!important}
+#ltCfg .opt-env .lt-cap .ft-n,#pcCfg .opt-env .lt-cap .ft-n{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.25;text-align:center;height:auto!important;max-height:none!important;display:block!important;-webkit-line-clamp:unset!important;flex:none}
+#ltCfg .opt-env .lt-cap{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-height:78px;text-align:center}
+#ltCfg .opt-env .lt-cap small,#ltCfg .opt-env .lt-cap .env-sub{font-size:12px;line-height:1.3;text-align:center}
+.lt-acc-k:has(>.ylstep-k){display:flex!important;flex-direction:row!important;flex-wrap:wrap;align-items:center;justify-content:flex-start;text-align:left;gap:2px 10px}
+.lt-acc-k:has(>.ylstep-k)>.ylstep-k{margin:0 10px 0 0!important}
+.lt-acc-k:has(>.ylstep-k)>small{flex-basis:100%}
+.lt-pillbar{margin-bottom:4px}
+.selected-slim:not(:has(.tpname:not([hidden]))){display:none!important}
+.ylp-on>.cfg>*+*{margin-top:14px}
+.ylp-on>.cfg .panel,.ylp-on>.cfg details.lt-acc{margin-bottom:0}
+.ylp-l small{overflow-wrap:anywhere}
+@media(max-width:700px){
+ .ptile:not(.all){padding:10px 12px!important;min-height:0!important;gap:12px}
+ .ptile.on:not(.all){padding-right:50px!important}
+ .ptile:not(.all) img{width:84px!important;height:auto!important;max-height:56px;object-fit:contain;background:#fff;border-radius:8px}
+ .ptile.ylhw-tile .ylhw-sub{font-size:11px}
+ #products-button-container .tiles-p{gap:10px!important}
+ .lt-acc-k{font-size:15px!important}
+ body{overflow-x:hidden}
+}
+</style>
+<script>(function(){function f(){document.querySelectorAll(".lt-colsub").forEach(function(e){var h=/^Pick (a|an|your) /i.test(e.textContent.trim());if(e.hidden!==h)e.hidden=h})}setInterval(f,700);document.addEventListener("click",function(){setTimeout(f,50)})})()</script>
+<script>(function(){var MAP={"Letter with A6 Envelope (Invitation)":"Letter with Invitation Envelope","Digital Greeting Cards & Folded Notes":"Printed Greeting Cards & Folded Notes","Digital Greeting Cards":"Printed Greeting Cards","Real Handwritten Cards":"Real Handwritten Cards"};
+function ren(){var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode&&n.parentNode.nodeName;return /^(SCRIPT|STYLE|OPTION|TEXTAREA)$/.test(p)?3:1}}),n,L=[];while(n=w.nextNode()){var t=n.nodeValue.trim();if(MAP[t]&&MAP[t]!==t)L.push([n,t])}L.forEach(function(x){x[0].nodeValue=x[0].nodeValue.replace(x[1],MAP[x[1]])})
+ var h=location.hash,ws=/^#\/letters\/windowed/.test(h),n10=/^#\/letters\/no10/.test(h);var col=n10?document.querySelector(".scr.on .lt-envcol"):ws?document.querySelector(".scr.on #ltCfg"):null;if(col&&!col.querySelector(".envstyle")){var d=document.createElement("div");d.className="envstyle";d.setAttribute("role","group");d.setAttribute("aria-label","Envelope style");d.innerHTML='<span>Envelope style</span><a href="#/letters/no10" class="'+(n10?"on":"")+'">Standard #10</a><a href="#/letters/windowed" class="'+(ws?"on":"")+'">Windowed #10</a>';if(ws&&col.children.length>1)col.insertBefore(d,col.children[1]);else col.insertBefore(d,col.firstChild)}
+ if(ws){var tt=document.querySelectorAll(".scr.on h2,.scr.on h3");tt.forEach(function(e){if(e.children.length===0&&e.textContent.trim()==="Letter with Windowed Envelope")e.textContent="Letter with #10 Envelope (Windowed)"})}}
+setInterval(ren,700);document.addEventListener("click",function(){setTimeout(ren,60)});window.addEventListener("hashchange",function(){setTimeout(ren,60)})})()</script>
+<style id="envstyle-css">.envstyle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px}.envstyle span{font:700 13px var(--body);color:#667085;margin-right:4px}.envstyle a{border:1.5px solid #d0d5dd;border-radius:999px;padding:7px 16px;font:700 14px var(--body);color:#1d2939;text-decoration:none;background:#fff}.envstyle a.on{background:#FFC72C;border-color:#111;color:#111}</style>
 </body></html>
