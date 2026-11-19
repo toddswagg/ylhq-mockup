@@ -3537,7 +3537,7 @@ function pcRenderBatchDates(){
 }
 function renderCfg(){
   var c=$("#pcCfg");if(!c)return;if(cfgHook("pc",c))return;
-  if(PS.p<0){c.innerHTML='<div class="note info" style="margin-top:22px">Pick a postcard above to see its options, the upload tool and prices. Standard and First Class postage are on the <b>4.25 x 5.5 Postcard</b> and the <b>Half Page Postcard (8.5 x 5.5)</b>. Standard is 4&cent; less per piece than First Class.</div>';return}
+  if(PS.p<0){c.innerHTML='';return}
   var p=PC[PS.p];
   if(!PS.other)PS.other=[];if(PS.art&&PS.art.length){PS.other=PS.other.concat(PS.art);PS.art=[];}
   if(p.std){if(!PS.post)PS.post="std"}else PS.post="fc";
@@ -5045,7 +5045,7 @@ function ltWrapRail(grid,label){
   }
   grid.classList.add("lt-rail-track");
   var prev=rail.querySelector(".lt-rail-prev"), next=rail.querySelector(".lt-rail-next");
-  function stepSize(){var tile=grid.querySelector(".image-box,.opt-env");var r=tile&&tile.getBoundingClientRect();return r?r.width+8:Math.max(120,grid.clientWidth/4)}
+  function stepSize(){var tile=grid.querySelector(".image-box,.opt-env,.ptile");var r=tile&&tile.getBoundingClientRect();return r?r.width+8:Math.max(120,grid.clientWidth/4)}
   function upd(){
     var max=Math.max(0,grid.scrollWidth-grid.clientWidth-2);
     prev.disabled=grid.scrollLeft<=2;
@@ -5304,7 +5304,7 @@ function ltApplyTpl(name,id){
 }
 function renderLCfg(){
   var c=$("#ltCfg"),L=ltList();if(!c)return;if(cfgHook("lt",c))return;
-  if(LS.p<0){c.innerHTML='<div class="note info" style="margin-top:22px">Pick '+(LS.set==="hw"?"a card":"a letter")+' above to see its options, the upload tool and prices.</div>';return}
+  if(LS.p<0){c.innerHTML='';return}
   var p=L[LS.p],act=ltActive(p),envs=envFor(p.name,act.k);
   var posts=[["std",!p.hw&&p.k==="fullview"?"Standard":POST_STD]].concat(p.fc||p.hw?[["fc",POST_FC]]:[]);window.LPOSTS=posts;
   if(!LS.post||!posts.some(function(x){return x[0]===LS.post}))LS.post="std";
@@ -6953,8 +6953,13 @@ window.snExHtml=function(msg){return '<div class="snex"><div class="snex-env"><d
 var YLPN=[["sp","Second page"],["sn","Envelope sticky note"],["eos","Easy Offer System"],["undel","Undeliverable list"],["ret","Return mail list"]];
 function ylpOpts(host){var items=[],chosen=[];YLPN.forEach(function(n){var ins=host.querySelectorAll('#ltMoreAcc input[type=radio][name$="'+n[0]+'"],#pcMoreAcc input[type=radio][name$="'+n[0]+'"]');if(!ins.length)return;var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});var on=cur!=="0",txt=!on?"No":(n[0]==="sp"?(cur==="1"?"Circular":"Variable data"):n[0]==="eos"?"Yes \u00b7 "+eosSrc(/leos$/.test(ins[0].name)?"lt":"pc"):"Yes");var snm="";if(n[0]==="sn"&&on){var ta=host.querySelector("#snMsg");snm=ta?ta.value.trim():""}items.push({k:n[0],name:n[1],on:on,txt:txt,val:cur,sn:n[0]==="sn"&&on,snm:snm});if(on)chosen.push(n[1].replace(" (Post-it)",""))});return {items:items,chosen:chosen}}
 function ylpToggle(host,k){var ins=host.querySelectorAll('#ltMoreAcc input[type=radio][name$="'+k+'"],#pcMoreAcc input[type=radio][name$="'+k+'"]');if(!ins.length)return;var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});var nxt;if(k==="sp")nxt=cur==="0"?"1":cur==="1"?"2":"0";else nxt=cur==="0"?"1":"0";ins.forEach(function(i){if(i.value===nxt){var l=i.closest("label");if(l)l.click();else i.click()}});ffSched()}
+function ylMailDates(host){var acc=host.querySelector("#ltMailAcc,#pcMailAcc");if(!acc)return [];var t=acc.textContent||"",out=[],re=/Batch\s*(\d+)\s*([A-Z][a-z]{2}, [A-Z][a-z]{2} \d{1,2}, \d{4})/g,m;while((m=re.exec(t)))out.push({n:+m[1],d:m[2]});
+ if(!out.length){var sm=acc.querySelector("summary small"),x=sm?sm.textContent:"";var mm=x.match(/[A-Z][a-z]{2}, [A-Z][a-z]{2} \d{1,2}, \d{4}/);if(mm)out.push({n:1,d:mm[0]})}return out}
+var YLWD={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
+function ylMailSum(host){var ds=ylMailDates(host);if(!ds.length)return "";var f=ds[0].d.split(", "),md=f[1],wd=YLWD[f[0]]||f[0];if(ds.length===1)return wd+", "+md+" · mails all at once";var same=ds.every(function(x){return x.d.split(", ")[0]===f[0]});return ds.length+" drops, "+(same?wd+"s ":"")+"starting "+md}
 function stepVal(host,s,i){
   var el=host.querySelector(s[1]);if(!el)return "";
+  if(s[0]==="Mail dates"){var ms=ylMailSum(host);if(ms)return ms}
   var sm=el.querySelector("summary small");if(sm)return txt(sm);
   var lab=s[0];var want=lab==="Letters"||lab==="Templates"||lab==="Postcard designs"?/^(template|letter|design|card)/i:lab==="Envelopes"?/^envelope:?$/i:null;
   if(want){var ln=host.querySelectorAll(".lt-buy-line");for(var j=0;j<ln.length;j++){var k=txt(ln[j].querySelector(".lt-buy-k")).replace(":","");if(want.test(k))return txt(ln[j].querySelector(".lt-buy-v"))}}
@@ -6964,11 +6969,12 @@ function stepVal(host,s,i){
 }
 function pieces(k){var sum=document.getElementById(k==="pc"?"sum":"lsum");if(!sum)return "0";var r=sum.querySelectorAll(".sumrow");for(var i=0;i<r.length;i++){var s=r[i].querySelector("span");if(s&&/piece|quantity|qty|letters|postcards/i.test(txt(s))&&!/price/i.test(txt(s)))return txt(r[i].querySelector("b"))}
   var st=k==="pc"?window.PS:window.LS;return st&&st.qty?String(st.qty):"0"}
-function ylpActFor(l){return /^(Letters|Templates|Postcard designs)$/.test(l)?"tpl":l==="Envelopes"?"env":l==="Postage"?"post":l==="Font"?"font":l==="Envelope font"?"efont":(l==="Your list"||l==="Mail dates"||l==="Notes"||l==="Finish")?"jump":""}
+function ylpActFor(l){return /^(Letters|Templates|Postcard designs)$/.test(l)?"tpl":l==="Envelopes"?"env":l==="Postage"?"post":l==="Font"?"font":l==="Envelope font"?"efont":(l==="Your list"||l==="Notes"||l==="Finish")?"jump":""}
 function ylpModal(title,html){var m=document.getElementById("ylpop");if(m)m.remove();m=document.createElement("div");m.id="ylpop";m.className="ylpop";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.innerHTML='<div class="ylpop-c"><h3></h3><div class="ylpop-b"></div><button type="button" class="btn sec ylpop-x">Close</button></div>';m.querySelector("h3").textContent=title;m.querySelector(".ylpop-b").innerHTML=html;document.body.appendChild(m);function cl(){m.remove();document.removeEventListener("keydown",kd)}function kd(e){if(e.key==="Escape")cl()}document.addEventListener("keydown",kd);m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".ylpop-x"))cl()});m.querySelector(".ylpop-x").focus()}
 function ylpAct(host,k,act,i,val){var K=FFK[k],steps=K.steps||[],lab=steps[i]?steps[i][0]:"";
   function jump(){var bar=host.querySelector(":scope > .ff-bar"),b=bar&&bar.querySelector('[data-ffs="'+i+'"]');if(b)b.click();var pn=host.querySelector(".ylp");if(pn&&window.innerWidth<1180){pn.classList.remove("open");pn.querySelector(".ylp-h").setAttribute("aria-expanded","false")}}
   function img(sel,ttl){var on=host.querySelector(sel),im=on&&on.querySelector("img");if(!im){jump();return}var c=document.createElement("div");var g=document.createElement("img");g.src=im.currentSrc||im.src;g.alt=val;g.className="ylpop-img";c.appendChild(g);ylpModal(ttl+": "+val,c.innerHTML)}
+  if(act==="dates"){var ds=ylMailDates(host);return ylpModal("Your mail dates",'<p>'+ds.length+(ds.length>1?' drops':' mail date')+'. Dates depend on proof approval.</p><ol style="padding-left:20px;margin:8px 0">'+ds.map(function(x){return '<li><b>Batch '+x.n+'</b> '+x.d+'</li>'}).join("")+'</ol>')}
   if(act==="snex")return ylpModal("Envelope sticky note",snExHtml(host.querySelector("#snMsg")?host.querySelector("#snMsg").value.trim():""));
   if(act==="tpl")return img('#tplField .ylsel-on,#pcDesign .ylsel-on,.lt-tpl .ylsel-on',lab==="Letters"?"Letter":"Design");
   if(act==="env")return img('.lt-envcol .opt-env.ylsel-on,.lt-envcol .ylsel-on',"Envelope");
@@ -6998,7 +7004,7 @@ function ylpUpdate(k){
   if(cur<0)cur=steps.length-1;
   pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){var c=i===cur&&!done[i]||(i===cur&&i===steps.length-1),cls=done[i]?"done":c?"cur":"next";if(li.className!==cls)li.className=cls;
     var ic=li.querySelector(".ylp-i"),t=done[i]?"\u2713":String(i+1);if(ic.textContent!==t)ic.textContent=t;
-    var v=stepVal(host,steps[i],i),sm=li.querySelector("small"),vv=done[i]||v?(v||(done[i]?"Done":"")):(i===cur?"Choose now":"");var act=(v&&(done[i]||/^(Postage|Font|Envelope font)$/.test(steps[i][0])))?ylpActFor(steps[i][0]):"";var key=(act?"A:"+act+":":"T:")+vv;if(sm.getAttribute("data-v")!==key){sm.setAttribute("data-v",key);if(act){sm.innerHTML='<a href="#" class="ylp-lk" data-act="'+act+'"></a>';sm.firstChild.textContent=vv}else sm.textContent=vv}});
+    var v=stepVal(host,steps[i],i),sm=li.querySelector("small"),vv=done[i]||v?(v||(done[i]?"Done":"")):(i===cur?"Choose now":"");var act=(v&&(done[i]||/^(Postage|Font|Envelope font)$/.test(steps[i][0])))?ylpActFor(steps[i][0]):"";var key=(act?"A:"+act+":":"T:")+vv;if(sm.getAttribute("data-v")!==key){sm.setAttribute("data-v",key);if(act){sm.innerHTML='<a href="#" class="ylp-lk" data-act="'+act+'"></a>';sm.firstChild.textContent=vv}else if(steps[i][0]==="Mail dates"&&v&&ylMailDates(host).length){sm.innerHTML='<span></span> <a href="#" class="ylp-lk" data-act="dates">See dates</a>';sm.firstChild.textContent=vv}else sm.textContent=vv}});
   pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){if(steps[i][0]!=="Options")return;var ul=li.querySelector(".ylp-sub"),os=ylpOpts(host),h=os.items.map(function(o){return '<li class="ylp-o'+(o.on?" on":"")+'" role="button" tabindex="0" aria-pressed="'+o.on+'" data-ok="'+o.k+'"><span class="ylp-oc">'+(o.on?"\u2713":"")+'</span><span class="ylp-nm">'+o.name+'</span><span class="ylp-ov">'+(o.sn?'<a href="#" class="ylp-lk" data-act="snex" data-m="'+esc(o.snm)+'">'+"Yes (see example)"+'</a>':o.txt)+'</span></li>'}).join("");if(!ul){ul=document.createElement("ul");ul.className="ylp-sub";li.querySelector(".ylp-t").appendChild(ul)}if(ul.getAttribute("data-h")!==h){ul.innerHTML=h;ul.setAttribute("data-h",h)}});
   var hs=pn.querySelector(".ylp-hs");hs.querySelector("small").textContent="Step "+(cur+1);hs.querySelector("b").textContent=steps[cur][0];
   var bar=host.querySelector(":scope > .ff-bar"),tb=bar&&bar.querySelector(".ff-tot b"),p=tb?tb.textContent:"\u2014";
@@ -7890,14 +7896,15 @@ setInterval(ren,700);document.addEventListener("click",function(){setTimeout(ren
 </style>
 <style id="one-css">.lt-split.lt-split-one{border:0!important;padding:0!important;box-shadow:none!important;background:transparent!important}</style>
 <style id="hwx-css">
-#products-button-container.ylhw-grid.tiles-p{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scroll-snap-type:x mandatory;gap:14px;scrollbar-width:none}
-#products-button-container.ylhw-grid.tiles-p::-webkit-scrollbar{display:none}
-#products-button-container.ylhw-grid .ptile{flex:0 0 min(420px,82vw)!important;scroll-snap-align:start;grid-column:auto!important}
-#products-button-container.ylhw-grid .ptile{grid-column:span 2!important;width:auto!important;text-decoration:none!important;background:#fff!important;border:2px solid #e3e3e3!important;color:#111!important}
-.ylhw-grid .ptile.on{border-color:#111!important;background:#FFF7DB!important}
 
 
 html body.ylhw .yl-nodesign,html body.ylhw label.opt-sw.opt-env.yl-nodesign,html body.ylhw label.opt-sw.env-lead.yl-nodesign.opt-ft{display:none!important}
+
+#products-button-container.tiles-p.ylpick{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scroll-snap-type:x mandatory;gap:14px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;grid-template-columns:none!important}
+#products-button-container.tiles-p.ylpick::-webkit-scrollbar{display:none}
+#products-button-container.tiles-p.ylpick>.ptile:not(.all){flex:0 0 min(400px,82vw)!important;width:min(400px,82vw)!important;scroll-snap-align:start;text-decoration:none!important;background:#FFC72C!important;border:2px solid #FFC72C!important;color:#111!important;grid-column:auto!important}
+#products-button-container.tiles-p.ylpick>.ptile.on:not(.all){border-color:#111!important}
+#products-button-container.tiles-p.ylpick>.ptile.ylhw-tile{background:#111!important;border-color:#111!important;color:#FFC72C!important}
 </style>
 <script>(function(){var done=0;function run(){var hw=window.ylIsHw&&ylIsHw();document.body.classList.toggle("ylhw",!!hw);if(!hw)return;
 var sc=document.querySelector(".scr.on")||document.body;
@@ -7905,7 +7912,7 @@ var h=sc.querySelector(".prod-head h1");if(h&&h.textContent!=="Handwritten"){h.t
 var w=document.createTreeWalker(sc,4),n,L=[];while(n=w.nextNode())L.push(n);
 L.forEach(function(n){var t=n.textContent,o=t;t=t.replace(/Real Handwritten/g,"Actual Handwritten").replace(/Actual Handwritten #6 Envelope/g,"Actual Handwritten Invitation Envelope").replace(/Handwritten A6 Envelope/g,"Handwritten Invitation Envelope");if(t!==o)n.textContent=t;
 })}
-setInterval(function(){var g=document.querySelector(".scr.on .ylhw-grid");if(g&&!g.classList.contains("lt-rail-track")&&window.ltWrapRail)ltWrapRail(g,"products")},400);
+setInterval(function(){var g=document.querySelector(".scr.on #products-button-container");if(g&&!g.classList.contains("ylpick")&&window.ltWrapRail){g.classList.add("ylpick");ltWrapRail(g,"products")}},300);
 setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(run,50)})})();</script>
 <style id="ylib-css">.ylib-prod{display:inline-block!important;background:#111;color:#FFC72C!important;border-radius:99px;padding:2px 9px;font:700 11px var(--body);margin:3px 0;align-self:flex-start}</style>
 <style id="size-css">
