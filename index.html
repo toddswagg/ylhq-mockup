@@ -7016,7 +7016,6 @@ cartBadge();route();
   if(W.showOpt)h+=optf.map(row).join("");
   h+='</tbody></table></div>';
   if(W.showOpt){var used={};for(var k in W.m)used[W.m[k]]=1;var left=COLS.filter(function(c){return !used[c]});
-    if(left.length)h+='<p class="help" style="margin-top:10px">Columns not used yet:</p><div class="wz-chips">'+left.map(function(c){return '<button type="button" class="btn sec sm btn-pill" data-wzx="'+e(c)+'">Add '+e(c)+' as an extra column</button>'}).join("")+'</div>';
     h+='<p class="help" style="margin-top:10px">Optional fields include a second mailing line, property city/state/zip, last or full name, and extra columns your template can print.</p>'}
   h+='</div><div id="wzPrevSlot"></div>';
   return h}
