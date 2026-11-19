@@ -3,7 +3,6 @@
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300&display=swap" rel="stylesheet">
 <style>:root{--y:#FFC523;--yh:#EDA700;--yt:#FFF7DB;--ys:#FFE9A8;--ink:#262626;--tx:#3F3F46;--mu:#71717A;--soft:#F7F7F8;--line:#E4E4E7;--line2:#D4D4D8;--ok:#15803D;--okt:#ECFDF3;--bad:#B42318;--badt:#FEF3F2;--amb:#B54708;--ambt:#FFFAEB;--info:#1D4ED8;--infot:#EFF6FF;--r-sm:10px;--r:12px;--r-lg:16px;--sh-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.06);--sh:0 4px 14px rgba(16,24,40,.08);--sh-lg:0 24px 48px rgba(16,24,40,.22);--focus:0 0 0 3px rgba(255,197,35,.45);--head:Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--body:"Open Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:auto}
@@ -7698,10 +7697,10 @@ details.lt-acc>summary .lt-acc-k small{font-size:13px!important}
 </style>
 <style id="yla6site-css">
 /* A6-preview look, cleaned up: condensed display headings, white step cards with a yellow accent, flat tabs */
-:root{--disp:"League Gothic","Arial Narrow",Impact,sans-serif}
-.scr.on h1,.scr.on .sec-h,.scr.on .ptitle,.scr.on h2.sel-h,.scr.on #ltPicker>h2,.scr.on .lt-hd h2{font-family:var(--disp)!important;font-weight:400!important;text-transform:uppercase;letter-spacing:.01em;line-height:1.02}
-.scr.on h1{font-size:clamp(44px,6vw,72px)!important}
-.scr.on .lt-hd h2,.scr.on #ltPicker>h2{font-size:clamp(28px,3.4vw,40px)!important}
+/* less busy: no tab row, no corner zoom badges (clicking the picture enlarges it) */
+.scr .ff-bar,.ff-bar{display:none!important}
+.scr.on #ltCfg .tg-zoom,.scr.on #ltCfg .env-zoom,.scr.on .zbtn{display:none!important}
+html body .btn,html body button.btn,html body .btn.lg,html body #ctAdd,html body #pxAdd,html body #addCart,html body #laddCart,html body .ce-btn{border-radius:999px!important}
 /* step cards: one consistent look */
 .scr.on .lt-tpl,.scr.on .lt-split-col,.scr.on details.lt-acc{background:#fff!important;border:1px solid var(--line,#E4E4E7)!important;border-radius:20px!important;box-shadow:inset 0 3px 0 var(--y,#FFC523),0 1px 2px rgba(16,24,40,.05),0 6px 18px rgba(16,24,40,.05)!important}
 .scr.on details.lt-acc[open]{border-color:var(--y,#FFC523)!important;box-shadow:inset 0 3px 0 var(--y,#FFC523),0 8px 24px rgba(16,24,40,.09)!important}
@@ -7712,7 +7711,7 @@ html body .scr.on .lt-pillbar{background:none!important;border:0!important;box-s
 html body .scr.on .lt-pillbar .lt-pill{background:none!important;border:0!important;box-shadow:none!important;color:var(--ink,#262626)!important;text-transform:none!important;font:800 20px var(--head)!important;padding:0!important;letter-spacing:0!important;display:inline-flex;align-items:center;gap:10px}
 .scr.on{overflow-x:clip}
 /* flat tab bar like the preview */
-.scr.on .ff-bar{background:#fff!important;border:0!important;border-bottom:1px solid var(--line,#E4E4E7)!important;border-radius:0!important;box-shadow:none!important}
+.scr.on .ff-bar{display:none!important;background:#fff!important;border:0!important;border-bottom:1px solid var(--line,#E4E4E7)!important;border-radius:0!important;box-shadow:none!important}
 .scr.on .ff-bar a,.scr.on .ff-bar button{border-radius:999px}
 /* buttons: fully rounded, a bit more color */
 .scr.on .btn,.btn.sec,.btn.sm{border-radius:999px}
