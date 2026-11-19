@@ -6908,11 +6908,15 @@ setInterval(function(){if(document.querySelector(".scr.on .ff-bar")||document.qu
 
 {
 function txt(e){return e?(e.textContent||"").replace(/\s+/g," ").trim():""}
+var YLPN=[["sp","Second page"],["sn","Sticky note (Post-it)"],["eos","Easy Offer System"],["undel","Undeliverable list"],["ret","Return mail list"]];
+function ylpOpts(host){var items=[],chosen=[];YLPN.forEach(function(n){var ins=host.querySelectorAll('#ltMoreAcc input[type=radio][name$="'+n[0]+'"],#pcMoreAcc input[type=radio][name$="'+n[0]+'"]');if(!ins.length)return;var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});var on=cur!=="0",txt=!on?"No":(n[0]==="sp"?(cur==="1"?"Circular":"Variable data"):"Yes");items.push({k:n[0],name:n[1],on:on,txt:txt,val:cur});if(on)chosen.push(n[1].replace(" (Post-it)",""))});return {items:items,chosen:chosen}}
+function ylpToggle(host,k){var ins=host.querySelectorAll('#ltMoreAcc input[type=radio][name$="'+k+'"],#pcMoreAcc input[type=radio][name$="'+k+'"]');if(!ins.length)return;var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});var nxt;if(k==="sp")nxt=cur==="0"?"1":cur==="1"?"2":"0";else nxt=cur==="0"?"1":"0";ins.forEach(function(i){if(i.value===nxt){var l=i.closest("label");if(l)l.click();else i.click()}});ffSched()}
 function stepVal(host,s,i){
   var el=host.querySelector(s[1]);if(!el)return "";
   var sm=el.querySelector("summary small");if(sm)return txt(sm);
   var lab=s[0];var want=lab==="Letters"||lab==="Templates"?/^(template|letter|design|card)/i:lab==="Envelopes"?/^envelope:?$/i:null;
   if(want){var ln=host.querySelectorAll(".lt-buy-line");for(var j=0;j<ln.length;j++){var k=txt(ln[j].querySelector(".lt-buy-k")).replace(":","");if(want.test(k))return txt(ln[j].querySelector(".lt-buy-v"))}}
+  if(lab==="Options"){var os=ylpOpts(host);if(os.chosen.length)return os.chosen.join(", ")}
   if(lab==="Your list"){var q=el.querySelector("summary small");return q?txt(q):""}
   return "";
 }
@@ -6926,17 +6930,18 @@ function ylpUpdate(k){
   if(pn&&pn.getAttribute("data-k")!==key){pn.remove();pn=null}
   if(!pn){pn=document.createElement("aside");pn.className="ylp";pn.setAttribute("aria-label","Your order progress");pn.setAttribute("data-k",key);
     pn.innerHTML='<button type="button" class="ylp-h" aria-expanded="false"><span class="ylp-hs"><small></small><b></b></span><span class="ylp-hp">\u2014</span><span class="ylp-ch"></span></button><div class="ylp-b"><ol class="ylp-l">'+steps.map(function(s,i){return '<li data-i="'+i+'"><span class="ylp-i"></span><span class="ylp-t"><b>'+s[0]+'</b><small></small></span></li>'}).join("")+'</ol><div class="ylp-f"><div class="ylp-r"><span>Pieces</span><b class="ylp-q">0</b></div><div class="ylp-r tot"><span>Your price</span><b class="ylp-p">\u2014</b></div></div></div>';
-    host.appendChild(pn);
+    host.appendChild(pn);pn.addEventListener("keydown",function(e){var oi=e.target.closest&&e.target.closest(".ylp-o");if(oi&&(e.key==="Enter"||e.key===" ")){e.preventDefault();ylpToggle(host,oi.dataset.ok)}});
     pn.querySelector(".ylp-h").addEventListener("click",function(){if(window.innerWidth>=1180)return;var o=pn.classList.toggle("open");this.setAttribute("aria-expanded",o)});
-    pn.querySelector(".ylp-l").addEventListener("click",function(e){var li=e.target.closest("li");if(!li)return;var bar=host.querySelector(":scope > .ff-bar"),b=bar&&bar.querySelector('[data-ffs="'+li.dataset.i+'"]');if(b)b.click();if(window.innerWidth<1180){pn.classList.remove("open");pn.querySelector(".ylp-h").setAttribute("aria-expanded","false")}});
+    pn.querySelector(".ylp-l").addEventListener("click",function(e){var oi=e.target.closest(".ylp-o");if(oi){e.stopPropagation();ylpToggle(host,oi.dataset.ok);return}var li=e.target.closest(".ylp-l>li");if(!li)return;var bar=host.querySelector(":scope > .ff-bar"),b=bar&&bar.querySelector('[data-ffs="'+li.dataset.i+'"]');if(b)b.click();if(window.innerWidth<1180){pn.classList.remove("open");pn.querySelector(".ylp-h").setAttribute("aria-expanded","false")}});
   }
   host.classList.add("ylp-on");document.body.classList.add("ylp-pad");
   var cur=-1,done=[];steps.forEach(function(s,i){var d=false;try{d=!!s[2]()}catch(e){}done.push(d);if(!d&&cur<0&&i<steps.length-1)cur=i});
   if(cur<0)cur=steps.length-1;
-  pn.querySelectorAll(".ylp-l li").forEach(function(li,i){var c=i===cur&&!done[i]||(i===cur&&i===steps.length-1),cls=done[i]?"done":c?"cur":"next";if(li.className!==cls)li.className=cls;
+  pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){var c=i===cur&&!done[i]||(i===cur&&i===steps.length-1),cls=done[i]?"done":c?"cur":"next";if(li.className!==cls)li.className=cls;
     var ic=li.querySelector(".ylp-i"),t=done[i]?"\u2713":String(i+1);if(ic.textContent!==t)ic.textContent=t;
     var v=stepVal(host,steps[i],i),sm=li.querySelector("small"),vv=done[i]||v?(v||(done[i]?"Done":"")):(i===cur?"Choose now":"");if(sm.textContent!==vv)sm.textContent=vv});
-  var hs=pn.querySelector(".ylp-hs");hs.querySelector("small").textContent="Step "+(cur+1)+" of "+steps.length;hs.querySelector("b").textContent=steps[cur][0];
+  pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){if(steps[i][0]!=="Options")return;var ul=li.querySelector(".ylp-sub"),os=ylpOpts(host),h=os.items.map(function(o){return '<li class="ylp-o'+(o.on?" on":"")+'" role="button" tabindex="0" aria-pressed="'+o.on+'" data-ok="'+o.k+'"><span class="ylp-oc">'+(o.on?"\u2713":"")+'</span><span class="ylp-nm">'+o.name+'</span><span class="ylp-ov">'+o.txt+'</span></li>'}).join("");if(!ul){ul=document.createElement("ul");ul.className="ylp-sub";li.querySelector(".ylp-t").appendChild(ul)}if(ul.getAttribute("data-h")!==h){ul.innerHTML=h;ul.setAttribute("data-h",h)}});
+  var hs=pn.querySelector(".ylp-hs");hs.querySelector("small").textContent="Step "+(cur+1);hs.querySelector("b").textContent=steps[cur][0];
   var bar=host.querySelector(":scope > .ff-bar"),tb=bar&&bar.querySelector(".ff-tot b"),p=tb?tb.textContent:"\u2014";
   pn.querySelector(".ylp-p").textContent=p;pn.querySelector(".ylp-hp").textContent=p;pn.querySelector(".ylp-q").textContent=pieces(k);
 };
@@ -6947,9 +6952,9 @@ function ylStepLabels(k){var K=FFK[k],host=document.getElementById(K.host);if(!h
   steps.forEach(function(s,i){var el=host.querySelector(s[1]);if(!el)return;var h=null;
     if(el.matches&&el.matches("details"))h=el.querySelector("summary .lt-acc-k");
     else h=el.querySelector(".lt-pill,.lt-buy-sum-h,.lt-step-h,h3,h4,.lbl,label");
-    if(!h)return;var t="Step "+(i+1)+" of "+T+" \u00b7 ",sp=h.querySelector(":scope > .ylstep-k");
+    if(!h)return;var t="Step "+(i+1),sp=h.querySelector(":scope > .ylstep-k");
     if(!sp){sp=document.createElement("span");sp.className="ylstep-k";h.insertBefore(sp,h.firstChild)}
-    if(sp.textContent!==t){sp.innerHTML="";sp.appendChild(document.createTextNode("Step "+(i+1)+" of "+T));var d=document.createElement("span");d.className="ylstep-d";d.textContent=" \u00b7 ";sp.appendChild(d)}})}
+    if(sp.textContent!==t)sp.textContent=t})}
 var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}catch(e){}};
 
 
@@ -7056,17 +7061,30 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   $q("#mT").textContent="Upload your list";
   if(!W.ran)W.ran=true;
   W.step=5;
-  function pane(i,fn){return '<section class="wz-pane" data-wzpane="'+i+'"><h3>'+i+'. '+STEPS[i-1][0]+'</h3><p class="help">'+STEPS[i-1][1]+'</p>'+fn()+'</section>'}
-  B.innerHTML=bar()+'<div id="wzBody" class="wz-all">'+pane(1,s1)+pane(2,s2)+pane(3,s3)+pane(4,s4)+pane(5,s5)+'</div><div id="wzE4"></div>';
+  W.det=W.det||{};
+  function mcount(){var c={ok:0,chk:0,no:0};G.forEach(function(g){g.f.forEach(function(f){var l=W.lv[f[0]];if(l==="ok"||l==="past"||l==="you")c.ok++;else if(l==="chk")c.chk++;else if(l==="no")c.no++})});return c}
+  var MC=mcount(),CC=counts(),unm=missing().length>0||MC.no>0||!!W.err;
+  var gcols=0;for(var k0 in W.m)if(W.m[k0]&&W.m[k0]!=="-")gcols++;
+  var nf=W.files.filter(function(f){return /\.csv$/i.test(f)}).map(function(f){return typeof f==="string"?f:f.name}).join(", ")||W.files[0]||"your list";
+  var issues=MC.no+MC.chk;
+  var one='<div class="wz-one-line" role="status"><span class="ok">'+(unm?'!':'\u2713')+'</span><b>'+e(nf)+'</b><span>'+n(window.WZ_N||5214)+' rows</span><span>'+MC.ok+' columns auto-matched</span><span class="'+(issues?'iss':'')+'">'+(issues?issues+' to check':'no issues')+'</span></div>';
+  var SUM={2:MC.ok+' matched \u00b7 '+MC.chk+' to check \u00b7 '+MC.no+' not found',3:CC.down?'Check could not run':n(CC.rows)+' rows \u00b7 '+n(CC.rows-CC.fin)+' removed \u00b7 '+n(CC.fin)+' to mail',4:'From '+e(W.ag||"Jane Sample")+' \u00b7 return address filled in'};
+  var AUTO={2:unm,3:!!CC.down,4:false};
+  function pane(i,fn){
+   if(i===1||i===5)return '<section class="wz-pane wz-p'+i+'" data-wzpane="'+i+'"><h3>'+(i===5?'Review':'Your list')+'</h3>'+fn()+'</section>';
+   var op=W.det[i]!==undefined?W.det[i]:AUTO[i];
+   return '<details class="wz-pane wz-det" data-wzpane="'+i+'" data-wzdet="'+i+'"'+(op?' open':'')+'><summary><span class="wz-dh">'+(i===2?'Review matches':i===3?'Clean list':'Agent and return address')+'</span><span class="wz-ds">'+SUM[i]+'</span><span class="wz-dt" aria-hidden="true"></span></summary><div class="wz-db">'+fn()+'</div></details>'}
+  B.innerHTML=one+'<div id="wzBody" class="wz-all">'+pane(1,s1)+pane(2,s2)+pane(3,s3)+pane(4,s4)+pane(5,s5)+'</div><div id="wzE4"></div>';
+  B.querySelectorAll("details.wz-det").forEach(function(d){var i=d.getAttribute("data-wzdet");d.addEventListener("toggle",function(){if(d.__rdy)W.det[i]=d.open});setTimeout(function(){d.__rdy=1},80)});
   if(window.listOptsWire)listOptsWire(B,"wz",W.st);
   F.innerHTML="";function btn(l,c,fn){var x=document.createElement("button");x.type="button";x.className=c;x.textContent=l;x.onclick=fn;F.appendChild(x);return x}
   btn("Cancel","btn sec",function(){if(confirm("Leave the upload tool? You can upload the list again any time."))closeModal()});
   if(window.ylRP){var tg=document.createElement("label");tg.className="yl-mocktog";tg.innerHTML='<input type="checkbox" id="ylDnmDownTog"'+(ylRP.dnmDown()?' checked':'')+'> Mockup only: pretend the Do Not Mail check is down';F.appendChild(tg);var cb=tg.querySelector("input");cb.onchange=function(){ylRP.setDown(cb.checked);draw()}}
   var nx=btn("Use "+n(counts().fin)+" records","btn",function(){
    if(!W.files.some(function(f){return /\.(csv|xlsx?)$/i.test(f)})){closeModal();toast("Added as artwork or instructions. No list to match.");return}
-   if(missing().length){W.err=1;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});else{var p=B.querySelector('[data-wzpane="2"]');if(p)p.scrollIntoView({block:"start"})}return}
+   if(missing().length){W.err=1;W.det[2]=true;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});else{var p=B.querySelector('[data-wzpane="2"]');if(p)p.scrollIntoView({block:"start"})}return}
    if(!W.ran){W.ran=true;draw();return}
-   if(!grab4()){var p4=B.querySelector('[data-wzpane="4"]');if(p4)p4.scrollIntoView({block:"start"});return}
+   if(!grab4()){var p4=B.querySelector('[data-wzpane="4"]');if(p4){p4.open=true;W.det[4]=true;p4.scrollIntoView({block:"start"})}return}
    if(window.ylRP){ylRP.run(W,COLS,function(res){commitList(res)},function(){});return}
    commitList(null);
   });
@@ -7085,6 +7103,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    var q=$q("#qty")||$q("#lqty");
    var lock=window.formLockQty||formLockQty;if(typeof lock==="function")lock(q,W.st||{});else if(q){q.value=fin;q.readOnly=true}
    closeModal();
+   try{var cEl=$q("#lqty")||$q("#qty"),hostB=W.st===window.PS?document.querySelector("#pcUpbar .lt-acc-body"):document.querySelector("#ltUpbar .lt-acc-body");if(hostB){var sm=hostB.querySelector(".up-sum");if(!sm){sm=document.createElement("div");sm.className="up-sum";hostB.insertBefore(sm,hostB.firstChild)}var nf2=(W.files||[]).map(function(x){return typeof x==="string"?x:x.name}).filter(function(x){return /\.csv$/i.test(x)})[0]||"your list",mm=0,is=0;for(var kk in W.m)if(W.m[kk]&&W.m[kk]!=="-")mm++;for(var kl in W.lv)if(W.lv[kl]==="chk"||W.lv[kl]==="no")is++;sm.innerHTML='<span class="ok">\u2713</span><b>'+e(nf2)+'</b><span>'+n(window.WZ_N||5214)+' rows</span><span>'+n(fin)+' to mail</span><span>'+mm+' columns matched</span><span class="'+(is?'iss':'')+'">'+(is?is+' to check':'no issues')+'</span><button type="button" class="btn sec sm" data-wzrev="1">Review matches</button>';sm.querySelector("[data-wzrev]").onclick=function(){W.det[2]=true;window.wzOpen(W.files,{st:W.st})}}}catch(ex){}
    var sync=window.formSync||formSync;if(typeof sync==="function")sync();
    var lu=window.lUpdate||lUpdate;if(typeof lu==="function"&&q&&q.id==="lqty")lu();
    var up=window.updatePrice||updatePrice;if(typeof up==="function"&&q&&q.id==="qty")up();
@@ -7428,7 +7447,7 @@ window.addEventListener("click",function(e){var s=e.target.closest&&e.target.clo
  var n=(box.querySelector("label,.ft-n")||{}).textContent;if(typeof toast==="function")toast("Selected: "+(n||"").trim());later()},true);
 decorate();setInterval(function(){if(document.querySelector(SEL+":not(:has(> .tg-sel))"))decorate()},1500);
 })();
-</script><style id="open-once-css">html body .lt-picked .lt-change.btn,html body .lt-picked .lt-change{font-size:0!important;line-height:0!important}html body .lt-picked .lt-change::before{font:800 12px/1 var(--body)!important;line-height:1!important;content:"Open"}html body .lt-picked .lt-change::after{content:none!important}</style><style id="ylstep-css">.ylstep-k{font-weight:800;color:var(--mu,#6b6b6b);white-space:nowrap}.lt-acc-k:has(>.ylstep-k){display:block!important}.lt-acc-k:has(>.ylstep-k)>small{display:block}.ylstep-k{display:inline}@media (max-width:520px){.lt-acc-k .ylstep-k{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase}.lt-acc-k .ylstep-d{display:none}}.lt-pill .ylstep-k{color:inherit;opacity:.8}</style><style id="ylp-css">
+</script><style id="open-once-css">html body .lt-picked .lt-change.btn,html body .lt-picked .lt-change{font-size:0!important;line-height:0!important}html body .lt-picked .lt-change::before{font:800 12px/1 var(--body)!important;line-height:1!important;content:"Open"}html body .lt-picked .lt-change::after{content:none!important}</style><style id="ylstep-css-old">.ylstep-k{font-weight:800;color:var(--mu,#6b6b6b);white-space:nowrap}.lt-acc-k:has(>.ylstep-k){display:block!important}.lt-acc-k:has(>.ylstep-k)>small{display:block}.ylstep-k{display:inline}@media (max-width:520px){.lt-acc-k .ylstep-k{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase}.lt-acc-k .ylstep-d{display:none}}.lt-pill .ylstep-k{color:inherit;opacity:.8}</style><style id="ylp-css">
 .ylp{font-family:var(--body,inherit);background:#fff;border:2px solid var(--line2,#e5dfcb);border-radius:20px;box-shadow:0 8px 26px rgba(0,0,0,.08);overflow:hidden;color:var(--ink,#1a1a1a)}
 .ylp-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:var(--yt,#fff8dc);padding:14px 16px;text-align:left;font:inherit;color:inherit;cursor:default;border-bottom:1px solid var(--line,#eee)}
 .ylp-hs small{display:block;font:700 11px/1.2 var(--body,inherit);letter-spacing:.06em;text-transform:uppercase;color:var(--mu,#6b6b6b)}
@@ -7436,16 +7455,16 @@ decorate();setInterval(function(){if(document.querySelector(SEL+":not(:has(> .tg
 .ylp-hp{margin-left:auto;font:800 16px var(--head,inherit);white-space:nowrap}
 .ylp-ch{display:none;width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-135deg);margin:4px 2px 0 6px;transition:transform .15s}
 .ylp-l{list-style:none;margin:0;padding:8px 8px 4px}
-.ylp-l li{display:flex;align-items:flex-start;gap:10px;padding:8px;border-radius:12px;cursor:pointer}
-.ylp-l li:hover{background:var(--soft,#faf7ea)}
+.ylp-l>li{display:flex;align-items:flex-start;gap:10px;padding:8px;border-radius:12px;cursor:pointer}
+.ylp-l>li:hover{background:var(--soft,#faf7ea)}
 .ylp-i{flex:0 0 24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 12px var(--body,inherit);border:2px solid var(--line2,#d8d2bd);color:var(--mu,#6b6b6b);background:#fff}
-.ylp-l li.done .ylp-i{background:#1a1a1a;border-color:#1a1a1a;color:#ffc523}
-.ylp-l li.cur .ylp-i{background:var(--y,#ffc523);border-color:var(--y,#ffc523);color:#111}
-.ylp-l li.cur{background:var(--yt,#fff8dc)}
+.ylp-l>li.done .ylp-i{background:#1a1a1a;border-color:#1a1a1a;color:#ffc523}
+.ylp-l>li.cur .ylp-i{background:var(--y,#ffc523);border-color:var(--y,#ffc523);color:#111}
+.ylp-l>li.cur{background:var(--yt,#fff8dc)}
 .ylp-t{min-width:0;flex:1}
 .ylp-t b{display:block;font:700 14px/1.25 var(--body,inherit)}
 .ylp-t small{display:block;font:500 12.5px/1.3 var(--body,inherit);color:var(--mu,#6b6b6b);overflow-wrap:anywhere}
-.ylp-l li.next .ylp-t b{color:var(--mu,#6b6b6b);font-weight:600}
+.ylp-l>li.next .ylp-t b{color:var(--mu,#6b6b6b);font-weight:600}
 .ylp-f{border-top:1px solid var(--line,#eee);padding:10px 16px 14px}
 .ylp-r{display:flex;justify-content:space-between;gap:8px;font:600 14px var(--body,inherit);padding:3px 0}
 .ylp-r.tot{font:800 17px var(--head,inherit);padding-top:6px}
@@ -7499,12 +7518,93 @@ function deco(){document.querySelectorAll("#ltMoreAcc .radios label,#pcMoreAcc .
  var t=l.textContent.replace(/\s+/g," ").trim(),m=/^(.*?)\s*\(([^)]*)\)\s*$/.exec(t),main=m?m[1]:t,px=m?m[2]:"";
  var w=document.createElement("span");w.className="seg-t";var a=document.createElement("span");a.className="seg-m";a.textContent=main;var b=document.createElement("span");b.className="seg-p";b.textContent=px;w.appendChild(a);w.appendChild(b);
  Array.prototype.slice.call(l.childNodes).forEach(function(n){if(n!==inp)l.removeChild(n)});l.appendChild(w)})}
-function wide(){["ltMoreAcc","pcMoreAcc"].forEach(function(id){var b=document.querySelector("#"+id+" .lt-acc-body");if(!b)return;var t=Array.prototype.filter.call(b.children,function(c){return c.classList.contains("fld")});t.forEach(function(c){c.classList.remove("ylo-wide")});if(t.length%2===1)t[t.length-1].classList.add("ylo-wide")})}
-function both(){deco();wide()}
+function wide(){["ltMoreAcc","pcMoreAcc"].forEach(function(id){var b=document.querySelector("#"+id+" .lt-acc-body");if(!b)return;var t=Array.prototype.filter.call(b.children,function(c){return c.classList.contains("fld")&&!c.classList.contains("lo-lead")});t.forEach(function(c){c.classList.remove("ylo-wide")});if(t.length%2===1)t[t.length-1].classList.add("ylo-wide")})}
+function spsel(){document.querySelectorAll("#ltMoreAcc .sp-radios,#pcMoreAcc .sp-radios").forEach(function(r){var fld=r.parentElement,sel=fld.querySelector(":scope > .sp-sel");var ins=r.querySelectorAll("input");if(!sel){sel=document.createElement("select");sel.className="sp-sel";sel.setAttribute("aria-label","Second page");[["0","No second page"],["1","Circular page (+10 cents)"],["2","Circular with variable data (+15 cents)"]].forEach(function(o){var op=document.createElement("option");op.value=o[0];op.textContent=o[1];sel.appendChild(op)});sel.addEventListener("change",function(){var v=sel.value;r.querySelectorAll("input").forEach(function(i){if(i.value===v){i.checked=true;i.dispatchEvent(new Event("change",{bubbles:true}));i.dispatchEvent(new Event("click",{bubbles:true}))}})});fld.insertBefore(sel,r)}
+ var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});if(sel.value!==cur)sel.value=cur})}
+function dd(){document.querySelectorAll("#ltMoreAcc .lt-acc-body>.fld,#pcMoreAcc .lt-acc-body>.fld").forEach(function(fld){var r=fld.querySelector(":scope .radios:not(.sp-radios)");if(!r||fld.querySelector(".sp-radios"))return;var ins=[].slice.call(r.querySelectorAll("input[type=radio]"));if(ins.length<2||ins.length>3)return;var sel=fld.querySelector(":scope > .dd-sel");if(!sel){sel=document.createElement("select");sel.className="dd-sel";sel.setAttribute("aria-label",(fld.querySelector("label,.lbl,b")||{textContent:"Option"}).textContent.trim());ins.slice().sort(function(a,b){var na=/no/i.test((a.closest("label").textContent||"").trim().replace(/\u2713/g,"").trim().slice(0,2))?0:1,nb=/no/i.test((b.closest("label").textContent||"").trim().replace(/\u2713/g,"").trim().slice(0,2))?0:1;return na-nb}).forEach(function(i){var lb=i.closest("label"),m=lb.querySelector(".seg-m"),p=lb.querySelector(".seg-p"),op=document.createElement("option");op.value=i.value;var t=(m?m.textContent:lb.textContent).replace(/\u2713/g,"").trim(),pp=p?p.textContent.trim():"";op.textContent=t+(pp?" ("+pp+")":"");sel.appendChild(op)});sel.addEventListener("change",function(){var t=ins.filter(function(i){return i.value===sel.value})[0];if(t&&!t.checked)t.click()});fld.appendChild(sel);fld.classList.add("has-dd")}var cur="";ins.forEach(function(i){if(i.checked)cur=i.value});if(sel.value!==cur)sel.value=cur;sel.classList.toggle("chg",!/^No/i.test(sel.options[sel.selectedIndex].textContent))})}
+function libcopy(){document.querySelectorAll("#ltCfg .lt-tpl .image-box label").forEach(function(l){if(l.textContent.trim()==="Past Templates")l.textContent="Past Letters"})}
+function both(){deco();wide();spsel();dd();libcopy()}
 both();setInterval(both,700);window.addEventListener("hashchange",function(){setTimeout(both,100)});document.addEventListener("click",function(){setTimeout(both,50)},true);
 })();
 </script>
-<script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
+<style id="yldd-css">
+#ltMoreAcc .fld.has-dd .radios,#pcMoreAcc .fld.has-dd .radios{display:none!important}
+.fld.has-dd{display:block!important;background:linear-gradient(180deg,#faf9f4,#f3f1e8)!important;border:1px solid #e6e2d3!important;border-radius:16px!important;padding:12px 14px!important}
+.fld.has-dd .dd-sel{width:100%;min-height:42px;border:1.5px solid #d9d4bf;border-radius:999px;background:#fff;font:700 13px var(--body);padding:0 14px;color:var(--ink,#111);box-shadow:inset 3px 0 0 var(--y,#FFC523);margin-top:8px}
+.fld.has-dd .dd-sel.chg{background:var(--yt,#FFF7DB);border-color:var(--y,#FFC523)}
+.fld.lo-lead{order:-1}
+#ltMoreAcc .fld:has(>.sp-sel),#pcMoreAcc .fld:has(>.sp-sel){display:block!important;background:linear-gradient(180deg,#faf9f4,#f3f1e8)!important;border:1px solid #e6e2d3!important;border-radius:16px!important;padding:12px 14px!important}
+#ltMoreAcc .fld>.sp-sel,#pcMoreAcc .fld>.sp-sel{width:100%!important;display:block;margin-top:8px;box-shadow:inset 3px 0 0 var(--y,#FFC523)}
+#ltMoreAcc .fld>.sp-sel:not([value="0"]){}
+</style>
+<style id="ylnotes3-css">
+.ylp-sub{list-style:none;margin:6px 0 2px;padding:0;display:flex;flex-direction:column;gap:4px}
+.ylp-o{display:flex!important;align-items:center;gap:8px;padding:5px 8px!important;border-radius:10px;background:#f4f3ee;font:600 12.5px var(--body);cursor:pointer;border:1px solid transparent}
+.ylp-o:hover{border-color:var(--y,#FFC523);background:#fff}
+.ylp-o.on{background:var(--yt,#FFF7DB);border-color:var(--y,#FFC523)}
+.ylp-oc{flex:0 0 16px;height:16px;border-radius:50%;border:1.5px solid var(--line2,#d4d4d8);background:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;color:#111}
+.ylp-o.on .ylp-oc{background:#262626;border-color:#262626;color:#FFC523}
+.ylp-nm{flex:1;min-width:0}.ylp-ov{font-weight:800;white-space:nowrap}
+/* 1. step badge in its own spot */
+.ylstep-k{display:inline-flex!important;align-items:center;background:#262626;color:#FFC523!important;border-radius:999px;font:800 11px/1 var(--body)!important;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;margin:0 10px 0 0;vertical-align:middle;white-space:nowrap;opacity:1!important}
+.lt-acc-k:has(>.ylstep-k)>.ylstep-k{display:flex!important;width:max-content;margin:0 0 6px}
+.lt-pill .ylstep-k{font-size:10.5px!important;padding:4px 10px}
+/* 2/3. big thumbnails, small Select bubble underneath, same copy shape on every card */
+@media (min-width:700px){#ltCfg .lt-split .lt-rail-track>.image-box,#ltCfg .lt-split .lt-rail-track>.opt-sw.opt-env{flex:0 0 calc(33.333% - 8px)!important;width:calc(33.333% - 8px)!important;max-width:calc(33.333% - 8px)!important;max-height:none!important}}
+@media (max-width:699px){#ltCfg .lt-split .lt-rail-track>.image-box,#ltCfg .lt-split .lt-rail-track>.opt-sw.opt-env{flex:0 0 88%!important;width:88%!important;max-width:88%!important;max-height:none!important}}
+#ltCfg .image-box .tpl-lib{position:relative!important;inset:auto!important;top:auto!important;left:auto!important;margin:0}
+#ltCfg .image-box .gallery-image,#ltCfg .image-box .tpl-lib{width:100%!important;max-width:100%;height:auto!important;aspect-ratio:16/9;object-fit:cover;box-sizing:border-box;display:flex}
+#ltCfg .image-box img.gallery-image{display:block}
+#ltCfg .image-box label,#ltCfg .opt-env .lt-cap{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:2.7em;line-height:1.25;padding:6px 8px 0}
+#ltCfg .opt-env .lt-cap .ft-n,#ltCfg .image-box label{font-weight:700}
+#ltCfg .opt-env .lt-cap .env-sub{font-size:12px;color:var(--mu,#6b6248);font-weight:600}
+.image-box .tg-sel,.opt-env .tg-sel{width:auto!important;min-width:96px;min-height:30px!important;margin:6px auto 10px!important;padding:4px 18px!important;font-size:12.5px!important;align-self:center}
+/* 4. Other options: slim tinted rows */
+#ltMoreAcc .lt-acc-body,#pcMoreAcc .lt-acc-body{gap:10px!important;padding:12px!important}
+#ltMoreAcc .lt-acc-body>.fld,#pcMoreAcc .lt-acc-body>.fld{flex-direction:row!important;align-items:center!important;justify-content:space-between;gap:14px!important;min-height:68px!important;padding:10px 14px!important;border:1px solid #e3e0d2!important;border-radius:16px!important;background:#f4f3ee!important}
+#ltMoreAcc .lt-acc-body>.fld>label.f,#pcMoreAcc .lt-acc-body>.fld>label.f{flex:1 1 auto;flex-direction:column!important;align-items:flex-start!important;justify-content:center;gap:5px!important;min-width:0;font-size:14px;margin:0}
+#ltMoreAcc .lt-acc-body>.fld>label.f .pill-help,#pcMoreAcc .lt-acc-body>.fld>label.f .pill-help{font-size:11px;padding:2px 9px}
+#ltMoreAcc .lt-acc-body>.fld .radios,#pcMoreAcc .lt-acc-body>.fld .radios{margin:0!important;flex:0 0 auto;grid-auto-columns:80px!important;gap:6px!important}
+#ltMoreAcc .lt-acc-body>.fld .radios label,#pcMoreAcc .lt-acc-body>.fld .radios label{min-height:44px!important;padding:4px 6px!important;border-width:1.5px!important}
+#ltMoreAcc .seg-m,#pcMoreAcc .seg-m{font-size:13px!important}
+#ltMoreAcc .seg-p,#pcMoreAcc .seg-p{font-size:11px!important;min-height:12px}
+#ltMoreAcc .lt-acc-body>.fld.lo-lead,#pcMoreAcc .lt-acc-body>.fld.lo-lead{grid-column:1/-1!important;flex-wrap:wrap;align-items:center!important}
+#ltMoreAcc .lo-lead .help,#pcMoreAcc .lo-lead .help{display:none}
+#ltMoreAcc .lo-lead .lt-tags,#pcMoreAcc .lo-lead .lt-tags{flex:1 1 280px;margin:0!important;min-height:44px}
+.sp-sel{flex:0 0 auto;width:166px;min-height:44px;border:1.5px solid var(--line2);border-radius:999px;background:#fff;font:700 13px var(--body);padding:0 12px;color:var(--ink)}
+#ltMoreAcc .sp-radios,#pcMoreAcc .sp-radios{display:none!important}
+@media (max-width:700px){#ltMoreAcc .lt-acc-body>.fld,#pcMoreAcc .lt-acc-body>.fld{min-height:64px!important}#ltMoreAcc .lt-acc-body>.fld .radios,#pcMoreAcc .lt-acc-body>.fld .radios{grid-auto-columns:72px!important}.sp-sel{width:150px}}
+</style><style id="ylup-css">
+/* 7. compact upload */
+.wz-one-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:10px 14px;margin:0 0 12px;border:1px solid var(--line,#e4e4e7);border-radius:14px;background:#f4f3ee;font:600 13.5px var(--body)}
+.wz-one-line .ok{width:22px;height:22px;border-radius:50%;background:#1b7a33;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.wz-one-line .iss{color:#b54708;font-weight:800}
+.wz-all{gap:10px!important}
+.wz-pane{padding:10px 14px!important;border-radius:14px!important}
+.wz-pane h3{font-size:15px!important}
+.wz-pane.wz-p1 .wz-file{padding:8px 10px}
+.wz-pane.wz-p1>p,.wz-pane.wz-p1 .help{display:none}
+.wz-det>summary{display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none;min-height:34px}
+.wz-det>summary::-webkit-details-marker{display:none}
+.wz-dh{font:800 15px var(--head)}
+.wz-ds{flex:1;font:600 12.5px var(--body);color:var(--mu,#6b6248);min-width:0}
+.wz-dt{width:9px;height:9px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg);margin:-3px 4px 0 0;transition:transform .15s}
+.wz-det[open]>summary .wz-dt{transform:rotate(-135deg);margin-top:4px}
+.wz-det[open]>summary{margin-bottom:10px}
+.wz-det .am-sum{display:none}
+.wz-sum{grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+@media(max-width:700px){.wz-sum{grid-template-columns:1fr 1fr!important}}
+#ltUpbar .lt-listhead,#pcUpbar .lt-listhead{display:inline-flex;margin:0 10px 0 0!important;vertical-align:middle}
+#ltUpbar .lt-list-tools,#pcUpbar .lt-list-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:8px 12px!important;margin-bottom:8px}
+#ltUpbar .lo-cb,#pcUpbar .lo-cb{margin:0!important;font-size:13px}
+#ltUpbar .lo-cb small,#pcUpbar .lo-cb small{display:none}
+#ltUpbar .drop,#pcUpbar .drop{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:10px 14px!important;min-height:0!important;text-align:left}
+#ltUpbar .drop .ic,#pcUpbar .drop .ic{display:none}
+#ltUpbar .drop .btn,#pcUpbar .drop .btn{margin:0!important}
+#ltUpbar .up-sum,#pcUpbar .up-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:10px 14px;margin:0 0 10px;border:1px solid var(--line,#e4e4e7);border-radius:14px;background:#f4f3ee;font:600 13.5px var(--body)}
+.up-sum .ok{width:22px;height:22px;border-radius:50%;background:#1b7a33;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.up-sum .iss{color:#b54708;font-weight:800}.up-sum .btn{margin-left:auto}
+</style><script id="design-polish-js">/* Design polish (Nov 15): end-of-form checkout bar on Postcards and Letters.
    It repeats the estimated total after the list upload step and presses the same Add to cart button, so the checks and pop-up are unchanged. */
 (function(){
  var F=[["pcCfg","sum","addCart","qerr"],["ltCfg","lsum","laddCart","lqerr"]],q=0;
