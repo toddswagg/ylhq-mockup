@@ -7879,7 +7879,7 @@ setInterval(ren,700);document.addEventListener("click",function(){setTimeout(ren
 .ls-act{display:flex;gap:8px;flex-wrap:wrap}.ls-hint{margin:8px 0 0;font-size:13px;color:#667085}
 </style>
 <script>(function(){function f(){document.querySelectorAll("#ltUpbar .lt-acc-body,#pcUpbar .lt-acc-body").forEach(function(b){if(b.querySelector(".ls-copy")||b.querySelector(".up-sum"))return;var p=document.createElement("p");p.className="ls-copy";p.textContent="Add as many lists as you want, they combine into one order.";b.insertBefore(p,b.firstChild)});document.querySelectorAll(".up-sum").forEach(function(u){var c=u.parentNode.querySelector(".ls-copy");if(c)c.remove()})}setInterval(f,700)})()</script>
-<style id="noall-css">.ptile.all{display:none!important}#products-button-container.tiles-p{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:14px}#products-button-container.tiles-p>.ptile{grid-column:auto!important;width:auto!important;min-width:0}@media(max-width:700px){#products-button-container.tiles-p{grid-template-columns:1fr!important}}</style>
+<style id="noall-css">.ptile.all{display:none!important}#products-button-container.tiles-p{display:grid!important;grid-auto-rows:1fr;grid-template-columns:repeat(3,1fr)!important;gap:14px}#products-button-container.tiles-p>.ptile{grid-column:auto!important;width:auto!important;min-width:0}@media(max-width:700px){#products-button-container.tiles-p{grid-template-columns:1fr!important}}</style>
 <style id="pc4-css">#products-button-container.tiles-p>.ptile.ylhw-tile:nth-child(4):last-child{grid-column:2!important}</style>
 <style id="pc2-css">#pcDesign .tg-one>h4,#pcDesign .tg-one>.ff-hint{display:none}
 #pcDesign .lt-rail-track{display:grid!important;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:176px;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;align-items:stretch}
@@ -7900,11 +7900,6 @@ setInterval(ren,700);document.addEventListener("click",function(){setTimeout(ren
 
 html body.ylhw .yl-nodesign,html body.ylhw label.opt-sw.opt-env.yl-nodesign,html body.ylhw label.opt-sw.env-lead.yl-nodesign.opt-ft{display:none!important}
 
-#products-button-container.tiles-p.ylpick{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scroll-snap-type:x mandatory;gap:14px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;grid-template-columns:none!important}
-#products-button-container.tiles-p.ylpick::-webkit-scrollbar{display:none}
-#products-button-container.tiles-p.ylpick>.ptile:not(.all){flex:0 0 min(400px,82vw)!important;width:min(400px,82vw)!important;scroll-snap-align:start;text-decoration:none!important;background:#FFC72C!important;border:2px solid #FFC72C!important;color:#111!important;grid-column:auto!important}
-#products-button-container.tiles-p.ylpick>.ptile.on:not(.all){border-color:#111!important}
-#products-button-container.tiles-p.ylpick>.ptile.ylhw-tile{background:#111!important;border-color:#111!important;color:#FFC72C!important}
 </style>
 <script>(function(){var done=0;function run(){var hw=window.ylIsHw&&ylIsHw();document.body.classList.toggle("ylhw",!!hw);if(!hw)return;
 var sc=document.querySelector(".scr.on")||document.body;
@@ -7912,7 +7907,7 @@ var h=sc.querySelector(".prod-head h1");if(h&&h.textContent!=="Handwritten"){h.t
 var w=document.createTreeWalker(sc,4),n,L=[];while(n=w.nextNode())L.push(n);
 L.forEach(function(n){var t=n.textContent,o=t;t=t.replace(/Real Handwritten/g,"Actual Handwritten").replace(/Actual Handwritten #6 Envelope/g,"Actual Handwritten Invitation Envelope").replace(/Handwritten A6 Envelope/g,"Handwritten Invitation Envelope");if(t!==o)n.textContent=t;
 })}
-setInterval(function(){var g=document.querySelector(".scr.on #products-button-container");if(g&&!g.classList.contains("ylpick")&&window.ltWrapRail){g.classList.add("ylpick");ltWrapRail(g,"products")}},300);
+
 setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(run,50)})})();</script>
 <style id="ylib-css">.ylib-prod{display:inline-block!important;background:#111;color:#FFC72C!important;border-radius:99px;padding:2px 9px;font:700 11px var(--body);margin:3px 0;align-self:flex-start}</style>
 <style id="size-css">
@@ -7926,6 +7921,21 @@ setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(
 .tiles-p .ptile:not(.all){min-height:104px!important;font-size:16.5px!important}
 .tiles-p .ptile:not(.all) img{width:120px!important;height:68px!important;flex:0 0 120px!important;min-width:120px!important}
 .pcard .btn{height:41px!important;min-width:118px!important;font-size:16px!important}
+}
+</style>
+<style id="static-pick-css">
+#products-button-container.tiles-p{display:grid!important;grid-auto-rows:1fr;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:14px!important;overflow:visible!important;flex-wrap:wrap}
+#products-button-container.tiles-p>.ptile:not(.all){grid-column:span 2!important;width:auto!important;min-width:0!important;flex:none!important;text-decoration:none!important;background:#FFC72C!important;border:2px solid #FFC72C!important;color:#111!important}
+#products-button-container.tiles-p>.ptile.on:not(.all){border-color:#111!important}
+#products-button-container.tiles-p>.ptile.ylhw-tile{background:#111!important;border-color:#111!important;color:#FFC72C!important}
+#products-button-container.ylhw-grid.tiles-p>.ptile:nth-child(4):not(.all){grid-column:2/span 2!important}
+#products-button-container.ylhw-grid.tiles-p>.ptile:nth-child(5):not(.all){grid-column:4/span 2!important}
+@media(max-width:700px){
+#products-button-container.tiles-p{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+#products-button-container.tiles-p>.ptile:not(.all),#products-button-container.ylhw-grid.tiles-p>.ptile:nth-child(4):not(.all),#products-button-container.ylhw-grid.tiles-p>.ptile:nth-child(5):not(.all){grid-column:auto!important;flex-direction:column!important;align-items:flex-start!important;text-align:left;min-height:0!important;font-size:14.5px!important;padding:10px!important;gap:8px!important}
+#products-button-container.tiles-p>.ptile:not(.all) img{width:100%!important;height:auto!important;aspect-ratio:16/9;flex:none!important;min-width:0!important;object-fit:cover}
+#products-button-container.tiles-p>.ptile:not(.all):last-child:nth-child(odd){grid-column:1/-1!important;width:calc(50% - 5px)!important;justify-self:center}
+#products-button-container.tiles-p>.ptile.on:not(.all){padding-right:10px!important}
 }
 </style>
 </body></html>
