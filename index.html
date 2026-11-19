@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r14"){u.searchParams.set("v","r14");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r15"){u.searchParams.set("v","r15");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3559,7 +3559,7 @@ function renderCfg(){
   more+='<div class="fld"><label class="f">Undeliverable list <button type="button" class="pill-help" id="undHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="undel" value="1"'+(PS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="undel" value="0"'+(!PS.undel?" checked":"")+'>No</label></div></div>';
   more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="retHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="ret" value="1"'+(PS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="ret" value="0"'+(!PS.ret?" checked":"")+'>No</label></div></div>';
   more+=listLeadHTML("pc",PS);
-  var mailBody='<div class="fld"><label class="f" for="day">Mail day</label><select class="inp" id="day"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return '<option'+(PS.day===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("pc",PS)+'<div class="fld"><label class="f" for="drops">Send as</label><select class="inp" id="drops"><option value="">Please make a selection</option><option value="all"'+(PS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(PS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("pc",PS)+'<div id="pcBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
+  var mailBody=YL_APPR_NOTE+'<div class="fld"><label class="f" for="day">Mail day</label><select class="inp" id="day"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return '<option'+(PS.day===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("pc",PS)+'<div class="fld"><label class="f" for="drops">Send as</label><select class="inp" id="drops"><option value="">Please make a selection</option><option value="all"'+(PS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(PS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("pc",PS)+'<div id="pcBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
   var accs='<div class="lt-accs">'+fontAcc+glossAcc+'<details class="lt-acc" id="pcMoreAcc"><summary><span class="lt-acc-k">Other options<small id="pcMoreSum">Lead type and extras</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
   var upbar='<details class="panel of-form lt-upbar lt-acc" id="pcUpbar"><summary><span class="lt-acc-k">Your list<small id="pcListSum"></small></span></summary><div class="lt-acc-body">'+listToolHTML("pc",PS)+dropBox("list","Your list","CSV only","Select files",PS.files)+'<a href="#" class="lt-csv-link" id="exCsv">Example CSV</a></div></details>';
   var mailAcc='<details class="panel of-form lt-acc" id="pcMailAcc"><summary><span class="lt-acc-k">Mail dates<small id="pcMailSum"></small></span></summary><div class="lt-acc-body">'+mailBody+'</div></details>';
@@ -3965,9 +3965,42 @@ function renderDetail(id){
 }
 
 /* ---------- PROOF (today's layout + wording; only the buttons are new) ---------- */
+/* round 15: proof page mail dates reuse the order Mail dates step code (ylBatchRender, schedStartHTML, schedWire, ylCal) */
+var PF={};
+var YL_APPR_NOTE='<p class="help appr-note"><b>These dates hold if you approve your proof in time.</b> Approve it the same day, or by 12:00 PM PT the next day. If you approve later, you will be asked to choose new mail dates after approval.</p>';
+function pfParse(x){var m=/^(\d\d)\/(\d\d)\/(\d\d)$/.exec(x||"");return m?ylD(2000+(+m[3]),+m[1],+m[2]):null}
+function pfMDY(i){return i.slice(5,7)+"/"+i.slice(8,10)+"/"+i.slice(2,4)}
+function pfRule(o){var hw=/handwritten/i.test(o.prod||""),pc=/postcard/i.test(o.prod||"");return pc?{kind:hw?"hwp":"std",min:0,unit:"cards",pc:true}:{kind:hw?"hwl":"std",min:200,unit:"pieces",thu:true}}
+function pfInit(o){if(PF.id===o.id)return;var rule=pfRule(o),df=ylDefaults(rule),t=pfParse(o.drops[0]);
+  PF={id:o.id,rule:rule,orig:o.drops.slice(),confirmed:false,drops:o.drops.length>1?"multi":"all",batches:o.drops.length>1?o.drops.length:"",batchDates:[],_bdUser:{}};
+  if(!t||!ylValid(t,rule))t=df.asap;PF.start=ylISO(t);PF.batchDates[0]=PF.start;PF.day="ASAP";ylSyncDay("pf",PF,PF.start,df)}
+function pfDates(){if(PF.drops==="multi"&&PF.batches>1)return PF.batchDates.slice(0,PF.batches).map(function(i){return ylFmt(ylParse(i))});return [ylFmt(ylParse(PF.start))]}
+function pfMailHTML(o,s){
+  var late=fa14V()==="late",O=function(v,l,sel){return '<option value="'+v+'"'+(sel?" selected":"")+'>'+l+'</option>'};
+  var rows=o.drops.map(function(d,i){var t=pfParse(d);return '<li><b>Batch '+(i+1)+'</b> '+(t?ylFmt(t):esc(d))+' <span class="chip '+(late?'n':'b')+'">'+(late?'No longer available':'Still works if you approve now')+'</span></li>'}).join("");
+  if(s==="ok")return '<div class="panel pf-mail"><h3>Mail dates</h3><ul class="pf-orig">'+rows.replace(/<span class="chip[^>]*>[^<]*<\/span>/g,'')+'</ul><p class="help">Your proof is approved, so these dates are final.</p></div>';
+  if(s)return '';
+  var mailBody='<div class="fld"><label class="f" for="pfDay">Mail day <span class="req">Required*</span></label><select class="inp" id="pfDay"><option value="">Please make a selection</option>'+[YL_DAYS[0],YL_DAYS[1],YL_DAYS[2],YL_THU,YL_DAYS[3]].map(function(d){return O(d,d,PF.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("pf",PF)+'<div class="fld"><label class="f" for="pfDrops">Send as <span class="req">Required*</span></label><select class="inp" id="pfDrops"><option value="all"'+(PF.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(PF.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("pf",PF)+'<div id="pfBatchDates"></div>';
+  return '<div class="panel of-form pf-mail" id="pfMail"><h3>Mail dates</h3>'+YL_APPR_NOTE+
+   '<div class="pf-orig"><b>Dates you chose when you ordered</b><ul>'+rows+'</ul></div>'+
+   (late?'<div class="note pf-late" role="alert"><b>Your approval came after the cutoff, so the dates above no longer work.</b> Choose new mail dates below, then approve.</div>':'<p class="help">If you approve by the cutoff, these dates stand. You can also change them now.</p>')+
+   '<div id="pfPick"'+(late?'':' hidden')+'>'+mailBody+'</div>'+
+   '<div class="pf-act">'+(late?'<button type="button" class="btn sm" id="pfConfirm">Use these dates</button> ':'<button type="button" class="btn sec sm" id="pfChange">Change dates</button> ')+'<span class="muted" id="pfMsg"></span></div>'+
+   '<p class="help pf-demo">Mockup preview: <a href="#" id="pfLate">'+(late?'Show on-time approval':'Show late approval')+'</a></p>'+
+   '<div class="note pf-acct"><b>Account holder rules: TBD.</b> Account holders may get different proof approval and mail date rules. Those rules are not decided yet, so none are shown here.</div></div>'}
+function pfWire(o){var box=$("#pfMail");if(!box)return;
+  var rerender=function(){ylBatchRender("pf",PF,"#pfBatchDates","#pfBdAck",function(){})};
+  schedWire(box,"pf",PF);
+  var pop=$("#pfPick .dp-pop",box);if(pop)pop.addEventListener("click",function(){setTimeout(function(){PF.batchDates[0]=PF.start;PF._bdUser={0:1};PF.confirmed=false;rerender()},0)});
+  var dr=$("#pfDrops",box);dr.onchange=function(){PF.drops=this.value;var f=$("#pfBatchF",box);if(f)f.hidden=this.value!=="multi";if(this.value!=="multi")PF.batches="";else if(!PF.batches){PF.batches=2;var b=$("#pfBatch",box);if(b)b.value="2"}PF.confirmed=false;rerender()};
+  var bs=$("#pfBatch",box);if(bs)bs.addEventListener("change",function(){PF.confirmed=false;rerender()});
+  rerender();
+  var ch=$("#pfChange",box);if(ch)ch.onclick=function(){$("#pfPick").hidden=!$("#pfPick").hidden};
+  var cf=$("#pfConfirm",box);if(cf)cf.onclick=function(){PF.confirmed=true;$("#pfMsg").textContent="New dates chosen: "+pfDates().join(", ")+". Now approve your proof."};
+  $("#pfLate",box).onclick=function(e){e.preventDefault();var h=location.hash.replace(/[?&]v=[a-z]+/,"");location.hash=fa14V()==="late"?h:h+(h.indexOf("?")>-1?"&":"?")+"v=late"}}
 function renderProof(id){
   var pid=parseInt(id,10)||204518,o=ofind(pid);if(!o){$("#proof-root").innerHTML='<div class="wrap page" style="max-width:720px;padding-top:18px"><a class="btn sec sm" href="#/orders">&lsaquo; My Orders</a>'+missOrder(pid)+'</div>';return}
-  var s=PRS[o.id];
+  var s=PRS[o.id];pfInit(o);
   var head='<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px"><a class="btn sec sm" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><a class="btn sec sm" href="#/orders">My Orders</a></div><div class="ttl">Proof order #'+o.id+(o.name?" ("+esc(o.name)+")":"")+(s==="ok"?" (Approved)":s&&s.dis?" (Disapproved)":"")+'</div>';
   var links='<div class="dl"><a href="#" id="pdl">Download PDF</a></div><div class="plinks" style="margin-top:6px"><a href="#" id="pOrig">Original PDF file</a><br><a href="#" id="pViewer">Trouble viewing the proof? Change PDF viewer</a></div>';
   var eosL=o.eos?'<p style="font-size:18px;margin:8px 0">EOS level: Yes'+(o.eosSrc?' ('+o.eosSrc+' data)':'')+' <button class="btn sec sm" id="pEos" type="button">Edit</button></p>':'';
@@ -3976,7 +4009,7 @@ function renderProof(id){
   else if(s&&s.dis)body='<div class="note" style="margin:12px 0">Thank you. Your changes were sent to our design team. We will email you a new proof.</div><div class="plinks">'+(s.file?'Files: '+esc(s.file)+'<br>':'Files: none<br>')+'<h3 style="font-size:17px;margin:8px 0">Batches updated to '+esc(s.drops)+'</h3><a href="#/detail/'+o.id+'">View order details</a></div>';
   else body='<div class="btnrow"><a class="ylhq-proof-approve" href="#" id="pAp">I approve this proof</a><a class="ylhq-proof-disapprove" href="#" id="pDis">I disapprove this proof</a></div>'+
    '<div class="plinks"><a id="pList" href="#">View the combined list</a><br>Number of batches: '+o.drops.length+'<br><a href="#/detail/'+o.id+'">View order details</a></div>';
-  $("#proof-root").innerHTML=head+links+eosL+body;
+  $("#proof-root").innerHTML=head+links+eosL+pfMailHTML(o,s)+body;pfWire(o);
   $("#pdl").onclick=function(e){e.preventDefault();demo("Download PDF","On the live site this downloads the proof PDF for order #"+o.id+". Nothing downloads in the mockup.")};
   $("#pOrig").onclick=function(e){e.preventDefault();demo("Original PDF file","On the live site this downloads the original proof PDF for order #"+o.id+". Nothing downloads in the mockup.")};
   $("#pViewer").onclick=function(e){e.preventDefault();toast("On the live site this reloads the proof in a different PDF viewer.")};
@@ -4351,6 +4384,7 @@ function ylRapidDays(prod){prod=(prod||"").toLowerCase();return /handwritten/.te
 function ylRuleFor(pfx){
   if(pfx==="lt"){var p=null;try{p=ltActive(ltList()[LS.p])}catch(e){}return {kind:p&&p.hw?"hwl":"std",min:200,unit:"pieces",thu:true}}
   if(pfx==="pc"){var q=PC[PS.p]||{};return {kind:/^hw/.test(q.k||"")?"hwp":"std",min:q.std?0:100,unit:"cards",pc:true,std:!!q.std}}
+  if(pfx==="pf")return PF.rule||{kind:"std"};
   if(pfx==="ro"){var o=null;try{o=(typeof ROO!=="undefined"&&ROO)||null}catch(e){}var rd=ylRapidDays(window.RO_PROD||"");return {rapid:true,days:rd.days,label:rd.label}}
   return {kind:"std"}}
 function ylHelp(rule,df){var e='Earliest start for this order: <b>'+ylFmt(df.asap)+'</b>.';
@@ -4366,7 +4400,7 @@ function schedStartHTML(pfx,st){var rule=ylRuleFor(pfx),df=ylDefaults(rule),now=
   if(!st.day)st.day="ASAP";
   return '<div class="fld dp-fld"><label class="f" for="'+pfx+'Start">Campaign start date <span class="req">Required*</span></label><div class="dp" data-dp="'+pfx+'"><button type="button" class="inp dp-btn" id="'+pfx+'Start" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(st.start))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Choose a campaign start date" hidden></div></div><details class="of-more"><summary>Learn more about the start date</summary><p class="help dp-help">'+ylHelp(rule,df)+'</p></details></div>'}
 function schedBatchHTML(pfx,st){return '<div class="fld" id="'+pfx+'BatchF"'+(st.drops==="multi"?'':' hidden')+'><label class="f" for="'+pfx+'Batch">Number of batches <span class="req">Required*</span></label><select class="inp" id="'+pfx+'Batch"><option value="">Please make a selection</option>'+[2,3,4,5,6,7,8,9,10,11,12].map(function(n){return '<option value="'+n+'"'+(+st.batches===n?" selected":"")+'>'+n+' Batches</option>'}).join("")+'</select><p class="help">Up to 12 batches. The first batch mails on your campaign start date.</p></div>'}
-function ylDaySel(pfx){return $(pfx==="pc"?"#day":pfx==="lt"?"#lday":pfx==="ro"?"#roDay":"#none")}
+function ylDaySel(pfx){return $(pfx==="pc"?"#day":pfx==="lt"?"#lday":pfx==="ro"?"#roDay":pfx==="pf"?"#pfDay":"#none")}
 function ylCal(pfx,st,box,vy,vm){var rule=ylRuleFor(pfx),now=ylNowPT(),df=ylDefaults(rule),sel=st.start,first=ylD(vy,vm,1),startW=first.getUTCDay(),dim=new Date(Date.UTC(vy,vm,0)).getUTCDate(),minM=df.asap?df.asap.getUTCFullYear()*12+df.asap.getUTCMonth():0,curM=vy*12+vm-1;
   var h='<div class="dp-hd"><button type="button" class="dp-nav" data-dpm="-1" aria-label="Previous month"'+(curM<=minM?' disabled':'')+'>&lsaquo;</button><b>'+first.toLocaleDateString("en-US",{timeZone:"UTC",month:"long",year:"numeric"})+'</b><button type="button" class="dp-nav" data-dpm="1" aria-label="Next month"'+(curM>=minM+5?' disabled':'')+'>&rsaquo;</button></div><div class="dp-grid">'+["Su","Mo","Tu","We","Th","Fr","Sa"].map(function(d,i){return '<span class="dp-wd'+((i%2&&i<6)||((rule.rapid||rule.thu)&&i===4)?' dp-mwf':'')+'">'+d+'</span>'}).join("");
   for(var i=0;i<startW;i++)h+='<span></span>';
@@ -5181,49 +5215,50 @@ function ltNextDrop(from,rule){
   while(i<60&&!ylValid(t,rule)){t=ylAdd(t,1);i++}
   return t;
 }
-function ltRenderBatchDates(){
-  var box=$("#ltBatchDates");if(!box)return;
-  var n=(LS.drops==="multi")?(+LS.batches||0):0;
-  if(n<2){box.hidden=true;box.innerHTML="";if(typeof ltUpdateBuy==="function")ltUpdateBuy();return}
+function ylBatchRender(pfx,S,boxSel,ackSel,upd){
+  var box=$(boxSel);if(!box)return;
+  var n=(S.drops==="multi")?(+S.batches||0):0;
+  if(n<2){box.hidden=true;box.innerHTML="";upd();return}
   n=Math.min(12,Math.max(2,n));
-  var rule=ylRuleFor("lt"), df=ylDefaults(rule);
-  LS.batchDates=LS.batchDates||[];
-  LS._bdUser=LS._bdUser||{};
-  if(LS._bdN!==n){LS._bdN=n;LS._bdAck=false}
-  var d0=ylParse(LS.batchDates[0]||LS.start)||df.asap;
+  var rule=ylRuleFor(pfx), df=ylDefaults(rule);
+  S.batchDates=S.batchDates||[];
+  S._bdUser=S._bdUser||{};
+  if(S._bdN!==n){S._bdN=n;S._bdAck=false}
+  var d0=ylParse(S.batchDates[0]||S.start)||df.asap;
   if(!ylValid(d0,rule))d0=df.asap;
-  LS.batchDates[0]=ylISO(d0);
+  S.batchDates[0]=ylISO(d0);
   for(var i=1;i<n;i++){
-    var cur=LS.batchDates[i]?ylParse(LS.batchDates[i]):null;
-    if(LS._bdUser[i]&&cur&&ylValid(cur,rule))continue;
-    var prev=ylParse(LS.batchDates[i-1]),c=ylAdd(prev,7),g=0;
+    var cur=S.batchDates[i]?ylParse(S.batchDates[i]):null;
+    if(S._bdUser[i]&&cur&&ylValid(cur,rule))continue;
+    var prev=ylParse(S.batchDates[i-1]),c=ylAdd(prev,7),g=0;
     while(g<8&&!ylValid(c,rule)){c=ylAdd(c,7);g++}
     if(!ylValid(c,rule))c=ylNextDropAny(prev,rule);
-    LS.batchDates[i]=ylISO(c);
+    S.batchDates[i]=ylISO(c);
   }
-  LS.batchDates=LS.batchDates.slice(0,n);
+  S.batchDates=S.batchDates.slice(0,n);
   box.hidden=false;
-  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch <span class="req">*</span></label><p class="help">Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+LS.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div><p class="help bd-note"><b>Drop dates depend on proof approval.</b> Approve your proof the same day, or by 12:00 PM PT the next day, so each batch mails on the date you picked. Later batches default to the same weekday, a week apart.</p><label class="lo-cb bd-ack"><input type="checkbox" id="ltBdAck"'+(LS._bdAck?' checked':'')+'><span>I understand my drop dates depend on proof approval, and these batch dates are final.</span></label></div></div>';
+  box.innerHTML='<div class="fld"><label class="f">Mail date for each batch <span class="req">*</span></label><p class="help">Mail goes to the post office on Mondays, Wednesdays, Thursdays and Fridays. '+YL_CAV+'</p><div class="lt-bdates">'+S.batchDates.map(function(iso,i){return '<div class="lt-bdate dp" data-bi="'+i+'"><span class="lt-bdate-k">Batch '+(i+1)+'</span><button type="button" class="inp dp-btn lt-bdate-btn" aria-haspopup="dialog" aria-expanded="false"><span class="dp-v">'+ylFmt(ylParse(iso))+'</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><div class="dp-pop" role="dialog" aria-label="Mail date for batch '+(i+1)+'" hidden></div></div>'}).join("")+'</div><p class="help bd-note"><b>Drop dates depend on proof approval.</b> Approve your proof the same day, or by 12:00 PM PT the next day, so each batch mails on the date you picked. Later batches default to the same weekday, a week apart.</p><label class="lo-cb bd-ack"><input type="checkbox" id="'+ackSel.slice(1)+'"'+(S._bdAck?' checked':'')+'><span>I understand my drop dates depend on proof approval, and these batch dates are final.</span></label></div></div>';
   $$(".lt-bdate",box).forEach(function(row){
     var i=+row.getAttribute("data-bi"), a=$(".lt-bdate-btn",row), pop=$(".dp-pop",row);
-    var st={start:LS.batchDates[i]};
-    var open=function(){var t=ylParse(st.start)||df.asap;ylCal("lt",st,pop,t.getUTCFullYear(),t.getUTCMonth()+1);pop.hidden=false;a.setAttribute("aria-expanded","true")};
+    var st={start:S.batchDates[i]};
+    var open=function(){var t=ylParse(st.start)||df.asap;ylCal(pfx,st,pop,t.getUTCFullYear(),t.getUTCMonth()+1);pop.hidden=false;a.setAttribute("aria-expanded","true")};
     var close=function(){pop.hidden=true;a.setAttribute("aria-expanded","false")};
     a.onclick=function(e){e.stopPropagation();pop.hidden?open():close()};
     pop.onclick=function(e){
       e.stopPropagation();
       var nbtn=e.target.closest("[data-dpm]");
-      if(nbtn&&!nbtn.disabled){var vy=+pop.getAttribute("data-vy"),vm=+pop.getAttribute("data-vm")+(+nbtn.getAttribute("data-dpm"));if(vm<1){vm=12;vy--}if(vm>12){vm=1;vy++}ylCal("lt",st,pop,vy,vm);return}
+      if(nbtn&&!nbtn.disabled){var vy=+pop.getAttribute("data-vy"),vm=+pop.getAttribute("data-vm")+(+nbtn.getAttribute("data-dpm"));if(vm<1){vm=12;vy--}if(vm>12){vm=1;vy++}ylCal(pfx,st,pop,vy,vm);return}
       var d=e.target.closest("[data-dpd]");if(!d||d.disabled)return;
-      st.start=d.getAttribute("data-dpd");LS.batchDates[i]=st.start;LS._bdUser=LS._bdUser||{};if(i===0){LS._bdUser={0:1}}else LS._bdUser[i]=1;LS._bdAck=false;
+      st.start=d.getAttribute("data-dpd");S.batchDates[i]=st.start;S._bdUser=S._bdUser||{};if(i===0){S._bdUser={0:1}}else S._bdUser[i]=1;S._bdAck=false;
       $(".dp-v",a).textContent=ylFmt(ylParse(st.start));
-      if(i===0){LS.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay("lt",LS,st.start,df)}
-      close();ltUpdateBuy();ltRenderBatchDates();
+      if(i===0){S.start=st.start;if(typeof ylSyncDay==="function")ylSyncDay(pfx,S,st.start,df)}
+      close();upd();ylBatchRender(pfx,S,boxSel,ackSel,upd);
     };
   });
-  var ack=$("#ltBdAck",box);if(ack)ack.onchange=function(){LS._bdAck=ack.checked;LS._mailSendChosen=true;if(ack.checked&&typeof formMailMaybeClose==="function")formMailMaybeClose("lt");if(typeof formSync==="function")formSync()};
-  if(typeof ltUpdateBuy==="function")ltUpdateBuy();
+  var ack=$(ackSel,box);if(ack)ack.onchange=function(){S._bdAck=ack.checked;if(pfx==="lt"){S._mailSendChosen=true;if(ack.checked&&typeof formMailMaybeClose==="function")formMailMaybeClose("lt");if(typeof formSync==="function")formSync()}};
+  upd();
 }
+function ltRenderBatchDates(){ylBatchRender("lt",LS,"#ltBatchDates","#ltBdAck",function(){if(typeof ltUpdateBuy==="function")ltUpdateBuy()})}
 function ltPacketHTML(o){
   var d=(typeof ODET!=="undefined"&&ODET[o.id])||{}, drops=o.drops||[];
   var img=d.tplImg||o.img||"", eimg=d.envImg||o.envImg||"";
@@ -5333,7 +5368,7 @@ function renderLCfg(){
   more+='<div class="fld"><label class="f">Undeliverable list <button type="button" class="pill-help" id="lundHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lundel" value="1"'+(LS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="lundel" value="0"'+(!LS.undel?" checked":"")+'>No</label></div></div>';
   more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="lretHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lret" value="1"'+(LS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="lret" value="0"'+(!LS.ret?" checked":"")+'>No</label></div></div>';
   more+=listLeadHTML("lt",LS);
-  var mailBody='<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+[YL_DAYS[0],YL_DAYS[1],YL_DAYS[2],YL_THU,YL_DAYS[3]].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS)+'<div id="ltBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
+  var mailBody=YL_APPR_NOTE+'<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+[YL_DAYS[0],YL_DAYS[1],YL_DAYS[2],YL_THU,YL_DAYS[3]].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS)+'<div id="ltBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
   var postbar='<details class="panel of-form lt-postbar lt-acc" id="ltPostAcc"><summary><span class="lt-acc-k">Postage<small id="ltPostSum"></small></span></summary><div class="lt-acc-body"><div id="lpseg"></div><button type="button" class="btn sec sm form-next" data-form-next="post">Continue</button></div></details>';
   var hasEnvFonts=envs.filter(function(x){return x&&x!=="None"}).length>0;
   var accs='<div class="lt-accs"><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Change your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details>'+(hasEnvFonts?'<details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details>':'')+'<details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small id="ltMoreSum">Lead type and extras</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
@@ -5469,7 +5504,7 @@ function renderRO3(){
   var o=roSrc(),hw=/Handwritten/.test(o.prod);
   $("#rStep3").innerHTML=roHead()+'<h3 class="ro-h">Step 3. Pick Drop Date(s)</h3><p class="muted" style="margin:0 0 14px">Set your delivery day and campaign start date.</p><div class="ro3">'+
    '<div class="fld"><label class="f" for="roName">Order Name</label><input class="inp" id="roName" placeholder="Name this order (for search later)" maxlength="40" value="'+esc(RO.name||o.name)+'" autocomplete="off"></div>'+
-   '<div class="fld"><label class="f" for="roDay">Mail day <span class="req">Required*</span></label>'+(hw?'<p class="help" style="margin:0 0 6px">Actual Handwritten Products require 5 days of production after proof approval.</p>':'')+'<select class="inp" id="roDay"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Thursday (order by Saturday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return '<option'+(RO.day===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+
+   YL_APPR_NOTE+'<div class="fld"><label class="f" for="roDay">Mail day <span class="req">Required*</span></label>'+(hw?'<p class="help" style="margin:0 0 6px">Actual Handwritten Products require 5 days of production after proof approval.</p>':'')+'<select class="inp" id="roDay"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Thursday (order by Saturday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return '<option'+(RO.day===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+
    '<div class="fld"><label class="f" for="roStart">Campaign start date <span class="req">Required*</span></label>'+(function(){window.RO_PROD=o.prod||"";var h=schedStartHTML("ro",RO);return h.replace(/^<div class="fld dp-fld">/,"").replace(/<\/div>$/,"").replace(/^<label[^>]*>.*?<\/label>/,"")})()+'</div></div>'+
    '<div class="err" id="roErr"></div><div class="ro-nav"><button class="btn sec" id="roB2">&lsaquo; Back</button><button class="btn lg" id="roGen">Generate Proof</button></div><div id="roGenMsg"></div>';
   $("#roChange").onclick=function(){roStep(1)};$("#roB2").onclick=function(){roStep(2)};
@@ -6766,8 +6801,8 @@ function fa14ProofApprove(o){var late=fa14V()==="late",days=["Monday","Wednesday
   modal("Terms and Conditions",'<div style="max-height:40vh;overflow:auto;border:1px solid #e5e5e5;border-radius:8px;padding:10px 14px;margin-bottom:12px" tabindex="0"><p><b>By checking this box, you sign this contract and accept the Terms and Conditions below and the full <a href="#/terms-proof-approval" id="faTL">Proof Approval &amp; Order Terms v1.4</a>:</b></p><p>100% responsible for the accuracy of this proof moving forward.</p><p>Please review and make sure the variable fields are correct, the phone number is correct, the mailing dates are correctly scheduled and that the letter verbiage is correct. You\u2019re responsible for spelling and grammar, the message, the variable data placement from your list, phone number, and overall appearance.</p><p>If there is a mistake in the proof, not called to our attention and discovered later, that is the responsibility of you the customer. No discounts or refunds will be applied.</p><p>Once approved, your order will automatically go into production. If changes or edits are required after the order is approved, a reprocessing/reprint fee will be applied.</p><p>If someone other than you approves this, they do so as your authorized agent and bind you the same as if you approved it yourself.</p><p style="margin-bottom:0">You confirm you own or have the right to use everything shown in this proof, whether you provided it or picked it from Yellow Letter HQ\u2019s templates. Yellow Letter HQ does not check content for copyright or ownership.</p></div>'+
    '<label style="display:flex;gap:8px;align-items:flex-start;font-weight:600"><input type="checkbox" id="faAgree"> I agree. Checking this box is my electronic signature.</label><p class="muted" id="faHint" style="margin:6px 0 10px">Tick the box above to enable Approve.</p>'+
    '<p style="margin:0 0 4px">You are also approving your combined list: <a href="#" id="faCL">Click to see the list</a></p><p style="margin:0">Number of batches: '+o.drops.length+'</p>'+
-   (late?'<div style="margin-top:12px;color:#c0392b;font-size:13px;text-align:center">The drop date has been modified due to late approval, please select a new date:</div><div class="fld" style="margin-top:8px"><label class="f" for="faDay">Drop day:</label><select class="inp" id="faDay">'+days.map(function(d){return '<option>'+d+'</option>'}).join("")+'</select></div><div class="fld"><label class="f" for="faBatch">Batch #1 date:</label><select class="inp" id="faBatch">'+ylNext3()+'</select></div>':''),
-   [{label:"Disapprove",cls:"btn sec",fn:function(){setTimeout(function(){fa14ProofDis(o)},0)}},{label:"Approve",cls:"btn",fn:function(){if(!$("#faAgree").checked){$("#faHint").style.color="#c0392b";return false}PRS[o.id]="ok";renderProof(o.id)}}]);
+   (late?'<div style="margin-top:12px;color:#c0392b;font-size:13px;text-align:center" id="faLate">The drop date has been modified due to late approval. Mail dates on the page: '+(PF.confirmed?pfDates().join(', '):'not chosen yet')+'</div>':''),
+   [{label:"Disapprove",cls:"btn sec",fn:function(){setTimeout(function(){fa14ProofDis(o)},0)}},{label:"Approve",cls:"btn",fn:function(){if(!$("#faAgree").checked){$("#faHint").style.color="#c0392b";return false}if(late&&!PF.confirmed){$("#faLate").textContent="Choose new mail dates on the page and press Use these dates first.";return false}if(late){var ds=PF.drops==="multi"?PF.batchDates.slice(0,PF.batches):[PF.start];o.drops=ds.map(function(i){return pfMDY(i)})}PRS[o.id]="ok";renderProof(o.id)}}]);
   var ap=$("#mF").querySelector("button:last-child");ap.disabled=true;$("#faAgree").onchange=function(){ap.disabled=!this.checked;$("#faHint").hidden=this.checked};
   $("#faCL").onclick=function(e){e.preventDefault();toast("On the live site this opens your combined list.")};$("#faTL").onclick=function(){closeModal()}}
 function fa14ProofDis(o){if(fa14V()==="maxrev"){modal("Details about proof.",'<p>You reached the maximum number of revisions for this order. To make an extra change, please buy more revisions at this link:</p><p><a href="#" id="faBuy" style="font-weight:700">Click to buy extra revisions</a></p><p class="muted">If you think it is not correct, you can ask for the changes anyway and clarify if it was our mistake.</p>',[{label:"Close",cls:"btn sec"},{label:"Ask for the changes anyway",cls:"btn",fn:function(){setTimeout(function(){fa14ProofDisForm(o)},0)}}]);$("#faBuy").onclick=function(e){e.preventDefault();demo("Buy extra revisions","On the live site this adds extra revisions to your cart. Nothing is charged in the mockup.")};return}fa14ProofDisForm(o)}
@@ -6974,7 +7009,7 @@ function ylpModal(title,html){var m=document.getElementById("ylpop");if(m)m.remo
 function ylpAct(host,k,act,i,val){var K=FFK[k],steps=K.steps||[],lab=steps[i]?steps[i][0]:"";
   function jump(){var bar=host.querySelector(":scope > .ff-bar"),b=bar&&bar.querySelector('[data-ffs="'+i+'"]');if(b)b.click();var pn=host.querySelector(".ylp");if(pn&&window.innerWidth<1180){pn.classList.remove("open");pn.querySelector(".ylp-h").setAttribute("aria-expanded","false")}}
   function img(sel,ttl){var on=host.querySelector(sel),im=on&&on.querySelector("img");if(!im){jump();return}var c=document.createElement("div");var g=document.createElement("img");g.src=im.currentSrc||im.src;g.alt=val;g.className="ylpop-img";c.appendChild(g);ylpModal(ttl+": "+val,c.innerHTML)}
-  if(act==="dates"){var ds=ylMailDates(host);return ylpModal("Your mail dates",'<p>'+ds.length+(ds.length>1?' drops':' mail date')+'. Dates depend on proof approval.</p><ol style="padding-left:20px;margin:8px 0">'+ds.map(function(x){return '<li><b>Batch '+x.n+'</b> '+x.d+'</li>'}).join("")+'</ol>')}
+  if(act==="dates"){var ds=ylMailDates(host);return ylpModal("Your mail dates",'<p>'+ds.length+(ds.length>1?' drops':' mail date')+'. Dates depend on proof approval.</p><p class="muted" style="margin:0 0 6px">Dates hold if you approve your proof the same day or by 12:00 PM PT the next day. If you approve later, you will choose new dates after approval.</p><ol style="padding-left:20px;margin:8px 0">'+ds.map(function(x){return '<li><b>Batch '+x.n+'</b> '+x.d+'</li>'}).join("")+'</ol>')}
   if(act==="snex")return ylpModal("Envelope sticky note",snExHtml(host.querySelector("#snMsg")?host.querySelector("#snMsg").value.trim():""));
   if(act==="tpl")return img('#tplField .ylsel-on,#pcDesign .ylsel-on,.lt-tpl .ylsel-on',lab==="Letters"?"Letter":"Design");
   if(act==="env")return img('.lt-envcol .opt-env.ylsel-on,.lt-envcol .ylsel-on',"Envelope");
@@ -7938,4 +7973,5 @@ setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(
 #products-button-container.tiles-p>.ptile.on:not(.all){padding-right:10px!important}
 }
 </style>
+<style id="r15-css">.appr-note{background:#fff8e1;border-left:4px solid #FFC72C;border-radius:8px;padding:9px 12px;margin:0 0 12px!important;font-size:14px;color:#222}.pf-mail{margin:14px 0}.pf-mail h3{margin:0 0 8px;font-size:20px}.pf-orig ul{list-style:none;padding:0;margin:6px 0 10px}.pf-orig li{padding:6px 0;border-bottom:1px solid #eee;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.pf-late{margin:10px 0}.pf-act{margin:10px 0}.pf-acct{margin-top:12px;border-style:dashed}.pf-demo{margin-top:8px!important}</style>
 </body></html>
