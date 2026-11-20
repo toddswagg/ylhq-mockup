@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r26"){u.searchParams.set("v","r26");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r27"){u.searchParams.set("v","r27");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1855,6 +1855,11 @@ html{-webkit-tap-highlight-color:rgba(255,197,35,.22)}
 /* round 19: equal picker tile heights across Letters, Handwritten and Postcards; equal shop cards */
 .tiles-p{grid-auto-rows:149px!important}.pgrid{grid-auto-rows:1fr!important}
 @media(max-width:700px){.tiles-p{grid-auto-rows:165px!important}}
+.ylp-min{font-size:12px;color:#71717A;white-space:nowrap}
+/* round 27: embed mode (used by the API dashboard builder and proof page) */
+body.embed .util,body.embed .hdr,body.embed footer,body.embed .hl-chat,body.embed #pmenu,body.embed .pm-toggle,body.embed .drawer{display:none!important}
+body.embed{background:#fff}
+body.embed .tpl-saved{max-width:900px;margin:0 auto}
 </style>
 </head><body>
 
@@ -3500,7 +3505,7 @@ function priceNow(){
   var p=PC[PS.p],q=PS.qty,i=tierIdx(q),base=p.fc[i],std=PS.post==="std";
   if(std)base=r3(base-STD_OFF);
   var add=(PS.gloss?.02:0)+(PS.eos?.03:0),flat=(PS.undel?19:0)+(PS.ret?49:0);
-  var err="";if(!(q>0))err="Upload your list to set the piece count.";else if(!(q>=100))err="Minimum order is 100 cards.";else if(std&&q<STD_MIN)err="Standard Postage needs at least 200 cards. Upload a list of at least 200, or pick First Class.";
+  var err="";if(!(q>0))err="Upload your list to set the piece count.";else if(!(q>=(PMIN[p.k]||100)))err="Minimum order is "+(PMIN[p.k]||100)+" cards.";else if(std&&q<STD_MIN)err="Standard Postage needs at least 200 cards. Upload a list of at least 200, or pick First Class.";
   return {i:i,base:base,add:add,ppc:r3(base+add),flat:flat,total:q>0?(q*r3(base+add)+flat):0,err:err};
 }
 function pcTplImg(){
@@ -4447,6 +4452,9 @@ var CT_LET=["Letter with Pressure Seal","Check Letter with #10 Window envelope",
 var CT_PC=["Postcard (4.25 x 5.5)","Half Page Postcard (8.5 x 5.5)","Jumbo Postcard (5.5 x 11)","Actual Handwritten Postcard (4.25 x 5.5)","Actual Handwritten Postcard Half Page (8.5 x 5.5)"];
 /* round 11 audit (Oct 30, 11:52 AM PT): options the live order pages have that the mock was missing. Live source: product page attribute lists (signed out) and the form fields under them. */
 var TRI_BGS=["Stars & Stripes","Coastline","Painted","Rustic"];
+var PMIN={}; /* per-product minimum overrides, e.g. PMIN.hw10=500. Empty = current minimums (letters 200, postcards 100). */
+var STICKY_MIN=200; /* a sticky note on the envelope needs at least 200 pieces */
+function ltMinNow(p){var k=p&&p.k,m=PMIN[k]||200;return(LS.sticky&&stickyOK(k))?Math.max(m,STICKY_MIN):m}
 function stickyOK(k){return /^(check|no10|a6|windowed|hwcards|hw10|hw6|cardsnotes|greeting|notes|hwcardsnotes|hwnotes)$/.test(k)}
 function secondOK(k){return /^(check|no10|a6|windowed|fullview)$/.test(k)}
 function triFoldHTML(pfx,st){return '<div class="fld"><label class="f">Stamp</label><p class="opt-fixed" style="margin:0">Live Stamp <span class="muted">(only choice)</span></p></div><div class="fld"><label class="f" for="'+pfx+'Bgs">Background Style</label><select class="inp" id="'+pfx+'Bgs"><option value="">Choose an option</option>'+TRI_BGS.map(function(x){return '<option'+(st.bgs===x?" selected":"")+'>'+esc(x)+'</option>'}).join("")+'</select></div>'}
@@ -5065,7 +5073,7 @@ function lPrice(){
   if(LS.post==="fc")base=p.hw?p.fcT[i]:r3(base+.241);
   else if(LS.post==="np")base=npOf(base);
   var opid=(LS.set==="hw"?"hw:":"lt:")+p.k,add=(LS.sticky?.06:0)+(LS.second===2?.15:LS.second?.10:0)+(LS.eos?.03:0)+centsOf(LS.env)+(typeof OPS!=="undefined"&&OPS[opid]&&OPS[opid].ef==="Print"&&OPTEFPRINT[opid]?OPTEFPRINT[opid]:0),flat=(LS.undel?19:0)+(LS.ret?49:0),envd=/^Custom envelope design/.test(LS.env||"")?65:0;flat+=envd;
-  var err=!(q>0)?"Upload your list to set the piece count.":(!(q>=200)?"Minimum order is 200 pieces.":((raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")?"Please choose Greeting Card or Folded Note.":""));
+  var err=!(q>0)?"Upload your list to set the piece count.":(!(q>=ltMinNow(p))?((LS.sticky&&stickyOK(p.k)&&q<STICKY_MIN)?"Sticky notes require a 200-piece minimum. Upload a list of at least 200 or turn the sticky note off.":"Minimum order is "+ltMinNow(p)+" pieces."):((raw&&raw.styles&&LS.cardStyle!=="greeting"&&LS.cardStyle!=="notes")?"Please choose Greeting Card or Folded Note.":""));
   return {envd:envd,i:i,base:base,add:add,ppc:r3(base+add),flat:flat,total:q>0?q*r3(base+add)+flat:0,err:err};
 }
 var LT_GRID_PREVIEW=6;
@@ -5458,7 +5466,7 @@ function renderLCfg(){
   var more='';
   if(!p.hw&&secondOK(p.k))more+='<div class="fld sp-fld"><label class="f">Second Page (Circular) <button type="button" class="pill-help" id="spHelp">What is this?</button></label><div class="radios sp-radios"><label><input type="radio" name="lsp" value="0"'+(!LS.second?" checked":"")+'>No second page</label><label><input type="radio" name="lsp" value="1"'+(LS.second&&LS.second!==2?" checked":"")+'>Circular page (+10 cents)</label><label><input type="radio" name="lsp" value="2"'+(LS.second===2?" checked":"")+'>Circular with variable data (+15 cents)</label></div></div>';
   if(!p.hw&&p.k==="trifold")more+=triFoldHTML("lt",LS);
-  if(stickyOK(p.k))more+='<div class="fld"><label class="f">Envelope sticky note <a href="#" class="snlk" id="snHelp">See example</a></label><p class="opt-help" style="margin:0 0 6px">A small yellow sticky note stuck to the outside of the envelope.</p><div class="radios"><label><input type="radio" name="lsn" value="0"'+(!LS.sticky?" checked":"")+'>No</label><label><input type="radio" name="lsn" value="1"'+(LS.sticky?" checked":"")+'>Yes (+6 cents)</label></div><div class="sn-box" id="snBox" style="display:none"><textarea id="snMsg" maxlength="60" rows="2" placeholder="Call me today! (555) 123-4567" aria-label="Envelope sticky note message"></textarea><div class="sn-ct"><span>What should the sticky note say? Short is best: a few words and a phone number.</span><b id="snCt">0/60</b></div></div></div>';
+  if(stickyOK(p.k))more+='<div class="fld"><label class="f">Envelope sticky note <a href="#" class="snlk" id="snHelp">See example</a></label><p class="opt-help" style="margin:0 0 6px">A small yellow sticky note stuck to the outside of the envelope. <b>Sticky notes require a 200-piece minimum.</b></p><div class="radios"><label><input type="radio" name="lsn" value="0"'+(!LS.sticky?" checked":"")+'>No</label><label><input type="radio" name="lsn" value="1"'+(LS.sticky?" checked":"")+'>Yes (+6 cents)</label></div><div class="sn-box" id="snBox" style="display:none"><textarea id="snMsg" maxlength="60" rows="2" placeholder="Call me today! (555) 123-4567" aria-label="Envelope sticky note message"></textarea><div class="sn-ct"><span>What should the sticky note say? Short is best: a few words and a phone number.</span><b id="snCt">0/60</b></div></div></div>';
   more+='<div class="fld"><label class="f">Easy Offer System <button type="button" class="pill-help" id="leosHelp">What is this?</button></label><div class="radios"><label><input type="radio" name="leos" value="0"'+(!LS.eos?" checked":"")+'>No</label><label><input type="radio" name="leos" value="1"'+(LS.eos?" checked":"")+'>Yes (+3 cents)</label></div></div>'+eosxHTML("lt",LS.eos);
   more+='<div class="fld"><label class="f">Undeliverable list <button type="button" class="pill-help" id="lundHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lundel" value="1"'+(LS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="lundel" value="0"'+(!LS.undel?" checked":"")+'>No</label></div></div>';
   more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="lretHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lret" value="1"'+(LS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="lret" value="0"'+(!LS.ret?" checked":"")+'>No</label></div></div>';
@@ -7135,7 +7143,7 @@ function ylpUpdate(k){
   pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){var c=i===cur&&!done[i]||(i===cur&&i===steps.length-1),cls=done[i]?"done":c?"cur":"next";if(li.className!==cls)li.className=cls;
     var ic=li.querySelector(".ylp-i"),t=done[i]?"\u2713":String(i+1);if(ic.textContent!==t)ic.textContent=t;
     var v=stepVal(host,steps[i],i),sm=li.querySelector("small"),vv=done[i]||v?(v||(done[i]?"Done":"")):(i===cur?"Choose now":"");var act=(v&&(done[i]||/^(Postage|Font|Envelope font)$/.test(steps[i][0])))?ylpActFor(steps[i][0]):"";var key=(act?"A:"+act+":":"T:")+vv;if(sm.getAttribute("data-v")!==key){sm.setAttribute("data-v",key);if(act){sm.innerHTML='<a href="#" class="ylp-lk" data-act="'+act+'"></a>';sm.firstChild.textContent=vv}else if(steps[i][0]==="Mail dates"&&v&&ylMailDates(host).length){sm.innerHTML='<span></span> <a href="#" class="ylp-lk" data-act="dates">See dates</a>';sm.firstChild.textContent=vv}else sm.textContent=vv}});
-  pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){if(steps[i][0]!=="Options")return;var ul=li.querySelector(".ylp-sub"),os=ylpOpts(host),h=os.items.map(function(o){return '<li class="ylp-o'+(o.on?" on":"")+'" role="button" tabindex="0" aria-pressed="'+o.on+'" data-ok="'+o.k+'"><span class="ylp-oc">'+(o.on?"\u2713":"")+'</span><span class="ylp-nm">'+o.name+'</span><span class="ylp-ov">'+(o.sn?'<a href="#" class="ylp-lk" data-act="snex" data-m="'+esc(o.snm)+'">'+"Yes (see example)"+'</a>':o.txt)+'</span></li>'}).join("");if(!ul){ul=document.createElement("ul");ul.className="ylp-sub";li.querySelector(".ylp-t").appendChild(ul)}if(ul.getAttribute("data-h")!==h){ul.innerHTML=h;ul.setAttribute("data-h",h)}});
+  pn.querySelectorAll(".ylp-l>li").forEach(function(li,i){if(steps[i][0]!=="Options")return;var ul=li.querySelector(".ylp-sub"),os=ylpOpts(host),h=os.items.map(function(o){return '<li class="ylp-o'+(o.on?" on":"")+'" role="button" tabindex="0" aria-pressed="'+o.on+'" data-ok="'+o.k+'"><span class="ylp-oc">'+(o.on?"\u2713":"")+'</span><span class="ylp-nm">'+o.name+'</span><span class="ylp-ov">'+(o.sn?'<a href="#" class="ylp-lk" data-act="snex" data-m="'+esc(o.snm)+'">'+"Yes (see example)"+'</a> <span class="ylp-min">\u00b7 200 min</span>':o.txt)+'</span></li>'}).join("");if(!ul){ul=document.createElement("ul");ul.className="ylp-sub";li.querySelector(".ylp-t").appendChild(ul)}if(ul.getAttribute("data-h")!==h){ul.innerHTML=h;ul.setAttribute("data-h",h)}});
   var hs=pn.querySelector(".ylp-hs");hs.querySelector("small").textContent="Step "+(cur+1);hs.querySelector("b").textContent=steps[cur][0];
   var bar=host.querySelector(":scope > .ff-bar"),tb=bar&&bar.querySelector(".ff-tot b"),p=tb?tb.textContent:"\u2014";
   pn.querySelector(".ylp-p").textContent=p;pn.querySelector(".ylp-hp").textContent=p;pn.querySelector(".ylp-q").textContent=pieces(k);var ab=document.getElementById(k==="pc"?"addCart":"laddCart");pn.classList.toggle("ylp-ready",!!(ab&&!ab.disabled));
@@ -7153,6 +7161,30 @@ function ylStepLabels(k){var K=FFK[k],host=document.getElementById(K.host);if(!h
 var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}catch(e){}};
 
 
+
+/* round 27: embed mode. ?embed=api turns the order flow into "Save as template" and hides the site chrome. */
+(function(){
+  if(!/[?&]embed=api/.test(location.search))return;
+  document.body.classList.add("embed");
+  var n=+(sessionStorage.getItem("ylTplN")||5600);
+  var _rc=renderCart;
+  renderCart=function(){
+    var it=CART[CART.length-1];if(!it){location.replace("#/shop");return}
+    CART.length=0;cartBadge();
+    n++;sessionStorage.setItem("ylTplN",n);
+    var code="CT"+n,hay=((it.envName||"")+" "+(it.name||"")),hasEnv=!!(it.envName&&!/^none$/i.test(it.envName))||/envelope/i.test(it.name||"");
+    var env=!hasEnv?null:(/window/i.test(hay)?"ENV10W":/invit|a6/i.test(hay)?"ENVINV":"ENV10");
+    var det={postage:it.postKey==="fc"||/first/i.test(it.post||"")?"first_class":"standard"};
+    if(env)det.envelope=env;
+    var st=/sticky/i.test((it.extra||"")+" "+(it.addons||[]).join(" "));if(st){det.sticky_note="Sample note";det.minimum_pieces=200}
+    var BASE="https://ylhq-api-orders.yellowletterhq.com/api/v1";
+    var req='curl -sS -X POST "'+BASE+'/upload" \\\n  -H "X-API-Key: YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify({target_date:"ASAP",template_on_file:code,details:det,records:[{first_name:"Sample",address:"123 Example St",city:"Anytown",state:"CA",zip:"90000"}]},null,2)+"'";
+    var img=it.img?'<img src="'+it.img+'" alt="" style="width:100%;max-height:260px;object-fit:contain;border-radius:12px;background:#f4f4f4">':"";
+    $("#cart-root").innerHTML='<div class="panel tpl-saved" style="padding:22px"><span class="pv-pill">Saved</span><h2 style="margin:10px 0 4px">Template saved</h2><p class="muted">'+esc(it.name||"")+(it.post?" \u00b7 "+esc(it.post):"")+(st?" \u00b7 sticky note (200-piece minimum)":"")+'. Mock only: nothing was ordered.</p>'+img+'<h3 style="margin:16px 0 6px">Template ID</h3><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code id="tplCode" style="font:800 20px Montserrat,sans-serif;border:2px solid #FFC523;border-radius:999px;padding:8px 20px">'+code+'</code><button class="btn sm" id="tplCopy" type="button">Copy</button></div><h3 style="margin:16px 0 6px">Sample API request</h3><pre id="tplReq" style="background:#262626;color:#fff8dc;padding:14px;border-radius:12px;overflow:auto;font-size:13px;white-space:pre-wrap;word-break:break-all">'+esc(req)+'</pre><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" id="tplReqCopy" type="button">Copy request</button><a class="btn sec sm" href="#/shop">Build another</a></div></div>';
+    function cp(id,btn){btn.onclick=function(){var t=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){btn.textContent="Copied"},function(){btn.textContent="Select and copy"})}}
+    cp("tplCode",$("#tplCopy"));cp("tplReq",$("#tplReqCopy"));
+  };
+})();
 cartBadge();route();
 })();
 </script>
