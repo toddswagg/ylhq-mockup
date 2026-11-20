@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r34"){u.searchParams.set("v","r34");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r35"){u.searchParams.set("v","r35");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6045,7 +6045,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tabs=[["","Overview"],["templates","My Templates"],["wallet","Wallet"]];
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
-  if(t==="templates")body='<div class="panel"><h3 style="font-size:18px;margin-bottom:4px">My Templates</h3><p class="muted" style="margin:0 0 14px">Every template you can send as <code>template_on_file</code>. Copy the ID, or start a new one.</p>'+mtHtml('<a class="mt-add" href="#/custom-template">Add template</a>')+'</div>';
+  if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
   else if(t==="wallet")body='<div class="panel" style="max-width:720px"><h3 style="font-size:18px;margin-bottom:4px">Wallet</h3><p class="muted" style="margin:0 0 14px">API and Zapier orders are paid from your wallet.</p><div class="bp-cards" style="grid-template-columns:1fr 1fr"><div class="bp-card"><small>Credit balance</small><b id="wBal">'+money(WALLET)+'</b><em>sample</em></div><div class="bp-card"><small>Auto reload</small><b style="font-size:18px">Off</b><em>add money when the balance is low</em></div></div><div class="bp-row" style="margin:0"><button class="btn" id="wAdd">Add money</button><a class="btn sec" href="'+lnk("credit-history","Credit history")+'">Credit history</a><a class="btn sec" href="'+lnk("credit-history","Credit history")+'">Credit history</a></div></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
@@ -6992,7 +6992,7 @@ var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}
 var YLDM=0;
 (function(){
   var _r0=route;
-  route=function(){var h=location.hash;if(/^#\/?custom-template/.test(h))YLDM=1;else if(!/^#\/?(letters|postcards)(\/|\?|$)/.test(h))YLDM=0;document.body.classList.toggle("dm",!!YLDM);return _r0.apply(this,arguments)};
+  route=function(){var h=location.hash;if(/^#\/?custom-template/.test(h))YLDM=1;else if(!/^#\/?(letters|postcards)(\/|\?|$)/.test(h))YLDM=0;document.body.classList.toggle("dm",!!YLDM);var _tm=/\/hw[a-z0-9]*\?/.test(h)?null:/[?&]tpl=([^&]*)/.exec(h);var _rv=_r0.apply(this,arguments);if(_tm){var _tn=decodeURIComponent(_tm[1]).toLowerCase();var _tries=0,_ti=setInterval(function(){_tries++;var bx=[].slice.call(document.querySelectorAll(".scr.on #tplField .image-box,.scr.on #pcDesign .image-box")).filter(function(x){return !/Custom|Library|Past/i.test(x.innerText)});if(bx.length){clearInterval(_ti);var w=_tn.replace(/[^a-z0-9 ]/g," ").split(" ").filter(function(x){return x.length>3&&x!=="letter"&&x!=="postcard"&&x!=="copy"});var hit=bx.filter(function(x){var t=x.innerText.toLowerCase();return w.length&&w.every(function(y){return t.indexOf(y)>-1})})[0]||null;if(hit){var sl=hit.querySelector(".tg-sel")||hit;sl.click();var ff=document.getElementById("tplField")||document.getElementById("pcDesign");if(ff)ff.scrollIntoView({block:"center"})}}else if(_tries>25)clearInterval(_ti)},250)}return _rv};
   document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("#nav a,#drawer a,.hdr a,footer a");if(a&&!/custom-template/.test(a.getAttribute("href")||""))YLDM=0},true);
 })();
 var renderCTold=renderCT;
@@ -8106,4 +8106,187 @@ setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(
 </script>
 <style>.dz-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px}.dz-choice button{font:inherit;text-align:left;cursor:pointer;background:#fffbe0;border:2px solid #fdd835;border-radius:14px;padding:14px 16px;color:#262626;font-size:13px;line-height:1.4}.dz-choice button b{display:block;font-family:Montserrat,sans-serif;font-size:15px;margin-bottom:4px}.dz-choice button:hover{background:#fff3a8}.dz-saved{background:#e8f5e9;border:1px solid #2e7d32;color:#1b5e20;border-radius:10px;padding:8px 12px;margin:0 0 10px;font-size:13px;font-weight:600}@media(max-width:600px){.dz-choice{grid-template-columns:1fr}}</style>
 <style>body.dm #ltUpbar,body.dm #pcUpbar,body.dm #ltMailAcc,body.dm #pcMailAcc,body.dm #ltPostAcc,body.dm #pcPostAcc,body.dm #ltNotes,body.dm #pcNotes,body.dm .ff-tot,body.dm .ylp-f .ylp-r,body.dm .ylp-note,body.dm .ylp-hp,body.dm #lsum,body.dm #sum,body.dm .env-pr,body.dm #laddCart,body.dm #addCart{display:none!important}body.dm .ylp-add,body.dm .ylp-add2{opacity:1!important;pointer-events:auto!important}</style>
+<style id="yll-css">
+.yl-lib{--y:#FFC523;--yd:#e8ad00;--ink:#262626;--mut:#6b6b6b;--line:#eee6c9;--soft:#fffbe8;font-family:'Open Sans',system-ui,sans-serif;color:var(--ink);text-align:left;line-height:1.45}
+.yl-lib *{box-sizing:border-box}
+.yl-lib h2,.yl-lib h3,.yl-lib b{font-family:'Montserrat','Open Sans',sans-serif}
+.yl-lib button{font:inherit;cursor:pointer;margin:0}
+.yl-lib a{color:inherit}
+.yll-h{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:0 0 16px}
+.yll-h h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+.yll-sub{margin:6px 0 0;color:var(--mut);font-size:14px}
+.yll-sub b{color:var(--ink);font-weight:800}
+.yll-ctl{display:flex;gap:10px;align-items:center;flex:1 1 320px;justify-content:flex-end;max-width:560px}
+.yll-s{position:relative;flex:1 1 220px}
+.yll-s svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.55}
+.yll-s input{width:100%;height:44px;border:2px solid var(--line);border-radius:999px;padding:0 16px 0 40px;font:inherit;font-size:14px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.yll-s input:focus{border-color:var(--y);box-shadow:0 0 0 4px rgba(255,197,35,.25)}
+.yll-vw{display:inline-flex;background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.yll-vw button{border:0;background:none;border-radius:999px;width:38px;height:34px;display:grid;place-items:center;color:#777}
+.yll-vw button.on{background:var(--y);color:var(--ink);box-shadow:0 2px 6px rgba(232,173,0,.35)}
+.yll-bar{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:12px 14px;background:var(--soft);border:1px solid var(--line);border-radius:18px;flex-wrap:wrap}
+.yll-pills{display:flex;gap:8px;flex:1 1 auto;min-width:0}
+.yll-pill{border:2px solid var(--line);background:#fff;border-radius:999px;height:38px;padding:0 16px;font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:var(--ink);transition:all .15s}
+.yll-pill small{font-size:11.5px;font-weight:800;background:#f3efdc;border-radius:999px;padding:1px 8px;color:#6a5d1c}
+.yll-pill:hover{border-color:var(--y)}
+.yll-pill.on{background:var(--y);border-color:var(--y);box-shadow:0 3px 10px rgba(232,173,0,.3)}
+.yll-pill.on small{background:rgba(255,255,255,.65);color:var(--ink)}
+.yll-tg{display:flex;gap:8px;flex:none}
+.yll-chip{border:2px solid var(--line);background:#fff;border-radius:999px;height:34px;padding:0 13px;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:6px;color:#555}
+.yll-chip i{width:9px;height:9px;border-radius:50%;background:#d9d4bd;display:inline-block}
+.yll-chip.on{border-color:#262626;color:var(--ink)}
+.yll-chip.on.p i{background:#e8920c}.yll-chip.on.g i{background:#2e9e5b}
+.yll-sort{display:flex;align-items:center;gap:8px;flex:none;font-size:12.5px;font-weight:700;color:#555}
+.yll-sort select{height:34px;border:2px solid var(--line);border-radius:999px;padding:0 30px 0 12px;font:inherit;font-size:13px;font-weight:700;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23262626' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;appearance:none;color:var(--ink)}
+.yll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.yll-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 22px rgba(60,48,0,.07);transition:transform .18s,box-shadow .18s,border-color .18s;cursor:pointer;outline:none}
+.yll-card:hover,.yll-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 32px rgba(60,48,0,.13);border-color:var(--y)}
+.yll-card.sel{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,197,35,.45),0 14px 32px rgba(60,48,0,.12)}
+.yll-pf{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#f6f2e2,#ece6cc);display:grid;place-items:center;overflow:hidden}
+.yll-pf img{width:100%;height:100%;object-fit:contain;padding:10px;transition:transform .3s}
+.yll-card:hover .yll-pf img{transform:scale(1.04)}
+.yll-pf .yll-tag{position:absolute;left:12px;top:12px;background:rgba(38,38,38,.88);color:#fff8dc;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.yll-bg{position:absolute;right:12px;top:12px;font-size:11.5px;font-weight:800;padding:4px 11px;border-radius:999px;background:#fff;border:1.5px solid}
+.yll-bg.p{color:#a45f00;border-color:#f2c36b;background:#fff6e3}.yll-bg.g{color:#1c7a45;border-color:#8fd3ae;background:#eafaf1}
+.yll-bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.yll-cat{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:#fff3c4;color:#6a5100;border-radius:999px;padding:3px 10px}
+.yll-bd h3{margin:2px 0 0;font-size:17px;font-weight:800;line-height:1.25;min-height:2.5em}
+.yll-prod{margin:0;font-size:13px;color:var(--mut);min-height:3em}
+.yll-date{font-size:12px;color:#8a8a8a}
+.yll-id{display:flex;align-items:center;gap:8px;margin:6px 0 2px}
+.yll-id code{flex:1;font:800 20px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.06em;background:#262626;color:#FFE08A;border-radius:999px;padding:11px 16px;text-align:center}
+.yll-cp{border:0;background:var(--y);color:var(--ink);font-weight:800;font-size:13px;height:40px;padding:0 16px;border-radius:999px;transition:all .15s;box-shadow:0 2px 0 var(--yd)}
+.yll-cp:hover{filter:brightness(1.05)}.yll-cp.done{background:#2e9e5b;color:#fff;box-shadow:0 2px 0 #1f7440}
+.yll-act{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--line)}.yll-act>*{text-align:left;justify-self:start}
+.yll-act a,.yll-act button{background:none;border:0;padding:2px 0;font-size:12.5px;font-weight:700;color:#3b3b3b;text-decoration:none;border-bottom:2px solid transparent}
+.yll-act a:hover,.yll-act button:hover{border-color:var(--y)}
+.yll-act .pri{color:#8a5d00}
+.yll-detail{background:#fff;border:2px solid var(--y);border-radius:24px;box-shadow:0 18px 44px rgba(60,48,0,.16);padding:24px;margin:0 0 22px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;position:relative;scroll-margin-top:90px}
+.yll-detail[hidden]{display:none}
+.yll-x{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:#fff;font-size:18px;line-height:1;color:#444}
+.yll-x:hover{border-color:var(--y)}
+.yll-dp{border-radius:18px;background:linear-gradient(135deg,#f6f2e2,#ece6cc);aspect-ratio:4/3;display:grid;place-items:center;position:relative;overflow:hidden;align-self:start}
+.yll-dp img{width:100%;height:100%;object-fit:contain;padding:16px}
+.yll-dp .yll-tag{position:absolute;left:14px;top:14px;background:rgba(38,38,38,.88);color:#fff8dc;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.yll-dr{min-width:0;display:flex;flex-direction:column;gap:10px;padding-right:34px}
+.yll-dr h3{margin:0;font-size:24px;font-weight:800;line-height:1.2}
+.yll-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.yll-spec{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:6px 0;padding:14px 16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;font-size:13px}
+.yll-spec dt{font-weight:800;color:#6a5d1c;font-family:'Montserrat',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.yll-spec dd{margin:0}
+.yll-snip{position:relative}
+.yll-snip pre{margin:0;background:#262626;color:#fff8dc;border-radius:14px;padding:14px 16px;font:12px/1.55 ui-monospace,Menlo,Consolas,monospace;overflow:auto;white-space:pre-wrap;word-break:break-all;max-height:190px}
+.yll-snip button{margin-top:8px}
+.yll-dact{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.yll-btn{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:#fff;font-weight:800;font-size:13px;text-decoration:none;color:var(--ink)!important}
+.yll-btn.pri{background:var(--y);border-color:var(--y)}
+.yll-btn:hover{box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.yll-list{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 6px 22px rgba(60,48,0,.06)}
+.yll-lh,.yll-lr{display:grid;grid-template-columns:64px minmax(0,2fr) 110px 104px 190px minmax(150px,1.1fr);gap:14px;align-items:center;padding:12px 18px}
+.yll-lh{background:var(--soft);font:800 11px 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#6a5d1c;border-bottom:1px solid var(--line)}
+.yll-lr{border-bottom:1px solid #f4efd9;cursor:pointer;transition:background .12s}
+.yll-lr:last-child{border-bottom:0}.yll-lr:hover{background:#fffdf3}.yll-lr.sel{background:#fff7d1}
+.yll-lt{width:64px;height:48px;border-radius:10px;background:#f3eedb;overflow:hidden;display:grid;place-items:center}
+.yll-lt img{width:100%;height:100%;object-fit:contain}
+.yll-ln b{display:block;font-size:14px;font-weight:800;line-height:1.25}.yll-ln span{font-size:12px;color:var(--mut)}
+.yll-lr .yll-id{margin:0}.yll-lr .yll-id code{font-size:14px;padding:8px 10px;flex:1}.yll-lr .yll-cp{height:32px;padding:0 12px;font-size:12px}
+.yll-lr .yll-act{border:0;padding:0;margin:0;gap:4px 12px;grid-template-columns:auto auto}
+.yll-ld{font-size:12.5px;color:#777}
+.yll-empty{text-align:center;padding:56px 20px;border:2px dashed var(--line);border-radius:22px;background:var(--soft)}
+.yll-empty svg{opacity:.7}.yll-empty h3{margin:12px 0 4px;font-size:20px}.yll-empty p{margin:0 0 16px;color:var(--mut)}
+.yll-foot{margin:18px 2px 0;font-size:12.5px;color:#8a8a8a}
+@media(max-width:900px){.yll-detail{grid-template-columns:1fr;padding:18px}.yll-dr{padding-right:0}.yll-dr h3{padding-right:36px}.yll-lh{display:none}
+ .yll-lr{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"t n" "i i" "a a";gap:10px 12px}.yll-lr>.yll-lt{grid-area:t}.yll-lr>.yll-ln{grid-area:n}.yll-lr>.yll-lc,.yll-lr>.yll-ld{display:none}.yll-lr>.yll-id{grid-area:i}.yll-lr>.yll-act{grid-area:a}}
+@media(max-width:600px){.yll-h h2{font-size:24px}.yll-ctl{flex-basis:100%;max-width:none}.yll-grid{grid-template-columns:1fr}
+ .yll-bar{padding:10px;gap:10px}.yll-pills{overflow-x:auto;flex:1 1 100%;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.yll-pills::-webkit-scrollbar{display:none}
+ .yll-tg,.yll-sort{flex:1 1 auto}.yll-sort{justify-content:flex-end}.yll-id code{font-size:18px}}
+.yl-lib button{box-shadow:none;font-family:inherit;text-transform:none;letter-spacing:normal;min-height:0;margin:0}
+.yl-lib .yll-pill:not(.on),.yl-lib .yll-chip{background:#fff!important;color:var(--ink)!important;border-color:var(--line)!important}
+.yl-lib .yll-chip.on{border-color:#262626!important}
+.yl-lib .yll-pill.on{background:var(--y)!important;border-color:var(--y)!important;box-shadow:0 3px 10px rgba(232,173,0,.3)}
+.yl-lib .yll-pill:not(.on):hover{border-color:var(--y)!important}
+@media(max-width:600px){.yll-ctl{flex-wrap:wrap}.yll-s{flex:1 1 100%;order:-1}.yll-ctl .yll-btn{flex:1 1 auto;justify-content:center}.yll-bar{gap:10px}}
+</style>
+<script id="yll-js">
+(function(){
+if(window.ylLib)return;
+var ROWS=[{"id": "S178", "n": "Just Listed Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Just-Listed-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PC425"}, {"id": "S179", "n": "Absentee Owner Postcard", "p": "First Class Half Page Postcard (8.5 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PCH"}, {"id": "S180", "n": "Handwritten Postcard", "p": "First Class Actual Handwritten Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Comic-768x432.jpg", "d": "May 07, 2024", "k": "HWPC"}, {"id": "S181", "n": "Handwritten Family Postcard", "p": "First Class Actual Handwritten Postcard Half Page (8.5 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Family-Picture-Actual-Handwritten-768x432.jpg", "d": "May 07, 2024", "k": "HWPCH"}, {"id": "S182", "n": "Street View Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2016/10/postcard-overlay.jpg", "d": "May 07, 2024", "k": "PC425"}, {"id": "S183", "n": "We Missed You Jumbo Postcard", "p": "First Class Jumbo Postcard (5.5 x 11)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/09/WE-MISSED-YOU-JUMBO-768x432.jpg", "d": "May 07, 2024", "k": "PCJ"}, {"id": "S184", "n": "Cash Buyer Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Postcard-1-180x101.png", "d": "May 07, 2024", "k": "PC425"}, {"id": "C031", "n": "Jane Sample Custom Half Page", "p": "First Class Half Page Postcard (8.5 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PCH"}, {"id": "S190", "n": "Yellow Letter", "p": "Letter with #10 Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/SeeThrough3-768x432.png", "d": "May 07, 2024", "k": "L10"}, {"id": "S196", "n": "Invitation Letter", "p": "Letter with Invitation Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Invitation-with-Letter-768x432.png", "d": "May 07, 2024", "k": "LINV"}, {"id": "S201", "n": "Pressure Sealed Mailer", "p": "Pressure Sealed Letter/Snap Packs", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/08/Pressure-Sealed-Action-Requested-768x432.jpg", "d": "May 07, 2024", "k": "PS"}, {"id": "D207", "n": "Designer Pressure Seal Check Mailer", "p": "Pressure Sealed Letter/Snap Packs", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/08/Pressure-Sealed-Action-Requested-768x432.jpg", "d": "May 07, 2024", "k": "PS"}, {"id": "S212", "n": "Check Letter", "p": "Check Letter (Windowed Envelope)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png", "d": "May 07, 2024", "k": "CHK"}, {"id": "S219", "n": "Probate Check Letter", "p": "Check Letter (Windowed Envelope)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png", "d": "May 07, 2024", "k": "CHK"}, {"id": "S210", "n": "Full View Letter", "p": "Full View Letter", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2026/03/FULL-VIEW-ENV-1-700x700.jpg", "d": "May 07, 2024", "k": "FV"}, {"id": "S220", "n": "Tri-Fold Letter", "p": "Tri-Fold Letter", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg", "d": "May 07, 2024", "k": "TF"}, {"id": "S240", "n": "Holiday Greeting Card", "p": "Printed Greeting Cards & Folded Notes", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/11/Ornament-Card-768x432.png", "d": "May 07, 2024", "k": "GRC"}, {"id": "S283", "n": "Handwritten Letter", "p": "Letter with Actual Handwritten #10 Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Envelope1-768x432.png", "d": "May 07, 2024", "k": "HWL10"}, {"id": "S284", "n": "Handwritten Invitation Letter", "p": "Letter with Actual Handwritten Invitation Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/HandwriteA6.png", "d": "May 07, 2024", "k": "HWLINV"}, {"id": "S285", "n": "Handwritten Greeting Card", "p": "Actual Handwritten Greeting Cards & Folded Notes", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png", "d": "May 07, 2024", "k": "HWGC"}];
+var SPEC={
+ PS:["8.5 x 11 in snap pack, self-sealing","None (self-sealing)","Typed","No envelope"],
+ L10:["8.5 x 11 in letter","#10 envelope","Digital letter fonts","Yes, 200-piece minimum"],
+ LINV:["8.5 x 11 in letter, folded","Invitation (A6) envelope","Digital letter fonts","Yes, 200-piece minimum"],
+ CHK:["Check letter","#10 windowed envelope","Digital letter fonts","Yes, 200-piece minimum"],
+ FV:["Full view letter","Full view envelope","Digital letter fonts","Yes, 200-piece minimum"],
+ TF:["8.5 x 11 in tri-fold","None (self-mailer)","Digital letter fonts","No envelope"],
+ GRC:["6 x 9 in greeting card or folded note","6 x 9 envelope","Digital letter fonts","Yes, 200-piece minimum"],
+ HWL10:["8.5 x 11 in letter, printed inside","#10 envelope, handwritten outside","Envelope: Cursive or Print. Letter: digital fonts","Yes, 200-piece minimum"],
+ HWLINV:["8.5 x 11 in letter, printed inside","Invitation (A6) envelope, handwritten outside","Envelope: Cursive or Print. Letter: digital fonts","Yes, 200-piece minimum"],
+ HWGC:["6 x 9 in greeting card or folded note, handwritten inside","6 x 9 envelope","Cursive or Print","Yes, 200-piece minimum"],
+ HWPC:["4.25 x 5.5 in postcard, handwritten","None","Cursive or Print","No envelope"],
+ HWPCH:["8.5 x 5.5 in half page postcard, handwritten","None","Cursive or Print","No envelope"],
+ PC425:["4.25 x 5.5 in postcard","None","Digital letter fonts","No envelope"],
+ PCH:["8.5 x 5.5 in half page postcard","None","Digital letter fonts","No envelope"],
+ PCJ:["5.5 x 11 in jumbo postcard","None","Digital letter fonts","No envelope"]
+};
+var SHOP={PS:"letters/sealed",L10:"letters/no10",LINV:"letters/a6",CHK:"letters/check",FV:"letters/fullview",TF:"letters/trifold",GRC:"letters/cardsnotes",HWL10:"letters/hw10",HWLINV:"letters/hw6",HWGC:"letters/hwcardsnotes",PC425:"postcards/fc425",PCH:"postcards/half",PCJ:"postcards/jumbo",HWPC:"postcards/hw425",HWPCH:"postcards/hw"};
+function kindOf(r){var p=r.p||"";
+ if(SPEC[r.k]&&r.k!=="NEW")return r.k;
+ if(/Actual Handwritten Postcard Half/i.test(p))return"HWPCH";if(/Actual Handwritten Postcard/i.test(p))return"HWPC";if(/Handwritten.*Invitation/i.test(p))return"HWLINV";if(/Handwritten #10|Handwritten Envelope/i.test(p))return"HWL10";if(/Handwritten/i.test(p))return"HWGC";
+ if(/Half Page/i.test(p))return"PCH";if(/Jumbo Postcard/i.test(p))return"PCJ";if(/Postcard/i.test(p))return"PC425";
+ if(/Pressure/i.test(p))return"PS";if(/Check/i.test(p))return"CHK";if(/Full View/i.test(p))return"FV";if(/Tri-Fold/i.test(p))return"TF";if(/Invitation/i.test(p))return"LINV";if(/Greeting/i.test(p))return"GRC";return"L10"}
+function catOf(r){var p=r.p||"";return /Handwritten/i.test(p)?"Handwritten":/Postcard/i.test(p)?"Postcards":"Letters"}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function saved(){try{return JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]")}catch(e){return[]}}
+function all(){return saved().concat(ROWS)}
+function copy(t,cb){function ok(){cb&&cb()}try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}function fb(){var a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()}}
+function snippet(id){return 'curl -sS -X POST "https://ylhq-api-orders.yellowletterhq.com/api/v1/upload" \\\n  -H "X-API-Key: YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify({target_date:"ASAP",template_on_file:id,records:[{first_name:"Sample",address:"123 Example St",city:"Anytown",state:"CA",zip:"90000"}]},null,2)+"'"}
+var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+ g:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>',
+ l:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="3.5" rx="1.5"/><rect x="3" y="10.3" width="18" height="3.5" rx="1.5"/><rect x="3" y="16.5" width="18" height="3.5" rx="1.5"/></svg>'};
+function init(root){
+ if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
+ var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
+ var base=ctx==="main"?"#/":"../?v=r35#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
+ root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
+ var q=function(s){return root.querySelector(s)};
+ function list(){var a=all().filter(function(r){var c=catOf(r);if(S.cat!=="All"&&c!==S.cat)return false;if(r.s==="Global"?!S.glob:!S.priv)return false;var t=(r.id+" "+r.n+" "+r.p+" "+c).toLowerCase();return !S.q||t.indexOf(S.q)>-1});
+  var dv=function(r){var t=Date.parse(r.d);return isNaN(t)?0:t};
+  a=a.map(function(r,i){return [r,i]}).sort(function(x,y){var A=x[0],B=y[0];if(S.sort==="name")return A.n.localeCompare(B.n)||x[1]-y[1];if(S.sort==="prod")return A.p.localeCompare(B.p)||A.n.localeCompare(B.n);return dv(B)-dv(A)||x[1]-y[1]}).map(function(x){return x[0]});return a}
+ function bar(){var c={All:0,Letters:0,Postcards:0,Handwritten:0};all().forEach(function(r){c.All++;c[catOf(r)]++});q(".yll-pills").innerHTML=["All","Letters","Postcards","Handwritten"].map(function(k){return '<button type="button" class="yll-pill'+(S.cat===k?" on":"")+'" data-c="'+k+'" aria-pressed="'+(S.cat===k)+'">'+k+' <small>'+c[k]+'</small></button>'}).join("")}
+ function acts(r,k,cls){return '<div class="yll-act '+(cls||"")+'"><a class="pri" href="'+proof+'" data-view="'+esc(r.id)+'">View proof</a><a href="'+base+(SHOP[k]||"letters/no10")+'?tpl='+encodeURIComponent(r.n)+'" data-use>Use in order</a>'+(bld?'<a href="#/builder" data-bld>Open in builder</a>':'')+'<button type="button" data-snip="'+esc(r.id)+'">Copy API snippet</button><button type="button" data-dup="'+esc(r.id)+'">Duplicate</button></div>'}
+ function idp(r){return '<div class="yll-id"><code>'+esc(r.id)+'</code><button type="button" class="yll-cp" data-copy="'+esc(r.id)+'">Copy</button></div>'}
+ function badge(r){return '<span class="yll-bg '+(r.s==="Global"?"g":"p")+'">'+(r.s==="Global"?"Global":"Private")+'</span>'}
+ function body(){var a=list();q("[data-n]").textContent=a.length===all().length?a.length:a.length+" of "+all().length;var b=q(".yll-body");
+  if(!a.length){b.innerHTML='<div class="yll-empty"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8.5 11h5"/></svg><h3>No templates match</h3><p>Try a different word, or clear your filters.</p><button type="button" class="yll-btn pri" data-clear>Clear filters</button></div>';return}
+  if(S.view==="grid")b.innerHTML='<div class="yll-grid">'+a.map(function(r){var k=kindOf(r);return '<article class="yll-card'+(S.sel===r.id?" sel":"")+'" data-id="'+esc(r.id)+'" tabindex="0" aria-label="'+esc(r.n)+'"><div class="yll-pf"><img loading="lazy" src="'+esc(r.img)+'" alt="Proof of '+esc(r.n)+'"><span class="yll-tag">Proof</span>'+badge(r)+'</div><div class="yll-bd"><span class="yll-cat">'+catOf(r)+'</span><h3>'+esc(r.n)+'</h3><p class="yll-prod">'+esc(r.p)+'</p><span class="yll-date">Created '+esc(r.d)+'</span>'+idp(r)+acts(r,k)+'</div></article>'}).join("")+'</div>';
+  else b.innerHTML='<div class="yll-list"><div class="yll-lh"><span></span><span>Template</span><span>Category</span><span>Created</span><span>ID</span><span>Actions</span></div>'+a.map(function(r){var k=kindOf(r);return '<div class="yll-lr'+(S.sel===r.id?" sel":"")+'" data-id="'+esc(r.id)+'"><div class="yll-lt"><img loading="lazy" src="'+esc(r.img)+'" alt=""></div><div class="yll-ln"><b>'+esc(r.n)+'</b><span>'+esc(r.p)+' &middot; '+(r.s==="Global"?"Global":"Private")+'</span></div><span class="yll-lc"><span class="yll-cat">'+catOf(r)+'</span></span><span class="yll-ld">'+esc(r.d)+'</span>'+idp(r)+acts(r,k)+'</div>'}).join("")+'</div>'}
+ function detail(id){var r=all().filter(function(x){return x.id===id})[0],d=q(".yll-detail");if(!r){d.hidden=true;S.sel="";return}S.sel=id;var k=kindOf(r),sp=SPEC[k]||SPEC.L10;
+  d.hidden=false;d.innerHTML='<button type="button" class="yll-x" data-close aria-label="Close details">&times;</button><div class="yll-dp"><img src="'+esc(r.img)+'" alt="Proof of '+esc(r.n)+'"><span class="yll-tag">Proof</span></div><div class="yll-dr"><div class="yll-row"><span class="yll-cat">'+catOf(r)+'</span><span class="yll-bg g" style="position:static;'+(r.s==="Global"?"":"display:none")+'">Global</span><span class="yll-bg p" style="position:static;'+(r.s==="Global"?"display:none":"")+'">Private</span><span class="yll-date">Created '+esc(r.d)+'</span></div><h3>'+esc(r.n)+'</h3>'+idp(r)+'<dl class="yll-spec"><dt>Product</dt><dd>'+esc(r.p)+'</dd><dt>Size</dt><dd>'+sp[0]+'</dd><dt>Envelope</dt><dd>'+sp[1]+'</dd><dt>Fonts</dt><dd>'+sp[2]+'</dd><dt>Sticky note</dt><dd>'+sp[3]+'</dd></dl><div class="yll-snip"><pre>'+esc(snippet(r.id))+'</pre><button type="button" class="yll-cp" data-snip="'+esc(r.id)+'">Copy API snippet</button></div><div class="yll-dact"><a class="yll-btn pri" href="'+proof+'" data-view="'+esc(r.id)+'">View sample proof page</a><a class="yll-btn" href="'+base+(SHOP[k]||"letters/no10")+'?tpl='+encodeURIComponent(r.n)+'" data-use>Use in order</a>'+(bld?'<a class="yll-btn" href="#/builder" data-bld>Open in builder</a>':'')+'<button type="button" class="yll-btn" data-dup="'+esc(r.id)+'">Duplicate</button></div></div>';
+  body();d.scrollIntoView({behavior:"smooth",block:"nearest"})}
+ function all2(){bar();body();var s=S.sel;if(s&&!list().some(function(r){return r.id===s})){q(".yll-detail").hidden=true;S.sel=""}}
+ root.addEventListener("click",function(e){var t=e.target,c;
+  if(c=t.closest("[data-copy]")){e.stopPropagation();copy(c.getAttribute("data-copy"),function(){var o=c.textContent;c.textContent="Copied";c.classList.add("done");setTimeout(function(){c.textContent="Copy";c.classList.remove("done")},1500)});return}
+  if(c=t.closest("[data-snip]")){e.stopPropagation();copy(snippet(c.getAttribute("data-snip")),function(){var o=c.textContent;c.textContent="Copied";c.classList.add("done");setTimeout(function(){c.textContent="Copy API snippet";c.classList.remove("done")},1500)});return}
+  if(c=t.closest("[data-dup]")){e.stopPropagation();var r=all().filter(function(x){return x.id===c.getAttribute("data-dup")})[0];if(!r)return;var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var A=saved();var d=new Date();A.unshift({id:"CT"+n,n:"Copy of "+r.n,p:r.p,s:"Private",img:r.img,d:d.toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:"NEW"});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A));S.sort="new";q(".yll-sort select").value="new";all2();detail("CT"+n);return}
+  if(c=t.closest("[data-view]")){var id=c.getAttribute("data-view");if(!t.closest(".yll-detail")){e.preventDefault();detail(id)}return}
+  if(t.closest("[data-use],[data-bld]"))return;
+  if(c=t.closest("[data-close]")){q(".yll-detail").hidden=true;S.sel="";body();return}
+  if(c=t.closest("[data-c]")){S.cat=c.getAttribute("data-c");all2();return}
+  if(c=t.closest("[data-t]")){var k=c.getAttribute("data-t");S[k]=!S[k];c.classList.toggle("on",S[k]);c.setAttribute("aria-pressed",S[k]);all2();return}
+  if(c=t.closest("[data-v]")){S.view=c.getAttribute("data-v");[].forEach.call(root.querySelectorAll("[data-v]"),function(b){b.classList.toggle("on",b===c)});body();return}
+  if(t.closest("[data-clear]")){S.q="";S.cat="All";S.priv=S.glob=true;q(".yll-s input").value="";[].forEach.call(root.querySelectorAll("[data-t]"),function(b){b.classList.add("on");b.setAttribute("aria-pressed","true")});all2();return}
+  if(c=t.closest("[data-id]")){detail(c.getAttribute("data-id"))}});
+ root.addEventListener("keydown",function(e){var c=e.target.closest&&e.target.closest(".yll-card");if(c&&(e.key==="Enter"||e.key===" ")&&e.target===c){e.preventDefault();detail(c.getAttribute("data-id"))}});
+ ["pointerdown","focus","touchstart"].forEach(function(ev){q(".yll-s input").addEventListener(ev,function(){this.removeAttribute("readonly");this.classList.remove("safe-ro")})});q(".yll-s input").addEventListener("input",function(){S.q=this.value.toLowerCase().trim();all2()});
+ q(".yll-sort select").addEventListener("change",function(){S.sort=this.value;body()});
+ all2();
+}
+function scan(){[].forEach.call(document.querySelectorAll("[data-ylib]:not([data-ready])"),init)}
+window.ylLib={scan:scan,rows:ROWS};
+new MutationObserver(function(){scan()}).observe(document.documentElement,{childList:true,subtree:true});
+scan();
+})();
+</script>
+
 </body></html>
