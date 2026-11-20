@@ -602,10 +602,10 @@
 .tp.m31 .m31-back{display:inline-flex;align-items:center;margin:0 0 14px;font:700 14px Montserrat,sans-serif;color:#262626;text-decoration:none;border:1.5px solid #E4E4E7;border-radius:999px;padding:8px 16px;background:#fff}.tp.m31 .m31-back:hover{background:#FFC523;border-color:#FFC523}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gloria+Hallelujah&family=Great+Vibes&family=Kalam:wght@400;700&family=Nanum+Pen+Script&family=Shadows+Into+Light&display=swap">
-<style id="r37-css">#app .button,#app button.button,#app .tb-opt{font-family:Montserrat,"Open Sans",sans-serif}.docs-page table{display:block;max-width:100%;overflow-x:auto}.docs-page pre,.docs-page code{max-width:100%}#app button{font-family:Montserrat,"Open Sans",sans-serif}.docs-layout>*{min-width:0}@media(max-width:800px){.docs-layout{grid-template-columns:minmax(0,1fr)!important}}.docs-page{overflow-wrap:anywhere}.docs-page pre{overflow-wrap:normal}</style></head>
+<style id="r37-css">#app .button,#app button.button,#app .tb-opt{font-family:Montserrat,"Open Sans",sans-serif}.docs-page table{display:block;max-width:100%;overflow-x:auto}.docs-page pre,.docs-page code{max-width:100%}#app button{font-family:Montserrat,"Open Sans",sans-serif}.docs-layout>*{min-width:0}@media(max-width:800px){.docs-layout{grid-template-columns:minmax(0,1fr)!important}}.docs-page{overflow-wrap:anywhere}.docs-page pre{overflow-wrap:normal}</style><style id="r38-proof-css">.proof-appr{margin-top:18px;padding:16px 20px;border:2px solid #f0e3a8;background:#fffbea;border-radius:18px}.proof-appr-b{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 4px}.yl-how{margin:18px 0;padding:18px 22px;border:1px solid #eee6c9;background:#fff;border-radius:18px}.yl-how ol{margin:8px 0 0;padding-left:20px;display:grid;gap:6px}</style></head>
 <body>
-<div class="ylhq-api"><div class="ver"><span>You are on Version A (without builder) · r37. Switch:</span><a class="is-on" href="./">Version A, without builder</a><a class="" href="../api-builder/">Version B, with builder</a></div></div>
-<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r37#/home">Home</a><a style="color:#262626" href="../?v=r37#/account">My Account</a><a style="color:#262626" href="../?v=r37#/integrations">Integrations</a></div>
+<div class="ylhq-api"><div class="ver"><span>You are on Version A (without builder) · r38. Switch:</span><a class="is-on" href="./">Version A, without builder</a><a class="" href="../api-builder/">Version B, with builder</a></div></div>
+<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r38#/home">Home</a><a style="color:#262626" href="../?v=r38#/account">My Account</a><a style="color:#262626" href="../?v=r38#/integrations">Integrations</a></div>
 <div class="ylhq-api">
   <div class="proto-banner"><strong>Prototype — sample data.</strong> This file stays on your computer. Requests are saved in this browser only. Nothing is emailed, and POST /upload is never called.</div>
   <div class="util"><div class="wrap">
@@ -647,10 +647,21 @@
 <script>
 (function (root) {
   var TEMPLATES = [
-    { id: "hw-postcard", code: "S180", name: "Handwritten Postcard", size: "4.25\" × 5.5\"", fields: ["return_address", "return_city_state_zip", "first_name", "last_name", "address", "city", "state", "zip", "property_address", "sender_name", "phone"] },
-    { id: "greeting-card", code: "S285", name: "Handwritten Greeting Card", size: "6\" × 9\"", fields: ["first_name", "last_name", "property_address", "phone", "sender_name"] },
-    { id: "check-letter", code: "S212", name: "Check Letter", size: "8.5\" × 11\"", fields: ["first_name", "last_name", "address", "city", "state", "zip", "property_address", "sender_name", "phone", "return_address", "return_city_state_zip", "offer_amount", "expiration_date"] },
-    { id: "yellow-letter", code: "S190", name: "Yellow Letter", size: "8.5\" × 11\"", fields: ["first_name", "property_address", "phone", "sender_name", "address", "city", "state", "zip", "return_address", "return_city_state_zip"] }
+    { id: "s178", code: "S178", key: "PC425", name: "S178 \u00b7 Just Listed Postcard", product: "4.25 x 5.5 Postcard", size: "4.25\" \u00d7 5.5\"", fields: ["return_address","return_city_state_zip","first_name","last_name","address","city","state","zip","property_address","sender_name","phone"] },
+    { id: "s179", code: "S179", key: "PCH", name: "S179 \u00b7 Absentee Owner Postcard", product: "Half Page Postcard (8.5 x 5.5)", size: "8.5\" \u00d7 5.5\"", fields: ["return_address","return_city_state_zip","first_name","last_name","address","city","state","zip","property_address","sender_name","phone"] },
+    { id: "s183", code: "S183", key: "PCJ", name: "S183 \u00b7 We Missed You Jumbo Postcard", product: "Jumbo Postcard (5.5 x 11)", size: "11\" \u00d7 5.5\"", fields: ["return_address","return_city_state_zip","first_name","last_name","address","city","state","zip","property_address","sender_name","phone"] },
+    { id: "s180", code: "S180", key: "HWPC", name: "S180 \u00b7 Handwritten Postcard", product: "Actual Handwritten Postcard (4.25 x 5.5)", size: "4.25\" \u00d7 5.5\"", fields: ["return_address","return_city_state_zip","first_name","last_name","address","city","state","zip","property_address","sender_name","phone"] },
+    { id: "s181", code: "S181", key: "HWPCH", name: "S181 \u00b7 Handwritten Family Postcard", product: "Actual Handwritten Postcard Half Page (8.5 x 5.5)", size: "8.5\" \u00d7 5.5\"", fields: ["return_address","return_city_state_zip","first_name","last_name","address","city","state","zip","property_address","sender_name","phone"] },
+    { id: "s190", code: "S190", key: "L10", name: "S190 \u00b7 Yellow Letter", product: "Letter with #10 Envelope", size: "#10 + 8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s196", code: "S196", key: "LINV", name: "S196 \u00b7 Invitation Letter", product: "Letter with Invitation Envelope", size: "A6 + 8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s212", code: "S212", key: "CHK", name: "S212 \u00b7 Check Letter", product: "Check Letter", size: "9.5\" \u00d7 4.125\" + 8.5\" \u00d7 11\"", fields: ["first_name","last_name","address","city","state","zip","property_address","sender_name","phone","return_address","return_city_state_zip","offer_amount","expiration_date"] },
+    { id: "s210", code: "S210", key: "FV", name: "S210 \u00b7 Full View Letter", product: "Full View Letter", size: "Full view + 8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s220", code: "S220", key: "TF", name: "S220 \u00b7 Tri-Fold Letter", product: "Tri-Fold Letter", size: "8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s201", code: "S201", key: "PS", name: "S201 \u00b7 Pressure Sealed Mailer", product: "Pressure Sealed Letter/Snap Packs", size: "8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s240", code: "S240", key: "GRC", name: "S240 \u00b7 Holiday Greeting Card", product: "Printed Greeting Cards & Folded Notes", size: "6\" \u00d7 9\"", fields: ["first_name","last_name","property_address","phone","sender_name"] },
+    { id: "s283", code: "S283", key: "HWL10", name: "S283 \u00b7 Handwritten Letter", product: "Letter with Actual Handwritten #10 Envelope", size: "#10 + 8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s284", code: "S284", key: "HWLINV", name: "S284 \u00b7 Handwritten Invitation Letter", product: "Letter with Actual Handwritten Invitation Envelope", size: "A6 + 8.5\" \u00d7 11\"", fields: ["first_name","property_address","phone","sender_name","address","city","state","zip","return_address","return_city_state_zip"] },
+    { id: "s285", code: "S285", key: "HWGC", name: "S285 \u00b7 Handwritten Greeting Card", product: "Actual Handwritten Greeting Cards & Folded Notes", size: "5.5\" \u00d7 8.5\"", fields: ["first_name","last_name","property_address","phone","sender_name"] }
   ];
   var LABELS = {
     first_name: "First name", last_name: "Last name", address: "Mailing address", city: "City", state: "State", zip: "ZIP",
@@ -804,7 +815,59 @@
   function side(label, size, html) {
     return '<figure class="proof-side"><figcaption><span>' + esc(label) + '</span><span>' + esc(size) + '</span></figcaption>' + html + '</figure>';
   }
-  var DRAW = { "hw-postcard": postcard, "greeting-card": greeting, "check-letter": checkLetter, "yellow-letter": yellow };
+  
+  function rep(h, a, b) { return h.split(a).join(b); }
+  function gpost(k) {
+    var hw = k === "HWPC" || k === "HWPCH";
+    var ar = (k === "PCH" || k === "HWPCH") ? "8.5 / 5.5" : (k === "PCJ" ? "11 / 5.5" : "5.5 / 4.25");
+    var sz = (k === "PCH" || k === "HWPCH") ? '8.5" × 5.5"' : (k === "PCJ" ? '11" × 5.5"' : '4.25" × 5.5"');
+    return function (row) {
+      var h = postcard(row);
+      h = rep(h, 'class="paper paper-post"', 'class="paper paper-post" style="aspect-ratio:' + ar + '"');
+      h = rep(h, esc('4.25" × 5.5"'), esc(sz));
+      if (!hw) { h = rep(h, ' hw"', '"'); h = rep(h, "Hi, my name is ", "Hello, my name is "); }
+      return h;
+    };
+  }
+  function gletter(k) {
+    var hwEnv = k === "HWL10" || k === "HWLINV", a6 = k === "LINV" || k === "HWLINV";
+    return function (row) {
+      var h = yellow(row);
+      h = rep(h, ' hw-yellow', '');
+      if (!hwEnv) h = rep(h, ' hw"', '"');
+      if (a6) { h = rep(h, 'class="paper paper-env"', 'class="paper paper-env" style="aspect-ratio:6.5 / 4.75;max-width:430px"'); h = rep(h, '<span>#10</span>', '<span>A6 (4.75&quot; × 6.5&quot;)</span>'); }
+      if (hwEnv) h = rep(h, '<span>Envelope</span>', '<span>Envelope · handwritten (Cursive or Print)</span>');
+      return h;
+    };
+  }
+  function gfull(row) {
+    var h = yellow(row);
+    h = rep(h, ' hw-yellow', ''); h = rep(h, ' hw"', '"');
+    h = rep(h, '<div class="env-to"', '<div style="position:absolute;inset:16% 7% 9% 7%;background:#fff;border:2px solid #d8d0b0;border-radius:4px;box-shadow:inset 0 0 0 4px rgba(255,197,35,.18)"></div><div class="env-to" style="z-index:1"');
+    return rep(h, '<span>#10</span>', '<span>Full view window</span>');
+  }
+  function gsealed(row) {
+    var out = '<div class="paper paper-letter" style="min-height:380px"><div class="env-return">' + esc(row.return_address) + '<br>' + esc(row.return_city_state_zip) + '</div>' + indicia()
+      + '<div class="env-to" style="top:46%">' + esc(fullName(row)) + '<br>' + esc(row.address) + '<br>' + esc(cityLine(row)) + '</div><div style="position:absolute;left:0;right:0;bottom:0;padding:8px 12px;font:700 10px Montserrat,sans-serif;letter-spacing:.06em;color:#8a7a3a;border-top:1px dashed #d8d0b0">PRESSURE SEALED · TEAR AT PERFORATION TO OPEN</div></div>';
+    var inn = '<div class="paper paper-letter yl-sheet">Hello ' + esc(row.first_name) + ',<br><br>I would like to buy your house at ' + esc(row.property_address) + '. I can pay cash and close on your timeline. Please call or text me.<br><br>' + esc(row.phone) + '<br>' + esc(row.sender_name) + '</div>';
+    return side("Outside", '8.5" × 11"', out) + side("Inside", '8.5" × 11"', inn);
+  }
+  function gtri(row) {
+    var folds = '<div style="position:absolute;left:0;right:0;top:33.3%;border-top:1px dashed #b9b08a"></div><div style="position:absolute;left:0;right:0;top:66.6%;border-top:1px dashed #b9b08a"></div>';
+    var out = '<div class="paper paper-letter" style="min-height:520px">' + folds + '<div class="env-return">' + esc(row.return_address) + '<br>' + esc(row.return_city_state_zip) + '</div>' + indicia() + '<div class="env-to" style="top:70%">' + esc(fullName(row)) + '<br>' + esc(row.address) + '<br>' + esc(cityLine(row)) + '</div></div>';
+    var inn = '<div class="paper paper-letter yl-sheet" style="min-height:520px">' + folds + '<div style="padding-top:8%">Hello ' + esc(row.first_name) + ',<br>I would like to buy your house at ' + esc(row.property_address) + '. Please call or text me at ' + esc(row.phone) + '.<br><br>' + esc(row.sender_name) + '</div></div>';
+    return side("Outside (self-mailer)", '8.5" × 11" tri-fold', out) + side("Inside", '8.5" × 11"', inn);
+  }
+  function ggreet(k) {
+    return function (row) {
+      var h = greeting(row);
+      if (k === "GRC") h = rep(h, 'hw-blue', '');
+      h = rep(h, esc('5" × 7"'), esc(k === "GRC" ? '6" × 9"' : '5.5" × 8.5"'));
+      return h;
+    };
+  }
+  var DRAW = { PC425: gpost("PC425"), PCH: gpost("PCH"), PCJ: gpost("PCJ"), HWPC: gpost("HWPC"), HWPCH: gpost("HWPCH"), L10: gletter("L10"), LINV: gletter("LINV"), CHK: checkLetter, FV: gfull, TF: gtri, PS: gsealed, GRC: ggreet("GRC"), HWL10: gletter("HWL10"), HWLINV: gletter("HWLINV"), HWGC: ggreet("HWGC") };
+
 
   function templateById(id) {
     for (var i = 0; i < TEMPLATES.length; i++) if (TEMPLATES[i].id === id) return TEMPLATES[i];
@@ -875,16 +938,16 @@
     return lines.join("\n");
   }
   function renderProof(tmpl, row) {
-    return '<div class="proof-sides">' + DRAW[tmpl.id](row) + '</div>';
+    return '<div class="proof-sides">' + DRAW[tmpl.key](row) + '</div>';
   }
 
   function mount(el) {
     if (!el) return;
-    var state = { template: "hw-postcard", index: 0, records: [normalize(SAMPLE)], errors: [] };
+    var state = { template: "s178", index: 0, records: [normalize(SAMPLE)], errors: [] };
     el.innerHTML = ''
       + '<div id="proof-errors"></div><div id="proof-pager" class="proof-tools" hidden></div><div id="proof-stage"></div>'
-      + '<label>Template <select id="proof-template"></select></label>'
-      + '<p class="hint">These four proofs are drawn in the browser from your variable data. Nothing is sent, and POST /upload is not called.</p>'
+      + '<label>Template <select id="proof-template"></select></label><p class="hint" id="proof-prod"></p>'
+      + '<p class="hint">These proofs (one for each template in My Templates) are drawn in the browser from your variable data. Nothing is sent, and POST /upload is not called.</p>'
       + '<div id="proof-fields" class="grid"></div>'
       + '<div class="proof-tools"><button type="button" class="button" id="proof-build">Build proof preview</button><a id="proof-sample" href="#">Download sample CSV</a></div>'
       + '<label>Or paste CSV <textarea id="proof-csv" rows="4" placeholder="first_name,last_name,..."></textarea></label>'
@@ -921,7 +984,9 @@
         el.querySelector("#proof-prev").onclick = function () { show((index + state.records.length - 1) % state.records.length); };
         el.querySelector("#proof-next").onclick = function () { show((index + 1) % state.records.length); };
       } else pager.hidden = true;
-      el.querySelector("#proof-stage").innerHTML = state.records.length ? renderProof(tmpl, state.records[index]) : "";
+      el.querySelector("#proof-stage").innerHTML = state.records.length ? renderProof(tmpl, state.records[index]) + '<div class="proof-appr"><div><b>Review, then approve or disapprove.</b> Check content, spelling, name, phone number, return address and variable data placement. Nothing mails until you approve.</div><div class="proof-appr-b"><button type="button" class="button" data-appr="ok">I approve this proof</button><button type="button" class="button ghost" data-appr="no">I disapprove</button></div><p class="hint" id="proof-appr-msg"></p></div>' : "";
+      var pp = el.querySelector("#proof-prod"); if (pp) pp.textContent = "Template " + tmpl.code + " · Product: " + tmpl.product + " · Size: " + tmpl.size;
+      el.querySelectorAll("[data-appr]").forEach(function (b) { b.onclick = function () { var m = el.querySelector("#proof-appr-msg"); m.textContent = b.getAttribute("data-appr") === "ok" ? "Sample only: approved. On a real order your mail goes to the post office 1 to 3 business days after approval." : "Sample only: disapproved. On a real order you type what to fix (or upload a document or picture) and we send a new proof."; }; });
     }
     select.onchange = function () {
       state.template = select.value;
@@ -1269,7 +1334,7 @@
       "<h2>Template codes</h2><p><code>S</code> plus the Organizer template id, <code>D</code> plus a designer id, or <code>CT</code> plus a custom ref. The API copies those nightly at 12:30 AM Pacific. This page does not call <code>POST /templates/sync</code>.</p><h2>Envelopes</h2><p>The envelope comes with the template&#039;s product: #10, Invitation, Check Letter, Full View, or a handwritten envelope (Cursive or Print). You do not pass an envelope code. Postcards, Tri-Fold and Pressure Sealed pieces have no envelope.</p><h2>Pressure seal templates</h2><p>Pressure seal is its own template type (for example <code>S201</code>). It folds and seals as one piece, so it has no envelope. Production is <strong>3 production days</strong>, the same as letters (upload Monday, mail Friday at the earliest). Mock only: this page does not call <code>POST /upload</code>.</p></main>";
   }
   function pageProof() {
-    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r37&embed=api#/proof/204518\"></iframe></main>";
+    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><div class=\"yl-how\"><b style=\"font-family:Montserrat,sans-serif\">How proofs work at Yellow Letter HQ</b><ol><li>Every order, including a test order with a template ID, gets a virtual proof. It arrives within 24 business hours. A reorder of a template you already approved gets a Rapid Proof in about 20 minutes.</li><li>Review your proof: content, spelling and grammar, your name, phone number and return address, and where the variable data lands. Look up the sample addresses in your list. NCOA can update an address if someone moved.</li><li>Approve or disapprove with the buttons on the proof page. Do not email an approval. We only mail after you approve.</li><li>After approval the mail goes to the post office in 1 to 3 business days. First Class then takes 1 to 3 days to arrive, Standard 8 to 15 days or more.</li></ol></div><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r38&embed=api#/proof/204518\"></iframe></main>";
   }
 
   function pageUsage() {
@@ -1929,7 +1994,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r37#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r38#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};

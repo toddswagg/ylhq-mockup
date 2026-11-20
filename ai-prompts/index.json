@@ -1,0 +1,78 @@
+{
+ "files": {
+  "postcard-4.25x5.5": {
+   "title": "4.25 x 5.5 Postcard",
+   "file": "postcard-4.25x5.5.md"
+  },
+  "half-page-postcard": {
+   "title": "Half Page Postcard (8.5 x 5.5)",
+   "file": "half-page-postcard.md"
+  },
+  "jumbo-postcard": {
+   "title": "Jumbo Postcard (5.5 x 11)",
+   "file": "jumbo-postcard.md"
+  },
+  "jumbo-postcard-flower-style": {
+   "title": "Jumbo Postcard, flower style",
+   "file": "jumbo-postcard-flower-style.md"
+  },
+  "pressure-sealed-letter-style-a": {
+   "title": "Pressure Sealed Letter, style A",
+   "file": "pressure-sealed-letter-style-a.md"
+  },
+  "pressure-sealed-letter-style-b": {
+   "title": "Pressure Sealed Letter, style B",
+   "file": "pressure-sealed-letter-style-b.md"
+  },
+  "letter-with-10-envelope": {
+   "title": "Letter with #10 Envelope",
+   "file": "letter-with-10-envelope.md"
+  },
+  "letter-with-10-envelope-windowed": {
+   "title": "Letter with #10 Envelope, windowed",
+   "file": "letter-with-10-envelope-windowed.md"
+  },
+  "letter-with-10-envelope-family-style": {
+   "title": "Letter with #10 Envelope, family style",
+   "file": "letter-with-10-envelope-family-style.md"
+  },
+  "check-letter": {
+   "title": "Check Letter",
+   "file": "check-letter.md"
+  },
+  "tri-fold-letter": {
+   "title": "Tri-Fold Letter",
+   "file": "tri-fold-letter.md"
+  },
+  "greeting-cards-folded-notes": {
+   "title": "Printed Greeting Cards & Folded Notes",
+   "file": "greeting-cards-folded-notes.md"
+  },
+  "handwritten-greeting-cards-folded-notes": {
+   "title": "Actual Handwritten Greeting Cards & Folded Notes",
+   "file": "handwritten-greeting-cards-folded-notes.md"
+  },
+  "envelope-10-designs": {
+   "title": "#10 Envelope designs",
+   "file": "envelope-10-designs.md"
+  },
+  "envelope-a6-designs": {
+   "title": "Invitation (A6) Envelope designs",
+   "file": "envelope-a6-designs.md"
+  }
+ },
+ "bundles": {
+  "letters": "bundles/ylhq-ai-prompts-letters.md",
+  "postcards": "bundles/ylhq-ai-prompts-postcards.md",
+  "handwritten": "bundles/ylhq-ai-prompts-handwritten.md",
+  "envelopes": "bundles/ylhq-ai-prompts-envelopes.md",
+  "all-products": "bundles/ylhq-ai-prompts-all-products.md"
+ },
+ "bundleCount": {
+  "letters": 8,
+  "postcards": 4,
+  "handwritten": 2,
+  "envelopes": 2,
+  "all-products": 15
+ }
+}

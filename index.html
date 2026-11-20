@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r37"){u.searchParams.set("v","r37");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r38"){u.searchParams.set("v","r38");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5486,6 +5486,7 @@ function fmtN(n){return Number(n).toLocaleString("en-US")}
 function renderBP(r,arg,q){var root=$("#bp-root"),b=BP[r];root.className="wrap page"+(b.wide?"":"");root.innerHTML="";b.r(root,arg||"",qs(q),q);
   if(b.nav)$$("#nav a[data-r]").forEach(function(a){if(a.getAttribute("data-r").split(" ").indexOf(b.nav)>-1)a.classList.add("on")})}
 function bpTitle(r,arg){var t=BP[r].t;return typeof t==="function"?t(arg):t}
+bp("design-with-ai","Design it with AI",function(root,a,q,raw){window.ylAIRender(root,a,q,raw)},"shop");
 var LOGGED=true; /* mock: the sample account is logged in unless a page shows the logged-out state */
 window.__bpLogin=function(v){LOGGED=v!==false};
 /* ---------- Fix 138: Order received / Thank you (woocommerce/checkout/thankyou.php) ---------- */
@@ -8253,7 +8254,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r37#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r38#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8292,6 +8293,169 @@ function scan(){[].forEach.call(document.querySelectorAll("[data-ylib]:not([data
 window.ylLib={scan:scan,rows:ROWS};
 new MutationObserver(function(){scan()}).observe(document.documentElement,{childList:true,subtree:true});
 scan();
+})();
+</script>
+
+<style id="yai-css">
+.yai{--y:#FFC523;--yd:#e8ad00;--ink:#262626;--mut:#6b6b6b;--line:#eee6c9;--soft:#fffbe8;font-family:'Open Sans',system-ui,sans-serif;color:var(--ink);line-height:1.5;max-width:1100px;margin:0 auto;text-align:left}
+.yai *{box-sizing:border-box}
+.yai h1,.yai h2,.yai h3,.yai b{font-family:'Montserrat','Open Sans',sans-serif}
+.yai button,.yai .yai-btn{font-family:'Montserrat',sans-serif}
+.yai-back{display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;font:700 14px Montserrat,sans-serif;color:#262626;text-decoration:none;border:1.5px solid #E4E4E7;border-radius:999px;padding:8px 16px;background:#fff}
+.yai-back:hover{background:var(--y);border-color:var(--y)}
+.yai-hero{background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:34px 36px;display:grid;grid-template-columns:1.3fr .9fr;gap:28px;align-items:center;box-shadow:0 8px 28px rgba(60,48,0,.06)}
+.yai-hero h1{margin:0 0 10px;font-size:36px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+.yai-hero p{margin:0 0 20px;font-size:16px;color:#444}
+.yai-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.yai-btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 22px;border-radius:999px;border:2px solid var(--y);background:var(--y);color:var(--ink)!important;font-weight:800;font-size:14px;text-decoration:none;cursor:pointer;transition:box-shadow .15s,filter .15s}
+.yai-btn:hover{box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.yai-btn.sec{background:#fff;border-color:#E4E4E7}
+.yai-btn.sm{height:36px;padding:0 16px;font-size:13px}
+.yai-btn[disabled],.yai-btn.off{opacity:.45;pointer-events:none}
+.yai-btn.done{background:#2e9e5b;border-color:#2e9e5b;color:#fff!important}
+.yai-ai{display:grid;gap:10px}
+.yai-ai span{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;font:700 14px Montserrat,sans-serif}
+.yai-ai i{width:26px;height:26px;border-radius:50%;background:var(--y);display:grid;place-items:center;font-style:normal;font-size:12px}
+.yai-sec{margin:44px 0 0}
+.yai-sec>h2{margin:0 0 4px;font-size:26px;font-weight:800}
+.yai-sub{margin:0 0 18px;color:var(--mut);font-size:14.5px}
+.yai-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.yai-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 18px 20px;box-shadow:0 4px 16px rgba(60,48,0,.05)}
+.yai-card h3{margin:10px 0 4px;font-size:16px;font-weight:800;line-height:1.25}
+.yai-card p{margin:0;font-size:13.5px;color:#555}
+.yai-pill{display:inline-block;background:var(--y);color:var(--ink);font:800 11.5px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:5px 12px}
+.yai-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.yai-rules .yai-card{background:var(--soft)}
+.yai-bund{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.yai-bund a{display:flex;flex-direction:column;gap:3px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px;text-decoration:none;color:var(--ink);transition:all .15s}
+.yai-bund a:hover{border-color:var(--y);background:#fffbea;transform:translateY(-1px)}
+.yai-bund b{font-size:15px}.yai-bund span{font-size:12.5px;color:var(--mut)}
+.yai-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.yai-cat{border:2px solid transparent;background:var(--y);border-radius:18px;padding:14px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:10px;font:inherit;color:var(--ink)}
+.yai-cat img{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#fff}
+.yai-cat b{font-size:18px;font-weight:800}.yai-cat span{font-size:13px;color:#4a3d00}
+.yai-cat:hover{border-color:#262626}
+.yai-prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.yai-prod{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 6px 20px rgba(60,48,0,.07)}
+.yai-prod.hl{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,197,35,.45)}
+.yai-prods.c4{grid-template-columns:repeat(2,minmax(0,1fr))}.yai-pimg{background:#efe9d0;padding:10px}.yai-pimg img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;border-radius:12px;background:#d9d9d9}
+.yai-pb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.yai-pb h3{margin:0;font-size:17px;font-weight:800;line-height:1.25}
+.yai-facts{margin:0;padding:0;list-style:none;font-size:12.5px;color:#555;display:grid;gap:3px}
+.yai-facts b{color:var(--ink);font-weight:700}
+.yai-pr{border-top:1px dashed var(--line);padding-top:10px;display:grid;gap:8px}
+.yai-pr .t{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 13px Montserrat,sans-serif}
+.yai-code{font:800 12px ui-monospace,Menlo,monospace;background:#262626;color:var(--y);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.yai-pr .b{display:flex;gap:8px;flex-wrap:wrap}
+.yai-soon{font:700 12.5px Montserrat,sans-serif;color:#8a5d00;background:#fff3c4;border-radius:999px;padding:6px 12px;align-self:flex-start}
+.yai-note{font-size:12.5px;color:#6b6b6b;margin:0}
+.yai-up{background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:26px 28px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.yai-up label{display:block;font:700 13px Montserrat,sans-serif;margin:0 0 6px}
+.yai-up input[type=text],.yai-up select{width:100%;height:46px;border:2px solid var(--line);border-radius:999px;padding:0 18px;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
+.yai-up input[type=file]{width:100%;border:2px dashed #e1d49b;border-radius:18px;padding:18px;background:#fff;font:inherit;font-size:13px}
+.yai-up .row{margin:0 0 14px}
+.yai-chk{display:flex;gap:10px;align-items:flex-start;font-size:13px}.yai-chk input{margin-top:3px;accent-color:#e8ad00}
+.yai-err{color:#B54708;font-size:13px;margin:8px 0 0;min-height:18px}
+.yai-qc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:8px;font-size:13.5px;align-content:start}
+.yai-qc h3{margin:0 0 4px;font-size:16px}
+.yai-qc li{list-style:none;display:flex;gap:8px;align-items:center;color:#9a9a9a}.yai-qc ul{margin:0;padding:0;display:grid;gap:7px}
+.yai-qc li.ok{color:#1b5e20}.yai-qc li.ok:before{content:"✓";font-weight:800;color:#2e9e5b}.yai-qc li:before{content:"○";width:14px}
+.yai-choice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.yai-choice.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.yai-choice button{border:2px solid #ECE7D6;background:#fff;border-radius:18px;padding:14px 16px;text-align:left;cursor:pointer;font:600 12.5px "Open Sans",sans-serif;color:#52525b}
+.yai-choice button b{display:block;font:800 15px Montserrat,sans-serif;color:#262626;margin-bottom:3px}
+.yai-choice button:hover{border-color:#FFC523;background:#FFFBEA}
+.yai-choice button.ai{border-color:#FFC523;background:#FFFBEA}
+.yai-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#FFFBEA;border:2px solid #FFC523;border-radius:20px;padding:16px 22px;margin:20px auto 0;max-width:1100px;font-family:'Open Sans',sans-serif}
+.yai-cta b{font:800 16px Montserrat,sans-serif;display:block}.yai-cta span{font-size:13.5px;color:#555}
+.yai-ban{background:#ECFDF3;border:1px solid #A6F4C5;color:#05603A;border-radius:16px;padding:12px 18px;margin:0 auto 16px;max-width:1100px;font:600 14px 'Open Sans',sans-serif;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.yai-ban a{font:800 13px Montserrat,sans-serif;color:#05603A;text-decoration:underline}
+@media(max-width:1000px){.yai-steps,.yai-rules{grid-template-columns:repeat(2,minmax(0,1fr))}.yai-bund{grid-template-columns:repeat(2,minmax(0,1fr))}.yai-prods{grid-template-columns:repeat(2,minmax(0,1fr))}.yai-hero{grid-template-columns:1fr}.yai-up{grid-template-columns:1fr}}
+@media(max-width:600px){.yai-steps,.yai-rules,.yai-bund,.yai-prods,.yai-cats,.yai-choice,.yai-choice.two{grid-template-columns:1fr}.yai-hero{padding:24px 20px}.yai-hero h1{font-size:28px}.yai-up{padding:20px 16px}.yai-sec{margin-top:34px}}
+</style>
+<script id="yai-js">
+(function(){
+var D={"prompts": {"postcard-4.25x5.5": {"file": "postcard-4.25x5.5.md", "facts": {"Size": "4.25 x 5.5 in (landscape: 5.5 W x 4.25 H)", "Bleed": "none or 0.16 in depending on design (confirmed at proof)", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "half-page-postcard": {"file": "half-page-postcard.md", "facts": {"Size": "5.5 x 8.5 in (landscape: 8.5 W x 5.5 H)", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "jumbo-postcard": {"file": "jumbo-postcard.md", "facts": {"Size": "5.5 x 11 in (landscape: 11 W x 5.5 H)", "Bleed": "0.16 in", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "jumbo-postcard-flower-style": {"file": "jumbo-postcard-flower-style.md", "facts": {"Size": "5.5 x 11 in (landscape: 11 W x 5.5 H)", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "pressure-sealed-letter-style-a": {"file": "pressure-sealed-letter-style-a.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "pressure-sealed-letter-style-b": {"file": "pressure-sealed-letter-style-b.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "letter-with-10-envelope": {"file": "letter-with-10-envelope.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "confirmed at proof", "Safe margin": "confirmed at proof", "Printed sides": "1"}}, "letter-with-10-envelope-windowed": {"file": "letter-with-10-envelope-windowed.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "none", "Safe margin": "confirmed at proof", "Printed sides": "1"}}, "letter-with-10-envelope-family-style": {"file": "letter-with-10-envelope-family-style.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "none", "Safe margin": "1 in", "Printed sides": "1"}}, "check-letter": {"file": "check-letter.md", "facts": {"Size": "8.5 x 11 in", "Bleed": "none", "Safe margin": "1 in", "Printed sides": "1"}}, "tri-fold-letter": {"file": "tri-fold-letter.md", "facts": {"Size": "confirmed at proof", "Bleed": "confirmed at proof", "Safe margin": "confirmed at proof", "Printed sides": "confirmed at proof"}}, "greeting-cards-folded-notes": {"file": "greeting-cards-folded-notes.md", "facts": {"Size": "11 x 8.5 in", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "handwritten-greeting-cards-folded-notes": {"file": "handwritten-greeting-cards-folded-notes.md", "facts": {"Size": "5.5 x 8.5 in", "Bleed": "none", "Safe margin": "0.25 in", "Printed sides": "2 (front and back)"}}, "envelope-10-designs": {"file": "envelope-10-designs.md", "facts": {"Size": "4.125 x 9.5 in (landscape: 9.5 W x 4.125 H)", "Bleed": "none or 0.5 in or 0.125 in depending on design (confirmed at proof)", "Safe margin": "L 0.25 in / T 0.25 in / R 0.5 in / B 0.25 in", "Printed sides": "1"}}, "envelope-a6-designs": {"file": "envelope-a6-designs.md", "facts": {"Size": "4.75 x 6.5 in (landscape: 6.5 W x 4.75 H)", "Bleed": "none or 0.5 in depending on design (confirmed at proof)", "Safe margin": "0.25 in", "Printed sides": "1"}}}, "products": [{"key": "ps", "cat": "Letters", "route": "letters/sealed", "name": "Pressure Sealed Letter/Snap Packs", "tpl": "S201", "canon": "Pressure Sealed Letter/Snap Packs", "prompts": [{"id": "pressure-sealed-letter-style-a", "label": "Style A", "tpl": "S201", "note": ""}, {"id": "pressure-sealed-letter-style-b", "label": "Style B", "tpl": "S201", "note": ""}]}, {"key": "l10", "cat": "Letters", "route": "letters/no10", "name": "Letter with #10 Envelope", "tpl": "S190", "canon": "Letter with #10 Envelope", "prompts": [{"id": "letter-with-10-envelope", "label": "Standard envelope", "tpl": "S190", "note": ""}, {"id": "letter-with-10-envelope-windowed", "label": "Windowed envelope", "tpl": "S190", "note": ""}, {"id": "letter-with-10-envelope-family-style", "label": "Family style", "tpl": "S190", "note": ""}, {"id": "check-letter", "label": "Check Letter", "tpl": "S212", "note": "Always in a windowed envelope."}, {"id": "tri-fold-letter", "label": "Tri-Fold Letter", "tpl": "S220", "note": "Full View Letter: prompt coming soon."}]}, {"key": "linv", "cat": "Letters", "route": "letters/a6", "name": "Letter with Invitation Envelope", "tpl": "S196", "canon": "Letter with Invitation Envelope", "prompts": [{"id": "letter-with-10-envelope", "label": "Letter inside", "tpl": "S196", "note": "Same 8.5 x 11 letter. The envelope is chosen at order time."}]}, {"key": "grc", "cat": "Letters", "route": "letters/cardsnotes", "name": "Printed Greeting Cards & Folded Notes", "tpl": "S240", "canon": "Printed Greeting Cards & Folded Notes", "prompts": [{"id": "greeting-cards-folded-notes", "label": "Greeting card or folded note", "tpl": "S240", "note": ""}]}, {"key": "pc425", "cat": "Postcards", "route": "postcards/fc425", "name": "4.25 x 5.5 Postcard", "tpl": "S178", "canon": "4.25 x 5.5 Postcard", "prompts": [{"id": "postcard-4.25x5.5", "label": "4.25 x 5.5 Postcard", "tpl": "S178", "note": ""}]}, {"key": "pch", "cat": "Postcards", "route": "postcards/half", "name": "Half Page Postcard (8.5 x 5.5)", "tpl": "S179", "canon": "Half Page Postcard (8.5 x 5.5)", "prompts": [{"id": "half-page-postcard", "label": "Half Page Postcard", "tpl": "S179", "note": ""}]}, {"key": "pcj", "cat": "Postcards", "route": "postcards/jumbo", "name": "Jumbo Postcard (5.5 x 11)", "tpl": "S183", "canon": "Jumbo Postcard (5.5 x 11)", "prompts": [{"id": "jumbo-postcard", "label": "Jumbo Postcard", "tpl": "S183", "note": ""}, {"id": "jumbo-postcard-flower-style", "label": "Flower style", "tpl": "S183", "note": ""}]}, {"key": "hwl10", "cat": "Handwritten", "route": "letters/hw10", "name": "Letter with Actual Handwritten #10 Envelope", "tpl": "S283", "canon": "Letter with Actual Handwritten #10 Envelope", "prompts": [{"id": "letter-with-10-envelope", "label": "Letter inside", "tpl": "S283", "note": "Only the envelope is handwritten (Cursive or Print). The letter inside is printed."}]}, {"key": "hwlinv", "cat": "Handwritten", "route": "letters/hw6", "name": "Letter with Actual Handwritten Invitation Envelope", "tpl": "S284", "canon": "Letter with Actual Handwritten Invitation Envelope", "prompts": [{"id": "letter-with-10-envelope", "label": "Letter inside", "tpl": "S284", "note": "Only the envelope is handwritten (Cursive or Print). The letter inside is printed."}]}, {"key": "hwgc", "cat": "Handwritten", "route": "letters/hwcardsnotes", "name": "Actual Handwritten Greeting Cards & Folded Notes", "tpl": "S285", "canon": "Actual Handwritten Greeting Cards & Folded Notes", "prompts": [{"id": "handwritten-greeting-cards-folded-notes", "label": "Handwritten card or note", "tpl": "S285", "note": "Inside is handwritten in Cursive or Print."}]}, {"key": "hwpc", "cat": "Handwritten", "route": "postcards/hw425", "name": "Actual Handwritten Postcard (4.25 x 5.5)", "tpl": "S180", "canon": "Actual Handwritten Postcard (4.25 x 5.5)", "prompts": []}, {"key": "hwpch", "cat": "Handwritten", "route": "postcards/hw", "name": "Actual Handwritten Postcard Half Page (8.5 x 5.5)", "tpl": "S181", "canon": "Actual Handwritten Postcard Half Page (8.5 x 5.5)", "prompts": []}], "cats": [{"k": "Letters", "n": 4, "tpl": "S190"}, {"k": "Postcards", "n": 3, "tpl": "S178"}, {"k": "Handwritten", "n": 5, "tpl": "S283"}], "rows": {"S178": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Just-Listed-Postcard-1-768x432.jpg"}, "S179": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg"}, "S180": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Comic-768x432.jpg"}, "S181": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Family-Picture-Actual-Handwritten-768x432.jpg"}, "S183": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/09/WE-MISSED-YOU-JUMBO-768x432.jpg"}, "S190": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/SeeThrough3-768x432.png"}, "S196": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Invitation-with-Letter-768x432.png"}, "S201": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2025/08/Pressure-Sealed-Action-Requested-768x432.jpg"}, "S212": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png"}, "S210": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2026/03/FULL-VIEW-ENV-1-700x700.jpg"}, "S220": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg"}, "S240": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/11/Ornament-Card-768x432.png"}, "S283": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Envelope1-768x432.png"}, "S284": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/HandwriteA6.png"}, "S285": {"img": "https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"}}, "bundleCount": {"letters": 8, "postcards": 4, "handwritten": 2, "envelopes": 2, "all-products": 15}};
+function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var emb=function(){return document.body.classList.contains("embed")};
+var ST=["Pick your product|Find your mailer below.","Copy the prompt|One click copies it.","Paste it into your AI|Grok, ChatGPT, Claude or any AI design tool.","Answer the questions|The AI asks where your phone number, name, offer and other details go.","Export a PDF|Trim and bleed, fonts embedded.","Upload it|Upload your PDF and confirm your image rights.","We check it|Our team checks it and fixes small issues.","Save your template|Your design gets a template ID in My Templates, ready to use when you order."];
+var RU=["Locked areas|Trim, bleed, safe margin, folds, envelope windows, the recipient address, the USPS barcode, postage, the return address and our small production marks. The prompt gives their exact positions. Keep them empty.","Everything else is yours|Layout, colors, photos, copy and where each personal detail goes.","YLHQ fonts|Printed text uses the fonts YLHQ prints with today. Each prompt lists them.","Handwriting|Handwritten products use Cursive or Print.","File formats|Best: a print-ready PDF at trim plus bleed with fonts embedded. Also accepted: PNG or JPG at 300 ppi or more.","Image resolution|Use images at 300 ppi or more. Under 150 ppi can't print.","Image rights|At upload you confirm you own or have rights to every image and logo.","Proof first|When you order with this template you get a proof to approve. Nothing prints until you do."];
+var BN=[["letters","All Letters"],["postcards","All Postcards"],["handwritten","All Handwritten"],["envelopes","All Envelopes"],["all-products","All Products"]];
+function pById(id){return D.prompts[id]}
+function tplImg(id){var r=D.rows[id];return r?r.img:""}
+function prodCard(p,hl){
+ var rowsH=p.prompts.length?p.prompts.map(function(pr){var m=pById(pr.id);return '<div class="yai-pr"><div class="t"><span>'+esc(pr.label)+'</span><span class="yai-code" title="Sample template ID">'+esc(pr.tpl)+'</span></div>'+(pr.note?'<p class="yai-note">'+esc(pr.note)+'</p>':'')+'<div class="b"><button type="button" class="yai-btn sm" data-copy="'+esc(m.file)+'">Copy prompt</button><a class="yai-btn sm sec" href="ai-prompts/'+esc(m.file)+'" download>Download .md</a></div></div>'}).join(""):'<div class="yai-pr"><span class="yai-soon">Prompt coming soon</span></div>';
+ var f=p.prompts.length?pById(p.prompts[0].id).facts:null;
+ return '<article class="yai-prod'+(hl?' hl':'')+'" data-key="'+esc(p.key)+'"><div class="yai-pimg"><img loading="lazy" src="'+esc(tplImg(p.tpl))+'" alt=""></div><div class="yai-pb"><h3>'+esc(p.name)+'</h3>'+(f?'<ul class="yai-facts"><li><b>Size</b> '+esc(f.Size)+'</li><li><b>Safe margin</b> '+esc(f["Safe margin"])+'</li></ul>':'')+rowsH+'</div></article>'}
+function render(root,arg,q,raw){
+ var qq=(raw||"").split("&").reduce(function(o,s){var i=s.indexOf("=");if(s)o[s.slice(0,i<0?s.length:i)]=i<0?"":decodeURIComponent(s.slice(i+1));return o},{});
+ var pk=qq.p||"",cat=qq.c||"",hlKey="";
+ D.products.forEach(function(p){if(p.route===pk){cat=p.cat;hlKey=p.key}});
+ var h='<div class="yai">'+
+ '<a class="yai-back" href="#/custom-template">&lsaquo; Back to Design a New Mail Piece</a>'+
+ '<div class="yai-hero"><div><span class="yai-pill">Design your own</span><h1 style="margin-top:12px">Design it with AI</h1><p>Design your own Yellow Letter HQ mailer with Grok, ChatGPT, Claude or any AI design tool. Pick your product, paste our prompt, and the AI builds a print-ready design around the areas we need for mailing.</p><div class="yai-ctas"><a class="yai-btn" href="#" data-go="yai-products">Get a prompt</a><a class="yai-btn sec" href="#" data-go="yai-how">How it works</a></div></div><div class="yai-ai"><span><i>1</i>Copy our prompt</span><span><i>2</i>Paste it into your AI</span><span><i>3</i>Upload the PDF, save your template</span></div></div>'+
+ '<section class="yai-sec" id="yai-how"><h2>How it works</h2><p class="yai-sub">About 10 minutes from prompt to upload.</p><div class="yai-steps">'+ST.map(function(s,i){var a=s.split("|");return '<div class="yai-card"><span class="yai-pill">Step '+(i+1)+'</span><h3>'+a[0]+'</h3><p>'+a[1]+'</p></div>'}).join("")+'</div></section>'+
+ '<section class="yai-sec" id="yai-rules"><h2>The rules</h2><p class="yai-sub">We only lock what the post office and the press need. Everything else is your call.</p><div class="yai-rules">'+RU.map(function(s){var a=s.split("|");return '<div class="yai-card"><h3 style="margin-top:0">'+a[0]+'</h3><p>'+a[1]+'</p></div>'}).join("")+'</div></section>'+
+ '<section class="yai-sec" id="yai-bundles"><h2>Download prompt bundles</h2><p class="yai-sub">Every prompt for a product type in one file.</p><div class="yai-bund">'+BN.map(function(b){return '<a href="ai-prompts/bundles/ylhq-ai-prompts-'+b[0]+'.md" download><b>'+b[1]+'</b><span>'+D.bundleCount[b[0]]+' prompts &middot; .md</span></a>'}).join("")+'</div></section>'+
+ '<section class="yai-sec" id="yai-products"><span class="yai-pill">Step 1</span><h2 style="margin-top:10px">Pick your product</h2><div id="yai-pp"></div></section>'+
+ '<section class="yai-sec" id="yai-upload"><span class="yai-pill">Step 6</span><h2 style="margin-top:10px">Upload your design</h2><p class="yai-sub">Mock upload: nothing is sent. After the check, your design is saved as a template with its own template ID in My Templates.</p><div class="yai-up"><div><div class="row"><label for="yai-name">Design name</label><input type="text" id="yai-name" placeholder="For example, Spring postcard" autocomplete="off"></div><div class="row"><label for="yai-prod">Product</label><select id="yai-prod">'+D.products.filter(function(p){return p.prompts.length}).map(function(p){return '<option value="'+esc(p.key)+'"'+(p.key===hlKey?' selected':'')+'>'+esc(p.name)+'</option>'}).join("")+'</select></div><div class="row"><label for="yai-file">PDF from your AI tool</label><input type="file" id="yai-file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"></div><label class="yai-chk"><input type="checkbox" id="yai-rights"><span>I own or have the rights to every image and logo in this design.</span></label><p class="yai-err" id="yai-err"></p><button type="button" class="yai-btn" id="yai-go">Upload and check</button></div><div class="yai-qc"><h3>Our check</h3><ul id="yai-qc"><li>Trim and bleed</li><li>Fonts embedded</li><li>Locked areas empty</li><li>Image resolution</li><li>Placeholders typed exactly</li></ul><p class="yai-note" id="yai-qcn">Runs when you upload.</p></div></div></section></div>';
+ root.innerHTML=h;
+ var pp=root.querySelector("#yai-pp");
+ function cats(){pp.innerHTML='<p class="yai-sub">Choose a category first. You will only see that category\'s products.</p><div class="yai-cats">'+D.cats.map(function(c){return '<button type="button" class="yai-cat" data-c="'+c.k+'"><img src="'+esc(tplImg(c.tpl))+'" alt=""><b>'+c.k+'</b><span>'+c.n+' products</span></button>'}).join("")+'</div>'}
+ function prods(c){var l=D.products.filter(function(p){return p.cat===c});pp.innerHTML='<a href="#" class="yai-back" data-back>&lsaquo; Choose another product</a><h3 style="font:800 20px Montserrat,sans-serif;margin:0 0 14px">'+c+'</h3><div class="yai-prods'+(l.length===4?' c4':'')+'">'+l.map(function(p){return prodCard(p,p.key===hlKey)}).join("")+'</div>'}
+ if(cat)prods(cat);else cats();
+ if(hlKey)setTimeout(function(){var e=root.querySelector(".yai-prod.hl");e&&e.scrollIntoView({block:"center"})},500);
+ root.addEventListener("click",function(ev){var t=ev.target,a;
+  if(a=t.closest("[data-go]")){ev.preventDefault();var e=root.querySelector("#"+a.getAttribute("data-go"));e&&e.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(a=t.closest("[data-c]")){prods(a.getAttribute("data-c"));return}
+  if(t.closest("[data-back]")){ev.preventDefault();cats();return}
+  if(a=t.closest("[data-copy]")){var f=a.getAttribute("data-copy");fetch("ai-prompts/"+f).then(function(r){return r.text()}).then(function(tx){var m=/```text\n([\s\S]*?)\n```/.exec(tx);var out=m?m[1]:tx;var done=function(){a.textContent="Copied";a.classList.add("done");setTimeout(function(){a.textContent="Copy prompt";a.classList.remove("done")},1800)};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(out).then(done,function(){fb(out);done()});else{fb(out);done()}window.__yaiLast=out}).catch(function(){a.textContent="Try again"});return}
+ });
+ function fb(x){var ta=document.createElement("textarea");ta.value=x;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}ta.remove()}
+ root.querySelector("#yai-go").onclick=function(){
+  var nm=root.querySelector("#yai-name").value.trim(),f=root.querySelector("#yai-file").files[0],er=root.querySelector("#yai-err");
+  if(!nm){er.textContent="Please name your design.";return}
+  if(!f){er.textContent="Choose the PDF from your AI tool.";return}
+  if(!root.querySelector("#yai-rights").checked){er.textContent="Please confirm your image rights.";return}
+  er.textContent="";var btn=this;btn.disabled=true;btn.textContent="Checking...";
+  var lis=root.querySelectorAll("#yai-qc li"),i=0;
+  (function nx(){if(i<lis.length){lis[i++].classList.add("ok");setTimeout(nx,260);return}
+   root.querySelector("#yai-qcn").textContent="Checks passed (sample). Saving your template...";
+   var key=root.querySelector("#yai-prod").value,p=D.products.filter(function(x){return x.key===key})[0];
+   var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
+   var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
+   try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
+   var href=emb()?"../api-builder/?v=r38#/my-templates":"#/integrations?tab=templates";
+   var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
+   sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') is template <b style="font-family:ui-monospace,Menlo,monospace">'+id+'</b> in My Templates.</span><a class="yai-btn sm" href="'+href+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
+   btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
+   })();
+ };
+}
+window.ylAIRender=render;
+/* entry points in Design a New Mail Piece */
+function curRoute(){return(location.hash||"").replace(/^#\/?/,"").split("?")[0]}
+function tick(){
+ var dm=document.body.classList.contains("dm"),r=curRoute();
+ if(dm&&r==="custom-template"&&!document.querySelector(".yai-cta")){var host=document.querySelector("#s-custom-template .wrap, #ct-root");var cards=document.querySelector("#s-custom-template .pgrid, #s-custom-template .ct-cards");
+   if(host){var c=document.createElement("div");c.className="yai-cta";c.innerHTML='<div><b>Design it with AI</b><span>Use Grok, ChatGPT or Claude with our prompts, then upload your PDF.</span></div><a class="yai-btn" href="#/design-with-ai">Design it with AI</a>';if(cards&&cards.parentNode)cards.parentNode.insertBefore(c,cards);else host.appendChild(c);c.style.margin='0 auto 20px'}}
+ if(r!=="custom-template"){var o=document.querySelector(".yai-cta");o&&o.remove()}
+ if(dm&&/^(letters|postcards)\//.test(r)){
+  var f=document.querySelector(".scr.on #tplField, .scr.on #pcDesign");
+  if(f&&!f.querySelector(".yai-choice")&&!f.parentNode.querySelector(":scope > .yai-choice")){
+   var hasEnv=!!document.querySelector(".scr.on .opt-env");
+   var d=document.createElement("div");d.className="yai-choice"+(hasEnv?"":" two");
+   d.innerHTML='<button type="button" data-yc="tpl"><b>Create your own template</b>Build a letter or card layout here.</button>'+(hasEnv?'<button type="button" data-yc="env"><b>Create your own envelope</b>Design the envelope front.</button>':'')+'<button type="button" class="ai" data-yc="ai"><b>Design it with AI</b>Use our prompts with your AI tool, then upload.</button>';
+   f.insertBefore(d,f.firstChild)}}
+
+}
+setInterval(tick,300);
+document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-yc]");if(!b)return;ev.preventDefault();ev.stopPropagation();var k=b.getAttribute("data-yc");
+ if(k==="ai"){var r=curRoute();location.hash="#/design-with-ai?p="+encodeURIComponent(r)}
+ else if(k==="tpl"){var t=[].slice.call(document.querySelectorAll(".scr.on #tplField .image-box, .scr.on #pcDesign .image-box")).filter(function(x){return/^New Custom Design/i.test((x.innerText||"").trim())})[0];t&&t.click()}
+ else{var e=[].slice.call(document.querySelectorAll(".scr.on .opt-env")).filter(function(x){return/Upload your design/i.test(x.innerText)})[0];e&&e.click()}},true);
 })();
 </script>
 
