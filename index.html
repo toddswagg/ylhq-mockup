@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r32"){u.searchParams.set("v","r32");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r33"){u.searchParams.set("v","r33");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5124,7 +5124,7 @@ function renderLT(arg){
   var hw=LS.set==="hw";
   root.innerHTML='<div class="prod-head"><div class="img" style="background-image:url(\''+(hw?IMG.hwHero:IMG.ltHero)+'\')"></div><div><h1>'+(hw?"Real Handwritten Cards":"Letters")+'</h1><p>'+(hw?"Real pen-and-ink handwritten notes and cards. Prices include printing, mailing and postage.":"Choose your letter, postage and template, then upload your list. Prices include printing, mailing and postage.")+' <button class="pill-help" id="ltWelcome">How does this work?</button></p>'+'</div></div>'+'<div id="ltPick"></div><div id="ltCfg"></div>';
   $("#ltWelcome").onclick=function(){modal(hw?"Real Handwritten Cards":"Letters","<p>Pick your "+(hw?"card":"letter")+", choose postage and a template, then drag and drop your list. Your proof is ready after checkout and nothing prints until you approve it.</p><p>Any problems, do not hesitate to contact us.</p>",[{label:"Got it",cls:"btn"}])};
-  var m31go=function(i){if(i!==LS.p){LS.env="";LS.tpl="";LS.cardStyle=""}LS.p=i;var k=L[i].k;history.replaceState(null,"","#/letters/"+k);cur="letters/"+k;renderLT(k);var c=$("#ltCfg");if(c)c.scrollIntoView({behavior:"smooth",block:"start"})};picker($("#ltPick"),L,LS.p,m31go);if(!hw)m31Pick(L,m31go);
+  var m31go=function(i){if(i!==LS.p){LS.env="";LS.tpl="";LS.cardStyle=""}LS.p=i;var k=L[i].k;history.replaceState(null,"","#/letters/"+k);cur="letters/"+k;renderLT(k);var c=$("#ltCfg");if(c)c.scrollIntoView({behavior:"smooth",block:"start"})};picker($("#ltPick"),L,LS.p,m31go);if(!hw&&!(window.ylIsHw&&ylIsHw()))m31Pick(L,m31go);
   renderLCfg();
 }
 function lTier(p,q){var T=p.t===5?T5:T6,i=0;for(var j=0;j<T.length;j++)if(q>=T[j])i=j;return i}
@@ -6276,7 +6276,7 @@ var _modal=modal;modal=function(t,h,b){$("#dim .modal").classList.remove("bp-wid
   var MT_ROWS = [{"id": "S178", "n": "Just Listed Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Just-Listed-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PC425"}, {"id": "S179", "n": "Absentee Owner Postcard", "p": "First Class Half Page Postcard (8.5 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PCH"}, {"id": "S180", "n": "Handwritten Postcard", "p": "First Class Actual Handwritten Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Comic-768x432.jpg", "d": "May 07, 2024", "k": "HWPC"}, {"id": "S181", "n": "Handwritten Family Postcard", "p": "First Class Actual Handwritten Postcard Half Page (8.5 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Family-Picture-Actual-Handwritten-768x432.jpg", "d": "May 07, 2024", "k": "HWPCH"}, {"id": "S182", "n": "Street View Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2016/10/postcard-overlay.jpg", "d": "May 07, 2024", "k": "PC425"}, {"id": "S183", "n": "We Missed You Jumbo Postcard", "p": "First Class Jumbo Postcard (5.5 x 11)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/09/WE-MISSED-YOU-JUMBO-768x432.jpg", "d": "May 07, 2024", "k": "PCJ"}, {"id": "S184", "n": "Cash Buyer Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Postcard-1-180x101.png", "d": "May 07, 2024", "k": "PC425"}, {"id": "C031", "n": "Jane Sample Custom Half Page", "p": "First Class Half Page Postcard (8.5 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg", "d": "May 07, 2024", "k": "PCH"}, {"id": "S190", "n": "Yellow Letter", "p": "Letter with #10 Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/SeeThrough3-768x432.png", "d": "May 07, 2024", "k": "L10"}, {"id": "S196", "n": "Invitation Letter", "p": "Letter with Invitation Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Invitation-with-Letter-768x432.png", "d": "May 07, 2024", "k": "LINV"}, {"id": "S201", "n": "Pressure Sealed Mailer", "p": "Pressure Sealed Letter/Snap Packs", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/08/Pressure-Sealed-Action-Requested-768x432.jpg", "d": "May 07, 2024", "k": "PS"}, {"id": "D207", "n": "Designer Pressure Seal Check Mailer", "p": "Pressure Sealed Letter/Snap Packs", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/08/Pressure-Sealed-Action-Requested-768x432.jpg", "d": "May 07, 2024", "k": "PS"}, {"id": "S212", "n": "Check Letter", "p": "Check Letter (Windowed Envelope)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png", "d": "May 07, 2024", "k": "CHK"}, {"id": "S219", "n": "Probate Check Letter", "p": "Check Letter (Windowed Envelope)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2022/07/Checks-with-windowed-Envelope-set-768x432.png", "d": "May 07, 2024", "k": "CHK"}, {"id": "S210", "n": "Full View Letter", "p": "Full View Letter", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2026/03/FULL-VIEW-ENV-1-700x700.jpg", "d": "May 07, 2024", "k": "FV"}, {"id": "S220", "n": "Tri-Fold Letter", "p": "Tri-Fold Letter", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/06/Tri-Fold-Showcase-Yellow-768x994.jpg", "d": "May 07, 2024", "k": "TF"}, {"id": "S240", "n": "Holiday Greeting Card", "p": "Printed Greeting Cards & Folded Notes", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/11/Ornament-Card-768x432.png", "d": "May 07, 2024", "k": "GRC"}, {"id": "S283", "n": "Handwritten Letter", "p": "Letter with Actual Handwritten #10 Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Envelope1-768x432.png", "d": "May 07, 2024", "k": "HWL10"}, {"id": "S284", "n": "Handwritten Invitation Letter", "p": "Letter with Actual Handwritten Invitation Envelope", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/09/HandwriteA6.png", "d": "May 07, 2024", "k": "HWLINV"}, {"id": "S285", "n": "Handwritten Greeting Card", "p": "Actual Handwritten Greeting Cards & Folded Notes", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png", "d": "May 07, 2024", "k": "HWGC"}];
   function mtHtml(add) {
     var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
-    var rows = MT_ROWS.map(function (r) {
+    var rows = (function(){try{return JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]")}catch(e){return []}})().concat(MT_ROWS).map(function (r) {
       return "<div class=\"mt-row\" data-mtrow data-s=\"" + r.s + "\" data-q=\"" + esc((r.id + " " + r.n + " " + r.p).toLowerCase()) + "\"><div class=\"mt-th\"><img loading=\"lazy\" src=\"" + r.img + "\" alt=\"" + esc(r.n) + "\"></div><div class=\"mt-nm\"><b title=\"" + esc(r.n) + "\">" + esc(r.n) + "</b><span class=\"mt-tag" + (r.s === "Global" ? " g" : "") + "\">" + r.s + "</span></div><div class=\"mt-pr\">" + esc(r.p) + "</div><div class=\"mt-dt\">" + r.d + "</div><div class=\"mt-idw\"><div class=\"mt-id\"><span>" + r.id + "</span><button type=\"button\" data-mtcopy=\"" + r.id + "\">Copy</button></div></div></div>";
     }).join("");
     return "<div class=\"mt\" data-mt><div class=\"mt-top\"><input type=\"search\" id=\"mtSearch\" data-mtq placeholder=\"Search templates or IDs\" aria-label=\"Search templates\"><div class=\"mt-pills\" role=\"group\" aria-label=\"Filter templates\"><button type=\"button\" class=\"on\" data-mtf=\"All\">All</button><button type=\"button\" data-mtf=\"Private\">Private</button><button type=\"button\" data-mtf=\"Global\">Global</button></div>" + (add || "") + "</div>" +
@@ -6841,7 +6841,10 @@ var OPTFONTS={
  "pc:hw425":[["Cursive","Print"],[],"handwrittenPostcardAttribute font-selection (Cursive / Print)"],
  "pc:flip":[OPTFS8,[],"getFlipCardAttribute font-selection"],
  "hw:hwnotes":[["Cursive","Print"],[],"font-selection 1366 to 1369"],
- "hw:hwcards":[["Cursive","Print"],[],"font-selection 1405 to 1408"]};
+ "hw:hwcards":[["Cursive","Print"],[],"font-selection 1405 to 1408"],
+ "lt:hw10":[["Cursive","Print"],["Cursive","Print"],"handwriting fonts only: Cursive, Print"],
+ "lt:hw6":[["Cursive","Print"],["Cursive","Print"],"handwriting fonts only: Cursive, Print"],
+ "lt:hwcardsnotes":[["Cursive","Print"],[],"handwriting fonts only: Cursive, Print"]};
 var OPTFSPLUS={"pc:hw":{"Print":.25}};
 function optFontsOf(id){var f=OPTFONTS[id]||[[],[],""];return {fs:f[0],ef:f[1],src:f[2]}}
 var OPTFF={"New York":"newyorkfont","OLMS":"olmhandwritingregular","Typed":"ylhqOpenSans","Tower":"CToress","Lindy":"Lindy","Popular Font":"premiumultra26","Belinda":"Belinda","Cursive":"Cursive2","Print":"Print"},OPTFZ={"Cursive2":1.9,"CToress":0.92,"Lindy":1.05,"Belinda":1.25,"premiumultra26":1.45,"olmhandwritingregular":1.9,"newyorkfont":0.95,"Print":1};
@@ -7206,7 +7209,7 @@ function ylpAct(host,k,act,i,val){var K=FFK[k],steps=K.steps||[],lab=steps[i]?st
   if(act==="post"){var fc=/first/i.test(val);ylpModal(val,'<p><b>'+(fc?'First Class':'Standard (Marketing Mail)')+'</b></p><p>'+(fc?'Faster. Undeliverable mail is returned to you. It costs a little more per piece than Standard.':'Our lowest price. This is USPS Marketing Mail, the usual postage for marketing mail.')+'</p><p class="ylpop-m">'+(fc?'Standard (Marketing Mail) is the lowest-price option.':'First Class is faster and returns undeliverable mail to you, for a little more per piece.')+'</p>');return}
   if(act==="font"||act==="efont"){var acc=host.querySelector(act==="font"?"#ltFontAcc,#pcFontAcc":"#ltEnvFontAcc"),r=acc&&acc.querySelector("input[type=radio]:checked"),lb=r&&r.closest("label");if(!lb){jump();return}var nm=(lb.querySelector(".ft-n")||{textContent:r.value}).textContent.trim(),smp=lb.querySelector(".ft-s");ylpModal((act==="font"?"Font: ":"Envelope font: ")+nm,'<p class="ylpop-fn">'+nm.replace(/</g,"&lt;")+'</p>'+(smp?'<p class="ylpop-smp" style="'+(smp.getAttribute("style")||"")+'">'+smp.textContent+'</p>':'')+'<p class="ylpop-m">'+(act==="font"?val:"This is the font used to address your envelopes.")+'</p>');return}
   jump()}
-function ylpAdd(host,k,pn){var b=document.getElementById(k==="pc"?"addCart":"laddCart"),msg=pn.querySelector(".ylp-msg");if(b&&!b.disabled){var err=document.getElementById(k==="pc"?"qerr":"lqerr");if(!err||!err.textContent.trim()){msg.textContent="";b.click();return}}
+function ylpAdd(host,k,pn){if(document.body.classList.contains("dm")&&window.ylDMSave)return window.ylDMSave(host,k,pn);var b=document.getElementById(k==="pc"?"addCart":"laddCart"),msg=pn.querySelector(".ylp-msg");if(b&&!b.disabled){var err=document.getElementById(k==="pc"?"qerr":"lqerr");if(!err||!err.textContent.trim()){msg.textContent="";b.click();return}}
   var er=document.getElementById(k==="pc"?"qerr":"lqerr"),t=er?er.textContent.trim():"";var steps=FFK[k].steps||[],nx=-1;steps.forEach(function(s,i){var d=false;try{d=!!s[2]()}catch(e){}if(!d&&nx<0&&s[0]!=="Notes")nx=i});
   msg.textContent=t||(nx>=0?"Next: finish "+steps[nx][0]+" to add this to your cart.":"Check your list and mail dates, then add to cart.");
   if(nx>=0){var bar=host.querySelector(":scope > .ff-bar"),bb=bar&&bar.querySelector('[data-ffs="'+nx+'"]');if(bb)bb.click()}}
@@ -7248,6 +7251,60 @@ function ylStepLabels(k){var K=FFK[k],host=document.getElementById(K.host);if(!h
 var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}catch(e){}};
 
 
+
+/* round 33: Design a New Mail Piece = the shop order flow in design mode (body.dm). */
+var YLDM=0;
+(function(){
+  var _r0=route;
+  route=function(){var h=location.hash;if(/^#\/?custom-template/.test(h))YLDM=1;else if(!/^#\/?(letters|postcards)(\/|\?|$)/.test(h))YLDM=0;document.body.classList.toggle("dm",!!YLDM);return _r0.apply(this,arguments)};
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("#nav a,#drawer a,.hdr a,footer a");if(a&&!/custom-template/.test(a.getAttribute("href")||""))YLDM=0},true);
+})();
+var renderCTold=renderCT;
+renderCT=function(){
+  if(/^#\/custom-template\/approve/.test(location.hash)){renderCTold();return}
+  var r=$("#ct-root");
+  var cards=[].slice.call(document.querySelectorAll("#s-shop .pgrid .pcard")).slice(0,3).map(function(c){var k=c.cloneNode(true),p=k.querySelector(".price");if(p)p.remove();var a=k.querySelector("a.btn");a.textContent="Choose";if(a.getAttribute("href")==="#/handwritten")a.setAttribute("href","#/letters/hw10");a.classList.remove("ylhw-btn");return k.outerHTML}).join("");
+  r.innerHTML='<div class="ptitle"><div><h1>Design a New Mail Piece</h1><p>Pick a product, choose a design, envelope, font and options, then save it as a template. Postage and your list come when you order.</p></div></div><div class="pgrid">'+cards+'</div>';
+};
+(function(){
+  var _ffs=ffStepsFor;
+  ffStepsFor=function(k){var r=_ffs(k);return document.body.classList.contains("dm")?r.filter(function(s){return !/^(Postage|Your list|Mail dates|Notes)$/.test(s[0])}):r};
+  var HEADP="Choose your design, envelope, font and options, then save it as a template. Postage and your list come when you order.";
+  setInterval(function(){
+    if(!document.body.classList.contains("dm"))return;
+    [].forEach.call(document.querySelectorAll(".scr.on .m31-back"),function(a){if(a.getAttribute("href")!=="#/custom-template")a.setAttribute("href","#/custom-template")});
+    [].forEach.call(document.querySelectorAll(".scr.on .ylp-add,.scr.on .ylp-add2"),function(b){if(b.textContent!=="Save mail piece")b.textContent="Save mail piece"});
+    [].forEach.call(document.querySelectorAll(".scr.on button,.scr.on a.btn"),function(b){if(/^See pricing$/i.test(b.textContent.trim()))b.style.display="none"});var h=document.querySelector(".scr.on .prod-head h1");if(h&&h.textContent!=="Design a New Mail Piece"){h.textContent="Design a New Mail Piece";var p=h.nextElementSibling;if(p)p.textContent=HEADP}
+  },250);
+  window.ylDMSave=ylDMSave;
+  function ylDMSave(host,k,pn){
+    var msg=pn.querySelector(".ylp-msg"),steps=FFK[k].steps||[],need=-1;
+    steps.forEach(function(s,i){var d=false;try{d=!!s[2]()}catch(e){}if(s[0]==="Envelopes"&&k==="lt"&&LS.env)d=true;if(!d&&need<0&&(s[0]==="Envelopes"||/^(Letters|Postcard designs)$/.test(s[0])))need=i});
+    if(need>-1){msg.textContent="Next: choose your "+(steps[need][0]==="Envelopes"?"envelope":"design")+" to save this mail piece.";var bar=host.querySelector(":scope > .ff-bar"),bb=bar&&bar.querySelector('[data-ffs="'+need+'"]');if(bb)bb.click();return}
+    var st=k==="pc"?PS:LS,sel=document.querySelector(".scr.on .m31-opt.sel b"),on=document.querySelector(".scr.on #ltPick .ptile.on:not(.all),.scr.on #pcPick .ptile.on:not(.all),.scr.on .ylhw-grid .ptile.on");
+    var prod=(sel&&sel.textContent)||(on&&(on.getAttribute("data-value")||on.textContent))||"Mail piece";
+    var te=document.querySelector("#tplField .ylsel-on,#pcDesign .ylsel-on,.lt-tpl .ylsel-on,#tplField .on"),tn=(te&&((te.querySelector("label,.ft-n")||te).textContent||"").replace(/⤢|Enlarge|Select/g,"").trim())||"Selected template";
+    var ti=te&&te.querySelector("img"),img=ti?ti.src:"";
+    var dz=document.querySelector(".dz-saved");if(dz){var mm=/\u201C([^\u201D]+)\u201D\s*\((DZ\d+)\)/.exec(dz.textContent);if(mm&&/New Custom|Your own|Upload|Custom/i.test(tn))tn=mm[1]}
+    var fr=host.querySelector("#ltFontAcc input:checked,#pcFontAcc input:checked"),font=fr?fr.value:"";
+    var envE=document.querySelector(".scr.on .lt-envcol .ylsel-on .ft-n,.scr.on .lt-envcol .opt-env.on .ft-n"),env=k==="lt"&&LS.env?String(LS.env):(envE?envE.textContent:"");
+    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var code="CT"+n;
+    var hay=prod+" "+env,hasEnv=!!env&&!/^none$/i.test(env)&&k==="lt";
+    var envc=!hasEnv?null:(/window/i.test(hay)?"ENV10W":/invit|a6/i.test(hay)?"ENVINV":"ENV10");
+    var det={};if(envc)det.envelope=envc;if(font)det.font=font;
+    var d=new Date(),ds=d.toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"});
+    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:code,n:tn,p:prod,s:"Private",img:img,d:ds,k:"NEW"});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
+    var emb=document.body.classList.contains("embed");
+    var BASE="https://ylhq-api-orders.yellowletterhq.com/api/v1";
+    var req='curl -sS -X POST "'+BASE+'/upload" \\\n  -H "X-API-Key: YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify({target_date:"ASAP",template_on_file:code,details:det,records:[{first_name:"Sample",address:"123 Example St",city:"Anytown",state:"CA",zip:"90000"}]},null,2)+"'";
+    var im=img?'<img src="'+img+'" alt="" style="width:100%;max-height:260px;object-fit:contain;border-radius:12px;background:#f4f4f4">':"";
+    var html='<div class="panel tpl-saved" style="padding:22px;max-width:760px;margin:18px auto"><span class="pv-pill">Saved</span><h2 style="margin:10px 0 4px">Mail piece saved</h2><p class="muted">'+esc(prod)+" \u00b7 "+esc(tn)+(env?" \u00b7 "+esc(env):"")+(font?" \u00b7 "+esc(font):"")+'. Mock only: nothing was ordered. Postage is picked when you order.</p>'+im+'<h3 style="margin:16px 0 6px">Template ID</h3><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code id="tplCode" style="font:800 20px Montserrat,sans-serif;border:2px solid #FFC523;border-radius:999px;padding:8px 20px">'+code+'</code><button class="btn sm" id="tplCopy" type="button">Copy</button></div>'+
+      (emb?'<h3 style="margin:16px 0 6px">Sample API request</h3><pre id="tplReq" style="background:#262626;color:#fff8dc;padding:14px;border-radius:12px;overflow:auto;font-size:13px;white-space:pre-wrap;word-break:break-all">'+esc(req)+'</pre><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" id="tplReqCopy" type="button">Copy request</button><a class="btn sec sm" href="#/custom-template">Build another</a></div>':'<p class="muted" style="margin-top:12px">It is now in My Templates. Use this ID as <code>template_on_file</code> when you order.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><a class="btn sm" href="#/integrations?tab=templates">View My Templates</a><a class="btn sec sm" href="#/custom-template">Design another</a></div>')+'</div>';
+    host.parentNode.innerHTML=html;
+    function cp(id,btn){if(!btn)return;btn.onclick=function(){var t=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){btn.textContent="Copied"},function(){btn.textContent="Select and copy"})}}
+    cp("tplCode",$("#tplCopy"));cp("tplReq",$("#tplReqCopy"));window.scrollTo(0,0);
+  }
+})();
 
 /* round 27: embed mode. ?embed=api turns the order flow into "Save as template" and hides the site chrome. */
 (function(){
@@ -8312,4 +8369,5 @@ setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(
 })();
 </script>
 <style>.dz-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px}.dz-choice button{font:inherit;text-align:left;cursor:pointer;background:#fffbe0;border:2px solid #fdd835;border-radius:14px;padding:14px 16px;color:#262626;font-size:13px;line-height:1.4}.dz-choice button b{display:block;font-family:Montserrat,sans-serif;font-size:15px;margin-bottom:4px}.dz-choice button:hover{background:#fff3a8}.dz-saved{background:#e8f5e9;border:1px solid #2e7d32;color:#1b5e20;border-radius:10px;padding:8px 12px;margin:0 0 10px;font-size:13px;font-weight:600}@media(max-width:600px){.dz-choice{grid-template-columns:1fr}}</style>
+<style>body.dm #ltUpbar,body.dm #pcUpbar,body.dm #ltMailAcc,body.dm #pcMailAcc,body.dm #ltPostAcc,body.dm #pcPostAcc,body.dm #ltNotes,body.dm #pcNotes,body.dm .ff-tot,body.dm .ylp-f .ylp-r,body.dm .ylp-note,body.dm .ylp-hp,body.dm #lsum,body.dm #sum,body.dm .env-pr,body.dm #laddCart,body.dm #addCart{display:none!important}body.dm .ylp-add,body.dm .ylp-add2{opacity:1!important;pointer-events:auto!important}</style>
 </body></html>
