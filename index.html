@@ -3698,7 +3698,7 @@ function updatePrice(){
   var help=$("#postHelp");if(help)help.innerHTML=!PS.post?"Choose First Class or Standard. Standard saves $0.040 per card, 200 card minimum.":(std?"<b>Standard:</b> Cheaper and slower. Bad addresses aren't returned. Saves $0.040 per card. 200 card minimum.":"<b>First Class:</b> Faster, and undeliverable mail is returned to you.");
   var cell=function(row,i,v){return '<td class="'+((row===(std?"std":"fc")&&i===pr.i&&!pr.err)?"hit":"")+'">'+v+'</td>'};
   var d='<div class="tw ptable ptable-d"><table><thead><tr><th>Quantity</th>'+labs.map(function(l){return "<th>"+l+"</th>"}).join("")+'</tr></thead><tbody>';
-  d+='<tr class="'+(hasStd&&std?"faded":"")+'"><td>'+((p.k==="jumbo"||p.k==="flip")?"Price":"Price First Class Postage Included")+'</td>'+p.fc.map(function(v,i){return cell("fc",i,money(v,3))}).join("")+'</tr>';
+  d+='<tr class="'+(hasStd&&std?"faded":"")+'"><td>'+((p.k==="flip")?"Price":"Price First Class Postage Included")+'</td>'+p.fc.map(function(v,i){return cell("fc",i,money(v,3))}).join("")+'</tr>';
   if(hasStd)d+='<tr class="'+(!std?"faded":"")+'"><td>Price Standard Postage Included</td>'+p.fc.map(function(v,i){return cell("std",i,money(r3(v-STD_OFF),3)+(i===0?'<span class="na">from 200</span>':""))}).join("")+'</tr>';
   d+='</tbody></table></div>';
   var m='<div class="tw ptable ptable-m"><table><thead><tr><th>Quantity</th><th>First Class</th>'+(hasStd?"<th>Standard</th>":"")+'</tr></thead><tbody>';
