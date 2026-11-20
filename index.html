@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r28"){u.searchParams.set("v","r28");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r29"){u.searchParams.set("v","r29");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1858,6 +1858,40 @@ html{-webkit-tap-highlight-color:rgba(255,197,35,.22)}
 .ylp-min{font-size:12px;color:#71717A;white-space:nowrap}
 /* round 27: embed mode (used by the API dashboard builder and proof page) */
 body.embed .util,body.embed .hdr,body.embed footer,body.embed .hl-chat,body.embed #pmenu,body.embed .pm-toggle,body.embed .drawer{display:none!important}
+
+/* r29 My Templates component */
+.mt{background:#fff;border:1.5px solid #ECE7D6;border-radius:20px;padding:18px;box-shadow:0 6px 22px rgba(0,0,0,.05);font-family:"Open Sans",system-ui,sans-serif;color:#3F3F46;max-width:100%;box-sizing:border-box}
+.mt *{box-sizing:border-box}
+.mt-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.mt-top input[type=search]{flex:1 1 220px;min-width:0;max-width:340px;height:40px;border:1.5px solid #E4E4E7;border-radius:999px;padding:0 16px;font:400 14px "Open Sans",sans-serif;background:#fff}
+.mt-pills{display:flex;gap:8px;flex-wrap:wrap}
+.mt-pills button,.mt-add{height:40px;padding:0 18px;border-radius:999px;border:1.5px solid #E4E4E7;background:#fff;color:#262626;font:700 13px Montserrat,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.mt-pills button.on{background:#FFC523;border-color:#FFC523}
+.mt-add{background:#262626;border-color:#262626;color:#FFC523;margin-left:auto}
+.mt-list{max-height:480px;overflow:auto;overscroll-behavior:contain;border:1px solid #ECE7D6;border-radius:14px}
+.mt-row{display:grid;grid-template-columns:84px minmax(0,1.4fr) minmax(0,1.2fr) 112px 190px;gap:16px;align-items:center;height:76px;padding:0 16px;border-bottom:1px solid #F0EDE1;background:#fff}
+.mt-row:last-child{border-bottom:0}
+.mt-hd{position:sticky;top:0;z-index:2;height:44px;background:#262626;color:#fff;font:700 11.5px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mt-row[hidden]{display:none}
+.mt-th{width:72px;height:54px;border-radius:10px;background:#F4F4F4;border:1px solid #ECE7D6;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mt-th img{width:100%;height:100%;object-fit:contain;display:block}
+.mt-nm{min-width:0}.mt-nm b{display:block;font:700 14px Montserrat,sans-serif;color:#262626;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mt-tag{display:inline-block;margin-top:3px;padding:1px 9px;border-radius:999px;font:700 10.5px Montserrat,sans-serif;background:#FFF3C4;color:#7A5B00}
+.mt-tag.g{background:#E9F3FF;color:#1C5FA8}
+.mt-pr{font-size:13.5px;line-height:1.35}.mt-dt{font-size:13.5px;white-space:nowrap}
+.mt-id{display:flex;align-items:center;justify-content:space-between;gap:8px;height:38px;border:1.5px solid #FFC523;border-radius:999px;padding:0 4px 0 14px;font:700 13.5px ui-monospace,Menlo,Consolas,monospace;color:#262626;background:#fff}
+.mt-id button{height:30px;padding:0 14px;border:0;border-radius:999px;background:#FFC523;color:#262626;font:700 12px Montserrat,sans-serif;cursor:pointer;min-width:62px}
+.mt-empty{padding:26px;text-align:center;color:#71717A}
+.mt-foot{margin:12px 0 0;font-size:12.5px;color:#71717A}
+@media (max-width:760px){
+ .mt{padding:12px}
+ .mt-hd{display:none}
+ .mt-list{border:0;max-height:none}
+ .mt-row{grid-template-columns:72px minmax(0,1fr);grid-template-areas:"th nm" "pr pr" "dt dt" "id id";height:auto;gap:6px 12px;padding:14px;border:1.5px solid #ECE7D6;border-radius:14px;margin-bottom:10px}
+ .mt-row .mt-th{grid-area:th}.mt-row .mt-nm{grid-area:nm}.mt-row .mt-pr{grid-area:pr}.mt-row .mt-dt{grid-area:dt;color:#71717A}.mt-row .mt-idw{grid-area:id;margin-top:4px}
+ .mt-row .mt-pr{min-height:2.7em}
+ .mt-add{margin-left:0;width:100%;justify-content:center}.mt-top input[type=search]{max-width:none}
+}
 body.embed{background:#fff}
 body.embed .mocktag,body.embed #mocktag{display:none!important}
 body.embed #app{padding-bottom:84px}
@@ -6213,6 +6247,34 @@ var _modal=modal;modal=function(t,h,b){$("#dim .modal").classList.remove("bp-wid
     pv.onclick=function(){var im=$(".scr.on .selected-template-image");proofPop("Proof preview",im&&im.src?im.src:IMG.yhalf,{note:"This preview uses the first records in your list. Check names, addresses and the template before you add it to your cart.",btns:[{label:"Keep editing",cls:"btn sec"},{label:"Looks good, Add to Cart",cls:"btn",fn:add.fn}]})};
     f.insertBefore(pv,f.lastChild)}};
 /* ---------- Fix 152: Integrations panel (dashboard.php ?dashboard=zapier). Labels: Zapier Key -> API key, ZAPIER TEMPLATES -> My Templates, Zapier Orders -> API order history ---------- */
+
+  var MT_ROWS = [{"id": "S178", "n": "Just Listed Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Just-Listed-Postcard-1-768x432.jpg", "d": "May 07, 2024"}, {"id": "S179", "n": "Absentee Owner Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Yellow-Letter-Postcard-1-768x432.jpg", "d": "May 07, 2024"}, {"id": "S180", "n": "Handwritten Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Comic-768x432.jpg", "d": "May 07, 2024"}, {"id": "S181", "n": "Handwritten Family Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/07/Family-Picture-Actual-Handwritten-768x432.jpg", "d": "May 07, 2024"}, {"id": "S182", "n": "Street View Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2016/10/postcard-overlay.jpg", "d": "May 07, 2024"}, {"id": "S183", "n": "We Missed You Jumbo Postcard", "p": "First Class Jumbo Postcard (5.5 x 11)", "s": "Private", "img": "https://www.yellowletterhq.com/wp-content/uploads/2025/09/WE-MISSED-YOU-JUMBO-768x432.jpg", "d": "May 07, 2024"}, {"id": "S184", "n": "Cash Buyer Postcard", "p": "First Class Postcard (4.25 x 5.5)", "s": "Global", "img": "https://www.yellowletterhq.com/wp-content/uploads/2021/08/Postcard-1-180x101.png", "d": "May 07, 2024"}];
+  function mtHtml(add) {
+    var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
+    var rows = MT_ROWS.map(function (r) {
+      return "<div class=\"mt-row\" data-mtrow data-s=\"" + r.s + "\" data-q=\"" + esc((r.id + " " + r.n + " " + r.p).toLowerCase()) + "\"><div class=\"mt-th\"><img loading=\"lazy\" src=\"" + r.img + "\" alt=\"" + esc(r.n) + "\"></div><div class=\"mt-nm\"><b title=\"" + esc(r.n) + "\">" + esc(r.n) + "</b><span class=\"mt-tag" + (r.s === "Global" ? " g" : "") + "\">" + r.s + "</span></div><div class=\"mt-pr\">" + esc(r.p) + "</div><div class=\"mt-dt\">" + r.d + "</div><div class=\"mt-idw\"><div class=\"mt-id\"><span>" + r.id + "</span><button type=\"button\" data-mtcopy=\"" + r.id + "\">Copy</button></div></div></div>";
+    }).join("");
+    return "<div class=\"mt\" data-mt><div class=\"mt-top\"><input type=\"search\" id=\"mtSearch\" data-mtq placeholder=\"Search templates or IDs\" aria-label=\"Search templates\"><div class=\"mt-pills\" role=\"group\" aria-label=\"Filter templates\"><button type=\"button\" class=\"on\" data-mtf=\"All\">All</button><button type=\"button\" data-mtf=\"Private\">Private</button><button type=\"button\" data-mtf=\"Global\">Global</button></div>" + (add || "") + "</div>" +
+      "<div class=\"mt-list\" role=\"region\" aria-label=\"My Templates, scrollable\" tabindex=\"0\"><div class=\"mt-row mt-hd\"><div>Preview</div><div>Template name</div><div>Product type</div><div>Date created</div><div>Template ID</div></div>" + rows + "<div class=\"mt-empty\" data-mtempty hidden>No templates match.</div></div>" +
+      "<p class=\"mt-foot\">Copy a Template ID and send it as <code>template_on_file</code> in your API call. Sample templates.</p></div>";
+  }
+  function mtInit() {
+    if (window.__mtInit) return; window.__mtInit = 1;
+    function apply(box) {
+      var on = box.querySelector("[data-mtf].on"), f = on ? on.getAttribute("data-mtf") : "All", q = (box.querySelector("[data-mtq]").value || "").toLowerCase().trim(), n = 0;
+      Array.prototype.forEach.call(box.querySelectorAll("[data-mtrow]"), function (r) { var ok = (f === "All" || r.getAttribute("data-s") === f) && (!q || r.getAttribute("data-q").indexOf(q) >= 0); r.hidden = !ok; if (ok) n++; });
+      box.querySelector("[data-mtempty]").hidden = n > 0;
+    }
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest ? e.target.closest("[data-mtf],[data-mtcopy]") : null; if (!t) return;
+      var box = t.closest("[data-mt]"); if (!box) return;
+      if (t.hasAttribute("data-mtf")) { Array.prototype.forEach.call(box.querySelectorAll("[data-mtf]"), function (b) { b.classList.toggle("on", b === t); }); apply(box); return; }
+      var id = t.getAttribute("data-mtcopy"), done = function () { t.textContent = "Copied"; setTimeout(function () { t.textContent = "Copy"; }, 1400); };
+      try { navigator.clipboard.writeText(id).then(done, done); } catch (x) { done(); }
+    });
+    document.addEventListener("input", function (e) { var box = e.target.closest && e.target.closest("[data-mt]"); if (box && e.target.hasAttribute("data-mtq")) apply(box); });
+  }
+mtInit();
 var KEYF="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",KEYM=KEYF;
 var TPLS=[["Template On File","S182","Yellow Letter Classic","Letter with #10 Envelope"],["Template On File","S207","Just Listed Postcard","First Class Postcard (4.25 x 5.5)"],["Saved template","S219","Probate Check Letter","Check Letter (In an Envelope)"],["Design a New Mail Piece","C031","Jane Sample Custom Half Page","First Class Half Page Postcard (8.5 x 5.5)"]];
 var WALLET=250;
@@ -6222,9 +6284,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tabs=[["","Overview"],["templates","My Templates"],["wallet","Wallet"]];
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
-  if(t==="templates")body='<div class="panel"><h3 style="font-size:18px;margin-bottom:4px">My Templates</h3><p class="muted" style="margin:0 0 14px">Copy a Template ID and send it as <code>template_on_file</code> in your API call.</p>'+
-    '<div class="bp-tiles" style="margin-bottom:16px"><button data-demo2="blank-pc"><b>Blank Postcard</b><span>Start a postcard template.</span></button><button data-demo2="blank-lt"><b>Blank Letter</b><span>Start a letter template.</span></button><a href="#/custom-template"><b>Design a New Mail Piece</b><span>Have us design one ($65).</span></a></div>'+
-    '<div class="tw"><table class="bp-tbl"><thead><tr><th>Type</th><th>Template Name</th><th>Product</th><th>Template ID</th><th></th></tr></thead><tbody>'+TPLS.map(function(x){return '<tr><td>'+x[0]+'</td><td><b>'+x[2]+'</b></td><td>'+x[3]+'</td><td><code>'+x[1]+'</code></td><td><button class="btn sec sm" data-cpid="'+x[1]+'">Copy ID</button></td></tr>'}).join("")+'</tbody></table></div><p class="muted" style="font-size:12.5px;margin:10px 0 0">Website Templates: coming soon. Sample template names and IDs. <a href="'+lnk("template-on-file","Template On File")+'">What is a template on file?</a></p></div>';
+  if(t==="templates")body='<div class="panel"><h3 style="font-size:18px;margin-bottom:4px">My Templates</h3><p class="muted" style="margin:0 0 14px">Every template you can send as <code>template_on_file</code>. Copy the ID, or start a new one.</p>'+mtHtml('<a class="mt-add" href="#/custom-template">Add template</a>')+'</div>';
   else if(t==="wallet")body='<div class="panel" style="max-width:720px"><h3 style="font-size:18px;margin-bottom:4px">Wallet</h3><p class="muted" style="margin:0 0 14px">API and Zapier orders are paid from your wallet.</p><div class="bp-cards" style="grid-template-columns:1fr 1fr"><div class="bp-card"><small>Credit balance</small><b id="wBal">'+money(WALLET)+'</b><em>sample</em></div><div class="bp-card"><small>Auto reload</small><b style="font-size:18px">Off</b><em>add money when the balance is low</em></div></div><div class="bp-row" style="margin:0"><button class="btn" id="wAdd">Add money</button><a class="btn sec" href="'+lnk("credit-history","Credit history")+'">Credit history</a><a class="btn sec" href="'+lnk("credit-history","Credit history")+'">Credit history</a></div></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
@@ -6921,7 +6981,7 @@ function fa14CartWire(r){var u=$("#cUpd",r);[].forEach.call(r.querySelectorAll("
   $("#ccGo",r).onclick=function(){var v=$("#ccIn").value.trim(),m=$("#ccMsg"),l=v.toLowerCase();if(!v){m.innerHTML='<div class="bp-bad" role="alert">Please enter a coupon code.</div>';return}if(CPN&&CPN.c===l){m.innerHTML='<div class="bp-bad" role="alert">Coupon code already applied!</div>';return}if(l==="sample10"||l==="credit-sample"){CPN={c:l,a:l==="sample10"?10:75};m.innerHTML='<div class="bp-ok" role="status">Coupon code applied successfully. It shows at checkout.</div>';return}m.innerHTML='<div class="bp-bad" role="alert">Coupon "'+esc(v)+'" does not exist!</div>'}}
 /* ---------- Hosted mockup safety layer: example-only banner, read-only sensitive fields, no form ever posts ---------- */
 var SAFE_R=["login","register","lost-password","reset-password","edit-account","checkout","order-pay","payment-methods","add-payment-method","integrations","lost-api-key"];
-var SAFE_SKIP=["cpIn"];
+var SAFE_SKIP=["cpIn","mtSearch"];
 var SAFE_TXT='<b>Mockup, example only.</b> Nothing here logs in, takes a card or sends anything. Fields show examples and cannot be typed in.';
 function safeVal(i){var l=i.id?document.querySelector('label[for="'+i.id+'"]'):null,t=((l&&l.textContent)||i.placeholder||"").toLowerCase(),req=!!(l&&l.querySelector(".req"))||i.required;
   if(!req)return null;if(i.getAttribute("data-pwd"))return "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022";
