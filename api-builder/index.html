@@ -599,12 +599,13 @@
 .tp.m31 .tp-res{margin-top:22px}.tp.m31 .m31-opt b{width:100%;text-align:left}
 @media (max-width:900px){.tp.m31 #tpg4.tiles-p,.tp.m31 .m31-opts{grid-template-columns:repeat(2,minmax(0,1fr))!important}.tp.m31 .m31-open:before{display:none}}
 @media (max-width:700px){.tp.m31 #tpg1.tiles-p{grid-template-columns:1fr!important}.tp.m31 #tpg1.tiles-p>.ptile{min-height:84px;flex-direction:row!important;align-items:center!important}.tp.m31 #tpg1.tiles-p>.ptile img{width:96px!important;height:auto!important}.tp.m31 #tpg4.tiles-p{gap:10px!important}.tp.m31 #tpg4.tiles-p>.ptile{font-size:13.5px;padding:10px!important;min-height:0}.tp.m31 #tpg4.tiles-p>.ptile img{height:60px!important}.tp.m31 .m31-opts{gap:10px}.tp.m31 .m31-opt b{font-size:13.5px}.tp.m31 .m31-open{padding:14px}}
+.tp.m31 .m31-back{display:inline-flex;align-items:center;margin:0 0 14px;font:700 14px Montserrat,sans-serif;color:#262626;text-decoration:none;border:1.5px solid #E4E4E7;border-radius:999px;padding:8px 16px;background:#fff}.tp.m31 .m31-back:hover{background:#FFC523;border-color:#FFC523}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gloria+Hallelujah&family=Great+Vibes&family=Kalam:wght@400;700&family=Nanum+Pen+Script&family=Shadows+Into+Light&display=swap">
 </head>
 <body>
-<div class="ylhq-api"><div class="ver"><span>You are on Version B (with builder) · r31. Switch:</span><a class="" href="../api/">Version A, without builder</a><a class="is-on" href="./">Version B, with builder</a></div></div>
-<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r31#/home">Home</a><a style="color:#262626" href="../?v=r31#/account">My Account</a><a style="color:#262626" href="../?v=r31#/integrations">Integrations</a></div>
+<div class="ylhq-api"><div class="ver"><span>You are on Version B (with builder) · r32. Switch:</span><a class="" href="../api/">Version A, without builder</a><a class="is-on" href="./">Version B, with builder</a></div></div>
+<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r32#/home">Home</a><a style="color:#262626" href="../?v=r32#/account">My Account</a><a style="color:#262626" href="../?v=r32#/integrations">Integrations</a></div>
 <div class="ylhq-api">
   <div class="proto-banner"><strong>Prototype — sample data.</strong> This file stays on your computer. Requests are saved in this browser only. Nothing is emailed, and POST /upload is never called.</div>
   <div class="util"><div class="wrap">
@@ -1267,7 +1268,7 @@
       "<h2>Template codes</h2><p><code>S</code> plus the Organizer template id, <code>D</code> plus a designer id, or <code>CT</code> plus a custom ref. The API copies those nightly at 12:30 AM Pacific. This page does not call <code>POST /templates/sync</code>.</p><h2>Envelope templates</h2><p>Envelopes are their own template type. For a letter order, pass an envelope template code as <code>details.envelope</code>: <code>ENV10</code> (#10 standard), <code>ENV10W</code> (#10 windowed) or <code>ENVINV</code> (invitation). This replaces typing the envelope option as free text. Leave it out to use the letter template&#039;s own envelope. <strong>Not allowed with a postcard or pressure seal template.</strong></p><pre>{ \"template_on_file\": \"S178\", \"details\": { \"envelope\": \"ENV10W\" } }</pre><h2>Pressure seal templates</h2><p>Pressure seal is its own template type (for example <code>S201</code> or <code>D207</code>). It folds and seals as one piece, so it has no envelope. Production is <strong>3 production days</strong>, the same as letters (upload Monday, mail Friday at the earliest). Mock only: this page does not call <code>POST /upload</code>.</p></main>";
   }
   function pageProof() {
-    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r31&embed=api#/proof/204518\"></iframe></main>";
+    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r32&embed=api#/proof/204518\"></iframe></main>";
   }
 
   function pageUsage() {
@@ -1399,27 +1400,30 @@
       return "<button type=\"button\" class=\"ptile normal ylhq_products tp-i" + ix + "\" data-tpv=\"" + k + "\" data-value=\"" + p.name + "\"><img src=\"" + p.img + "\" alt=\"\">" + p.name + "</button>";
     }).join("") + "</div>";
   }
-  var TPS = {cat: "L", prod: "L10", win: false};
+  var TPS = {cat: "", prod: "", win: false};
   var TP_FAM = ["L10", "CHK", "TF", "FV"];
   function tpImg(k) { return TP_PRODS.filter(function (x) { return x.code === k; })[0].img; }
   function tpTop() {
-    var h = "<div class=\"sect-t\">Select Product</div><div class=\"tiles-p m31-cats\" id=\"tpg1\">" +
+    var cats = "<div class=\"sect-t\">Select Product</div><div class=\"tiles-p m31-cats\" id=\"tpg1\">" +
       "<button type=\"button\" class=\"ptile normal ylhq_products" + (TPS.cat === "L" ? " on" : "") + "\" data-tpcat=\"L\" data-value=\"Letters\"><img src=\"" + tpImg("L10") + "\" alt=\"\">Letters</button>" +
       "<button type=\"button\" class=\"ptile normal ylhq_products" + (TPS.cat === "P" ? " on" : "") + "\" data-tpcat=\"P\" data-value=\"Postcards\"><img src=\"" + tpImg("PC425") + "\" alt=\"\">Postcards</button>" +
       "<button type=\"button\" class=\"ptile normal ylhq_products ylhw-tile" + (TPS.cat === "H" ? " on" : "") + "\" data-tpcat=\"H\" data-value=\"Handwritten\"><img src=\"../assets/hw-card.jpg\" alt=\"\">Handwritten<span class=\"ylhw-sub\">Cards, flip notes, postcards, #10 envelopes</span></button></div>";
+    var h = "";
+    if (!TPS.cat) return cats;
+    h += "<a class=\"m31-back\" href=\"#\" data-tpback=\"1\">\u2039 Choose another product</a><div class=\"sect-t\">" + (TPS.cat === "L" ? "Select Letter Type" : TPS.cat === "P" ? "Select Postcard" : "Select Handwritten Product") + "</div>";
     if (TPS.cat === "L") {
       var fam = TP_FAM.indexOf(TPS.prod) > -1;
       function lt(k, label, on, fm) { return "<button type=\"button\" class=\"ptile normal ylhq_products" + (on ? " on" : "") + "\" " + (fm ? "data-tpfam=\"1\"" : "data-tpv=\"" + k + "\"") + " data-value=\"" + label.replace(/&/g, "&amp;") + "\"><img src=\"" + tpImg(k) + "\" alt=\"\">" + label.replace(/&/g, "&amp;") + "</button>"; }
-      h += "<div class=\"m31-lab\">Letters</div><div class=\"tiles-p m31-letters\" id=\"tpg4\">" + lt("PS", "Pressure Sealed Letter/Snap Packs", TPS.prod === "PS") + lt("L10", "Letter with #10 Envelope", fam, 1) + lt("LINV", "Letter with Invitation Envelope", TPS.prod === "LINV") + lt("GRC", "Printed Greeting Cards & Folded Notes", TPS.prod === "GRC") + "</div>";
+      h += "<div class=\"tiles-p m31-letters\" id=\"tpg4\">" + lt("PS", "Pressure Sealed Letter/Snap Packs", TPS.prod === "PS") + lt("L10", "Letter with #10 Envelope", fam, 1) + lt("LINV", "Letter with Invitation Envelope", TPS.prod === "LINV") + lt("GRC", "Printed Greeting Cards & Folded Notes", TPS.prod === "GRC") + "</div>";
       if (fam) {
         function opt(k, label, chip) { return "<button type=\"button\" class=\"m31-opt" + (TPS.prod === k ? " sel" : "") + "\" data-tpv=\"" + k + "\" data-value=\"" + label + "\"><span class=\"m31-img\"><img src=\"" + tpImg(k) + "\" alt=\"\"></span><b>" + label + "</b><span class=\"m31-chip\">" + chip + "</span></button>"; }
         h += "<div class=\"m31-open\"><div class=\"m31-head\"><div><h3>Letter with #10 Envelope</h3><p class=\"hint\">Every letter here goes out in a #10 envelope. Pick the envelope, then the letter style.</p></div><div class=\"m31-sw\" role=\"group\" aria-label=\"Envelope\"><span>Envelope</span><button type=\"button\" data-tpwin=\"0\" class=\"" + (TPS.win ? "" : "on") + "\" aria-pressed=\"" + !TPS.win + "\">Standard #10</button><button type=\"button\" data-tpwin=\"1\" class=\"" + (TPS.win ? "on" : "") + "\" aria-pressed=\"" + TPS.win + "\">Windowed #10</button></div></div>" +
           "<div class=\"m31-opts\">" + opt("L10", TPS.win ? "Letter with Windowed #10" : "Letter with #10 Envelope", TPS.win ? "Windowed envelope" : "Standard envelope") + opt("CHK", "Check Letter", "Always windowed") + opt("TF", "Tri-Fold Letter", "#10 option") + opt("FV", "Full View Letter", "#10 option") + "</div></div>";
       }
     } else if (TPS.cat === "P") {
-      h += "<div class=\"tp-sec\" id=\"s-postcards\" style=\"margin-top:20px\"><h3>Postcards</h3>" + tpTiles(TP_LIST.P, "tpg3") + "</div>";
+      h += "<div class=\"tp-sec\" id=\"s-postcards\" style=\"margin-top:20px\">" + tpTiles(TP_LIST.P, "tpg3") + "</div>";
     } else {
-      h += "<div class=\"tp-sec\" id=\"tpL2\" style=\"margin-top:20px\"><h3>Handwritten</h3>" + tpTiles(TP_LIST.H, "tpg2", " ylhw-grid") + "</div>";
+      h += "<div class=\"tp-sec\" id=\"tpL2\" style=\"margin-top:20px\">" + tpTiles(TP_LIST.H, "tpg2", " ylhw-grid") + "</div>";
     }
     return h;
   }
@@ -1435,6 +1439,7 @@
     return mine.map(function (r) { return {c: r.id, t: r.shared ? "Shared from Letter with #10 Envelope" : (k === "L10" && TPS.win ? "Also prints on the windowed envelope" : r.s), nm: r.n, img: r.img}; });
   }
   function tpResults(k) {
+    if (!k) return "<div class=\"tp-prompt\">Pick a product to see its templates and copy a template ID.</div>";
     var title, list = [];
     if (k === "PC_ALL") { title = "All Templates"; TP_LIST.P.forEach(function (c) { list = list.concat(tpEntries(c)); }); }
     else { title = TP_PRODS.filter(function (x) { return x.code === k; })[0].name; list = tpEntries(k); }
@@ -1520,7 +1525,7 @@
     return "<h3>Your template</h3><dl><div><dt>Product</dt><dd>" + (p ? p.n : "Not chosen") + "</dd></div><div><dt>Design</dt><dd>" + (p ? d(TB.d1, TB.d1lib) : "-") + "</dd></div><div><dt>Envelope</dt><dd>" + env + "</dd></div><div><dt>Envelope design</dt><dd>" + (p && p.env ? d(TB.d2, TB.d2lib) : "-") + "</dd></div><div><dt>Sticky note</dt><dd>" + (p && p.env ? (TB.sticky ? "Yes (+6\u00a2)" : "No") : "Not available") + "</dd></div><div><dt>Postage</dt><dd>" + (TB.post === "fc" ? "First Class" : TB.post === "std" ? "Standard" : "Not chosen") + "</dd></div><div><dt>Code</dt><dd>" + (s ? s.code : "Save to get one") + "</dd></div></dl>";
   }
   function pageBuilder() {
-    return "<main><h1>Design a mail piece</h1><p class=\"lede\">This is the Yellow Letter HQ mockup's own design and order flow, the same tiles, steps and right panel. The only difference is the end: it saves a template and gives you the template ID and a sample API request instead of going to checkout. Mock only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"tb-frame\" title=\"Design a mail piece\" src=\"../?v=r31&embed=api#/shop\"></iframe></main>";
+    return "<main><h1>Design a mail piece</h1><p class=\"lede\">This is the Yellow Letter HQ mockup's own design and order flow, the same tiles, steps and right panel. The only difference is the end: it saves a template and gives you the template ID and a sample API request instead of going to checkout. Mock only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"tb-frame\" title=\"Design a mail piece\" src=\"../?v=r32&embed=api#/custom-template\"></iframe></main>";
   }
 
   var TB_CTA = "<div class=\"tb-cta\"><div><strong>Design a mail piece</strong></div><span>Build any piece step by step, then save it as a template code for the API.</span><a class=\"button\" href=\"#/builder\">Open the builder</a></div>";
@@ -1655,7 +1660,8 @@
       var c = e.target.closest("[data-tpcopy]");
       if (c) { var id = c.getAttribute("data-tpcopy"), done = function () { c.textContent = "Copied"; setTimeout(function () { c.textContent = "Copy"; }, 1400); }; try { navigator.clipboard.writeText(id).then(done, done); } catch (x) { done(); } return; }
       var cat = e.target.closest("[data-tpcat]");
-      if (cat) { var nc = cat.getAttribute("data-tpcat"); if (nc !== TPS.cat) { TPS.cat = nc; TPS.prod = nc === "L" ? "L10" : nc === "P" ? "PC425" : "HWL10"; } redraw(); return; }
+      if (cat) { var nc = cat.getAttribute("data-tpcat"); TPS.cat = nc; TPS.prod = ""; redraw(); return; }
+      if (e.target.closest("[data-tpback]")) { e.preventDefault(); TPS.cat = ""; TPS.prod = ""; redraw(); return; }
       var w = e.target.closest("[data-tpwin]");
       if (w) { TPS.win = w.getAttribute("data-tpwin") === "1"; redraw(); return; }
       if (e.target.closest("[data-tpfam]")) { if (TP_FAM.indexOf(TPS.prod) < 0) TPS.prod = "L10"; redraw(); return; }

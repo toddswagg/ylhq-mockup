@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r31"){u.searchParams.set("v","r31");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r32"){u.searchParams.set("v","r32");location.replace(u.toString())}}catch(e){}})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2808,10 +2808,10 @@ document.addEventListener("click",function(e){if(!e.target.closest("#pmenu,#pmBt
 /* ---------- product picker (Option B + search) ---------- */
 var HWTILES=[["hw10","#/letters/hw10","Letter with Actual Handwritten #10 Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/08/Envelope1-768x432.png"],["hw6","#/letters/hw6","Letter with Actual Handwritten Invitation Envelope","https://www.yellowletterhq.com/wp-content/uploads/2021/09/HandwriteA6.png"],["hwcardsnotes","#/letters/hwcardsnotes","Actual Handwritten Greeting Cards & Folded Notes","https://www.yellowletterhq.com/wp-content/uploads/2023/02/Seasonal-Card-Spring-Wishing-You-768x432.png"],["hw425","#/postcards/hw425","Actual Handwritten Postcard (4.25 x 5.5)","https://www.yellowletterhq.com/wp-content/uploads/2025/07/Comic-768x432.jpg"],["hw","#/postcards/hw","Actual Handwritten Postcard Half Page (8.5 x 5.5)","https://www.yellowletterhq.com/wp-content/uploads/2025/07/Family-Picture-Actual-Handwritten-768x432.jpg"]];
 window.ylIsHw=function(){return /^#\/(letters\/(hw10|hw6|hwcardsnotes|hwcards|hwnotes)|postcards\/(hw|hw425))(\?|\/|$)/.test(location.hash)};
-window.ylHwPickerHTML=function(){var h=location.hash.replace(/^#\/(letters|postcards)\//,"").replace(/[?\/].*$/,"");if(h==="hwcards"||h==="hwnotes")h="hwcardsnotes";return '<div class="sect-t">Select Handwritten Product</div><div class="tiles-p ylhw-grid" id="products-button-container">'+HWTILES.map(function(t){return '<a class="ptile normal ylhq_products'+(t[0]===h?" on":"")+'" href="'+t[1]+'" data-value="'+t[2].replace(/"/g,"&quot;")+'"><img src="'+t[3]+'" alt="">'+t[2].replace(/&/g,"&amp;")+'</a>'}).join("")+'</div>'};
+window.ylHwPickerHTML=function(){var h=location.hash.replace(/^#\/(letters|postcards)\//,"").replace(/[?\/].*$/,"");if(h==="hwcards"||h==="hwnotes")h="hwcardsnotes";return '<a class="m31-back" href="#/shop">\u2039 Choose another product</a><div class="sect-t">Select Handwritten Product</div><div class="tiles-p ylhw-grid" id="products-button-container">'+HWTILES.map(function(t){return '<a class="ptile normal ylhq_products'+(t[0]===h?" on":"")+'" href="'+t[1]+'" data-value="'+t[2].replace(/"/g,"&quot;")+'"><img src="'+t[3]+'" alt="">'+t[2].replace(/&/g,"&amp;")+'</a>'}).join("")+'</div>'};
 function picker(root,items,sel,onPick,allLabel,allImg,all){
   all=all||{};
-  var html='<div class="sect-t">Select Product</div>';
+  var html='<a class="m31-back" href="#/shop">\u2039 Choose another product</a><div class="sect-t">Select Product</div>';
   if(all.on)html+='<div class="picker-search"><input type="search" placeholder="Search all templates by name" aria-label="Search templates"><span class="cnt"></span></div>';
   html+='<div class="tiles-p" id="products-button-container">';
   items.forEach(function(it,i){html+='<button type="button" class="ptile normal ylhq_products'+(sel===i&&!all.on?" on":"")+'" data-i="'+i+'" data-value="'+esc(it.name)+'"><img src="'+it.img+'" alt="">'+esc(it.name)+'</button>'});
@@ -4694,7 +4694,7 @@ function renderCT(){
   if(/^#\/custom-template\/approve/.test(location.hash)){ctApprove();return}
   ctRetInit();
   /* Design a New Mail Piece — Nov 14 rework (Josh): trimmed letter list, letter+envelope thumbnails, true handwritten envelope +35¢, digital vs true handwritten inside on cards/notes, draft Standard postcard class, live option buttons + one adjustments box. */
-  var r=$("#ct-root"),L=CT.type==="letter"?CT_LET:CT_PC,cid=CT.prod?ctId(CT.prod):"",ck=cid.split(":")[1]||"";
+  var r=$("#ct-root"),isHwN=function(n){return /Handwritten/.test(n)},ctCat=CT.cat||(CT.type==="postcard"?"postcard":"letter"),L=ctCat==="handwritten"?CT_LET.filter(isHwN).concat(CT_PC.filter(isHwN)):ctCat==="postcard"?CT_PC.filter(function(n){return !isHwN(n)}):CT_LET.filter(function(n){return !isHwN(n)}),cid=CT.prod?ctId(CT.prod):"",ck=cid.split(":")[1]||"";
   if(!CT.ret)CT.ret={n:"",a:"",c:"",s:"",z:""};
   if(!CT.envNote)CT.envNote="";if(!CT.envArt)CT.envArt=[];
   if(CT.hwEnv==null)CT.hwEnv="";
@@ -4768,10 +4768,8 @@ function renderCT(){
   var head=function(n,t,sub){return '<div class="ct-sh"><span class="ct-n'+(ok[n]?" ok":"")+'">'+(ok[n]?"&#10003;":n)+'</span><div><h2>'+t+'</h2>'+(sub?'<p class="muted">'+sub+'</p>':'')+'</div></div>'};
   var picked=function(){if(!CT.prod||isOwn||!CT.tmpl)return "";var src=ctTplSrc(),label=CT.tmplName||"";if(!label&&!src)return "";return '<div class="ct-picked">'+(src?'<img src="'+src+'" alt="">':'')+'<div><b>'+esc(label||CT.prod)+'</b><div class="muted">'+esc(CT.prod)+'</div></div></div>'};
   var card=function(n){var x=info(n),on=CT.prod===n;var badge=/Real Handwritten Greeting/.test(n)?'<span class="ct-kind-badge ct-kind-hw">Real handwritten</span>':/Digital Greeting/.test(n)?'<span class="ct-kind-badge ct-kind-print">Printed</span>':'';return '<div class="ct-card'+(on?" on":"")+'" data-ctid="'+esc(ctId(n))+'"><button type="button" class="ct-im" data-ctzoom="'+esc(n)+'" aria-label="Choose '+esc(n)+'" style="background-image:url(\''+x.img+'\')">'+badge+'<span class="ct-zoom" title="Enlarge sample">&#128269; Enlarge</span></button><div class="ct-b"><b>'+esc(n)+'</b><dl>'+(x.size?'<dt>Size</dt><dd>'+x.size+'</dd>':'')+'<dt>Envelope</dt><dd>'+x.env+'</dd><dt>Ink</dt><dd>'+x.ink+'</dd></dl><div class="ct-from">From <b>'+money(x.from,3)+'</b> each</div>'+(x.extra?'<p class="muted" style="font-size:12px;margin:0">'+x.extra+'</p>':'')+'<button type="button" class="btn sm'+(on?"":" sec")+' block" data-ctpick="'+esc(n)+'" data-ctid="'+esc(ctId(n))+'">'+(on?"&#10003; Selected":"Choose this")+'</button></div></div>'};
-  var s1='<div class="panel ct-step" id="ct-s1">'+head(1,"Step 1: What are you mailing?")+'<div class="radios"><label><input type="radio" name="ctType" value="letter"'+(CT.type==="letter"?" checked":"")+'>Letter</label><label><input type="radio" name="ctType" value="postcard"'+(CT.type==="postcard"?" checked":"")+'>Postcard</label></div>'+why("Letters look like personal mail and get opened. Postcards cost less and get read without opening.")+'</div>';
-  var grid;
-  if(CT.type==="postcard"){var printed=L.filter(function(n){return n.indexOf("Handwritten")<0}),hwpc=L.filter(function(n){return n.indexOf("Handwritten")>-1});grid='<div class="ct-sec"><h3 class="ct-sec-h">Printed postcards</h3><div class="ct-cards">'+printed.map(card).join("")+'</div></div><div class="ct-sec"><h3 class="ct-sec-h">Real handwritten postcards</h3><p class="muted" style="font-size:12.5px;margin:0 0 8px">The live site offers 4 templates for these: Custom Designed Post Card ($65), Past Templates, family picture, and comic. We did not invent additional artwork.</p><div class="ct-cards">'+hwpc.map(card).join("")+'</div></div>'}
-  else grid='<div class="ct-cards">'+L.map(card).join("")+'</div>';
+  var s1='<div class="panel ct-step" id="ct-s1">'+head(1,"Step 1: What are you mailing?")+'<div class="radios"><label><input type="radio" name="ctType" value="letter"'+(ctCat==="letter"?" checked":"")+'>Letter</label><label><input type="radio" name="ctType" value="postcard"'+(ctCat==="postcard"?" checked":"")+'>Postcard</label><label><input type="radio" name="ctType" value="handwritten"'+(ctCat==="handwritten"?" checked":"")+'>Handwritten</label></div>'+why("Letters look like personal mail and get opened. Postcards cost less and get read without opening. Handwritten pieces are written with a real pen.")+'</div>';
+  var grid='<div class="ct-cards'+(ctCat==="handwritten"?" ct-hw":"")+'">'+L.map(card).join("")+'</div>';
   var s2='<div class="panel ct-step" id="ct-s2">'+head(2,"Step 2: Pick your mail piece","Tap a piece to choose it. Use Enlarge to see a bigger sample.")+grid+why("Each piece looks different in the mailbox and has its own price. Picking it first shows only the options that fit it.")+'<p class="muted" style="font-size:12.5px;margin:6px 0 0">Starting price is per piece at the highest quantity tier, before postage options.</p></div>';
   var sInside="",s3="",s4="",s5="",s6="";
   if(CT.prod&&hasInside){
@@ -4843,7 +4841,7 @@ function renderCT(){
     }
     if(isOwn){
       s5='<div class="panel ct-step" id="ct-s5">'+head(4+sh,"Step "+(4+sh)+": Tell us about your design","We will design this from scratch from your notes and any files you upload.")+
-        '<div class="fld"><label class="f" for="ctNotes">What should it look like and say? <span class="req">*</span></label><textarea class="inp" id="ctNotes" rows="5" placeholder="What should it look like and say? Include the offer, names, phone numbers, and any layout notes.">'+esc(CT.notes)+'</textarea>'+why("The more detail you give, the closer the first proof will be.")+'</div>'+
+        '<div class="dz-choice"><button type="button" data-dz="template"><b>Create your own template</b>Pick a layout or upload artwork, edit the headline, body, return address and font, preview it, then save.</button>'+(hasEnv?'<button type="button" data-dz="envelope"><b>Create your own envelope</b>Pick an envelope layout or upload artwork, edit the return address and font, preview it, then save.</button>':'')+'</div>'+(CT.dzT?'<div class="dz-saved">\u2713 Your template: '+esc(CT.dzT.name)+' ('+CT.dzT.id+')</div>':'')+(CT.dzE?'<div class="dz-saved">\u2713 Your envelope: '+esc(CT.dzE.name)+' ('+CT.dzE.id+')</div>':'')+'<div class="fld"><label class="f" for="ctNotes">What should it look like and say? <span class="req">*</span></label><textarea class="inp" id="ctNotes" rows="5" placeholder="What should it look like and say? Include the offer, names, phone numbers, and any layout notes.">'+esc(CT.notes)+'</textarea>'+why("The more detail you give, the closer the first proof will be.")+'</div>'+
         '<div class="fld"><label class="f">Upload your artwork or an example</label>'+dropBox("ctart","Drag and drop your artwork here","Logo, photo, PDF or a picture of a mail piece you like","Select files",CT.files)+why("A sketch, a logo or a photo of a piece you like is enough to start.")+'</div>'+
         look+offerBox+adjBox+nameQty+'</div>';
     }
@@ -4901,7 +4899,7 @@ function renderCT(){
   function envSum(){if(!CT.prod)return "";if(!hasEnv)return info(CT.prod).env;var row=ctEnvRow(cid,CT.env),lab=row?optEnvLabel(row):(CT.env||"");if(CT.hwEnv==="yes")lab+=" + true handwritten envelope, "+(CT.hwFont||"style not chosen")+" (+35 cents)";if(CT.sn)lab+=" + yellow sticky note (+6 cents)";return lab}
   function clip(s){s=(s||"").trim();return s?esc(s.slice(0,140))+(s.length>140?"...":""):""}
   function sum(){var R=CT.ret,tpl=isOwn?"Create my own design":(CT.tmplName||"");
-    var rows=[["Product type",CT.type==="letter"?"Letter":"Postcard"],["Mail piece",CT.prod?('<span class="ct-sum-prod"><img src="'+ctImgOf(CT.prod)+'" alt="">'+esc(CT.prod)+'</span>'):""],["Inside message",hasInside?(CT.inside==="truehw"?"True handwritten (real pen, +$"+CT_INSIDE_UP.toFixed(3)+" each)":(CT.inside==="digital"?"Digital handwritten":"")):""],["How you started",isOwn?"Create my own design":(isStock?"Use one of our templates with minor adjustments":"")],["Stock template",isStock&&tpl?esc(tpl):""],["Adjustments",clip(CT.adjust)],["Envelope",envSum()],["Postage",(CT.post||"").split(" (")[0]],["Paper color",CT.paper||(CT.prod&&optColOf(cid).paper.length===1?optColOf(cid).paper[0]:"")],["Font",CT.font||(CT.prod&&optFontsOf(cid).fs.length===1?optFontsOf(cid).fs[0]:"")],["Ink color",CT.fcol||(CT.prod&&optColOf(cid).font.length===1?optColOf(cid).font[0]:"")],["Return address",(function(){var a=[R.n,R.a,[R.c,R.s].filter(Boolean).join(", ")+(R.z?" "+R.z:"")].filter(function(x){return x&&x.trim()}).map(esc).join("<br>");return a?a+'<br><small class="muted">Saved default. Fills @ReturnAddressStreet@ and @ReturnAddressCityStateZip@. A list column overrides it per order.</small>':""})()],["Phone",CT.phone?esc(CT.phone)+'<br><small class="muted">Saved default. Fills @AgentNumber@. A list column overrides it per order.</small>':""],["Artwork",CT.files.length?CT.files.map(esc).join(", "):"None uploaded"],["Notes",clip(CT.notes)],["Template name",esc(CT.tname)],["Design files","1 letter design"+(CT.sp?" (circular on the same sheet)":"")+(hasEnv?" + 1 envelope"+(optIsCustom(cid,CT.env)?" (custom design)":""):"")]];
+    var rows=[["Product type",CT.cat==="handwritten"?"Handwritten":(CT.type==="letter"?"Letter":"Postcard")],["Mail piece",CT.prod?('<span class="ct-sum-prod"><img src="'+ctImgOf(CT.prod)+'" alt="">'+esc(CT.prod)+'</span>'):""],["Inside message",hasInside?(CT.inside==="truehw"?"True handwritten (real pen, +$"+CT_INSIDE_UP.toFixed(3)+" each)":(CT.inside==="digital"?"Digital handwritten":"")):""],["How you started",isOwn?"Create my own design":(isStock?"Use one of our templates with minor adjustments":"")],["Stock template",isStock&&tpl?esc(tpl):""],["Adjustments",clip(CT.adjust)],["Envelope",envSum()],["Postage",(CT.post||"").split(" (")[0]],["Paper color",CT.paper||(CT.prod&&optColOf(cid).paper.length===1?optColOf(cid).paper[0]:"")],["Font",CT.font||(CT.prod&&optFontsOf(cid).fs.length===1?optFontsOf(cid).fs[0]:"")],["Ink color",CT.fcol||(CT.prod&&optColOf(cid).font.length===1?optColOf(cid).font[0]:"")],["Return address",(function(){var a=[R.n,R.a,[R.c,R.s].filter(Boolean).join(", ")+(R.z?" "+R.z:"")].filter(function(x){return x&&x.trim()}).map(esc).join("<br>");return a?a+'<br><small class="muted">Saved default. Fills @ReturnAddressStreet@ and @ReturnAddressCityStateZip@. A list column overrides it per order.</small>':""})()],["Phone",CT.phone?esc(CT.phone)+'<br><small class="muted">Saved default. Fills @AgentNumber@. A list column overrides it per order.</small>':""],["Artwork",CT.files.length?CT.files.map(esc).join(", "):"None uploaded"],["Notes",clip(CT.notes)],["Template name",esc(CT.tname)],["Design files","1 letter design"+(CT.sp?" (circular on the same sheet)":"")+(hasEnv?" + 1 envelope"+(optIsCustom(cid,CT.env)?" (custom design)":""):"")]];
     if(isOwn)rows=rows.filter(function(x){return ["Stock template"].indexOf(x[0])<0});
     if(!hasInside)rows=rows.filter(function(x){return x[0]!=="Inside message"});
     if(isPc)rows=rows.filter(function(x){return x[0]!=="Envelope"});
@@ -4911,9 +4909,10 @@ function renderCT(){
     $("#ctSum").innerHTML='<div class="kv ct-kv">'+rows.map(function(x){return '<b>'+x[0]+'</b><span>'+(x[1]?x[1]:'<span class="muted">Not chosen yet</span>')+'</span>'}).join("")+'</div>'}
   if($("#ctSum"))sum();
   $$("[data-ctgo]",r).forEach(function(a){a.onclick=function(e){e.preventDefault();var s=$("#"+stepId(+a.getAttribute("data-ctgo")));if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
-  function resetProdExtras(){CT.env=CT.post=CT.paper=CT.font=CT.fcol="";CT.sn=CT.sp=CT.gl="";CT.tmpl=CT.tmplName="";CT.tmplImg=-1;CT.start="";CT.tplQ="";CT.adjWord=CT.adjAgent=CT.adjLogo=CT.adjColor=CT.adjFont=CT.adjLayout=CT.adjOther="";CT.hwEnv="";CT.inside="";CT.cardStyle="";CT.adjust=""}
-  $$("input[name=ctType]").forEach(function(x){x.onchange=function(){CT.type=x.value;CT.prod="";resetProdExtras();renderCT()}});
-  $$("[data-ctpick]",r).forEach(function(b){b.onclick=function(){CT.prod=b.getAttribute("data-ctpick");resetProdExtras();renderCT();var s=$(hasInside||hasStyle||ctHasInside(CT.prod)||ctHasStyle(CT.prod)?"#ct-sInside":"#ct-s3");if(!s)s=$("#ct-s3");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
+  function resetProdExtras(){CT.dzT=CT.dzE=null;CT.env=CT.post=CT.paper=CT.font=CT.fcol="";CT.sn=CT.sp=CT.gl="";CT.tmpl=CT.tmplName="";CT.tmplImg=-1;CT.start="";CT.tplQ="";CT.adjWord=CT.adjAgent=CT.adjLogo=CT.adjColor=CT.adjFont=CT.adjLayout=CT.adjOther="";CT.hwEnv="";CT.inside="";CT.cardStyle="";CT.adjust=""}
+  $$("input[name=ctType]").forEach(function(x){x.onchange=function(){CT.cat=x.value;CT.type=x.value==="postcard"?"postcard":"letter";CT.prod="";resetProdExtras();renderCT()}});
+  $$("[data-dz]",r).forEach(function(b){b.onclick=function(){window.ylDesigner(b.getAttribute("data-dz"),function(d){if(d.kind==="envelope")CT.dzE=d;else CT.dzT=d;if((CT.notes||"").indexOf(d.summary)<0)CT.notes=((CT.notes||"")+(CT.notes?"\n":"")+d.summary);renderCT();if(d.kind==="envelope")setTimeout(function(){var rr=[].slice.call(document.querySelectorAll("#ct-s6 input[type=radio]")).filter(function(x){return /design|upload/i.test((x.value||"")+(x.parentNode?x.parentNode.textContent:""))})[0];if(rr)rr.click()},100)})}});
+  $$("[data-ctpick]",r).forEach(function(b){b.onclick=function(){CT.prod=b.getAttribute("data-ctpick");if(CT.cat==="handwritten")CT.type=CT_PC.indexOf(CT.prod)>-1?"postcard":"letter";resetProdExtras();renderCT();var s=$(hasInside||hasStyle||ctHasInside(CT.prod)||ctHasStyle(CT.prod)?"#ct-sInside":"#ct-s3");if(!s)s=$("#ct-s3");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
   $$("[data-ctzoom]",r).forEach(function(b){b.onclick=function(ev){if(!(ev&&ev.target&&ev.target.closest&&ev.target.closest(".ct-zoom"))){var pk=b.closest(".ct-card");pk=pk&&pk.querySelector("[data-ctpick]");if(pk){pk.click();return}}var n=b.getAttribute("data-ctzoom"),x=info(n);modal(n,'<img src="'+x.img+'" alt="Sample of '+esc(n)+'" style="width:100%;border-radius:10px;display:block"><p class="muted" style="margin:10px 0 0">'+(x.size?x.size+' &middot; ':'')+x.env+' &middot; '+x.ink+' &middot; from '+money(x.from,3)+' each. Sample image.</p>',[{label:"Choose this piece",cls:"btn",fn:function(){CT.prod=n;resetProdExtras();renderCT();var next=$(ctHasInside(n)?"#ct-sInside":"#ct-s3");if(next)next.scrollIntoView({behavior:"smooth",block:"start"})}},{label:"Close",cls:"btn sec"}])}});
   $$("[data-ctinside]",r).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-ctinside");if(CT.inside!==v){CT.tmpl=CT.tmplName="";CT.tmplImg=-1;CT.env="";CT.tplQ=""}CT.inside=v;renderCT();var s=$("#ct-s3");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
   $$("[data-ctstyle]",r).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-ctstyle");if(CT.cardStyle!==v){CT.tmpl=CT.tmplName="";CT.tmplImg=-1;CT.env="";CT.tplQ=""}CT.cardStyle=v;renderCT();var s=$("#ct-s3");if(s)s.scrollIntoView({behavior:"smooth",block:"start"})}});
@@ -5092,12 +5091,8 @@ function m31Pick(L,go){
  var im=function(k){var i=ix(k);return i>-1?L[i].img:""};
  function tile(k,label,on,extra){return '<button type="button" class="ptile normal ylhq_products m31t'+(on?" on":"")+'" data-i="'+ix(k)+'" data-k="'+k+'" data-value="'+label.replace(/"/g,"&quot;")+'"><img src="'+im(k)+'" alt="">'+label.replace(/&/g,"&amp;")+'</button>'}
  var t10='<button type="button" class="ptile normal ylhq_products m31t'+(inFam?" on":"")+'" data-fam="1" data-value="Letter with #10 Envelope"><img src="'+im("no10")+'" alt="">Letter with #10 Envelope</button>';
- var h='<div class="sect-t">Select Product</div>'+
-  '<div class="tiles-p m31-cats" id="m31cats"><button type="button" class="ptile normal ylhq_products on" data-value="Letters"><img src="'+im("no10")+'" alt="">Letters</button>'+
-  '<a class="ptile normal ylhq_products" href="#/postcards" data-value="Postcards"><img src="https://www.yellowletterhq.com/wp-content/uploads/2025/07/Just-Listed-Postcard-1-768x432.jpg" alt="">Postcards</a>'+
-  '<a class="ptile normal ylhq_products ylhw-tile" href="#/handwritten" data-value="Handwritten"><img src="assets/hw-card.jpg" alt="">Handwritten<span class="ylhw-sub">Cards, flip notes, postcards, #10 envelopes</span></a></div>'+
-  '<div class="m31-lab">Letters</div>'+
-  '<div class="tiles-p m31-letters" id="products-button-container">'+tile("sealed","Pressure Sealed Letter/Snap Packs",cur==="sealed")+t10+tile("a6","Letter with Invitation Envelope",cur==="a6")+tile("cardsnotes","Printed Greeting Cards & Folded Notes",cur==="cardsnotes")+'</div>';
+ var h='<a class="m31-back" href="#/shop">\u2039 Choose another product</a><div class="sect-t">Select Letter Type</div>'+
+   '<div class="tiles-p m31-letters" id="products-button-container">'+tile("sealed","Pressure Sealed Letter/Snap Packs",cur==="sealed")+t10+tile("a6","Letter with Invitation Envelope",cur==="a6")+tile("cardsnotes","Printed Greeting Cards & Folded Notes",cur==="cardsnotes")+'</div>';
  if(inFam){
   var o1=M31.win?"windowed":"no10";
   function opt(k,label,chip,on){return '<button type="button" class="m31-opt'+(on?" sel":"")+'" data-i="'+ix(k)+'" data-k="'+k+'" data-value="'+label+'"><span class="m31-img"><img src="'+im(k)+'" alt=""></span><b>'+label+'</b><span class="m31-chip">'+chip+'</span></button>'}
@@ -7257,11 +7252,11 @@ var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}
 /* round 27: embed mode. ?embed=api turns the order flow into "Save as template" and hides the site chrome. */
 (function(){
   if(!/[?&]embed=api/.test(location.search))return;
-  document.body.classList.add("embed");
+  document.body.classList.add("embed");try{var _rl=function(){var b=document.getElementById("ctAdd");if(b&&b.textContent!=="Save as template")b.textContent="Save as template";var p=document.querySelector("#ct-s9 .muted");};setInterval(_rl,400)}catch(e){}
   var n=+(sessionStorage.getItem("ylTplN")||5600);
   var _rc=renderCart;
   renderCart=function(){
-    var it=CART[CART.length-1];if(!it){location.replace("#/shop");return}
+    var it=CART[CART.length-1];if(!it){location.replace("#/custom-template");return}
     CART.length=0;cartBadge();
     n++;sessionStorage.setItem("ylTplN",n);
     var code="CT"+n,hay=((it.envName||"")+" "+(it.name||"")),hasEnv=!!(it.envName&&!/^none$/i.test(it.envName))||/envelope/i.test(it.name||"");
@@ -7272,7 +7267,7 @@ var ylsO=ffBar;ffBar=function(k){ylsO.apply(this,arguments);try{ylStepLabels(k)}
     var BASE="https://ylhq-api-orders.yellowletterhq.com/api/v1";
     var req='curl -sS -X POST "'+BASE+'/upload" \\\n  -H "X-API-Key: YOUR_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify({target_date:"ASAP",template_on_file:code,details:det,records:[{first_name:"Sample",address:"123 Example St",city:"Anytown",state:"CA",zip:"90000"}]},null,2)+"'";
     var img=it.img?'<img src="'+it.img+'" alt="" style="width:100%;max-height:260px;object-fit:contain;border-radius:12px;background:#f4f4f4">':"";
-    $("#cart-root").innerHTML='<div class="panel tpl-saved" style="padding:22px"><span class="pv-pill">Saved</span><h2 style="margin:10px 0 4px">Template saved</h2><p class="muted">'+esc(it.name||"")+(it.post?" \u00b7 "+esc(it.post):"")+(st?" \u00b7 sticky note (200-piece minimum)":"")+'. Mock only: nothing was ordered.</p>'+img+'<h3 style="margin:16px 0 6px">Template ID</h3><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code id="tplCode" style="font:800 20px Montserrat,sans-serif;border:2px solid #FFC523;border-radius:999px;padding:8px 20px">'+code+'</code><button class="btn sm" id="tplCopy" type="button">Copy</button></div><h3 style="margin:16px 0 6px">Sample API request</h3><pre id="tplReq" style="background:#262626;color:#fff8dc;padding:14px;border-radius:12px;overflow:auto;font-size:13px;white-space:pre-wrap;word-break:break-all">'+esc(req)+'</pre><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" id="tplReqCopy" type="button">Copy request</button><a class="btn sec sm" href="#/shop">Build another</a></div></div>';
+    $("#cart-root").innerHTML='<div class="panel tpl-saved" style="padding:22px"><span class="pv-pill">Saved</span><h2 style="margin:10px 0 4px">Template saved</h2><p class="muted">'+esc(it.name||"")+(it.post?" \u00b7 "+esc(it.post):"")+(st?" \u00b7 sticky note (200-piece minimum)":"")+'. Mock only: nothing was ordered.</p>'+img+'<h3 style="margin:16px 0 6px">Template ID</h3><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code id="tplCode" style="font:800 20px Montserrat,sans-serif;border:2px solid #FFC523;border-radius:999px;padding:8px 20px">'+code+'</code><button class="btn sm" id="tplCopy" type="button">Copy</button></div><h3 style="margin:16px 0 6px">Sample API request</h3><pre id="tplReq" style="background:#262626;color:#fff8dc;padding:14px;border-radius:12px;overflow:auto;font-size:13px;white-space:pre-wrap;word-break:break-all">'+esc(req)+'</pre><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" id="tplReqCopy" type="button">Copy request</button><a class="btn sec sm" href="#/custom-template">Build another</a></div></div>';
     function cp(id,btn){btn.onclick=function(){var t=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){btn.textContent="Copied"},function(){btn.textContent="Select and copy"})}}
     cp("tplCode",$("#tplCopy"));cp("tplReq",$("#tplReqCopy"));
   };
@@ -8220,5 +8215,101 @@ setInterval(run,600);window.addEventListener("hashchange",function(){setTimeout(
 @media (max-width:900px){#ltPick #products-button-container.m31-letters,#ltPick .m31-opts{grid-template-columns:repeat(2,minmax(0,1fr))!important}#ltPick .m31-open:before{display:none}}
 @media (max-width:560px){#ltPick #m31cats.m31-cats{grid-template-columns:1fr!important}#ltPick #m31cats.m31-cats>.ptile{min-height:84px!important}#ltPick #products-button-container.m31-letters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}#ltPick #products-button-container.m31-letters>.ptile{font-size:13.5px;padding:10px}#ltPick #products-button-container.m31-letters>.ptile img{height:60px!important}#ltPick .m31-opts{gap:10px}#ltPick .m31-opt b{font-size:13.5px}#ltPick .m31-open{padding:14px}}
 #ltPick .m31-cats a.ptile{text-decoration:none!important}#ltPick .m31-cats>.ptile{align-items:center}#ltPick .m31-cats .ylhw-tile{flex-wrap:wrap;align-content:center}
+
+.m31-back{display:inline-flex;align-items:center;gap:6px;margin:0 0 14px;font:700 14px Montserrat,sans-serif;color:#262626;text-decoration:none;border:1.5px solid #E4E4E7;border-radius:999px;padding:8px 16px;background:#fff}
+.m31-back:hover{background:#FFC523;border-color:#FFC523}
+.ct-cards.ct-hw{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:16px}
+.ct-cards.ct-hw>.ct-card{grid-column:span 2}
+.ct-cards.ct-hw>.ct-card:nth-child(4){grid-column:2/span 2}
+.ct-cards.ct-hw>.ct-card:nth-child(5){grid-column:4/span 2}
+@media (max-width:900px){.ct-cards.ct-hw{grid-template-columns:repeat(2,minmax(0,1fr))!important}.ct-cards.ct-hw>.ct-card,.ct-cards.ct-hw>.ct-card:nth-child(4),.ct-cards.ct-hw>.ct-card:nth-child(5){grid-column:auto}}
+@media (max-width:560px){.ct-cards.ct-hw{grid-template-columns:1fr!important}}
 </style>
+<script>
+/* r32: Design your own template / envelope (mock designer) */
+(function(){
+ var FONTS=[["Montserrat","Montserrat, sans-serif"],["Open Sans","'Open Sans', sans-serif"],["Caveat (handwriting)","Caveat, cursive"],["Kalam (handwriting)","Kalam, cursive"],["Great Vibes (cursive)","'Great Vibes', cursive"]];
+ var LAY={template:[["classic","Classic letter","Headline on top, short letter below."],["offer","Bold offer","Big headline, one strong offer line."],["note","Friendly note","Handwritten look, personal tone."]],
+          envelope:[["return","Return address only","Clean, looks like personal mail."],["teaser","Teaser line","Return address plus a short line on the front."],["hand","Handwritten look","Looks hand addressed."]]};
+ function e(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+ function css(){if(document.getElementById("dz-css"))return;var st=document.createElement("style");st.id="dz-css";st.textContent=
+ '.dz{position:fixed;inset:0;z-index:3000;background:rgba(20,20,20,.55);display:flex;align-items:center;justify-content:center;padding:16px;font-family:"Open Sans",system-ui,sans-serif}'+
+ '.dz-c{background:#fff;border-radius:22px;width:min(1040px,100%);max-height:92vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.35)}'+
+ '.dz-h{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid #ECE7D6;position:sticky;top:0;background:#fff;z-index:2}'+
+ '.dz-h h2{margin:0;font:800 20px Montserrat,sans-serif;color:#262626}.dz-x{border:0;background:#f4f4f5;border-radius:99px;width:36px;height:36px;font-size:20px;cursor:pointer}'+
+ '.dz-b{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;padding:20px 24px}'+
+ '.dz-sec{margin:0 0 16px}.dz-sec>b{display:block;font:700 13px Montserrat,sans-serif;color:#262626;margin:0 0 8px}'+
+ '.dz-lay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}'+
+ '.dz-lay button{border:1.5px solid #ECE7D6;border-radius:14px;background:#fff;padding:10px;text-align:left;cursor:pointer;font:600 12px "Open Sans",sans-serif;color:#52525b}'+
+ '.dz-lay button b{display:block;font:700 13px Montserrat,sans-serif;color:#262626;margin-bottom:2px}.dz-lay button.on{border-color:#FFC523;box-shadow:0 0 0 3px #FFE9A6;background:#FFFBEA}'+
+ '.dz-f{display:flex;flex-direction:column;gap:4px;margin:0 0 10px}.dz-f label{font:700 12px Montserrat,sans-serif;color:#52525b}'+
+ '.dz-f input,.dz-f textarea,.dz-f select{border:1.5px solid #E4E4E7;border-radius:12px;padding:10px 12px;font:400 14px "Open Sans",sans-serif;width:100%;box-sizing:border-box;background:#fff}'+
+ '.dz-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}'+
+ '.dz-up{border:2px dashed #E4C75A;border-radius:14px;padding:12px;background:#FFFBEA;font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}'+
+ '.dz-pv{background:#f4f4f5;border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:center;position:sticky;top:76px;align-self:start;min-height:360px}'+
+ '.dz-sheet{background:#fff;box-shadow:0 8px 26px rgba(0,0,0,.18);width:100%;max-width:380px;aspect-ratio:8.5/11;padding:9% 9%;box-sizing:border-box;overflow:hidden;position:relative;display:flex;flex-direction:column;gap:8px;line-height:1.35}'+
+ '.dz-sheet.card{aspect-ratio:5.5/4.25;max-width:420px}.dz-env{aspect-ratio:9.5/4.125;max-width:430px;background:#FFFDF5;padding:6% 7%;justify-content:space-between}'+
+ '.dz-sheet .hd{font-weight:800;font-size:22px;word-break:break-word}.dz-sheet .bd{font-size:13px;white-space:pre-wrap;word-break:break-word}.dz-sheet .rt{font-size:11px;white-space:pre-wrap;color:#52525b}'+
+ '.dz-sheet img.art{max-width:100%;max-height:45%;object-fit:contain;border-radius:6px}.dz-sheet .stamp{position:absolute;right:6%;top:10%;width:46px;height:52px;border:2px dashed #bbb;border-radius:4px}'+
+ '.dz-ft{display:flex;gap:10px;justify-content:flex-end;padding:14px 24px 20px;border-top:1px solid #ECE7D6;position:sticky;bottom:0;background:#fff}'+
+ '.dz-ft button{height:44px;padding:0 22px;border-radius:999px;font:700 14px Montserrat,sans-serif;cursor:pointer;border:2px solid #FFC523;background:#FFC523;color:#262626}.dz-ft button.sec{background:#fff;border-color:#E4E4E7}'+
+ '.dz-err{color:#B54708;font-size:13px;margin-right:auto;align-self:center}'+
+ '@media(max-width:800px){.dz-b{grid-template-columns:1fr}.dz-pv{position:static;min-height:0}.dz-lay{grid-template-columns:1fr}}'+
+ '.dz-choice{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 16px}.dz-choice button{border:2px solid #ECE7D6;background:#fff;border-radius:18px;padding:16px;text-align:left;cursor:pointer;font:600 13px "Open Sans",sans-serif;color:#52525b}'+
+ '.dz-choice button b{display:block;font:800 16px Montserrat,sans-serif;color:#262626;margin-bottom:4px}.dz-choice button:hover{border-color:#FFC523;background:#FFFBEA}'+
+ '.dz-saved{display:flex;gap:10px;align-items:center;background:#ECFDF3;border:1px solid #A6F4C5;border-radius:12px;padding:8px 12px;font-size:13px;margin:0 0 10px;color:#05603A}'+
+ '@media(max-width:560px){.dz-choice{grid-template-columns:1fr}}';document.head.appendChild(st)}
+ function open(kind,cb,opt){
+  css();opt=opt||{};var env=kind==="envelope",L=LAY[kind];
+  var d={kind:kind,name:"",layout:L[0][0],headline:env?"":"We want to buy your house",body:env?"":"Hi there,\n\nI'm a local buyer and I'd love to make you a fair cash offer for your property. Call me anytime.\n\nThanks,\nJane",teaser:"Personal and confidential",ret:"Jane Sample\nSample Home Buyers LLC\nPO Box 100, Anytown, CA 90000",font:FONTS[0][1],fontName:FONTS[0][0],color:"#262626",art:"",artName:""};
+  var o=document.createElement("div");o.className="dz";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label",env?"Create your own envelope":"Create your own template");
+  o.innerHTML='<div class="dz-c"><div class="dz-h"><h2>'+(env?"Create your own envelope":"Create your own template")+'</h2><button type="button" class="dz-x" aria-label="Close">&times;</button></div>'+
+  '<div class="dz-b"><div>'+
+   '<div class="dz-sec"><b>1. Pick a starting layout</b><div class="dz-lay">'+L.map(function(l,i){return '<button type="button" data-lay="'+l[0]+'" class="'+(i?"":"on")+'"><b>'+l[1]+'</b>'+l[2]+'</button>'}).join("")+'</div></div>'+
+   '<div class="dz-sec"><b>or upload your artwork</b><div class="dz-up"><label class="btn sec sm" style="margin:0;cursor:pointer;border-radius:999px;border:1.5px solid #E4E4E7;padding:8px 14px;background:#fff;font-weight:700">Select artwork<input type="file" id="dzFile" accept="image/*,.pdf" hidden></label><span id="dzFileN" style="color:#52525b">PNG, JPG or PDF. Stays on your computer (mock only).</span></div></div>'+
+   '<div class="dz-sec"><b>2. Edit the details</b>'+
+    (env?'<div class="dz-f"><label for="dzTease">Line on the front (optional)</label><input id="dzTease" value="'+e(d.teaser)+'"></div>':'<div class="dz-f"><label for="dzHead">Headline</label><input id="dzHead" value="'+e(d.headline)+'"></div><div class="dz-f"><label for="dzBody">Body</label><textarea id="dzBody" rows="6">'+e(d.body)+'</textarea></div>')+
+    '<div class="dz-f"><label for="dzRet">Return address</label><textarea id="dzRet" rows="3">'+e(d.ret)+'</textarea></div>'+
+    '<div class="dz-two"><div class="dz-f"><label for="dzFont">Font</label><select id="dzFont">'+FONTS.map(function(f){return '<option value="'+e(f[1])+'">'+f[0]+'</option>'}).join("")+'</select></div><div class="dz-f"><label for="dzCol">Ink color</label><select id="dzCol"><option value="#262626">Black</option><option value="#1D4ED8">Blue</option><option value="#B42318">Red</option></select></div></div>'+
+   '</div>'+
+   '<div class="dz-sec"><b>3. Name it</b><div class="dz-f"><input id="dzName" placeholder="'+(env?"My envelope":"My template")+'" aria-label="Design name"></div></div>'+
+  '</div><div class="dz-pv"><div class="dz-sheet'+(env?" dz-env":"")+'" id="dzSheet"></div></div></div>'+
+  '<div class="dz-ft"><span class="dz-err" id="dzErr"></span><button type="button" class="sec" data-dzc>Cancel</button><button type="button" data-dzs>Save design</button></div></div>';
+  document.body.appendChild(o);
+  function g(id){return o.querySelector("#"+id)}
+  function draw(){var s=g("dzSheet");d.headline=g("dzHead")?g("dzHead").value:"";d.body=g("dzBody")?g("dzBody").value:"";d.teaser=g("dzTease")?g("dzTease").value:"";d.ret=g("dzRet").value;d.font=g("dzFont").value;d.fontName=g("dzFont").selectedOptions[0].text;d.color=g("dzCol").value;
+   var hand=d.layout==="note"||d.layout==="hand",ff=d.font,fs=hand&&d.font===FONTS[0][1]?FONTS[2][1]:ff;
+   s.style.fontFamily=fs;s.style.color=d.color;
+   if(env){s.innerHTML='<div class="rt" style="font-size:12px;color:'+d.color+'">'+e(d.ret)+'</div><div class="stamp"></div>'+(d.art?'<img class="art" src="'+d.art+'" alt="" style="max-height:40%;align-self:center">':'')+'<div class="hd" style="font-size:'+(d.layout==="teaser"?"15px":"13px")+';align-self:center;text-align:center;font-weight:700">'+(d.layout==="teaser"?e(d.teaser):"Homeowner Name<br>123 Main St, Anytown, CA 90000")+'</div>'}
+   else{s.className="dz-sheet"+(d.layout==="offer"?" card":"");s.innerHTML=(d.art?'<img class="art" src="'+d.art+'" alt="">':'')+'<div class="hd" style="'+(d.layout==="offer"?"font-size:28px;text-transform:uppercase":"")+'">'+e(d.headline)+'</div><div class="bd">'+e(d.body)+'</div><div class="rt" style="margin-top:auto">'+e(d.ret)+'</div>'}}
+  draw();
+  o.addEventListener("input",draw);o.addEventListener("change",draw);
+  o.querySelectorAll("[data-lay]").forEach(function(b){b.onclick=function(){o.querySelectorAll("[data-lay]").forEach(function(x){x.classList.toggle("on",x===b)});d.layout=b.getAttribute("data-lay");draw()}});
+  g("dzFile").onchange=function(){var f=this.files&&this.files[0];if(!f)return;d.artName=f.name;g("dzFileN").textContent="Selected: "+f.name;if(/^image\//.test(f.type)){var r=new FileReader();r.onload=function(){d.art=r.result;draw()};r.readAsDataURL(f)}else draw()};
+  function close(){o.remove();document.removeEventListener("keydown",kd)}function kd(ev){if(ev.key==="Escape")close()}document.addEventListener("keydown",kd);
+  o.querySelector(".dz-x").onclick=close;o.querySelector("[data-dzc]").onclick=function(){close();[60,400].forEach(function(ms){setTimeout(function(){var t=document.getElementById("tv");if(t&&t.classList.contains("open")){var x=document.getElementById("tvX");x&&x.click()}},ms)})};
+  o.querySelector("[data-dzs]").onclick=function(){draw();var nm=g("dzName").value.trim();if(!nm){g("dzErr").textContent="Please name your design.";g("dzName").focus();return}if(!env&&!d.art&&!d.headline.trim()){g("dzErr").textContent="Add a headline or upload artwork.";return}
+   d.name=nm;d.id="DZ"+(Math.floor(Math.random()*900)+100);d.thumb=d.art||"";d.summary=(env?"Envelope":"Template")+" \u201C"+nm+"\u201D: "+(env?(d.layout==="teaser"?"teaser line \u201C"+d.teaser+"\u201D, ":"")+"return address":"headline \u201C"+d.headline+"\u201D, body")+", "+d.fontName+(d.artName?", artwork "+d.artName:"")+".";
+   close();try{cb&&cb(d)}catch(x){}[60,400,900].forEach(function(ms){setTimeout(function(){var t=document.getElementById("tv");if(t&&t.classList.contains("open")){var x=document.getElementById("tvX");x&&x.click()}},ms)})};
+  setTimeout(function(){g("dzName").focus()},50);
+ }
+ window.ylDesigner=open;
+ window.ylDesignChoice=function(host){ /* returns html of the two choices */ };
+ /* shop flow: New Custom Design tile and Upload your design envelope tile */
+ document.addEventListener("click",function(ev){
+  var box=ev.target.closest&&ev.target.closest(".image-box,.opt-env");if(!box||!box.closest("#ltCfg,#pcCfg"))return;
+  var lab=box.querySelector("label,.ft-n,.env-up-k");var t=((lab&&lab.textContent)||box.textContent||"").trim();
+  var isEnv=box.classList.contains("opt-env");
+  if(isEnv?!/Upload your design/i.test(t):!/^New Custom Design/i.test(t))return;
+  ev.preventDefault();ev.stopPropagation();ev.stopImmediatePropagation();
+  open(isEnv?"envelope":"template",function(d){
+   var l=box.querySelector("label");var nm=d.name;
+   if(isEnv){var k=box.querySelector(".env-up-k");if(k)k.textContent=nm;var sm=box.querySelector(".env-up small");if(sm)sm.textContent="Your design, saved ("+d.id+")";if(typeof ltSelectBox==="function")ltSelectBox(box,true);else{var r=box.querySelector("input");r&&r.click()}}
+   else{if(l){var sp=l.firstChild;l.textContent=nm}if(typeof ltSelectBox==="function"&&box.closest("#ltCfg"))ltSelectBox(box,false);else{var i=box.querySelector("input");i&&i.click()}}
+   var m=document.createElement("div");m.className="dz-saved";m.textContent="\u2713 Saved \u201C"+nm+"\u201D ("+d.id+") and selected.";var host=box.closest(".tg,.lt-envcol,.lt-tpl")||box.parentNode;host.parentNode.insertBefore(m,host);setTimeout(function(){m.remove()},6000);
+  });
+ },true);
+})();
+</script>
+<style>.dz-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px}.dz-choice button{font:inherit;text-align:left;cursor:pointer;background:#fffbe0;border:2px solid #fdd835;border-radius:14px;padding:14px 16px;color:#262626;font-size:13px;line-height:1.4}.dz-choice button b{display:block;font-family:Montserrat,sans-serif;font-size:15px;margin-bottom:4px}.dz-choice button:hover{background:#fff3a8}.dz-saved{background:#e8f5e9;border:1px solid #2e7d32;color:#1b5e20;border-radius:10px;padding:8px 12px;margin:0 0 10px;font-size:13px;font-weight:600}@media(max-width:600px){.dz-choice{grid-template-columns:1fr}}</style>
 </body></html>
