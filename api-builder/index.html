@@ -604,8 +604,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gloria+Hallelujah&family=Great+Vibes&family=Kalam:wght@400;700&family=Nanum+Pen+Script&family=Shadows+Into+Light&display=swap">
 </head>
 <body>
-<div class="ylhq-api"><div class="ver"><span>You are on Version B (with builder) · r35. Switch:</span><a class="" href="../api/">Version A, without builder</a><a class="is-on" href="./">Version B, with builder</a></div></div>
-<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r35#/home">Home</a><a style="color:#262626" href="../?v=r35#/account">My Account</a><a style="color:#262626" href="../?v=r35#/integrations">Integrations</a></div>
+<div class="ylhq-api"><div class="ver"><span>You are on Version B (with builder) · r36. Switch:</span><a class="" href="../api/">Version A, without builder</a><a class="is-on" href="./">Version B, with builder</a></div></div>
+<div style="background:#FFC523;color:#262626;font:700 13px/1.2 Montserrat,Arial,sans-serif;padding:9px 16px;display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span>Yellow Letter HQ mockup</span><a style="color:#262626" href="../?v=r36#/home">Home</a><a style="color:#262626" href="../?v=r36#/account">My Account</a><a style="color:#262626" href="../?v=r36#/integrations">Integrations</a></div>
 <div class="ylhq-api">
   <div class="proto-banner"><strong>Prototype — sample data.</strong> This file stays on your computer. Requests are saved in this browser only. Nothing is emailed, and POST /upload is never called.</div>
   <div class="util"><div class="wrap">
@@ -1062,6 +1062,7 @@
     if (name === "home" || name === "overview") return "overview/1";
     if (stepMatch) return "overview/" + stepMatch[1];
     if (name === "templates") return "overview/5";
+    if (name === "my-templates") return name;
     if (name === "status" || name === "builder") return name;
     var alias = {"setup-account":1,"request-key":2,"verify-key":3,"add-credits":4,"review-templates":5,"proof":6,"docs":7};
     if (alias[name]) return "overview/" + alias[name];
@@ -1268,7 +1269,7 @@
       "<h2>Template codes</h2><p><code>S</code> plus the Organizer template id, <code>D</code> plus a designer id, or <code>CT</code> plus a custom ref. The API copies those nightly at 12:30 AM Pacific. This page does not call <code>POST /templates/sync</code>.</p><h2>Envelope templates</h2><p>Envelopes are their own template type. For a letter order, pass an envelope template code as <code>details.envelope</code>: <code>ENV10</code> (#10 standard), <code>ENV10W</code> (#10 windowed) or <code>ENVINV</code> (invitation). This replaces typing the envelope option as free text. Leave it out to use the letter template&#039;s own envelope. <strong>Not allowed with a postcard or pressure seal template.</strong></p><pre>{ \"template_on_file\": \"S178\", \"details\": { \"envelope\": \"ENV10W\" } }</pre><h2>Pressure seal templates</h2><p>Pressure seal is its own template type (for example <code>S201</code> or <code>D207</code>). It folds and seals as one piece, so it has no envelope. Production is <strong>3 production days</strong>, the same as letters (upload Monday, mail Friday at the earliest). Mock only: this page does not call <code>POST /upload</code>.</p></main>";
   }
   function pageProof() {
-    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r35&embed=api#/proof/204518\"></iframe></main>";
+    return "<main><h1>Test order / proof preview</h1><p class=\"lede\">Merge your variable data onto a template here. This page never calls <code>POST /upload</code>. The picture is the sample proof image, not the print file.</p><p>A real upload draws from <strong>My Account &gt; Integrations &gt; Wallet</strong>. The wallet needs a balance before the order goes out. If it is short, the order is held and retried, then sent once credit is added.</p><div class=\"ylhq-proof\"><div class=\"proof-banner\"><strong>Proof preview: not print-final</strong><p>Sample proof built in your browser. Final print uses our master template for this ID.</p></div><div id=\"ylhq-proof\"></div></div><h2>What your customer sees: the proof page</h2><p>This is the same proof page as the Yellow Letter HQ site: one PDF with the envelope and letter together, mail dates, approve or disapprove right on the page, the late red flag, exception request and override accounts. Sample data only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"pf-frame\" title=\"Proof page\" src=\"../?v=r36&embed=api#/proof/204518\"></iframe></main>";
   }
 
   function pageUsage() {
@@ -1525,7 +1526,7 @@
     return "<h3>Your template</h3><dl><div><dt>Product</dt><dd>" + (p ? p.n : "Not chosen") + "</dd></div><div><dt>Design</dt><dd>" + (p ? d(TB.d1, TB.d1lib) : "-") + "</dd></div><div><dt>Envelope</dt><dd>" + env + "</dd></div><div><dt>Envelope design</dt><dd>" + (p && p.env ? d(TB.d2, TB.d2lib) : "-") + "</dd></div><div><dt>Sticky note</dt><dd>" + (p && p.env ? (TB.sticky ? "Yes (+6\u00a2)" : "No") : "Not available") + "</dd></div><div><dt>Postage</dt><dd>" + (TB.post === "fc" ? "First Class" : TB.post === "std" ? "Standard" : "Not chosen") + "</dd></div><div><dt>Code</dt><dd>" + (s ? s.code : "Save to get one") + "</dd></div></dl>";
   }
   function pageBuilder() {
-    return "<main><h1>Design a mail piece</h1><p class=\"lede\">This is the Yellow Letter HQ mockup's own design and order flow, the same tiles, steps and right panel. The only difference is the end: it saves a template and gives you the template ID and a sample API request instead of going to checkout. Mock only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"tb-frame\" title=\"Design a mail piece\" src=\"../?v=r35&embed=api#/custom-template\"></iframe></main>";
+    return "<main><h1>Design a mail piece</h1><p class=\"lede\">This is the Yellow Letter HQ mockup's own design and order flow, the same tiles, steps and right panel. The only difference is the end: it saves a template and gives you the template ID and a sample API request instead of going to checkout. Mock only.</p><iframe class=\"embed-frame\" scrolling=\"no\" id=\"tb-frame\" title=\"Design a mail piece\" src=\"../?v=r36&embed=api#/custom-template\"></iframe></main>";
   }
 
   var TB_CTA = "<div class=\"tb-cta\"><div><strong>Design a mail piece</strong></div><span>Build any piece step by step, then save it as a template code for the API.</span><a class=\"button\" href=\"#/builder\">Open the builder</a></div>";
@@ -1558,7 +1559,10 @@
   }
   function idGrid() { mtInit(); return mtHtml("<a class=\"mt-add\" href=\"#/builder\">Add template</a>"); }
   function pageReview() {
-    return PAGEREVIEW_HTML.replace(/<figure class="shot">([\s\S]*?)<\/figure>/, function (m) { return TB_CTA + "<div data-ylib data-ctx=\"api\" data-builder=\"1\" data-new=\"#/builder\"></div><p class=\"hint\" style=\"margin-top:18px\">Where to find your ID: right here in the library, or on the Yellow Letter HQ site. Your own Unique IDs live in the same list under <a href=\"../#/integrations?tab=templates\" target=\"_top\">My Account &gt; Integrations &gt; My Templates</a>.</p>"; });
+    return PAGEREVIEW_HTML.replace(/<figure class="shot">([\s\S]*?)<\/figure>/, function (m) { return TB_CTA + "<div class=\"yl-ptr\" style=\"margin:18px 0;padding:18px 22px;border:2px solid #f0e3a8;background:#fffbea;border-radius:16px\"><b style=\"font-family:Montserrat,sans-serif\">Where to find your ID</b><p style=\"margin:6px 0 12px\">Your template IDs live in <b>My Templates</b>, now its own tab in the left menu. Copy an ID there and send it as <code>template_on_file</code>.</p><a class=\"button\" href=\"#/my-templates\">Open My Templates</a></div>"; });
+  }
+  function pageMyTemplates() {
+    return "<main class=\"mt-page\"><style>.mt-page .yll-h>div:first-child{display:none}.mt-page .yll-ctl{max-width:none;flex-basis:100%}.mt-page .yl-lib{margin-top:6px}</style><h1>My Templates</h1><p class=\"lede\">Every template you can send with <code>template_on_file</code>. Copy an ID, preview the proof, or start an order from it.</p><div data-ylib data-ctx=\"api\" data-builder=\"1\" data-new=\"#/builder\"></div><p class=\"hint\" style=\"margin-top:18px\">Where to find your ID: right here. Your own Unique IDs also appear in <a href=\"../#/integrations?tab=templates\" target=\"_top\">My Account &gt; Integrations &gt; My Templates</a> on the Yellow Letter HQ site.</p></main>";
   }
   function pageDocs() {
     return PAGEDOCS_HTML;
@@ -1582,6 +1586,7 @@
       side += "<a class=\"sub" + (n === step ? " is-on" : "") + "\" href=\"#/overview/" + n + "\">" + n + " " + h(label) + "</a>";
     });
     side += "<a class=\"" + (name === "builder" ? "is-on" : "") + "\" href=\"#/builder\"><span class=\"ic\">\u270e</span>Design a mail piece</a>";
+    side += "<a class=\"" + (name === "my-templates" ? "is-on" : "") + "\" href=\"#/my-templates\"><span class=\"ic\">\u25a6</span>My Templates</a>";
     side += "<a class=\"" + (name === "status" ? "is-on" : "") + "\" href=\"#/status\"><span class=\"ic\">●</span>Status</a>";
     document.getElementById("side").innerHTML = side;
     var html;
@@ -1594,6 +1599,9 @@
       var next = step < 7 ? "<a class=\"button\" href=\"#/overview/" + (step + 1) + "\">Continue</a>" : "<a class=\"button\" href=\"#/overview/1\">Back to start</a>";
       html = "<div class=\"stepper\" aria-label=\"API setup steps\">" + links + "</div>" + (step === 1 ? TB_CTA : "") + fns[step - 1]() + "<div class=\"wizard-nav\">" + back + next + "</div>";
       document.title = menu[step - 1] + " · prototype";
+    } else if (name === "my-templates") {
+      html = pageMyTemplates();
+      document.title = "My Templates \u00b7 prototype";
     } else if (name === "builder") {
       html = pageBuilder();
       document.title = "Design a mail piece \u00b7 prototype";
@@ -2000,7 +2008,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r35#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r36#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
