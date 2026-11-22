@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r41"){u.searchParams.set("v","r41");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r41#/overview/6";function fix(h){var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r42"){u.searchParams.set("v","r42");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r42#/overview/6";function fix(h){var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2028,7 +2028,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
 <!-- MY ORDERS -->
 <div class="scr" id="s-orders"><div class="wrap page">
  <div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px"><div style="display:flex;gap:14px;align-items:center"><a class="btn sec sm" href="#/account">&lsaquo; Back</a><h1 style="font-size:26px">My Orders</h1></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn sec sm" href="api-builder/?v=r41#/overview/6">Test Order &amp; Proof</a><a class="btn sm" href="#/tracking-dashboard">Mail Tracking Dashboard</a></span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px"><div style="display:flex;gap:14px;align-items:center"><a class="btn sec sm" href="#/account">&lsaquo; Back</a><h1 style="font-size:26px">My Orders</h1></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn sec sm" href="api-builder/?v=r42#/overview/6">Test Order &amp; Proof</a><a class="btn sm" href="#/tracking-dashboard">Mail Tracking Dashboard</a></span></div>
   <div class="tools">
    <input class="inp" id="oq" type="search" placeholder="Order id, name, or nickname" style="flex:1;min-width:220px" aria-label="Search orders">
    <button class="btn" id="oqBtn">Search</button>
@@ -2356,7 +2356,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r41#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r42#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -4117,7 +4117,7 @@ function renderProof(id){
   var pid=parseInt(id,10)||204518,o=ofind(pid);if(!o){$("#proof-root").innerHTML='<div class="wrap page" style="max-width:720px;padding-top:18px"><a class="btn sec sm" href="#/orders">&lsaquo; My Orders</a>'+missOrder(pid)+'</div>';return}
   var s=PRS[o.id],locked=!!s,y=window.pageYOffset;pfInit(o);if(PV.id!==o.id)PV={id:o.id,tab:pvIsPc(o)?"front":"env",zoom:window.innerWidth<600?50:100,rec:0,agree:false};
   var pc=pvIsPc(o),tabs=pc?[["front","Front"],["back","Back"]]:[["letter","Letter"],["env","Envelope"]];
-  var head='<div class="pv-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+(s==="ok"?"Proof approved":s&&s.dis?"Revision requested":"Review and approve your proof")+'</h1><p class="muted">'+esc(o.prod)+(o.name?" &middot; "+esc(o.name):"")+'</p><p class="muted"><a href="api-builder/?v=r41#/overview/6">Preview a proof for any template (in the API) &rsaquo;</a></p></div>';
+  var head='<div class="pv-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+(s==="ok"?"Proof approved":s&&s.dis?"Revision requested":"Review and approve your proof")+'</h1><p class="muted">'+esc(o.prod)+(o.name?" &middot; "+esc(o.name):"")+'</p><p class="muted"><a href="api-builder/?v=r42#/overview/6">Preview a proof for any template (in the API) &rsaquo;</a></p></div>';
   var qrN=(window.PV_QR||/[?&]qr=1/.test(location.hash))&&!locked?'<div class="pv-alert pv-qr" role="note"><b>Important: QR code proof.</b> The first page contains field names. Do not scan the first page. Only scan QR codes on the sample mail pages after the first page.</div>':'';var mode=fa14V(),isLate=mode==="late"&&!locked,alertH=(isLate?'<div class="pv-red" role="alert"><b>Your original mail dates have passed. You must choose new dates before approving.</b> Go to Step 2 and pick new dates.</div>':'')+(mode==="override"&&!locked?'<div class="pv-ovr-note"><span class="chip y">Date override</span> This account can change mail dates freely, even late.</div>':'')+qrN+(locked?'':'<div class="pv-alert" role="alert"><b>Approve or disapprove only with these buttons.</b> Please do not email an approval request, that can delay your mail.</div>');
   var result=s==="ok"?pvConfirmHTML(o):s&&s.dis?pvDisHTML(o,s):"";
   var pages=pc?[["front","Front"],["back","Back"]]:[["env","Envelope"],["letter","Letter"]],pgIdx=Math.max(0,pages.map(function(t){return t[0]}).indexOf(PV.tab));
@@ -4299,6 +4299,7 @@ var SUBP={
   faq:[["Is there a setup or scanner fee?","No. There is no setup or scanner fee. Membership is $49 a month."],["How do I scan?","Use your webcam, or a handheld scanner for large amounts of returned mail."],["Does it work with the List Organizer?","Yes. It ties directly into the YLHQ List Organizer, so returned addresses come off your list fast."],["How do I cancel?",'Create a ticket on the website. <a href="#/submit-ticket">Submit a ticket</a>.']],
   extra:'See how returned mail scanning works on the <a href="#/returned-mail">Returned Mail page</a>.'}
 };
+window.__renderSubPage=function(x){return renderSubPage(x)};
 function renderSubPage(slug){
   var d=SUBP[slug]||SUBP["list-source"],r=$("#sub-root"),pic=(SUBS_PIC.art||[])[d.i];
   var priceH=d.price==null?d.priceHtml:'$'+d.price+' <em>'+d.unit+'</em>';
@@ -6047,7 +6048,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Wallet" src="api-builder/?v=r41&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Wallet" src="api-builder/?v=r42&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p></div>'+
@@ -8255,7 +8256,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r41#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r42#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8426,7 +8427,7 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r41#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r42#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
    sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') is template <b style="font-family:ui-monospace,Menlo,monospace">'+id+'</b> in My Templates.</span><a class="yai-btn sm" href="'+href+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
@@ -8464,8 +8465,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r41#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r41#/home";
+var M=API?"../?v=r42#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r42#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'integrations?tab=templates">My Templates<small>All templates and IDs</small></a>';
@@ -8486,14 +8487,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r40 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r41#/home">Main site</a><a href="../api/?v=r41#/home">API Version A (no builder)</a><a href="../api-builder/?v=r41#/home">API Version B (with builder)</a><a href="../pages/?v=r41">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r42 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r42#/home">Main site</a><a href="../api/?v=r42#/home">API Version A (no builder)</a><a href="../api-builder/?v=r42#/home">API Version B (with builder)</a><a href="../pages/?v=r42">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
-  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r40</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r41#/home">API Version A: no builder</a><a href="api-builder/?v=r41#/home">API Version B: with builder</a>');
+  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r42</b>";
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r42#/home">API Version A: no builder</a><a href="api-builder/?v=r42#/home">API Version B: with builder</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r41#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r42#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -8508,7 +8509,7 @@ function mount(){
 }
 if(document.body)mount();else document.addEventListener("DOMContentLoaded",mount);
 })();
-</script><script id="r41-js">(function(){if(window.__r41)return;window.__r41=1;
+</script><script id="r42-js">(function(){if(window.__r42)return;window.__r42=1;
 var css=document.createElement("style");css.textContent='.r41tabs{display:flex;gap:8px;flex-wrap:wrap;max-width:1100px;margin:18px auto 0;padding:0 20px}.r41tabs a{font:700 13px Montserrat,sans-serif;text-decoration:none;color:#262626;border:1.5px solid #eee6c9;background:#fff;border-radius:99px;padding:9px 18px}.r41tabs a.on{background:#FFC523;border-color:#FFC523}#r41-dh{max-width:1100px;margin:30px auto;padding:0 20px}#r41-dh h2{font:800 24px Montserrat,sans-serif;margin:0 0 6px}#r41-dh .g{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}#r41-dh .c{border:1.5px solid #eee6c9;border-radius:20px;padding:20px;background:#fff}#r41-dh .c b{font:800 18px Montserrat,sans-serif;display:block}#r41-dh .c p{color:#555;margin:8px 0 14px}@media(max-width:700px){#r41-dh .g{grid-template-columns:1fr}}';document.head.appendChild(css);
 function tabs(id,items,cur){var s=document.getElementById(id);if(!s||s.querySelector(".r41tabs"))return;var d=document.createElement("div");d.className="r41tabs";d.innerHTML=items.map(function(x){return '<a href="'+x[0]+'"'+(x[0]===cur?' class="on"':'')+'>'+x[1]+'</a>'}).join("");s.insertBefore(d,s.firstChild)}
 function h1(id,t){var e=document.querySelector("#"+id+" h1");if(e&&e.textContent!==t)e.textContent=t}
@@ -8520,10 +8521,21 @@ function tick(){
  tabs("s-contact",ct,"#/contact");tabs("s-submit-ticket",ct,"#/submit-ticket");h1("s-submit-ticket","Contact Us");
  h1("s-returned-mail","Returned Mail");
  var dh=document.getElementById("s-datahub");
- if(dh&&!document.getElementById("r41-dh")){var d=document.createElement("div");d.id="r41-dh";d.innerHTML='<h2>Also in HQ DataHub</h2><p style="color:#555;margin:0">List Source and Skip Tracing live here now.</p><div class="g"><div class="c" id="r41-ls"><b>List Source</b><p>A monthly membership for pulling leads for your mail campaigns. Unlimited leads at 3 cents a record. Demographics are an extra half a cent a record. From $97 / mo, cancel any time.</p><a class="btn" href="#/datahub-signup">Sign up</a></div><div class="c" id="r41-st"><b>Skip Tracing</b><p>Upload your list and get phone numbers, emails and mailing addresses for the owners, emailed to you when it finishes. From $0.10 per hit. 100 record minimum; 100 to 200 records is $29 per order.</p><a class="btn" href="#/cart">Add to Cart</a></div></div>';dh.appendChild(d)}
- var q=(location.hash.split("?")[1]||"");if(dh&&dh.classList.contains("on")&&/s=(list-source|skip-tracing)/.test(q)&&!window.__r41s){var t=document.getElementById(/list-source/.test(q)?"r41-ls":"r41-st");if(t){window.__r41s=1;t.scrollIntoView({block:"center"})}}
- if(!/s=/.test(q))window.__r41s=0;
+ if(dh&&window.__renderSubPage){
+  var q=(location.hash.split("?")[1]||""),m=/s=(list-source|skip-tracing)/.exec(q),sec=m?m[1]:"";
+  if(!dh.querySelector(".r41tabs")){var tb=document.createElement("div");tb.className="r41tabs";tb.innerHTML='<a href="#/datahub" data-s="">Overview</a><a href="#/datahub?s=skip-tracing" data-s="skip-tracing">Skip Tracing</a><a href="#/datahub?s=list-source" data-s="list-source">List Source</a>';dh.insertBefore(tb,dh.firstChild)}
+  var sc=document.getElementById("r42-sec");if(!sc){sc=document.createElement("div");sc.id="r42-sec";sc.className="wrap page";sc.style.display="none";dh.appendChild(sc)}
+  var ov=document.getElementById("r41-dh");
+  if(!ov){ov=document.createElement("div");ov.id="r41-dh";ov.innerHTML='<h2>Also in HQ DataHub</h2><p style="color:#555;margin:0">List Source and Skip Tracing live here.</p><div class="g"><div class="c" id="r41-ls"><b>List Source</b><p>A monthly membership for pulling leads for your mail campaigns. Unlimited leads at 3 cents a record. Demographics are an extra half a cent a record. From $97 / mo, cancel any time.</p><a class="btn" href="#/datahub?s=list-source">See plans and sign up</a></div><div class="c" id="r41-st"><b>Skip Tracing</b><p>Upload your list and get phone numbers, emails and mailing addresses for the owners, emailed to you when it finishes. From $0.10 per hit. 100 record minimum; 100 to 200 records is $29 per order.</p><a class="btn" href="#/datahub?s=skip-tracing">See pricing and order</a></div></div>';dh.appendChild(ov)}
+  [].forEach.call(dh.children,function(c){if(c===sc||c.classList.contains("r41tabs"))return;if(sec){if(c.dataset.r42==null&&c.style.display!=="none")c.dataset.r42="show";if(c.dataset.r42!=null)c.style.display="none"}else if(c.dataset.r42!=null){c.style.display="";delete c.dataset.r42}});
+  [].forEach.call(dh.querySelectorAll(".r41tabs a"),function(a){a.classList.toggle("on",a.dataset.s===sec)});
+  if(sec){sc.style.display="";if(sc.dataset.s!==sec){sc.dataset.s=sec;var o=document.getElementById("sub-root");if(o)o.id="sub-root-x";sc.innerHTML="";var i=document.createElement("div");i.id="sub-root";sc.appendChild(i);try{window.__renderSubPage(sec)}catch(e){console.error(e)}i.id="r42-sub";if(o)o.id="sub-root";
+   [].forEach.call(sc.querySelectorAll(".sp-back,.crumbs"),function(e){e.style.display="none"});[].forEach.call(sc.querySelectorAll('a.btn.sec[href="#/subscriptions"]'),function(e){e.style.display="none"});
+   window.scrollTo(0,0)}}
+  else{sc.style.display="none";sc.dataset.s=""}
+ }
+
 }
-setInterval(tick,400);
+setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout(tick,30)});
 })();
 </script></body></html>
