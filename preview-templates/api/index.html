@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script id="r44head">(function(){var reg=false;try{reg=localStorage.getItem("ylhq_role")==="reg"}catch(e){}if(reg)return;function fix(h){var k=(h||"").replace(/^#\/?/,"").split("?")[0];return(k===""||k==="home"||k==="overview"||k==="overview/1"||k==="overview/2"||k==="setup-account"||k==="request-key")?"#/overview/3":null}var r=fix(location.hash);if(r)history.replaceState(null,"",location.pathname+location.search+r);window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r){e.stopImmediatePropagation();location.hash=r}},true)})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ API dashboard — prototype</title>
@@ -2085,5 +2086,45 @@ function mount(){
 }
 if(document.body)mount();else document.addEventListener("DOMContentLoaded",mount);
 })();
-</script><meta name="robots" content="noindex"><script id="r44tag">(function(){var d=document.createElement("div");d.textContent="TEST PREVIEW, templates split";d.style.cssText=(innerWidth<=700?"top:0;border-radius:0 0 10px 10px;":"bottom:0;border-radius:10px 10px 0 0;")+"position:fixed;left:50%;transform:translateX(-50%);z-index:99999;background:#111;color:#FFC523;font:800 11px Montserrat,sans-serif;letter-spacing:.04em;padding:4px 12px;pointer-events:none;white-space:nowrap";document.body.appendChild(d)})()</script></body>
+</script><meta name="robots" content="noindex"><script id="r44tagjs">(function(){
+ var role="api";try{role=localStorage.getItem("ylhq_role")==="reg"?"reg":"api"}catch(e){}
+ var API=/\/api(-builder)?\//.test(location.pathname);
+ document.documentElement.classList.add(role==="reg"?"r44reg":"r44api");
+ var st=document.createElement("style");
+ st.textContent="script#r44tagjs,script#r44api,script#r44head{display:none!important}#r44tag{position:fixed;left:50%;transform:translateX(-50%);z-index:99999;background:#111;color:#FFC523;font:800 11px Montserrat,sans-serif;letter-spacing:.03em;padding:5px 12px;display:flex;gap:10px;align-items:center;white-space:nowrap}#r44tag button{pointer-events:auto;cursor:pointer;border:1px solid #FFC523;background:#FFC523;color:#111;border-radius:99px;font:800 11px Montserrat,sans-serif;padding:3px 10px}#r44tag span{pointer-events:none}@media(min-width:701px){#r44tag{bottom:0;border-radius:10px 10px 0 0}}@media(max-width:700px){#r44tag{top:0;border-radius:0 0 10px 10px;flex-direction:column;gap:3px;padding:4px 10px}}html.r44reg .r44apiui{display:none!important}";
+ document.head.appendChild(st);
+ function mk(){var d=document.createElement("div");d.id="r44tag";d.innerHTML='<span>TEST PREVIEW, templates split</span><button type="button" id="r44role">Viewing as: '+(role==="reg"?"Regular customer":"API Customer")+' &#8646;</button>';document.body.appendChild(d);d.querySelector("button").onclick=function(){try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(e){}if(/^#\/(overview|home)/.test(location.hash)&&API)location.hash="#/overview/3";location.reload()}}
+ function tick(){
+  [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
+  if(role==="reg"){
+   [].forEach.call(document.querySelectorAll(".nh a,#nhp a,footer a,.foot a"),function(a){var t=a.textContent.trim();if(t==="API"||t==="API dashboard")a.style.display="none"});
+   if(!API&&/^#\/integrations(\?v=noapi)?$/.test(location.hash)){location.replace("#/integrations?v=noapi")}
+  }
+ }
+ if(document.body){mk()}else document.addEventListener("DOMContentLoaded",mk);
+ setInterval(tick,300);
+})();
+</script><script id="r44api">(function(){
+ var role="api";try{role=localStorage.getItem("ylhq_role")==="reg"?"reg":"api"}catch(e){}
+ var st=document.createElement("style");
+ st.textContent="#r44gate{max-width:640px;margin:70px auto;padding:34px;text-align:center;border:1.5px solid #eee6c9;border-radius:22px;background:#fff;font-family:Montserrat,'Open Sans',sans-serif}#r44gate h1{font:800 26px Montserrat,sans-serif;margin:0 0 10px}#r44gate p{color:#555;margin:0 0 20px;line-height:1.5}#r44gate a{display:inline-block;background:#FFC523;color:#111;font:700 15px Montserrat,sans-serif;border-radius:99px;padding:12px 26px;text-decoration:none;margin:4px}#r44gate a.s{background:#fff;border:1.5px solid #eee6c9}html.r44reg #side,html.r44reg .app-main>#app,html.r44reg .side-toggle{display:none!important}.r44note{background:#fff8dc;border:1.5px solid #FFC523;border-radius:14px;padding:12px 16px;margin:0 0 16px;font-size:14px}";
+ document.head.appendChild(st);
+ function tick(){
+  if(role==="reg"){
+   var m=document.querySelector(".app-main");if(m&&!document.getElementById("r44gate")){var g=document.createElement("div");g.id="r44gate";g.innerHTML='<h1>API access is turned on by our team</h1><p>The API is not on for your account yet. Contact us and we will switch it on. You will keep using your normal Yellow Letter HQ sign-in.</p><a href="../?v=r43#/contact">Contact us</a><a class="s" href="../?v=r43#/account">Back to My Account</a>';m.appendChild(g)}
+   return;
+  }
+  var sd=document.getElementById("side");
+  if(sd){var n=0;[].forEach.call(sd.querySelectorAll("a"),function(a){var t=a.textContent.trim();
+    if(/^Overview$/.test(t.replace(/^\S+\s?/,""))||t==="⌂Overview"||t==="⌂ Overview"){a.style.display="none";return}
+    if(/^[12] (Create Account|Request API Key)$/.test(t)){a.style.display="none";return}
+    var hr=a.getAttribute("href")||"",mh=/^#\/overview\/([3-7])$/.exec(hr);if(mh&&a.classList.contains("sub")){var names={3:"Your API Key",4:"Wallet",5:"Review API Templates",6:"Test Order & Proof",7:"API Docs"};var nt=(+mh[1]-2)+" "+names[mh[1]];if(a.textContent!==nt)a.textContent=nt}})}
+  var app=document.getElementById("app");if(!app)return;
+  var h1=app.querySelector("h1");
+  if(h1&&h1.textContent==="Verify Key"){h1.textContent="Your API key";if(!app.querySelector(".r44note")){var d=document.createElement("div");d.className="r44note";d.innerHTML="<b>No separate API sign-in.</b> You use your normal Yellow Letter HQ login. Our team turns API on for your account (API Customer role), and your key then shows in My Account &gt; Integrations.";h1.parentNode.insertBefore(d,h1.nextSibling)}
+   [].forEach.call(app.querySelectorAll("p,a,div"),function(e){var t=e.textContent;if(e.children.length<3&&(/Still waiting|approval takes up to 24 hours/.test(t))&&t.length<260)e.style.display="none";if(e.tagName==="A"&&/^Back$/.test(t.trim()))e.style.display="none"})}
+ }
+ setInterval(tick,250);
+})();
+</script></body>
 </html>
