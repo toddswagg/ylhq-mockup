@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r45"){u.searchParams.set("v","r45");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r45#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r46"){u.searchParams.set("v","r46");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r46#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2028,7 +2028,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
 <!-- MY ORDERS -->
 <div class="scr" id="s-orders"><div class="wrap page">
  <div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px"><div style="display:flex;gap:14px;align-items:center"><a class="btn sec sm" href="#/account">&lsaquo; Back</a><h1 style="font-size:26px">My Orders</h1></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn sec sm" href="api-builder/?v=r45#/overview/6">Test Order &amp; Proof</a><a class="btn sm" href="#/tracking-dashboard">Mail Tracking Dashboard</a></span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px"><div style="display:flex;gap:14px;align-items:center"><a class="btn sec sm" href="#/account">&lsaquo; Back</a><h1 style="font-size:26px">My Orders</h1></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn sec sm" href="api-builder/?v=r46#/overview/6">Test Order &amp; Proof</a><a class="btn sm" href="#/tracking-dashboard">Mail Tracking Dashboard</a></span></div>
   <div class="tools">
    <input class="inp" id="oq" type="search" placeholder="Order id, name, or nickname" style="flex:1;min-width:220px" aria-label="Search orders">
    <button class="btn" id="oqBtn">Search</button>
@@ -2356,7 +2356,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r45#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r46#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -3239,7 +3239,7 @@ function ltOnMoreChange(){
   if(typeof ltSyncAcc==="function")ltSyncAcc();
   if(typeof ltUpdateBuy==="function")ltUpdateBuy();
   var acc=document.getElementById("ltMoreAcc");
-  if(acc&&ltMoreComplete()){if(typeof LS!=="undefined")LS._guidedMore=true;if(typeof formAdvance==="function")formAdvance("more");else acc.open=false;if(typeof ltSyncAcc==="function")ltSyncAcc()}
+  /* r46: picking an option never closes Other options. It closes only with its Continue button. */
 }
 function pcOpenAcc(id){
   var el=document.getElementById(id);if(el)el.open=true;
@@ -3268,7 +3268,7 @@ function pcOnMoreChange(){
   if(typeof pcSyncAcc==="function")pcSyncAcc();
   if(typeof pcUpdateBuy==="function")pcUpdateBuy();
   var acc=document.getElementById("pcMoreAcc");
-  if(acc&&pcMoreComplete()){if(typeof PS!=="undefined")PS._guidedMore=true;if(typeof formAdvance==="function")formAdvance("more");else acc.open=false;if(typeof pcSyncAcc==="function")pcSyncAcc()}
+  /* r46: picking an option never closes Other options. It closes only with its Continue button. */
 }
 function choiceChip(label,val,ok,miss){
   var st=miss?" miss":(ok?" ok":" muted");
@@ -3558,7 +3558,7 @@ function pcUpdateBuy(){
   var src=pcTplImg();
   if(tiles){var th=isPastTpl(rec)?tplLibHTML("",tname):(src?'<img src="'+src+'" alt="">':'<span class="env-ph">Postcard</span>');tiles.innerHTML='<div class="lt-buy-tile">'+th+'<div><b>Postcard</b><small>'+esc(tname)+'</small></div></div>'}
   var sum=$("#pcBuySum");if(sum&&typeof pcChoicesHTML==="function")sum.innerHTML=pcChoicesHTML();
-  var more=$("#pcMoreAcc");if(more&&more.open&&typeof pcMoreComplete==="function"&&pcMoreComplete()){more.open=false;if(typeof PS!=="undefined")PS._guidedMore=true;if(typeof pcSyncAcc==="function")pcSyncAcc()}
+  /* r46: Other options no longer auto-closes when complete */
   var post=$("#pcBuyPost");if(post)post.textContent=p.std?(PS.post==="std"?"Standard (Marketing Mail)":"First Class"):"First Class";
   var dates=$("#pcBuyDates");if(dates)dates.textContent=pcMailDateLabels();
   var add=[];
@@ -5112,7 +5112,7 @@ function ltUpdateBuy(){
     tiles.innerHTML='<div class="lt-buy-tile">'+th+'<div><small>Letter</small><b>'+esc(tn)+'</b></div></div>'+(hasEnv?'<div class="lt-buy-tile">'+ehtml+'<div><small>Envelope</small><b>'+esc(en)+'</b></div></div>':'');
   }
   var sum=$("#ltBuySum");if(sum&&typeof ltChoicesHTML==="function")sum.innerHTML=ltChoicesHTML();
-  var more=$("#ltMoreAcc");if(more&&more.open&&typeof ltMoreComplete==="function"&&ltMoreComplete()){more.open=false;if(typeof LS!=="undefined")LS._guidedMore=true;if(typeof ltSyncAcc==="function")ltSyncAcc()}
+  /* r46: Other options no longer auto-closes when complete */
 }
 window.ltUpdateBuy=ltUpdateBuy;
 
@@ -6076,7 +6076,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Wallet" src="api-builder/?v=r45&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Wallet" src="api-builder/?v=r46&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p></div>'+
@@ -6885,7 +6885,7 @@ function ffStepsFor(k){
       ["Font","#pcFontAcc",function(){return fd("font")}]];
     if(document.getElementById("pcGlossAcc"))s.push(["Finish","#pcGlossAcc",function(){return fd("gloss")}]);
     s.push(
-      ["Options","#pcMoreAcc",function(){return typeof leadText==="function"?!!leadText(PS):!!(PS.leads&&PS.leads.length)}],
+      ["Options","#pcMoreAcc",function(){return !!(PS._done||{}).more&&(typeof leadText==="function"?!!leadText(PS):!!(PS.leads&&PS.leads.length))}],
       ["Your list","#pcUpbar",function(){return window.ylListReady?ylListReady(PS):!!(PS.files&&PS.files.length)}],
       ["Mail dates","#pcMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(PS):!!(PS.day&&PS.drops))}],
       ["Notes","#pcNotes",function(){return !!(PS.notes&&String(PS.notes).trim())||!!PS.oname||fd("notes")}]
@@ -6901,7 +6901,7 @@ function ffStepsFor(k){
   );
   if(document.getElementById("ltEnvFontAcc"))s.push(["Envelope font","#ltEnvFontAcc",function(){return fd("envfont")||!!(document.getElementById("ltEnvFontAcc")&&!document.getElementById("ltEnvFontAcc").querySelector("input,select")&&LS.tpl)}]);
   s.push(
-    ["Options","#ltMoreAcc",function(){return typeof leadText==="function"?!!leadText(LS):!!(LS.leads&&LS.leads.length)}],
+    ["Options","#ltMoreAcc",function(){return !!(LS._done||{}).more&&(typeof leadText==="function"?!!leadText(LS):!!(LS.leads&&LS.leads.length))}],
     ["Your list","#ltUpbar",function(){return window.ylListReady?ylListReady(LS):!!(LS.files&&LS.files.length)}],
     ["Mail dates","#ltMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(LS):!!(LS.day&&LS.drops))}],
     ["Notes","#ltNotes",function(){return !!(LS.notes&&String(LS.notes).trim())||!!LS.oname||fd("notes")}]
@@ -8285,7 +8285,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r45#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r46#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8456,10 +8456,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r45#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r46#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r45#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r46#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8494,8 +8494,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r45#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r45#/home";
+var M=API?"../?v=r46#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r46#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
@@ -8516,14 +8516,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r45 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r45#/home">Main site</a><a href="../api/?v=r45#/home">API Version A (no builder)</a><a href="../api-builder/?v=r45#/home">API Version B (with builder)</a><a href="../pages/?v=r45">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r46 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r46#/home">Main site</a><a href="../api/?v=r46#/home">API Version A (no builder)</a><a href="../api-builder/?v=r46#/home">API Version B (with builder)</a><a href="../pages/?v=r46">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
-  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r45</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r45#/home">API Version A: no builder</a><a href="api-builder/?v=r45#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r46</b>";
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r46#/home">API Version A: no builder</a><a href="api-builder/?v=r46#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r45#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r46#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -8603,7 +8603,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r45#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r46#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
@@ -8737,4 +8737,8 @@ setInterval(tick,500);window.addEventListener("hashchange",function(){setTimeout
 })();
 
 </script>
+<script id="r46js">(function(){if(window.__r46)return;window.__r46=1;
+var c=document.createElement("style");c.textContent="script#r46js{display:none}[id$=MoreAcc] .lt-acc-body>.fld.lo-lead{order:2!important;grid-column:1/-1}[id$=MoreAcc] .lt-acc-body>.form-next{order:4!important;grid-column:1/-1;justify-self:stretch;min-height:48px;font-size:16px;margin-top:6px}[id$=MoreAcc] .lt-acc-body>.r46hint{order:3;grid-column:1/-1;margin:4px 0 0;font-size:13.5px;color:#555}@media(min-width:700px){[id$=MoreAcc] .lt-acc-body>.form-next{justify-self:start;min-width:260px}}";document.head.appendChild(c);
+function t(){[].forEach.call(document.querySelectorAll(".scr.on [id$=MoreAcc] .lt-acc-body"),function(b){var n=b.querySelector(":scope>.form-next");if(!n)return;if(n.classList.contains("sec")){n.classList.remove("sec");n.classList.remove("sm")}if(n.textContent!=="Continue to your list")n.textContent="Continue to your list";if(!b.querySelector(":scope>.r46hint")){var p=document.createElement("p");p.className="help r46hint";p.textContent="Set the extras you want and your lead type. This step stays open until you press Continue.";b.insertBefore(p,n)}})}
+setInterval(t,400);document.addEventListener("click",function(){setTimeout(t,20)},true);setTimeout(t,50);})();</script>
 </body></html>
