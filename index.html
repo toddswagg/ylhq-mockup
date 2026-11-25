@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r54#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r55#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2364,7 +2364,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r54#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r55#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -4211,8 +4211,8 @@ function pfWire(o){var box=$("#pfMail");if(!box)return;
 /* ---------- Round 16: full proof walk-through (review, mail dates, approve / disapprove, confirmation) ---------- */
 var PV={};
 function pvIsPc(o){return /postcard/i.test(o.prod||"")}
-function pvSheet(o,tab,zoom){
-  var base=tab==="env"?560:460,w=Math.round(base*zoom/100),fs=(w/(tab==="env"?58:52)).toFixed(2),r=RECS[PV.rec||0],ret="Sample Home Buyers<br>PO Box 100<br>Springfield, MO 65800",pc=pvIsPc(o);
+function pvSheet(o,tab,zoom,recI){
+  var recs=(typeof pvRecs==="function")?pvRecs(o):RECS,base=tab==="env"?560:460,w=Math.round(base*zoom/100),fs=(w/(tab==="env"?58:52)).toFixed(2),r=recs[recI!=null?recI:(PV.rec||0)]||recs[0]||RECS[0],ret="Sample Home Buyers<br>PO Box 100<br>Springfield, MO 65800",pc=pvIsPc(o);
   var addr='<b>'+esc(r[0])+'</b><br>'+esc(r[1])+'<br>'+esc(r[2]);
   var stamp='<div class="pvs-stamp">FIRST-CLASS MAIL<br>U.S. POSTAGE PAID<br>PERMIT NO. 000</div>';
   if(tab==="env")return '<div class="pvs env" style="width:'+w+'px;height:'+Math.round(w*4.125/9.5)+'px;font-size:'+fs+'px"><div class="pvs-ret">'+ret+'</div>'+(o.post==="Standard"?stamp.replace("FIRST-CLASS MAIL","PRSRT STD"):stamp)+'<div class="pvs-to">'+addr+'</div><div class="pvs-sticky">Call me, I may buy your house!</div><div class="pvs-barc"></div></div>';
@@ -4239,15 +4239,17 @@ function pvSummary(o,s){
 function pvKind(o){var p=o.prod||"";if(/postcard/i.test(p))return "pc";if(/handwritten|greeting card|folded note/i.test(p))return "card";if(/pressure seal|snap pack/i.test(p))return "pack";return "letter"}
 function pvPages(o){var k=pvKind(o);if(k==="pc")return [["front","Front"],["back","Back"]];if(k==="card")return [["front","Card front"],["inside","Inside"]];if(k==="pack")return [["letter","Letter"],["env","Snap pack"]];return [["letter","Letter"],["env","Envelope"]]}
 function pvNeedDates(o){if(fa14V()==="late")return true;var rule=pfRule(o),now=ylNowPT();return (o.drops||[]).some(function(d){var t=pfParse(d);return !t||!ylValid(t,rule,now)})}
+function pvSampleCount(o){var k=pvKind(o);if(k==="pc")return 4;if(k==="card")return 4;if(k==="pack")return 6;return 5}
+function pvRecs(o){var n=pvSampleCount(o),src=(typeof PVRECS!=="undefined"&&PVRECS&&PVRECS.length)?PVRECS:RECS,out=[],i=0;for(;i<n;i++)out.push(src[i%src.length]);return out}
 function r54Fit(){
   var nh=document.querySelector(".nh");
   document.documentElement.style.setProperty("--r54hh",(nh?Math.round(nh.getBoundingClientRect().height):64)+"px");
-  $$(".r54-fit").forEach(function(host){
+  $$(".r55-sheet").forEach(function(host){
     var wrap=host.querySelector(".r54-scale"),sheet=host.querySelector(".pvs");
     if(!wrap||!sheet)return;
     wrap.style.width="";wrap.style.height="";sheet.style.transform="";
-    var nw=sheet.offsetWidth||1,nh2=sheet.offsetHeight||1,aw=host.clientWidth-8,ah=host.clientHeight-8;
-    var s=Math.min(aw/nw,ah/nh2,1);
+    var nw=sheet.offsetWidth||1,nh2=sheet.offsetHeight||1,aw=host.clientWidth-8;
+    var s=Math.min(aw/nw,1);
     wrap.style.width=Math.round(nw*s)+"px";wrap.style.height=Math.round(nh2*s)+"px";
     sheet.style.transformOrigin="top left";sheet.style.transform="scale("+s+")";
   });
@@ -4262,49 +4264,75 @@ function r54ZoomOpen(html,label){
   document.addEventListener("keydown",onK);
   ov.addEventListener("click",function(e){if(e.target===ov||e.target.getAttribute("data-r54z")==="x")close()});
 }
+function r55Fig(o,tab,i,rec,n,kindLabel,extra){
+  var who=esc(rec[0])+" · "+esc(rec[1])+", "+esc(rec[2]);
+  var lab=kindLabel+" "+(i+1)+" of "+n+(extra?" — "+extra:"");
+  return '<figure class="r55-pdf" data-tab="'+tab+'" data-rec="'+i+'"><figcaption><span><b>'+lab+'</b> · '+who+'</span><span>Click to zoom</span></figcaption><div class="r55-sheet"><div class="r54-scale">'+pvSheet(o,tab,100,i)+'</div></div></figure>';
+}
+function r55DocsHTML(o){
+  var recs=pvRecs(o),n=recs.length,kind=pvKind(o),html="",help='<p class="help r55-help">These are PDF-style proofs with names and addresses from your list merged in. Sample names are made up. Click a page to zoom.</p>';
+  if(kind==="pc"){
+    html+='<section class="r55-sec" id="pvSecProof"><h2>Postcard fronts ('+n+' samples)</h2>'+help;
+    recs.forEach(function(rec,i){html+=r55Fig(o,"front",i,rec,n,"Proof","Front")});
+    html+='</section><section class="r55-sec" id="pvSecBacks"><h2>Postcard backs ('+n+' samples)</h2>';
+    recs.forEach(function(rec,i){html+=r55Fig(o,"back",i,rec,n,"Proof","Back")});
+    html+='</section>';
+  }else if(kind==="card"){
+    html+='<section class="r55-sec" id="pvSecProof"><h2>Card fronts ('+n+' samples)</h2>'+help;
+    recs.forEach(function(rec,i){html+=r55Fig(o,"front",i,rec,n,"Proof","Front")});
+    html+='</section><section class="r55-sec" id="pvSecInsides"><h2>Card insides ('+n+' samples)</h2>';
+    recs.forEach(function(rec,i){html+=r55Fig(o,"inside",i,rec,n,"Proof","Inside")});
+    html+='</section>';
+  }else{
+    var envN=kind==="pack"?"Snap packs":"Envelopes",envL=kind==="pack"?"Snap pack":"Envelope";
+    html+='<section class="r55-sec" id="pvSecProof"><h2>Letter proofs ('+n+' samples)</h2>'+help;
+    recs.forEach(function(rec,i){html+=r55Fig(o,"letter",i,rec,n,"Proof")});
+    html+='</section><section class="r55-sec" id="pvSecEnvs"><h2>'+envN+' ('+n+' samples)</h2>';
+    recs.forEach(function(rec,i){html+=r55Fig(o,"env",i,rec,n,envL)});
+    html+='</section>';
+  }
+  return html;
+}
 
 function renderProof(id){
   var pid=parseInt(id,10)||204518,o=ofind(pid);if(!o){$("#proof-root").innerHTML='<div class="wrap page" style="max-width:720px;padding-top:18px"><a class="btn sec sm" href="#/orders">&lsaquo; My Orders</a>'+missOrder(pid)+'</div>';return}
   var s=PRS[o.id],locked=!!s,y=window.pageYOffset;pfInit(o);
   var pages=pvPages(o),need=pvNeedDates(o)&&!locked,mode=fa14V(),isLate=need;
   if(PV.id!==o.id)PV={id:o.id,tab:pages[0][0],zoom:100,rec:0,agree:false};
-  var kind=pvKind(o);
+  var kind=pvKind(o),recs=pvRecs(o);
   var title=s==="ok"?"Proof approved":s&&s.dis?"Revision requested":"Review and approve your proof";
-  var head='<div class="r54-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+title+'</h1><span class="chip '+(s==="ok"?"ok":s&&s.dis?"amb":"y")+'">'+(s==="ok"?"Approved":s&&s.dis?"Revision requested":"Waiting for approval")+'</span></div>';
   var qrN=(window.PV_QR||/[?&]qr=1/.test(location.hash))&&!locked?'<div class="r54-alert" role="note"><b>QR code proof:</b> Do not scan the first page. Only scan sample mail pages after it.</div>':'';
   var alertH=(mode==="override"&&!locked?'<div class="r54-alert r54-ovr">This account can change mail dates freely. The production-day minimum still applies.</div>':'')+qrN+(locked?'':'<div class="r54-alert">Approve or request changes only with the buttons on this page. Please do not email an approval, that can delay your mail.</div>');
   var result=s==="ok"?pvConfirmHTML(o):s&&s.dis?pvDisHTML(o,s):"";
-  var recN=(PV.rec||0)+1;
-  var figs=pages.map(function(t){return '<figure class="r54-fig" data-tab="'+t[0]+'"><figcaption>'+t[1]+' <span>Click to zoom</span></figcaption><div class="r54-fit"><div class="r54-scale">'+pvSheet(o,t[0],100)+'</div></div></figure>'}).join("");
-  var viewer='<section class="r54-previews" id="pvSecProof">'+figs+'<div class="r54-rec"><span>Sample record '+recN+' of '+RECS.length+' (names are made up)</span><span><button type="button" class="pv-lk" data-rec="-1">Previous</button> · <button type="button" class="pv-lk" data-rec="1">Next</button></span></div></section>';
   var earliest=ylFmt((ylDefaults(PF.rule||pfRule(o)).asap));
   var origDates=(o.drops||[]).map(function(d){var t=pfParse(d);return t?ylFmt(t):d}).join(", ");
   var datePick=(function(){var html=schedStartHTML("pf",PF);html=html.replace(/<details class="of-more">[\s\S]*?<\/details>/g,"");html=html.replace(/Campaign start date/g,"New mail date");html=html.replace(/Choose a campaign start date/g,"Choose a new mail date");return html})();
   var datesInner;
-  if(locked){datesInner='<div class="pvr"><span>Mail dates</span><b>'+esc(pvFinalDates(o).join(", "))+'</b></div>';}
+  if(locked){datesInner='<span class="r55-kv"><span>Mail dates</span> <b>'+esc(pvFinalDates(o).join(", "))+'</b></span>';}
   else if(need){
     datesInner='<div class="r54-warn" id="pvDateWarn" role="alert"><b>Not enough production time</b> to make your scheduled mail date ('+esc(origDates)+'). Choose a new date on or after <b>'+earliest+'</b>. Approve stays locked until you do.</div>'+
       '<div class="r54-datefld r54-date-hl" id="pfPick">'+datePick+'<p class="help" style="margin:6px 0 0">Earliest if you approve today: <b>'+earliest+'</b></p><div class="r54-dateact"><button type="button" class="btn sm" id="pfConfirm">Use this date</button><span class="muted" id="pfMsg">'+(PF.confirmed?"New date chosen: "+pfDates().join(", "):"")+'</span></div></div>';
   } else {
-    datesInner='<div class="pvr"><span>Mail dates</span><b>'+esc(pvFinalDates(o).join(", "))+' <button type="button" class="pv-lk" id="pfChange">Edit</button></b></div>'+
+    datesInner='<span class="r55-kv"><span>Mail dates</span> <b>'+esc(pvFinalDates(o).join(", "))+' <button type="button" class="pv-lk" id="pfChange">Edit</button></b></span>'+
       '<div id="pfPick" hidden><p class="help" style="margin:0 0 6px">Dates are optional if you approve in time. Earliest: <b>'+earliest+'</b></p>'+datePick+'<div class="r54-dateact"><button type="button" class="btn sm" id="pfConfirm">Use this date</button><span class="muted" id="pfMsg"></span></div></div>';
   }
-  var sum='<div class="r54-sum" id="pvSum">'+
-    '<h3>Order #'+o.id+'</h3><p class="muted r54-oname">'+esc(o.name||"Untitled order")+'</p>'+
-    '<div class="pvr"><span>Product</span><b>'+esc(o.prod)+'</b></div>'+
-    '<div class="pvr"><span>Quantity</span><b>'+fmtN(o.qty)+' pieces</b></div>'+
-    '<div class="pvr"><span>Postage</span><b><a href="#" class="pv-lk" data-pv="postage">'+esc(o.post)+'</a></b></div><p class="help pv-note" id="pvPostNote" hidden></p>'+
-    '<div id="pfMail">'+datesInner+'</div>'+
-    '<p class="r54-dl"><a href="#" id="pdl" class="pv-lk">Download PDF</a></p><p class="help pv-note" id="pvDlNote" hidden></p></div>';
-  var appr=locked?'':'<div class="r54-actions" id="pvSecAppr">'+
-    '<div class="r54-terms"><p>Check names, phone number, mail dates and spelling. Approving sends this order to print. Mistakes found after approval are not refunded. <a href="#/terms-proof-approval">Proof Approval &amp; Order Terms</a></p></div>'+
-    '<label class="pv-agree"><input type="checkbox" id="pvAgree"'+(PV.agree?" checked":"")+'> I agree. Checking this box is my electronic signature.</label>'+
-    '<p class="err" id="pvErr" role="alert">'+(need&&!PF.confirmed?"Approve is locked until you choose a new mail date after the production window.":"")+'</p>'+
-    '<div class="pv-nav r54-btns"><button type="button" class="btn ylhq-proof-approve" id="pAp"'+(PV.agree&&!(need&&!PF.confirmed)?"":" disabled")+'>I approve this proof</button><button type="button" class="btn sec pv-dis ylhq-proof-disapprove" id="pvDisBtn" aria-expanded="'+(PV.dis?"true":"false")+'">Request changes</button></div>'+
-    '<div class="pv-disbox" id="pvDisBox"'+(PV.dis?"":" hidden")+'><label class="f" for="pvMsg">What needs to change? <span class="req">*</span></label><p class="help" style="margin:0 0 6px">Tell us what to fix. We send a new proof, and nothing prints until you approve it.</p><textarea class="inp" id="pvMsg" rows="3" placeholder="For example: change the phone number to 555-0123">'+esc(PV.msg||"")+'</textarea><p class="err" id="pvMErr" role="alert"></p><div class="pv-nav" style="margin-top:10px"><button type="button" class="btn" id="pvSubmit">Submit</button><button type="button" class="btn sec" id="pvCancel">Cancel</button></div></div></div>';
+  var stick='<div class="r55-stick" id="pvStick"><div class="r55-stick-inner">'+
+    '<div class="r54-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+title+'</h1><span class="chip '+(s==="ok"?"ok":s&&s.dis?"amb":"y")+'">'+(s==="ok"?"Approved":s&&s.dis?"Revision requested":"Waiting for approval")+'</span></div>'+
+    alertH+(result?'<div class="r54-result">'+result+'</div>':'')+
+    '<div class="r55-sumline" id="pvSum"><span class="r55-kv"><span>Product</span> <b>'+esc(o.prod)+'</b></span><span class="r55-kv"><span>Quantity</span> <b>'+fmtN(o.qty)+' pieces</b></span><span class="r55-kv"><span>Postage</span> <b><a href="#" class="pv-lk" data-pv="postage">'+esc(o.post)+'</a></b></span>'+
+    '<div id="pfMail" style="display:contents">'+datesInner+'</div>'+
+    '<a href="#" id="pdl" class="pv-lk">Download all PDFs</a></div>'+
+    '<p class="help pv-note" id="pvPostNote" hidden></p><p class="help pv-note" id="pvDlNote" hidden></p>'+
+    (locked?'':'<div class="r54-actions" id="pvSecAppr">'+
+      '<div class="r54-terms"><p>Check names, phone number, mail dates and spelling. Approving sends this order to print. Mistakes found after approval are not refunded. <a href="#/terms-proof-approval">Proof Approval &amp; Order Terms</a></p></div>'+
+      '<label class="pv-agree"><input type="checkbox" id="pvAgree"'+(PV.agree?" checked":"")+'> I agree. Checking this box is my electronic signature.</label>'+
+      '<p class="err" id="pvErr" role="alert">'+(need&&!PF.confirmed?"Approve is locked until you choose a new mail date after the production window.":"")+'</p>'+
+      '<div class="pv-nav r54-btns"><button type="button" class="btn ylhq-proof-approve" id="pAp"'+(PV.agree&&!(need&&!PF.confirmed)?"":" disabled")+'>I approve this proof</button><button type="button" class="btn sec pv-dis ylhq-proof-disapprove" id="pvDisBtn" aria-expanded="'+(PV.dis?"true":"false")+'">Request changes</button></div>'+
+      '<div class="pv-disbox" id="pvDisBox"'+(PV.dis?"":" hidden")+'><label class="f" for="pvMsg">What needs to change? <span class="req">*</span></label><p class="help" style="margin:0 0 6px">Tell us what to fix. We send a new proof, and nothing prints until you approve it.</p><textarea class="inp" id="pvMsg" rows="3" placeholder="For example: change the phone number to 555-0123">'+esc(PV.msg||"")+'</textarea><p class="err" id="pvMErr" role="alert"></p><div class="pv-nav" style="margin-top:10px"><button type="button" class="btn" id="pvSubmit">Submit</button><button type="button" class="btn sec" id="pvCancel">Cancel</button></div></div></div>')+
+    '</div></div>';
   var root=$("#proof-root");
-  root.className="proofpg r54pv";
-  root.innerHTML=head+alertH+(result?'<div class="r54-result">'+result+'</div>':'')+'<div class="r54-grid" id="pfMailWrap"><div class="r54-main">'+viewer+'</div><aside class="panel r54-side">'+sum+appr+'</aside></div>';
+  root.className="proofpg r54pv r55pv";
+  root.innerHTML=stick+'<div class="r55-docs">'+r55DocsHTML(o)+'</div>';
   var again=function(){renderProof(o.id)};
   var updAp=function(){var a=$("#pAp");if(!a)return;var lk=need&&!PF.confirmed;a.disabled=!PV.agree||lk;var e=$("#pvErr");if(e)e.textContent=lk?"Approve is locked until you choose a new mail date after the production window.":""};
   if(!locked){
@@ -4324,16 +4352,18 @@ function renderProof(id){
   }
   requestAnimationFrame(function(){r54Fit();requestAnimationFrame(r54Fit)});
   if(!window._r54fit){window._r54fit=true;window.addEventListener("resize",function(){if(document.body.classList.contains("r54-proof-on"))r54Fit()})}
-  $$(".r54-fig",root).forEach(function(fig){
-    fig.onclick=function(){var tab=fig.getAttribute("data-tab");var lab=(pages.filter(function(x){return x[0]===tab})[0]||[tab,tab])[1];r54ZoomOpen(pvSheet(o,tab,130),lab)};
+  $$(".r55-pdf",root).forEach(function(fig){
+    fig.onclick=function(){
+      var tab=fig.getAttribute("data-tab"),ri=+fig.getAttribute("data-rec")||0;
+      var cap=fig.querySelector("figcaption b");
+      r54ZoomOpen(pvSheet(o,tab,140,ri),(cap&&cap.textContent)||"Proof");
+    };
   });
-  $$("[data-rec]",root).forEach(function(b){b.onclick=function(){PV.rec=((PV.rec||0)+ +b.getAttribute("data-rec")+RECS.length)%RECS.length;again()}});
   $$(".pv-lk[data-pv]",root).forEach(function(a){a.onclick=function(e){e.preventDefault();var k=a.getAttribute("data-pv");
-    if(/^tab-/.test(k)){var fig=root.querySelector('.r54-fig[data-tab="'+k.slice(4)+'"]');if(fig)fig.click()}
-    else if(k==="postage"){var n=$("#pvPostNote");n.textContent=o.post==="Standard"?"Standard (marketing) mail is the lowest price. Delivery usually takes 3 to 10 days after it reaches the post office.":"First Class mail is delivered faster, usually 2 to 5 days after it reaches the post office, and is forwarded when a recipient moves.";n.hidden=!n.hidden}
+    if(k==="postage"){var n=$("#pvPostNote");n.textContent=o.post==="Standard"?"Standard (marketing) mail is the lowest price. Delivery usually takes 3 to 10 days after it reaches the post office.":"First Class mail is delivered faster, usually 2 to 5 days after it reaches the post office, and is forwarded when a recipient moves.";n.hidden=!n.hidden}
     else {var p=$("#pfPick");if(p){p.hidden=false;p.scrollIntoView({block:"nearest"})}}
   }});
-  if($("#pdl"))$("#pdl").onclick=function(e){e.preventDefault();var n=$("#pvDlNote");n.textContent="Mockup: on the live site this downloads the proof PDF for order #"+o.id+". Nothing downloads here.";n.hidden=false};
+  if($("#pdl"))$("#pdl").onclick=function(e){e.preventDefault();var n=$("#pvDlNote");n.textContent="Mockup: on the live site this downloads all proof PDFs for order #"+o.id+", including every sample record. Nothing downloads here.";n.hidden=false};
   if($("#pvAgree"))$("#pvAgree").onchange=function(){PV.agree=this.checked;updAp()};
   if($("#pAp"))$("#pAp").onclick=function(){if(!PV.agree)return;if(need&&!PF.confirmed){$("#pvErr").textContent="There is not enough production time left. Choose a new mail date on or after "+earliest+", then approve.";var p=$("#pfPick");if(p)p.scrollIntoView({block:"nearest"});return}
     if(PF.confirmed){o.dropsOrig=o.dropsOrig||o.drops.slice();o.drops=(PF.drops==="multi"&&PF.batches>1?PF.batchDates.slice(0,PF.batches):[PF.start]).map(pfMDY)}
@@ -4343,7 +4373,9 @@ function renderProof(id){
   if($("#pvCancel"))$("#pvCancel").onclick=function(){PV.dis=false;PV.msg="";again()};
   if($("#pvSubmit"))$("#pvSubmit").onclick=function(){var v=$("#pvMsg").value.trim();PV.msg=v;if(!v){$("#pvMErr").textContent="Please tell us what needs to change.";return}PRS[o.id]={dis:1,msg:v};again();window.scrollTo(0,0)};
   if($("#pvRestart"))$("#pvRestart").onclick=function(e){e.preventDefault();delete PRS[o.id];delete o.exc;if(o.dropsOrig){o.drops=o.dropsOrig;delete o.dropsOrig}PV={};PF={};again();window.scrollTo(0,0)};
+  window.scrollTo(0,y);
 }
+
 
 var fa14PV="";window.addEventListener("hashchange",function(){if(!/^#\/proof/.test(location.hash)){fa14PV="";PV={}}});
 
@@ -6308,6 +6340,7 @@ bp("edit-account","Account details",function(root,arg,Q){
 },"account");
 /* ---------- Fixes 150 and 151: proof pop-ups (My Account "Your Proof" with records; product page proof preview before checkout) ---------- */
 var RECS=[["Pat Sample","1200 Example Ave","Springfield, MO 65800"],["Lee Placeholder","45 Test Rd","Austin, TX 78700"],["Sam Demo","9 Mock Ln","Tampa, FL 33600"],["Chris Fake","310 Sample Blvd","Mesa, AZ 85200"],["Robin Notreal","77 Demo St","Reno, NV 89500"]];
+var PVRECS=RECS.concat([["Jordan Example","88 Demo Way","Boise, ID 83700"],["Alex Tester","14 Sample Ct","Omaha, NE 68100"],["Morgan Placeholder","201 Mock Ave","Raleigh, NC 27600"],["Casey Trial","56 Proof Dr","Topeka, KS 66600"],["Riley Standin","9 List Pl","Salem, OR 97300"]]);
 function proofPop(title,img,opt){opt=opt||{};var i=0,tab="proof";
   function body(){var r=RECS[i];var tabs='<div class="bp-mock" style="margin-bottom:10px"><span>Show:</span><a href="#" class="chip'+(tab==="proof"?" on":"")+'" data-pt="proof">Proof</a><a href="#" class="chip'+(tab==="recs"?" on":"")+'" data-pt="recs">Records</a>'+(opt.second?'<a href="#" class="chip'+(tab==="second"?" on":"")+'" data-pt="second">Second Page</a>':'')+'</div>';
     var main=tab==="recs"?'<div class="tw"><table><thead><tr><th>#</th><th>Name</th><th>Address</th><th>City, state, ZIP</th></tr></thead><tbody>'+RECS.map(function(x,k){return '<tr'+(k===i?' style="background:var(--yt)"':'')+'><td>'+(k+1)+'</td><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td></tr>'}).join("")+'</tbody></table></div><p class="muted" style="font-size:12.5px">Showing 5 of '+(opt.total||"1,000")+' records (sample, made-up names).</p>'
@@ -6375,7 +6408,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r54&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r55&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p>'+
@@ -8589,7 +8622,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r54#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r55#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8760,10 +8793,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r54#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r55#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r54#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r55#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8858,8 +8891,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r54#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r54#/home";
+var M=API?"../?v=r55#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r55#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
@@ -8880,14 +8913,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r54 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r54#/home">Main site</a><a href="../api/?v=r54#/home">API Version A (no builder)</a><a href="../api-builder/?v=r54#/home">API Version B (with builder)</a><a href="../pages/?v=r54">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r55 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r55#/home">Main site</a><a href="../api/?v=r55#/home">API Version A (no builder)</a><a href="../api-builder/?v=r55#/home">API Version B (with builder)</a><a href="../pages/?v=r55">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
-  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r54</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r54#/home">API Version A: no builder</a><a href="api-builder/?v=r54#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r55</b>";
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r55#/home">API Version A: no builder</a><a href="api-builder/?v=r55#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r54#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r55#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -8969,7 +9002,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r54#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r55#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
@@ -9289,10 +9322,10 @@ body.dm .r51-notes{display:none !important}
 </style>
 
 <style id="r54-css">
-html.r54-proof-on,body.r54-proof-on{overflow:hidden;height:100%}
-body.r54-proof-on footer,body.r54-proof-on #hlchat,body.r54-proof-on #mocktag{display:none!important}
-body.r54-proof-on #s-proof{min-height:0}
-.proofpg.r54pv{max-width:none;width:100%;height:calc(100dvh - var(--r54hh,61px));padding:8px 20px 10px;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;gap:6px}
+html.r54-proof-on,body.r54-proof-on{overflow:visible;height:auto}
+body.r54-proof-on #hlchat,body.r54-proof-on #mocktag{display:none!important}
+body.r54-proof-on #s-proof,body.r54-proof-on #proof-root,body.r54-proof-on #app{overflow:visible!important}
+.proofpg.r54pv,.proofpg.r55pv{max-width:none;width:100%;height:auto;padding:0 0 40px;box-sizing:border-box;overflow:visible;display:block}
 .r54-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:none}
 .r54-top h1{font:700 20px/1.2 Montserrat,"Open Sans",sans-serif;margin:0;flex:1;min-width:180px}
 .r54-top .pv-back{font-size:13px;white-space:nowrap}
@@ -9341,6 +9374,33 @@ body.r54-proof-on .pv-done{padding:20px}
   .r54-actions{position:static;box-shadow:none;margin:12px 0 0;padding:10px 0 0;border-top:1px solid #eee;background:transparent}
   .r54-btns{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;margin:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 18px rgba(0,0,0,.12);border-top:1px solid #eee}
   .r54-btns .btn{flex:1}
+}
+</style>
+
+<style id="r55-css">
+.r55-stick{position:sticky;top:var(--r54hh,61px);z-index:55;background:#fff;border-bottom:1px solid #e8e8e8;box-shadow:0 8px 18px rgba(16,24,40,.08);padding:8px 24px 10px}
+.r55-stick-inner{max-width:1120px;margin:0 auto}
+.r55-sumline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:13px;margin:6px 0 4px}
+.r55-kv{display:inline-flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.r55-kv>span{color:#666}
+.r55-docs{max-width:820px;margin:0 auto;padding:22px 20px 70px}
+.r55-sec{margin:0 0 36px}
+.r55-sec h2{font:700 22px/1.2 Montserrat,"Open Sans",sans-serif;margin:0 0 6px}
+.r55-help{margin:0 0 16px}
+.r55-pdf{margin:0 0 20px;background:#e4e4e4;border-radius:10px;padding:14px 16px 18px;cursor:zoom-in}
+.r55-pdf figcaption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:600 13px/1.35 "Open Sans",sans-serif;color:#333;margin:0 0 10px}
+.r55-pdf figcaption span:last-child{color:#888;font-weight:600;font-size:12px}
+.r55-sheet{display:flex;justify-content:center;background:transparent}
+.r55-stick .r54-top{margin:0 0 4px}
+.r55-stick .r54-alert{margin:0 0 8px}
+.r55-stick .r54-actions{margin-top:6px;padding-top:8px}
+.r55-stick #pfPick[hidden]{display:none!important}
+.r55-sumline .r54-warn,.r55-sumline #pfPick,.r55-sumline .r54-datefld{flex:1 1 100%;width:100%}
+@media(max-width:860px){
+  .r55-stick{padding:6px 12px 8px}
+  .r55-docs{padding:16px 12px 110px}
+  .r55-pdf{padding:10px 8px 14px}
+  .proofpg.r54pv,.proofpg.r55pv{padding:8px 0 110px}
 }
 </style>
 </html>
