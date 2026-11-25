@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r50#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r51#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2364,7 +2364,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r50#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r51#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -2609,7 +2609,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
   '</div>'};
  function box(el){return el&&el.closest?el.closest("[data-eosx]"):null}
  document.addEventListener("change",function(e){var t=e.target;if(!t||!t.matches)return;
-  if(t.matches('input[name=eos],input[name=leos]')){var k=t.name==="eos"?"pc":"lt",b=document.getElementById("eosx-"+k);if(b)b.hidden=t.value!=="1";return}
+  if(t.matches('input[name=eos],input[name=leos]')){var k=t.name==="eos"?"pc":"lt",b=document.getElementById("eosx-"+k);if(b)b.hidden=t.type==="checkbox"?!t.checked:t.value!=="1";return}
   var b=box(t);if(!b)return;var o=st(b.getAttribute("data-eosx"));
   if(t.hasAttribute("data-eosxt")){o.type=t.value;return}
   if(t.hasAttribute("data-eosxland")){o.land=t.checked;return}
@@ -2980,16 +2980,29 @@ function formKind(){
 }
 window.formKind=formKind;window.formOnScreen=formOnScreen;
 function formSteps(kind){kind=kind||formKind();var arr=formStepsRaw(kind);arr.forEach(function(s){if(!s.skip&&(s.id==="font"||s.id==="envfont")){var e=formEl(s);if(e&&!e.querySelector("input,select"))s.skip=true}});return arr}
-function r50Sw(id,on){
-  return '<label class="r50-sw"><input type="checkbox" id="'+id+'"'+(on?" checked":"")+'>'
+function r50Sw(id,on,name,val){
+  return '<label class="r50-sw"><input type="checkbox" id="'+id+'"'+(name?' name="'+name+'"':'')+(val!=null&&String(val)!==""?' value="'+String(val)+'"':'')+(on?" checked":"")+'>'
     +'<span class="r50-sw-n off">No</span>'
     +'<span class="r50-sw-track" aria-hidden="true"></span>'
     +'<span class="r50-sw-n on">Yes</span></label>';
 }
+function r51NotesHTML(pfx,st){
+  var notesId=pfx==="pc"?"pnotes":"lnotes";
+  var fileId=pfx==="pc"?"potherInp":"lotherInp";
+  var listId=pfx==="pc"?"files-pother":"files-lother";
+  var nameId=pfx==="pc"?"oname":"loname";
+  var key=pfx==="pc"?"pother":"lother";
+  return '<div class="fld r51-notes" id="'+pfx+'Notes"><label class="f">Notes and files</label>'
+    +'<p class="help" style="margin:0 0 8px">Optional. Add special instructions, an order name, or extra files. This does not hold up your order.</p>'
+    +'<div class="fld"><label class="f" for="'+notesId+'">Order notes</label><textarea class="inp" id="'+notesId+'" rows="3" placeholder="Special instructions for this order">'+esc(st.notes||"")+'</textarea></div>'
+    +'<div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="'+fileId+'"></label><p class="help lt-files-help">Any other artwork or instructions? Upload them here.</p><ul class="files" id="'+listId+'">'+fileList((st.other||[]).concat(st.art||[]),key)+'</ul></div>'
+    +'<div class="fld" style="margin:0"><label class="f" for="'+nameId+'">Order name</label><input class="inp" id="'+nameId+'" placeholder="Optional name for this order" value="'+esc(st.oname||"")+'" maxlength="40"></div>'
+    +'</div>';
+}
 function r50GlossHTML(st){
   return '<div class="fld r50-opt" id="pcGlossFld"><div class="r50-opt-row">'
     +'<label class="f" for="pcGlossOn">Glossy <span class="muted">(+2 cents each)</span></label>'
-    +r50Sw("pcGlossOn",!!(st&&st.gloss)).replace('id="pcGlossOn"','id="pcGlossOn" name="gloss" value="1"')
+    +r50Sw("pcGlossOn",!!(st&&st.gloss),"gloss","1")
     +'</div></div>';
 }
 function r48QrBody(pfx,st){
@@ -3035,7 +3048,6 @@ function formStepsRaw(kind){kind=kind||formKind();
       {id:"more",sel:"#ltMoreAcc"},
       {id:"list",sel:"#ltUpbar"},
       {id:"mail",sel:"#ltMailAcc"},
-      {id:"notes",sel:"#ltNotes"},
       {id:"buy",sel:"#lPricePanel"}
     ];
   }
@@ -3047,7 +3059,6 @@ function formStepsRaw(kind){kind=kind||formKind();
       {id:"more",sel:"#pcMoreAcc"},
       {id:"list",sel:"#pcUpbar"},
       {id:"mail",sel:"#pcMailAcc"},
-      {id:"notes",sel:"#pcNotes"},
       {id:"buy",sel:"#pPricePanel"}
     ];
   }
@@ -3681,21 +3692,22 @@ function renderCfg(){
   L+=tplFieldHTML(galFind("postcards",p.k),PS.tpl);
   L+='</div>';
   var postbar='<details class="panel of-form lt-postbar lt-acc" id="pcPostAcc"><summary><span class="lt-acc-k">Postage<small id="pcPostSum"></small></span></summary><div class="lt-acc-body"><div id="pseg"></div><button type="button" class="btn sec sm form-next" data-form-next="post">Continue</button></div></details>';
-  var fontAcc='<details class="lt-acc" id="pcFontAcc"><summary><span class="lt-acc-k">Change your font<small id="pcFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-pc"></div></details>';
+  var fontAcc='<details class="lt-acc" id="pcFontAcc"><summary><span class="lt-acc-k">Select your font<small id="pcFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-pc"></div></details>';
   var canGloss=!(p.k==="hw"||p.k==="hw425");
   if(!canGloss)PS.gloss=false;
   var more='';
   if(canGloss)more+=r50GlossHTML(PS);
   more+=r48QrBody("pc",PS);
-  more+='<div class="fld"><label class="f">Easy Offer System <button type="button" class="pill-help" id="eosHelp">What is this?</button></label><div class="radios"><label><input type="radio" name="eos" value="0"'+(!PS.eos?" checked":"")+'>No</label><label><input type="radio" name="eos" value="1"'+(PS.eos?" checked":"")+'>Yes (+3 cents)</label></div></div>'+eosxHTML("pc",PS.eos);
-  more+='<div class="fld"><label class="f">Bad address list <button type="button" class="pill-help" id="undHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="undel" value="1"'+(PS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="undel" value="0"'+(!PS.undel?" checked":"")+'>No</label></div></div>';
-  more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="retHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="ret" value="1"'+(PS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="ret" value="0"'+(!PS.ret?" checked":"")+'>No</label></div></div>';
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="pcEosOn">Easy Offer System <span class="muted">(+3 cents)</span> <button type="button" class="pill-help" id="eosHelp">What is this?</button></label>'+r50Sw("pcEosOn",!!PS.eos,"eos","1")+'</div></div>'+eosxHTML("pc",PS.eos);
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="pcUndelOn">Bad address list <span class="muted">($19)</span> <button type="button" class="pill-help" id="undHelp">Learn more</button></label>'+r50Sw("pcUndelOn",!!PS.undel,"undel","1")+'</div></div>';
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="pcRetOn">Return Mail List after delivery <span class="muted">($49)</span> <button type="button" class="pill-help" id="retHelp">Learn more</button></label>'+r50Sw("pcRetOn",!!PS.ret,"ret","1")+'</div></div>';
+  more+=r51NotesHTML("pc",PS);
   more+=listLeadHTML("pc",PS);
   var mailBody=YL_APPR_NOTE+'<div class="fld"><label class="f" for="day">Mail day</label><select class="inp" id="day"><option value="">Please make a selection</option>'+["ASAP","Monday (order by Wednesday 3:30 PM Pacific)","Wednesday (order by Friday 3:30 PM Pacific)","Friday (order by Tuesday 3:30 PM Pacific)"].map(function(d){return '<option'+(PS.day===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("pc",PS)+'<div class="fld"><label class="f" for="drops">Send as</label><select class="inp" id="drops"><option value="">Please make a selection</option><option value="all"'+(PS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(PS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("pc",PS)+'<div id="pcBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
   var accs='<div class="lt-accs">'+fontAcc+'<details class="lt-acc" id="pcMoreAcc"><summary><span class="lt-acc-k">Other options<small id="pcMoreSum">Lead type and extras</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
   var upbar='<details class="panel of-form lt-upbar lt-acc" id="pcUpbar"><summary><span class="lt-acc-k">Your list<small id="pcListSum"></small></span></summary><div class="lt-acc-body">'+listToolHTML("pc",PS)+dropBox("list","Your list","CSV only","Select files",PS.files)+'<a href="#" class="lt-csv-link" id="exCsv">Example CSV</a></div></details>';
   var mailAcc='<details class="panel of-form lt-acc" id="pcMailAcc"><summary><span class="lt-acc-k">Mail dates<small id="pcMailSum"></small></span></summary><div class="lt-acc-body">'+mailBody+'</div></details>';
-  var notes='<details class="panel of-form lt-acc" id="pcNotes"><summary><span class="lt-acc-k">Notes and files<small id="pcNotesSum"></small></span></summary><div class="lt-acc-body"><div class="fld"><label class="f" for="pnotes">Order notes</label><textarea class="inp" id="pnotes" rows="3" placeholder="Special instructions for this order">'+esc(PS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="potherInp"></label><p class="help lt-files-help">Any other artwork or instructions? Upload them here.</p><ul class="files" id="files-pother">'+fileList((PS.other||[]).concat(PS.art||[]),"pother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="oname">Order name</label><input class="inp" id="oname" placeholder="Optional name for this order" value="'+esc(PS.oname)+'" maxlength="40"></div><button type="button" class="btn sec sm form-next" data-form-next="notes">Continue</button></div></details>';
+  var notes='';
   var buy='<div class="panel of-form lt-buy" id="pPricePanel"><div class="lt-buy-sum" id="pcBuySum"></div><div class="lt-buy-qtyline"><label class="lt-buy-k" for="qty">Pieces:</label> <input class="inp" id="qty" type="number" min="0" step="1" inputmode="numeric" value="'+(PS.qty||0)+'" readonly aria-readonly="true" aria-label="How many pieces"><p class="help qmin" style="margin:4px 0 0">'+(p.std?"0 until you upload your list. Then it is the cleaned count and cannot be changed. Minimum 100 First Class, 200 Standard.":"0 until you upload your list. Then it is the cleaned count and cannot be changed. Minimum 100 cards.")+'</p></div><div class="err" id="qerr"></div><div class="sumbox" id="sum" hidden></div><button class="btn lg" id="addCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
   var priceModal='<div class="lt-price-modal" id="pcPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="pcPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">'+(p.std?"100 minimum First Class. 200 minimum Standard.":"100 minimum.")+'</p><p class="help pseg-help" id="postHelp"></p><div id="ptable"></div>'+(p.std?'<p class="pc-stdnote"><b>Standard is 4&cent; less per piece than First Class.</b> Same card and design. Standard needs at least 200 cards.</p>':'')+(p.k==="hw"?'<p class="lpg" style="margin:8px 0 0;font-size:14px;font-weight:700;color:var(--ink)">Lowest price guaranteed</p>':'')+(p.std?'<p class="help" id="postPrice" style="color:var(--ink);font-size:14.5px"></p>':'')+'</div></div>';
   c.innerHTML='<div class="cfg lt-wide">'+head+L+postbar+accs+upbar+mailAcc+notes+buy+'</div>'+priceModal;
@@ -4248,6 +4260,52 @@ document.addEventListener("input",function(e){var t=e.target;if(!t||!t.getAttrib
 /* Josh, Nov 15: ready templates use the same minimum as a regular order of that product */
 function tplMin(rec){var c=((rec&&rec.cid)||"").split(":");if(c[0]==="pc")return rec.post==="std"?200:100;return 200}
 function tplMinTxt(rec){var m=tplMin(rec);return m+(/^pc:/.test((rec&&rec.cid)||"")?" cards":" pieces")}
+function roDash(v){v=(v==null?"":String(v)).trim();return(!v||v==="NA"||v==="N/A")?"\u2014":v}
+function roSizeOf(prod, extra){
+  if(extra&&extra.size)return extra.size;
+  var p=String(prod||"");
+  var m=/\(([^)]*\d[^)]*)\)/.exec(p);
+  if(m)return m[1].replace(/\s+/g," ").trim();
+  var map={"Pressure Sealed Letter/Snap Packs":"8.5 x 11 in snap pack (sealed, no envelope)","Letter with #10 Envelope":"#10 letter","Letter with Windowed Envelope":"#10 windowed letter","Digital Greeting Cards":"Greeting card","Digital Folded Notes":"Folded note","Letter with Invitation Envelope":"Invitation / A6 letter","Letter with A6 Envelope (Invitation)":"Invitation / A6 letter"};
+  return map[p]||"";
+}
+function roTileHTML(src){
+  var dash="\u2014";
+  var size=roSizeOf(src.prod,{size:src.size});
+  var paperInk="";
+  if(src.paper||src.ink)paperInk=(src.paper?src.paper+" paper":dash)+(src.ink?" \u00b7 "+src.ink+" ink":"");
+  var piece=esc(src.prod||dash)+'<br><small class="muted">'+esc(size||dash)+'</small>';
+  var im;
+  if(src.custom){
+    im='<div class="im"><div class="ph"><b>Upload Your<br>Design</b><i></i><small>Your images, wording, and personalization</small></div><span class="tag">'+(src.tag||"Custom")+'</span></div>';
+  }else{
+    im='<div class="im" style="background-image:url('+src.img+')"><span class="tag'+(src.ready?" rdy":"")+'">'+(src.ready?"&#10003; Ready to mail":(src.tag||"Your Library"))+'</span></div>';
+  }
+  var env=src.env&&/^none$/i.test(String(src.env))?"No envelope":src.env;
+  var btn=src.pickt
+    ?'<button class="btn sm" data-pickt="1">Order this product again</button>'
+    :'<button class="btn sm" data-pick="'+src.pick+'">Order this product again</button>';
+  return '<div class="rcard'+(src.ready?" rdy":"")+'">'+im
+    +'<div class="t"><b>'+esc(src.title||dash)+'</b><span class="chip'+(src.ready?" ok":"")+'">'+esc(src.chip||"Template")+'</span></div>'
+    +'<div class="d">'
+    +'<b>Piece</b><span>'+piece+'</span>'
+    +'<b>Paper / ink</b><span>'+esc(roDash(paperInk))+'</span>'
+    +'<b>Envelope</b><span>'+esc(roDash(env))+'</span>'
+    +'<b>Postage</b><span>'+esc(roDash(src.post))+'</span>'
+    +'<b>Proof</b><span>'+esc(roDash(src.proof))+'</span>'
+    +'<b>Prints</b><span>'+esc(roDash(src.prints))+'</span>'
+    +'</div>'
+    +'<p class="rdy-src">'+(src.srcLine?esc(src.srcLine):"\u00a0")+'</p>'
+    +'<p class="rdy-note">'+(src.note||"\u00a0")+'</p>'
+    +'<div class="ft"><span class="muted">'+(src.ft||"Approved design")+'</span>'+btn+'</div></div>';
+}
+function roEqualTiles(){
+  var g=document.getElementById("rgrid");if(!g)return;
+  var cards=[].slice.call(g.querySelectorAll(".rcard"));
+  cards.forEach(function(c){c.style.minHeight=""});
+  var h=0;cards.forEach(function(c){h=Math.max(h,c.offsetHeight)});
+  if(h)cards.forEach(function(c){c.style.minHeight=h+"px"});
+}
 function renderRapid(){
   var q=($("#rq").value||"").toLowerCase().trim();
   var L=ORDERS.filter(function(o){return oActive(o)&&(!eos||o.eos)&&(!q||(o.id+" "+o.prod+" "+o.name+(o.eos?" eos":"")).toLowerCase().indexOf(q)>-1)});
@@ -4257,13 +4315,36 @@ function renderRapid(){
   nt.style.display=/[?&]v=notpl/.test(location.hash)?"":"none";
   var showR=!eos&&(!q||(RDY.tpl+" "+RDY.prod+" ready to mail template").toLowerCase().indexOf(q)>-1);
   if(showR)$("#rcount").textContent+=", plus 1 ready to mail template";
-  var rdy=showR?'<div class="rcard rdy"><div class="im" style="background-image:url('+RDY.img+')"><span class="tag rdy">&#10003; Ready to mail</span></div><div class="t"><b>'+esc(RDY.tpl)+'</b><span class="chip ok">Template</span></div><div class="d">'+(function(){var rc=TPLREC[RDY.basis]||{};return '<b>Piece</b><span>'+esc(rc.prod||RDY.prod)+(rc.size?'<br><small class="muted">'+esc(rc.size)+'</small>':'')+'</span><b>Paper / ink</b><span>'+esc((rc.paper||"White")+" paper · "+(rc.ink||"Black")+" ink")+'</span><b>Envelope</b><span>'+esc(rc.env||"")+'</span><b>Postage</b><span>'+esc((rc.postLabel||RDY.post).replace(/ Postage$/,""))+'</span><b>Proof</b><span>Approved '+esc(rc.approved||RDY.approved)+'</span><b>Prints</b><span>Return address and phone from your list, or your saved default ('+esc(rc.ret||RDY.ret)+' &middot; '+esc(rc.phone||RDY.phone)+')</span>'})()+'</div><p class="rdy-src">Source: your saved design, '+esc(RDY.tpl)+'</p><p class="rdy-note">Built from this saved template, mail it with any new list. Same minimum as a regular order of this product: '+tplMinTxt(TPLREC[RDY.basis])+'.</p><div class="ft"><span class="muted">Proof approved</span><button class="btn sm" data-pickt="1">Order this product again</button></div></div>':'';
-  $("#rgrid").innerHTML=(L.length||showR)?rdy+L.map(function(o,i){var st=ST[o.st];
-    var im=i%3===2?'<div class="im" style="background-image:url('+o.img+')"><span class="tag">Your Library</span></div>':'<div class="im"><div class="ph"><b>Upload Your<br>Design</b><i></i><small>Your images, wording, and personalization</small></div><span class="tag">Custom</span></div>';
-    return '<div class="rcard">'+im+'<div class="t"><b>'+esc(o.prod)+'</b></div><div class="d"><b>Template</b><span>'+(o.eos?"EOS template":"Saved template")+'</span><b>Postage</b><span>'+esc(o.post)+'</span></div><div class="ft"><span class="muted">Approved design</span><button class="btn sm" data-pick="'+o.id+'">Order this product again</button></div></div>'}).join(""):'<div class="empty" style="grid-column:1/-1">'+(document.getElementById("rq")&&document.getElementById("rq").value.trim()?"No products match your search.":"No reusable orders to show. Cancelled, refunded, on-hold, failed, and unfinished orders can't be reused in Rapid Orders.")+'</div>';
+  var rdy="";
+  if(showR){
+    var rc=TPLREC[RDY.basis]||{};
+    rdy=roTileHTML({
+      ready:1,pickt:1,img:RDY.img,title:RDY.tpl,chip:"Template",
+      prod:rc.prod||RDY.prod,size:rc.size||"",paper:rc.paper||"White",ink:rc.ink||"Black",
+      env:rc.env||"",post:(rc.postLabel||RDY.post||"").replace(/ Postage$/,""),
+      proof:"Approved "+(rc.approved||RDY.approved||""),
+      prints:"Return address and phone from your list, or your saved default ("+(rc.ret||RDY.ret||"")+" \u00b7 "+(rc.phone||RDY.phone||"")+")",
+      srcLine:"Source: your saved design, "+RDY.tpl,
+      note:"Built from this saved template, mail it with any new list. Same minimum as a regular order of this product: "+tplMinTxt(rc)+".",
+      ft:"Proof approved"
+    });
+  }
+  $("#rgrid").innerHTML=(L.length||showR)?rdy+L.map(function(o,i){
+    var d=(typeof ODET!=="undefined"&&ODET[o.id])?ODET[o.id]:{};
+    return roTileHTML({
+      pick:o.id,img:o.img,custom:i%3!==2,tag:i%3===2?"Your Library":"Custom",
+      title:d.tpl||"\u2014",chip:o.eos?"EOS template":"Template",
+      prod:o.prod,size:d.size||"",paper:d.paper||"",ink:d.fcol||d.ink||"",
+      env:d.env||"",post:o.post,proof:"Approved design",prints:"",
+      srcLine:d.tpl?("Source: your saved design, "+d.tpl):"Source: your saved design",
+      note:"Mail this product with any new list.",ft:"Approved design"
+    });
+  }).join(""):'<div class="empty" style="grid-column:1/-1">'+(document.getElementById("rq")&&document.getElementById("rq").value.trim()?"No products match your search.":"No reusable orders to show. Cancelled, refunded, on-hold, failed, and unfinished orders can\'t be reused in Rapid Orders.")+'</div>';
   $$("[data-pick]").forEach(function(b){b.onclick=function(){var id=+b.getAttribute("data-pick");if(RO.id!==id||RO.tpl){resetRO();RO.id=id}roStep(2);window.scrollTo(0,0)}});
   $$("[data-pickt]").forEach(function(b){b.onclick=function(){if(!RO.tpl||!RO.rec||RO.rec.id!==RDY.basis){resetRO();RO.id=RDY.basis;RO.rec=TPLREC[RDY.basis];RO.tpl=RDY;RO.useOld=false;RO.name=RDY.tpl;RO.qty=250}roStep(2);window.scrollTo(0,0)}});
+  requestAnimationFrame(function(){roEqualTiles();setTimeout(roEqualTiles,80);setTimeout(roEqualTiles,300)});
 }
+if(!window.__r51roEq){window.__r51roEq=1;window.addEventListener("resize",function(){if(typeof roEqualTiles==="function")roEqualTiles()});}
 $("#rq").addEventListener("input",renderRapid);
 $("#eosOnly").onclick=function(){eos=!eos;renderRapid()};
 
@@ -4898,11 +4979,12 @@ function m31Pick(L,go){
  function ix(k){for(var i=0;i<L.length;i++)if(L[i].k===k)return i;return -1}
  var cur=(LS.p>-1&&L[LS.p])?L[LS.p].k:"",fam=["no10","windowed","check","trifold","fullview"],inFam=fam.indexOf(cur)>-1;
  if(cur==="windowed")M31.win=true;else if(cur==="no10")M31.win=false;
- var im=function(k){var i=ix(k);return i>-1?L[i].img:""};
- function tile(k,label,on,extra){return '<button type="button" class="ptile normal ylhq_products m31t'+(on?" on":"")+'" data-i="'+ix(k)+'" data-k="'+k+'" data-value="'+label.replace(/"/g,"&quot;")+'"><img src="'+im(k)+'" alt="">'+label.replace(/&/g,"&amp;")+'</button>'}
+ var im=function(k,style){var i=ix(k);if(i<0)return "";var p=L[i];if(style&&p.styles&&p.styles[style]&&p.styles[style].img)return p.styles[style].img;return p.img};
+ function tile(k,label,on,extra){extra=extra||{};return '<button type="button" class="ptile normal ylhq_products m31t'+(on?" on":"")+'" data-i="'+ix(k)+'" data-k="'+k+'"'+(extra.style?' data-style="'+extra.style+'"':'')+' data-value="'+label.replace(/"/g,"&quot;")+'"><img src="'+im(k,extra.style)+'" alt="">'+label.replace(/&/g,"&amp;")+'</button>'}
  var t10='<button type="button" class="ptile normal ylhq_products m31t'+(inFam?" on":"")+'" data-fam="1" data-value="Letter with #10 Envelope"><img src="'+im("no10")+'" alt="">Letter with #10 Envelope</button>';
+ var gOn=cur==="cardsnotes"&&LS.cardStyle!=="notes", nOn=cur==="cardsnotes"&&LS.cardStyle==="notes";
  var h='<a class="m31-back" href="#/shop">\u2039 Choose another product</a><div class="sect-t">Select Letter Type</div>'+
-   '<div class="tiles-p m31-letters" id="products-button-container">'+tile("sealed","Pressure Sealed Letter/Snap Packs",cur==="sealed")+t10+tile("a6","Letter with Invitation Envelope",cur==="a6")+tile("cardsnotes","Printed Greeting Cards & Folded Notes",cur==="cardsnotes")+'</div>';
+   '<div class="tiles-p m31-letters" id="products-button-container">'+t10+tile("a6","Letter with Invitation Envelope",cur==="a6")+tile("sealed","Pressure Seal / Snap Packs",cur==="sealed")+tile("cardsnotes","Printed Greeting Cards",gOn,{style:"greeting"})+tile("cardsnotes","Folded Notes",nOn,{style:"notes"})+'</div>';
  if(inFam){
   var o1=M31.win?"windowed":"no10";
   function opt(k,label,chip,on){return '<button type="button" class="m31-opt'+(on?" sel":"")+'" data-i="'+ix(k)+'" data-k="'+k+'" data-value="'+label+'"><span class="m31-img"><img src="'+im(k)+'" alt=""></span><b>'+label+'</b><span class="m31-chip">'+chip+'</span></button>'}
@@ -4910,9 +4992,15 @@ function m31Pick(L,go){
    '<div class="m31-opts">'+opt(o1,M31.win?"Letter with Windowed #10":"Letter with #10 Envelope",M31.win?"Windowed envelope":"Standard envelope",cur===o1)+opt("check","Check Letter","Always windowed",cur==="check")+opt("trifold","Tri-Fold Letter","#10 option",cur==="trifold")+opt("fullview","Full View Letter","#10 option",cur==="fullview")+'</div></div>';
  }
  root.innerHTML=h;
- $$("[data-i]",root).forEach(function(b){b.onclick=function(){var i=+b.getAttribute("data-i");if(i>-1)go(i)}});
+ $$("[data-i]",root).forEach(function(b){b.onclick=function(){var st=b.getAttribute("data-style");if(st)LS.cardStyle=st;else if(b.getAttribute("data-k")!=="cardsnotes")LS.cardStyle="";var i=+b.getAttribute("data-i");if(i>-1)go(i)}});
  var f=$("[data-fam]",root);if(f)f.onclick=function(){go(ix(inFam?cur:(M31.win?"windowed":"no10")))};
  $$("[data-win]",root).forEach(function(b){b.onclick=function(){M31.win=b.getAttribute("data-win")==="1";if(cur==="no10"||cur==="windowed")go(ix(M31.win?"windowed":"no10"));else m31Pick(L,go)}});
+ requestAnimationFrame(function(){
+   var tiles=[].slice.call(root.querySelectorAll("#products-button-container.m31-letters > .ptile"));
+   tiles.forEach(function(t){t.style.minHeight=""});
+   var mh=0;tiles.forEach(function(t){mh=Math.max(mh,t.offsetHeight)});
+   if(mh)tiles.forEach(function(t){t.style.minHeight=mh+"px"});
+ });
 }
 window.m31Pick=m31Pick;
 function renderLT(arg){
@@ -5353,29 +5441,30 @@ function renderLCfg(){
   var envCol='<p class="lt-colsub muted" id="ltEnvSub">Pick an envelope below.</p><div class="fld" style="margin:0"><label class="f" for="ltEnv" hidden>Envelope</label><select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select></div>';
   var more='';
   more+=r48QrBody("lt",LS);
-  if(!p.hw&&secondOK(p.k))more+='<div class="fld sp-fld"><label class="f">Second Page (Circular) <button type="button" class="pill-help" id="spHelp">What is this?</button></label><div class="radios sp-radios"><label><input type="radio" name="lsp" value="0"'+(!LS.second?" checked":"")+'>No second page</label><label><input type="radio" name="lsp" value="1"'+(LS.second&&LS.second!==2?" checked":"")+'>Circular page (+10 cents)</label><label><input type="radio" name="lsp" value="2"'+(LS.second===2?" checked":"")+'>Circular with variable data (+15 cents)</label></div></div>';
+  if(stickyOK(p.k))more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="ltStickyOn">Envelope sticky note <span class="muted">(+6 cents)</span> <a href="#" class="snlk" id="snHelp">See example</a></label>'+r50Sw("ltStickyOn",!!LS.sticky,"lsn","1")+'</div><p class="opt-help" style="margin:8px 0 0">A small yellow sticky note stuck to the outside of the envelope. <b>Sticky notes require a 200-piece minimum.</b></p><div class="sn-box" id="snBox" style="display:none"><textarea id="snMsg" maxlength="60" rows="2" placeholder="Call me today! (555) 123-4567" aria-label="Envelope sticky note message"></textarea><div class="sn-ct"><span>What should the sticky note say? Short is best: a few words and a phone number.</span><b id="snCt">0/60</b></div></div></div>';
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="ltEosOn">Easy Offer System <span class="muted">(+3 cents)</span> <button type="button" class="pill-help" id="leosHelp">What is this?</button></label>'+r50Sw("ltEosOn",!!LS.eos,"leos","1")+'</div></div>'+eosxHTML("lt",LS.eos);
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="ltUndelOn">Bad address list <span class="muted">($19)</span> <button type="button" class="pill-help" id="lundHelp">Learn more</button></label>'+r50Sw("ltUndelOn",!!LS.undel,"lundel","1")+'</div></div>';
+  more+='<div class="fld r50-opt"><div class="r50-opt-row"><label class="f" for="ltRetOn">Return Mail List after delivery <span class="muted">($49)</span> <button type="button" class="pill-help" id="lretHelp">Learn more</button></label>'+r50Sw("ltRetOn",!!LS.ret,"lret","1")+'</div></div>';
   if(!p.hw&&p.k==="trifold")more+=triFoldHTML("lt",LS);
-  if(stickyOK(p.k))more+='<div class="fld"><label class="f">Envelope sticky note <a href="#" class="snlk" id="snHelp">See example</a></label><p class="opt-help" style="margin:0 0 6px">A small yellow sticky note stuck to the outside of the envelope. <b>Sticky notes require a 200-piece minimum.</b></p><div class="radios"><label><input type="radio" name="lsn" value="0"'+(!LS.sticky?" checked":"")+'>No</label><label><input type="radio" name="lsn" value="1"'+(LS.sticky?" checked":"")+'>Yes (+6 cents)</label></div><div class="sn-box" id="snBox" style="display:none"><textarea id="snMsg" maxlength="60" rows="2" placeholder="Call me today! (555) 123-4567" aria-label="Envelope sticky note message"></textarea><div class="sn-ct"><span>What should the sticky note say? Short is best: a few words and a phone number.</span><b id="snCt">0/60</b></div></div></div>';
-  more+='<div class="fld"><label class="f">Easy Offer System <button type="button" class="pill-help" id="leosHelp">What is this?</button></label><div class="radios"><label><input type="radio" name="leos" value="0"'+(!LS.eos?" checked":"")+'>No</label><label><input type="radio" name="leos" value="1"'+(LS.eos?" checked":"")+'>Yes (+3 cents)</label></div></div>'+eosxHTML("lt",LS.eos);
-  more+='<div class="fld"><label class="f">Bad address list <button type="button" class="pill-help" id="lundHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lundel" value="1"'+(LS.undel?" checked":"")+'>Yes ($19)</label><label><input type="radio" name="lundel" value="0"'+(!LS.undel?" checked":"")+'>No</label></div></div>';
-  more+='<div class="fld"><label class="f">Return Mail List after delivery <button type="button" class="pill-help" id="lretHelp">Learn more</button></label><div class="radios"><label><input type="radio" name="lret" value="1"'+(LS.ret?" checked":"")+'>Yes ($49)</label><label><input type="radio" name="lret" value="0"'+(!LS.ret?" checked":"")+'>No</label></div></div>';
+  more+=r51NotesHTML("lt",LS);
   more+=listLeadHTML("lt",LS);
+  if(!p.hw&&secondOK(p.k))more+='<div class="fld sp-fld"><label class="f">Second Page (Circular) <button type="button" class="pill-help" id="spHelp">What is this?</button></label><div class="radios sp-radios"><label><input type="radio" name="lsp" value="0"'+(!LS.second?" checked":"")+'>No second page</label><label><input type="radio" name="lsp" value="1"'+(LS.second&&LS.second!==2?" checked":"")+'>Circular page (+10 cents)</label><label><input type="radio" name="lsp" value="2"'+(LS.second===2?" checked":"")+'>Circular with variable data (+15 cents)</label></div></div>';
   var mailBody=YL_APPR_NOTE+'<div class="fld"><label class="f" for="lday">Mail day <span class="req">Required*</span></label><select class="inp" id="lday"><option value="">Please make a selection</option>'+[YL_DAYS[0],YL_DAYS[1],YL_DAYS[2],YL_THU,YL_DAYS[3]].map(function(d){return o(d,d,LS.day===d)}).join("")+'</select><details class="of-more"><summary>Learn more about mail dates</summary><p class="help day-cav"><b>Heads up:</b> These dates assume your proof is approved the same day, or by 12:00 PM Pacific the next day. Later approval moves your mail date back.</p></details></div>'+schedStartHTML("lt",LS)+'<div class="fld"><label class="f" for="ldrops">Send as <span class="req">Required*</span></label><select class="inp" id="ldrops"><option value="">Please make a selection</option><option value="all"'+(LS.drops==="all"?" selected":"")+'>Mail All At Once</option><option value="multi"'+(LS.drops==="multi"?" selected":"")+'>Multiple Mail Drops</option></select></div>'+schedBatchHTML("lt",LS)+'<div id="ltBatchDates"></div><button type="button" class="btn sec sm form-next" data-form-next="mail">Continue</button>';
   var postbar='<details class="panel of-form lt-postbar lt-acc" id="ltPostAcc"><summary><span class="lt-acc-k">Postage<small id="ltPostSum"></small></span></summary><div class="lt-acc-body"><div id="lpseg"></div><button type="button" class="btn sec sm form-next" data-form-next="post">Continue</button></div></details>';
   var hasEnvFonts=envs.filter(function(x){return x&&x!=="None"}).length>0;
 
-  var accs='<div class="lt-accs"><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Change your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details>'+(hasEnvFonts?'<details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details>':'')+'<details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small id="ltMoreSum">Lead type and extras</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
+  var accs='<div class="lt-accs"><details class="lt-acc" id="ltFontAcc"><summary><span class="lt-acc-k">Select your font<small id="ltFontSum"></small></span></summary><div class="lt-acc-body" id="opPick-lt"></div></details>'+(hasEnvFonts?'<details class="lt-acc" id="ltEnvFontAcc"><summary><span class="lt-acc-k">Envelope font<small id="ltEnvFontSum"></small></span></summary><div class="lt-acc-body" id="ltEnvFontBody"></div></details>':'')+'<details class="lt-acc" id="ltMoreAcc"><summary><span class="lt-acc-k">Other options<small id="ltMoreSum">Lead type and extras</small></span></summary><div class="lt-acc-body">'+more+'</div></details></div>';
   var upbar='<details class="panel of-form lt-upbar lt-acc" id="ltUpbar"><summary><span class="lt-acc-k">Your list<small id="ltListSum"></small></span></summary><div class="lt-acc-body">'+listToolHTML("lt",LS)+dropBox("llist","Your list","CSV only","Select files",LS.files)+'<a href="#" class="lt-csv-link" id="lexCsv">Example CSV</a></div></details>';
   var mailAcc='<details class="panel of-form lt-acc" id="ltMailAcc"><summary><span class="lt-acc-k">Mail dates<small id="ltMailSum"></small></span></summary><div class="lt-acc-body">'+mailBody+'</div></details>';
   var art="";
   var qty='<div class="panel of-form lt-buy" id="lPricePanel"><div class="lt-buy-sum" id="ltBuySum"></div><div class="lt-buy-qtyline"><label class="lt-buy-k" for="lqty">Pieces:</label> <input class="inp" id="lqty" type="number" min="0" step="1" inputmode="numeric" value="'+(LS.qty||0)+'" readonly aria-readonly="true" aria-label="How many pieces"><p class="help qmin" style="margin:4px 0 0">0 until you upload your list. Then it is the cleaned count and cannot be changed. Minimum 200.</p></div><div class="err" id="lqerr"></div><div class="sumbox" id="lsum" hidden></div><button class="btn lg" id="laddCart">Add to cart</button><p class="muted" style="margin:0">Mockup: nothing is ordered or charged.</p></div>';
-  var notes='<details class="panel of-form lt-acc" id="ltNotes"><summary><span class="lt-acc-k">Notes and files<small id="ltNotesSum"></small></span></summary><div class="lt-acc-body"><div class="fld"><label class="f" for="lnotes">Order notes</label><textarea class="inp" id="lnotes" rows="3" placeholder="Special instructions for this order">'+esc(LS.notes||"")+'</textarea></div><div class="fld lt-notes-files"><label class="btn sec sm" style="margin:0">Select files<input type="file" multiple hidden id="lotherInp"></label><p class="help lt-files-help">Any other artwork or instructions? Upload them here.</p><ul class="files" id="files-lother">'+fileList((LS.other||[]).concat(LS.art||[]),"lother")+'</ul></div><div class="fld" style="margin:0"><label class="f" for="loname">Order name</label><input class="inp" id="loname" placeholder="Optional name for this order" value="'+esc(LS.oname)+'" maxlength="40"></div><button type="button" class="btn sec sm form-next" data-form-next="notes">Continue</button></div></details>';
+  var notes='';
   var priceModal='<div class="lt-price-modal" id="ltPriceModal" hidden><div class="lt-price-card"><button type="button" class="btn sec sm lt-price-close" id="ltPriceClose">Close</button><h3>Pricing</h3><p style="margin:0 0 12px;font-weight:700;color:var(--ink);font-size:14px">200 minimum.</p><p class="help pseg-help" id="lpostHelp"></p><div id="lptable"></div>'+(!p.hw&&secondOK(p.k)?'<p class="sp-note">Second page add-ons per piece: <b>Circular page +$0.10</b> &middot; <b>Circular with variable data +$0.15</b>. Printed 11&times;17, cut and folded.</p>':'')+(!p.hw&&p.fc?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)">First Class Postage adds $0.241 each</p>':'')+(/^(a6|notes|hwnotes)$/.test(act.k)?'<p style="margin:8px 0 0;font-size:14px;color:var(--ink)" class="unq-note">Unique envelopes add 3 cents each</p>':'')+'</div></div>';
   var hideEnvChoice=/^(windowed|fullview)$/.test(p.k)||/^(windowed|fullview)$/.test((act&&act.k)||"");
   var hasEnvChoice=hasEnvFonts&&!hideEnvChoice;
   c.innerHTML='<div class="cfg lt-wide"><div class="panel of-form lt-head"><h3>'+esc(p.name)+'</h3><div class="lt-head-actions"><button type="button" class="btn sec sm" id="ltSeePrice">See pricing</button></div></div>'+styleBits+'<div class="panel of-form lt-split'+(hasEnvChoice?' lt-split-stack':'')+(hasEnvChoice?'':' lt-split-one')+'"><div class="lt-split-col lt-tpl"><div class="lt-pillbar"><span class="lt-pill">Letters</span></div>'+tplBits+'</div>'+(hasEnvChoice?'<div class="lt-split-div" aria-hidden="true"></div><div class="lt-split-col lt-envcol"><div class="lt-pillbar"><span class="lt-pill">Envelopes</span></div>'+envCol+'</div>':'<select class="inp" id="ltEnv" hidden>'+envs.map(function(x){return o(x,x,LS.env===x)}).join("")+'</select>')+'</div>'+postbar+accs+upbar+mailAcc+art+notes+qty+'</div>'+priceModal;
   if(!LS.env){var dw=envs.filter(function(e){return /white/i.test(e)&&!centsOf(e)})[0];LS.env=dw||envs[0];var se=$("#ltEnv",c);if(se)se.value=LS.env}
-  var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.value==="1";lUpdate()}})};
+  var bindR=function(n,k){$$("input[name="+n+"]",c).forEach(function(r){r.onchange=function(){LS[k]=r.type==="checkbox"?r.checked:r.value==="1";lUpdate()}})};
   bindR("lsn","sticky");(function(){var bx=$("#snBox",c),ta=$("#snMsg",c),ct=$("#snCt",c);if(!bx||!ta)return;ta.value=LS.stickyMsg||"";function show(){bx.style.display=LS.sticky?"":"none";ct.textContent=ta.value.length+"/60"}show();$$("input[name=lsn]",c).forEach(function(r){r.addEventListener("change",function(){setTimeout(show,0);try{ffSched()}catch(e){}})});ta.addEventListener("input",function(){LS.stickyMsg=ta.value;show();try{ffSched()}catch(e){}})})();$$("input[name=lsp]",c).forEach(function(r){r.onchange=function(){LS.second=+r.value;lUpdate()}});bindR("leos","eos");bindR("lundel","undel");bindR("lret","ret");
   wireField(c,gp,function(i){LS.tpl=gp.t[i][0];$("#lqerr").textContent="";ltApplyTpl(LS.tpl,pid);fa14Tpl("lt");if(typeof ltCollapseSide==="function")ltCollapseSide("tpl");if(typeof ltAfterTplPick==="function")ltAfterTplPick();if(typeof ltUpdateBuy==="function")ltUpdateBuy()});
   var _ltEnv=$("#ltEnv");if(_ltEnv)_ltEnv.onchange=function(){LS.env=this.value;lUpdate();if(typeof ltCollapseSide==="function")ltCollapseSide("env");if(typeof formAdvance==="function")formAdvance("env");if(typeof ltUpdateBuy==="function")ltUpdateBuy()};$("#lday").onchange=function(){LS.day=this.value;if(typeof ltUpdateBuy==="function")ltUpdateBuy();if(typeof formSync==="function")formSync()};$("#ldrops").onchange=function(){LS.drops=this.value;var bf=$("#ltBatchF");if(bf)bf.hidden=this.value!=="multi";if(this.value!=="multi")LS.batches="";if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()};schedWire(c,"lt",LS);(function(){var b=$("#ltBatch");if(b){var prev=b.onchange;b.onchange=function(){if(prev)prev.apply(this,arguments);LS.batches=this.value;if(typeof ltRenderBatchDates==="function")ltRenderBatchDates();if(typeof ltUpdateBuy==="function")ltUpdateBuy()}}})();listOptsWire(c,"lt",LS);if(typeof listToolWire==="function")listToolWire(c,"lt",LS);$("#lnotes").oninput=function(){LS.notes=this.value;if(typeof formSync==="function")formSync()};if(!stickyOK(p.k))LS.sticky=false;if(!secondOK(p.k)||p.hw)LS.second=false;$("#loname").oninput=function(){LS.oname=this.value;if(typeof formSync==="function")formSync()};
@@ -6163,7 +6252,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r50&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r51&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p></div>'+
@@ -6973,12 +7062,11 @@ function ffStepsFor(k){
   if(k==="pc"){
     var s=[["Postcard designs","#pcDesign, #tplField",function(){return PS.tpl>-1}],
       ["Postage","#pcPostAcc",function(){try{return !!PS.post&&!!(PS._done||{}).post&&!priceNow().err}catch(e){return !!PS.post&&!!(PS._done||{}).post}}],
-      ["Font","#pcFontAcc",function(){return fd("font")}]];
+      ["Select your font","#pcFontAcc",function(){return fd("font")}]];
     s.push(
       ["Options","#pcMoreAcc",function(){return !!(PS._done||{}).more&&(typeof leadText==="function"?!!leadText(PS):!!(PS.leads&&PS.leads.length))}],
       ["Your list","#pcUpbar",function(){return window.ylListReady?ylListReady(PS):!!(PS.files&&PS.files.length)}],
-      ["Mail dates","#pcMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(PS):!!(PS.day&&PS.drops))}],
-      ["Notes","#pcNotes",function(){return !!(PS.notes&&String(PS.notes).trim())||!!PS.oname||fd("notes")}]
+      ["Mail dates","#pcMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(PS):!!(PS.day&&PS.drops))}]
     );
     return s;
   }
@@ -6987,14 +7075,13 @@ function ffStepsFor(k){
   if(hasEnv)s.push(["Envelopes","#ltCfg .lt-envcol",function(){return fd("env")}]);
   s.push(
     ["Postage","#ltPostAcc",function(){try{return !!LS.post&&!!(LS._done||{}).post&&!lPrice().err}catch(e){return !!LS.post&&!!(LS._done||{}).post}}],
-    ["Font","#ltFontAcc",function(){return fd("font")||!!(document.getElementById("ltFontAcc")&&!document.getElementById("ltFontAcc").querySelector("input,select")&&LS.tpl)}]
+    ["Select your font","#ltFontAcc",function(){return fd("font")||!!(document.getElementById("ltFontAcc")&&!document.getElementById("ltFontAcc").querySelector("input,select")&&LS.tpl)}]
   );
   if(document.getElementById("ltEnvFontAcc"))s.push(["Envelope font","#ltEnvFontAcc",function(){return fd("envfont")||!!(document.getElementById("ltEnvFontAcc")&&!document.getElementById("ltEnvFontAcc").querySelector("input,select")&&LS.tpl)}]);
   s.push(
     ["Options","#ltMoreAcc",function(){return !!(LS._done||{}).more&&(typeof leadText==="function"?!!leadText(LS):!!(LS.leads&&LS.leads.length))}],
     ["Your list","#ltUpbar",function(){return window.ylListReady?ylListReady(LS):!!(LS.files&&LS.files.length)}],
-    ["Mail dates","#ltMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(LS):!!(LS.day&&LS.drops))}],
-    ["Notes","#ltNotes",function(){return !!(LS.notes&&String(LS.notes).trim())||!!LS.oname||fd("notes")}]
+    ["Mail dates","#ltMailAcc",function(){return fd("mail")&&(typeof formMailFinished==="function"?formMailFinished(LS):!!(LS.day&&LS.drops))}]
   );
   return s;
 }
@@ -7053,7 +7140,7 @@ function stepVal(host,s,i){
 }
 function pieces(k){var sum=document.getElementById(k==="pc"?"sum":"lsum");if(!sum)return "0";var r=sum.querySelectorAll(".sumrow");for(var i=0;i<r.length;i++){var s=r[i].querySelector("span");if(s&&/piece|quantity|qty|letters|postcards/i.test(txt(s))&&!/price/i.test(txt(s)))return txt(r[i].querySelector("b"))}
   var st=k==="pc"?window.PS:window.LS;return st&&st.qty?String(st.qty):"0"}
-function ylpActFor(l){return /^(Letters|Templates|Postcard designs|Envelopes|Postage|Font|Envelope font|Finish|QR code|Options|Your list|Notes)$/.test(l)?"jump":""}
+function ylpActFor(l){return /^(Letters|Templates|Postcard designs|Envelopes|Postage|Font|Select your font|Envelope font|Finish|QR code|Options|Your list|Notes|Mail dates)$/.test(l)?"jump":""}
 function ylpModal(title,html){var m=document.getElementById("ylpop");if(m)m.remove();m=document.createElement("div");m.id="ylpop";m.className="ylpop";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.innerHTML='<div class="ylpop-c"><h3></h3><div class="ylpop-b"></div><button type="button" class="btn sec ylpop-x">Close</button></div>';m.querySelector("h3").textContent=title;m.querySelector(".ylpop-b").innerHTML=html;document.body.appendChild(m);function cl(){m.remove();document.removeEventListener("keydown",kd)}function kd(e){if(e.key==="Escape")cl()}document.addEventListener("keydown",kd);m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".ylpop-x"))cl()});m.querySelector(".ylpop-x").focus()}
 function ylpAct(host,k,act,i,val){var K=FFK[k],steps=K.steps||[],lab=steps[i]?steps[i][0]:"";
   function jump(){var bar=host.querySelector(":scope > .ff-bar"),b=bar&&bar.querySelector('[data-ffs="'+i+'"]');if(b)b.click();var pn=host.querySelector(".ylp");if(pn&&window.innerWidth<1180){pn.classList.remove("open");pn.querySelector(".ylp-h").setAttribute("aria-expanded","false")}}
@@ -7750,8 +7837,7 @@ function deco(){document.querySelectorAll("#ltMoreAcc .radios label,#pcMoreAcc .
  var w=document.createElement("span");w.className="seg-t";var a=document.createElement("span");a.className="seg-m";a.textContent=main;var b=document.createElement("span");b.className="seg-p";b.textContent=px;w.appendChild(a);w.appendChild(b);
  Array.prototype.slice.call(l.childNodes).forEach(function(n){if(n!==inp)l.removeChild(n)});l.appendChild(w)})}
 function wide(){["ltMoreAcc","pcMoreAcc"].forEach(function(id){var b=document.querySelector("#"+id+" .lt-acc-body");if(!b)return;var t=Array.prototype.filter.call(b.children,function(c){return c.classList.contains("fld")&&!c.classList.contains("lo-lead")});t.forEach(function(c){c.classList.remove("ylo-wide")});if(t.length%2===1)t[t.length-1].classList.add("ylo-wide")})}
-function spsel(){document.querySelectorAll("#ltMoreAcc .sp-radios,#pcMoreAcc .sp-radios").forEach(function(r){var fld=r.parentElement,sel=fld.querySelector(":scope > .sp-sel");var ins=r.querySelectorAll("input");if(!sel){sel=document.createElement("select");sel.className="sp-sel";sel.setAttribute("aria-label","Second page");[["0","No second page"],["1","Circular page (+10 cents)"],["2","Circular with variable data (+15 cents)"]].forEach(function(o){var op=document.createElement("option");op.value=o[0];op.textContent=o[1];sel.appendChild(op)});sel.addEventListener("change",function(){var v=sel.value;r.querySelectorAll("input").forEach(function(i){if(i.value===v){i.checked=true;i.dispatchEvent(new Event("change",{bubbles:true}));i.dispatchEvent(new Event("click",{bubbles:true}))}})});fld.insertBefore(sel,r)}
- var cur="0";ins.forEach(function(i){if(i.checked)cur=i.value});if(sel.value!==cur)sel.value=cur})}
+function spsel(){/* r51: keep circular radios; remove any leftover dropdown */document.querySelectorAll("#ltMoreAcc .sp-sel,#pcMoreAcc .sp-sel").forEach(function(s){s.remove()})}
 function dd(){document.querySelectorAll("#ltMoreAcc .lt-acc-body>.fld,#pcMoreAcc .lt-acc-body>.fld").forEach(function(fld){var r=fld.querySelector(":scope .radios:not(.sp-radios)");if(!r||fld.querySelector(".sp-radios"))return;var ins=[].slice.call(r.querySelectorAll("input[type=radio]"));if(ins.length<2||ins.length>3)return;var sel=fld.querySelector(":scope > .dd-sel");if(!sel){sel=document.createElement("select");sel.className="dd-sel";sel.setAttribute("aria-label",(fld.querySelector("label,.lbl,b")||{textContent:"Option"}).textContent.trim());ins.slice().sort(function(a,b){var na=/no/i.test((a.closest("label").textContent||"").trim().replace(/\u2713/g,"").trim().slice(0,2))?0:1,nb=/no/i.test((b.closest("label").textContent||"").trim().replace(/\u2713/g,"").trim().slice(0,2))?0:1;return na-nb}).forEach(function(i){var lb=i.closest("label"),m=lb.querySelector(".seg-m"),p=lb.querySelector(".seg-p"),op=document.createElement("option");op.value=i.value;var t=(m?m.textContent:lb.textContent).replace(/\u2713/g,"").trim(),pp=p?p.textContent.trim():"";op.textContent=t+(pp?" ("+pp+")":"");sel.appendChild(op)});sel.addEventListener("change",function(){var t=ins.filter(function(i){return i.value===sel.value})[0];if(t&&!t.checked)t.click()});fld.appendChild(sel);fld.classList.add("has-dd")}var cur="";ins.forEach(function(i){if(i.checked)cur=i.value});if(sel.value!==cur)sel.value=cur;sel.classList.toggle("chg",!/^No/i.test(sel.options[sel.selectedIndex].textContent))})}
 function ftcur(){document.querySelectorAll("#ltFontAcc .ft-grid,#pcFontAcc .ft-grid,#ltEnvFontAcc .ft-grid").forEach(function(g){var p=g.previousElementSibling,r=g.querySelector("input:checked"),n=r?(r.closest("label").querySelector(".ft-n")||{textContent:r.value}).textContent.trim():"none chosen";if(!p||!p.classList.contains("ft-cur")){p=document.createElement("div");p.className="ft-cur";g.parentNode.insertBefore(p,g)}var t=(g.closest("#ltEnvFontAcc")?"Envelope font: ":"Font: ");var h=t+"|"+n;if(p.getAttribute("data-h")!==h){p.setAttribute("data-h",h);p.innerHTML="";p.appendChild(document.createTextNode("Selected "+t.toLowerCase()));var b=document.createElement("b");b.textContent=n;p.appendChild(b)}})}
 function libcopy(){document.querySelectorAll("#ltCfg .lt-tpl .image-box label").forEach(function(l){if(l.textContent.trim()==="Past Templates")l.textContent="Past Letters"})}
@@ -8375,7 +8461,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r50#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r51#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8546,10 +8632,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r50#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r51#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r50#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r51#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8644,11 +8730,11 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r50#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r50#/home";
+var M=API?"../?v=r51#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r51#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
-var design='<a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
+var design='<a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
 var tools='<a href="'+M+'app/organizer">Organizer</a><a href="'+M+'datahub">HQ DataHub</a><a href="'+M+'returned-mail">Returned Mail</a>';
 var help='<a href="'+M+'how-to-order">How it works</a><a href="'+M+'faq">FAQ</a><a href="'+M+'contact">Contact Us</a><a href="'+M+'resources">Resources</a>';
 function dd(id,label,menu,right){return '<div class="nhd" data-k="'+id+'"><button type="button" class="nhb" aria-expanded="false">'+label+' &#9662;</button><div class="nhm'+(right?' r':'')+'">'+menu+'</div></div>'}
@@ -8666,14 +8752,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r50 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r50#/home">Main site</a><a href="../api/?v=r50#/home">API Version A (no builder)</a><a href="../api-builder/?v=r50#/home">API Version B (with builder)</a><a href="../pages/?v=r50">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r50 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r51#/home">Main site</a><a href="../api/?v=r51#/home">API Version A (no builder)</a><a href="../api-builder/?v=r51#/home">API Version B (with builder)</a><a href="../pages/?v=r51">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
   var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r50</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r50#/home">API Version A: no builder</a><a href="api-builder/?v=r50#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r51#/home">API Version A: no builder</a><a href="api-builder/?v=r51#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r50#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r51#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -8755,7 +8841,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r50#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r51#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
@@ -8911,4 +8997,94 @@ function tick(){
 }
 setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout(tick,80)});setTimeout(tick,50);
 })();</script>
-</body></html>
+</body>
+<style id="r51-css">
+/* r51: select arrows must not cover the value */
+select.inp,select.sp-sel,select.dd-sel{
+  -webkit-appearance:none;
+  appearance:none;
+  background-color:#fff;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23262626' d='M1.2 1.5l4.8 4.8 4.8-4.8' stroke='%23262626' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:12px 8px;
+  padding-right:32px !important;
+}
+#rpp,#rpp2{min-width:4.75em;padding:6px 32px 6px 10px !important}
+
+/* r51: Rapid Orders tiles — same fields, equal height, buttons at the bottom */
+.rgrid{align-items:stretch}
+.rgrid .rcard{height:100%;display:flex;flex-direction:column}
+.rgrid .rcard .t{min-height:3.2em;align-items:flex-start}
+.rgrid .rcard .d{flex:1 1 auto}
+.rgrid .rcard .rdy-src,.rgrid .rcard .rdy-note{min-height:2.6em;margin:0;padding:0 14px 8px;font-size:12.5px;color:#6b6b6b;line-height:1.35}
+.rgrid .rcard .ft{margin-top:auto}
+
+/* r51: Other options — slides grouped; notes; Second page last as circular radios */
+#ltMoreAcc .lt-acc-body>.fld.r50-opt,
+#pcMoreAcc .lt-acc-body>.fld.r50-opt{flex-wrap:wrap;align-items:center}
+#ltMoreAcc .r50-opt-row,#pcMoreAcc .r50-opt-row{flex:1 1 100%;width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+#ltMoreAcc .r50-opt>.fld,#ltMoreAcc .r50-opt>.sn-box,#ltMoreAcc .r50-opt>.opt-help,
+#pcMoreAcc .r50-opt>.fld,#pcMoreAcc .r50-opt>.opt-help{flex:1 1 100%;width:100%}
+#ltMoreAcc .lt-acc-body>.eosx,#pcMoreAcc .lt-acc-body>.eosx{order:1 !important;grid-column:1/-1}
+#ltMoreAcc .lt-acc-body>.r51-notes,#pcMoreAcc .lt-acc-body>.r51-notes{
+  order:1 !important;grid-column:1/-1 !important;
+  display:flex !important;flex-direction:column !important;align-items:stretch !important;
+  min-height:0 !important;gap:10px !important;
+}
+#ltMoreAcc .r51-notes>.fld,#pcMoreAcc .r51-notes>.fld{flex-direction:column !important;align-items:stretch !important;min-height:0 !important;width:100%;background:transparent !important;border:0 !important;padding:0 !important}
+#ltMoreAcc .lt-acc-body>.fld.lo-lead,#pcMoreAcc .lt-acc-body>.fld.lo-lead{order:2 !important;grid-column:1/-1}
+#ltMoreAcc .lt-acc-body>.sp-fld,#pcMoreAcc .lt-acc-body>.sp-fld{
+  order:3 !important;grid-column:1/-1 !important;
+  display:flex !important;flex-direction:column !important;align-items:flex-start !important;
+  gap:10px !important;min-height:0 !important;
+  padding:14px 16px !important;
+  border:1px solid #e6e2d3 !important;
+  background:linear-gradient(180deg,#faf9f4,#f3f1e8) !important;
+}
+#ltMoreAcc .sp-radios,#pcMoreAcc .sp-radios{
+  display:flex !important;flex-direction:column !important;align-items:flex-start !important;
+  gap:8px !important;width:100%;margin:0 !important;flex:0 0 auto;
+  grid-auto-columns:unset !important;
+}
+#ltMoreAcc .sp-radios label,#pcMoreAcc .sp-radios label{
+  display:flex !important;align-items:center !important;gap:10px !important;
+  border:0 !important;background:transparent !important;box-shadow:none !important;
+  min-height:36px !important;padding:2px 0 !important;width:auto !important;
+  font:600 14px var(--body);color:var(--ink);cursor:pointer;justify-content:flex-start !important;
+}
+#ltMoreAcc .sp-radios input[type=radio],#pcMoreAcc .sp-radios input[type=radio]{
+  -webkit-appearance:none;appearance:none;
+  width:20px;height:20px;margin:0;flex:0 0 auto;
+  border:2px solid #111;border-radius:50%;background:#fff;
+  display:grid;place-content:center;cursor:pointer;
+}
+#ltMoreAcc .sp-radios input[type=radio]:checked::after,
+#pcMoreAcc .sp-radios input[type=radio]:checked::after{
+  content:"";width:10px;height:10px;border-radius:50%;background:#111;
+}
+#ltMoreAcc .lt-acc-body>.r46hint,#pcMoreAcc .lt-acc-body>.r46hint{order:4 !important;grid-column:1/-1}
+#ltMoreAcc .lt-acc-body>.form-next,#pcMoreAcc .lt-acc-body>.form-next{order:5 !important;grid-column:1/-1}
+body.dm .r51-notes{display:none !important}
+
+/* r51: Letters type tiles — 5 equal-height tiles */
+#ltPick #products-button-container.m31-letters{
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  grid-auto-rows:1fr !important;
+  align-items:stretch !important;
+}
+#ltPick #products-button-container.m31-letters>.ptile{
+  height:100% !important;
+  min-height:128px !important;
+}
+#ltPick .m31-open:before{left:calc(10% - 9px)}
+@media (max-width:1100px){
+  #ltPick #products-button-container.m31-letters{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  #ltPick .m31-open:before{left:calc(16.66% - 9px)}
+}
+@media (max-width:700px){
+  #ltPick #products-button-container.m31-letters{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  #ltPick .m31-open:before{display:none}
+}
+</style>
+</html>
