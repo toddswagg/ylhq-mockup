@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r56#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r57#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2364,7 +2364,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r56#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r57#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -6408,7 +6408,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r56&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r57&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p>'+
@@ -7500,7 +7500,7 @@ cartBadge();route();
 function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false},rows=(window.WZ_N||5214);
   if(window.ylRP&&W&&W.m){try{
         var rr=ylRP.evaluate(ylRP.ctx(W,COLS));
-    return {rows:rr.total,d:rr.rm.dup+rr.rm.spelled,u:rr.rm.und||0,nc:0,t:0,fin:rr.mailed,o:o,dnm:rr.rm.dnm,ret:rr.rm.ret,real:true,sample:rr.sample,down:!!(rr.down||rr.dnmStatus==="failed")}
+    return {rows:rr.total,d:rr.rm.dup+rr.rm.spelled,u:rr.rm.und||0,nc:0,t:0,fin:rr.mailed,o:o,dnm:rr.rm.dnm,ret:rr.rm.ret,real:true,sample:rr.sample,down:!!(rr.down||rr.dnmStatus==="failed"),unsub:!!(rr.unsub||rr.dnmStatus==="unsubscribed")}
   }catch(ex){}}
   var sc=rows/5214;
   var d=o.tout?0:Math.round(({mailing_property:37,mailing:52,property:41}[o.dup]||0)*sc),u=o.tout?0:Math.round(112*sc),nc=o.tout?0:Math.round(48*sc),t=(!o.tout&&o.trust)?Math.round(19*sc):0;
@@ -7512,10 +7512,10 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   h+='<p class="help" style="margin:8px 0 0">Turn off upload tool skips the whole clean up: no duplicate removal and no address checks. You pay for every row.</p>';
   if(!W.ran)return h+'<div style="margin-top:12px"><button type="button" class="btn" id="wzRun">Clean my list</button></div>';
   var c=counts();if(c.o.tout)return h+'<div class="wz-cnt"><div><span>Rows in your list</span><b>'+n(c.rows)+'</b></div><div><span>Records to mail (nothing removed)</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button>';
-  return h+(c.down?'<div class="wz-err" role="status" id="wzDnmDown"><b>The Do Not Mail check didn\u2019t run.</b> We couldn\u2019t reach List Organizer, so your Do Not Mail list and returned mail were not checked for this upload. The rest of the clean-up still finished.</div>':'')+'<div class="wz-bar"><i style="width:100%"></i></div><div class="wz-cnt" id="wzCnt">'+
+  return h+(c.unsub?'<div class="wz-note" role="status" id="wzDnmDown">Do Not Mail and returned mail were not checked, because this account is not subscribed. Those counts show as 0.</div>':c.down?'<div class="wz-note" role="status" id="wzDnmDown">The Do Not Mail and returned mail check didn\u2019t run this time, so those counts show as 0. The rest of the clean-up still finished.</div>':'')+'<div class="wz-bar"><i style="width:100%"></i></div><div class="wz-cnt" id="wzCnt">'+
    '<div><span>Rows in your list (file format checked)</span><b>'+n(c.rows)+'</b></div>'+
    '<div><span>Duplicates removed ('+({mailing_property:"mailing and property",mailing:"mailing",property:"property"}[c.o.dup]||"none")+')</span><span class="m">'+(c.d?'&minus; '+n(c.d):'0')+'</span></div>'+
-   (c.real?(c.down?'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">Not checked</span></div><div><span>Mail came back before, removed</span><span class="m">Not checked</span></div>':'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">'+(c.dnm?'&minus; '+n(c.dnm):'0')+'</span></div><div><span>Mail came back before, removed</span><span class="m">'+(c.ret?'&minus; '+n(c.ret):'0')+'</span></div>'+(c.u?'<div><span>Undeliverable addresses removed</span><span class="m">&minus; '+n(c.u)+'</span></div>':'')):'<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
+   (c.real?'<div><span>Do Not Mail records removed (your Do Not Mail list)'+(c.unsub?' &mdash; &ldquo;Not subscribed&rdquo;':c.down?' &mdash; not checked this time':'')+'</span><span class="m" id="wzDnm">'+(c.dnm&&!c.down&&!c.unsub?'&minus; '+n(c.dnm):'0')+'</span></div><div><span>Returned mail removed<small class="ylrp-def" style="margin:0">Mail we sent to this address before came back undeliverable.</small>'+(c.unsub?' &mdash; &ldquo;Not subscribed&rdquo;':c.down?' &mdash; not checked this time':'')+'</span><span class="m">'+(c.ret&&!c.down&&!c.unsub?'&minus; '+n(c.ret):'0')+'</span></div>'+(c.u&&!c.down&&!c.unsub?'<div><span>Undeliverable addresses removed</span><span class="m">&minus; '+n(c.u)+'</span></div>':''):'<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
    '<div><span>Movers updated to their new address (NCOA)</span><span class="u">'+n(c.nc)+' updated</span></div>')+
    (c.t?'<div><span>Trust names changed (\u201cOntiveros 1997 Trust\u201d to \u201cOntiveros Family\u201d)</span><span class="u">'+n(c.t)+' changed</span></div>':'')+
    '<div><span>Records to mail</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button> <span class="muted" style="font-size:12.5px">'+(c.real?(c.sample?'Counts from the example list.':'Counts from your file.'):'Example counts.')+'</span>'}
@@ -7555,7 +7555,12 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(window.listOptsWire)listOptsWire(B,"wz",W.st);
   F.innerHTML="";function btn(l,c,fn){var x=document.createElement("button");x.type="button";x.className=c;x.textContent=l;x.onclick=fn;F.appendChild(x);return x}
   btn("Cancel","btn sec",function(){if(confirm("Leave the upload tool? You can upload the list again any time."))closeModal()});
-  if(window.ylRP){var tg=document.createElement("label");tg.className="yl-mocktog";tg.innerHTML='<input type="checkbox" id="ylDnmDownTog"'+(ylRP.dnmDown()?' checked':'')+'> Mockup only: pretend the Do Not Mail check is down';F.appendChild(tg);var cb=tg.querySelector("input");cb.onchange=function(){ylRP.setDown(cb.checked);draw()}}
+  if(window.ylRP){var box=document.createElement("div");box.className="yl-mocktogs";
+   var tg=document.createElement("label");tg.className="yl-mocktog";tg.innerHTML='<input type="checkbox" id="ylDnmDownTog"'+(ylRP.dnmDown()?' checked':'')+'> Mockup only: Organizer is down';
+   var tg2=document.createElement("label");tg2.className="yl-mocktog";tg2.innerHTML='<input type="checkbox" id="ylDnmUnsubTog"'+(ylRP.dnmUnsub()?' checked':'')+'> Mockup only: not subscribed';
+   box.appendChild(tg);box.appendChild(tg2);F.appendChild(box);
+   tg.querySelector("input").onchange=function(){ylRP.setDown(this.checked);if(this.checked)ylRP.setUnsub(false);draw()};
+   tg2.querySelector("input").onchange=function(){ylRP.setUnsub(this.checked);if(this.checked)ylRP.setDown(false);draw()}}
   var nx=btn("Use "+n(counts().fin)+" records","btn",function(){
    if(!W.files.some(function(f){return /\.(csv|xlsx?)$/i.test(f)})){closeModal();toast("Added as artwork or instructions. No list to match.");return}
    if(missing().length){W.err=1;W.det[2]=true;draw();var x=$q(".wz-err");if(x)x.scrollIntoView({block:"nearest"});else{var p=B.querySelector('[data-wzpane="2"]');if(p)p.scrollIntoView({block:"start"})}return}
@@ -7695,12 +7700,19 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
 .ylrp-mf .sp{display:block;font-size:12px;color:#71717a;line-height:1.45;margin-bottom:14px}
 .ylrp-mf .actions{display:flex;justify-content:flex-end;gap:10px}
 .ylrp-err{margin:20px 22px 0;padding:18px;background:#fdecea;border:1px solid #f5b5ae;border-radius:14px;color:#7a1d14}.ylrp-err b{font-size:16px}.ylrp-err p{margin:8px 0 0;font-size:14px;color:#5b2a25}
-.yl-mocktog{margin-left:auto;font-size:12px;color:#71717a;display:inline-flex;align-items:center;gap:6px}
+.yl-mocktogs{margin-left:auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end}.yl-mocktog{margin-left:auto;font-size:12px;color:#71717a;display:inline-flex;align-items:center;gap:6px}
 .yl-seeres{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;background:#fff7db;border-radius:12px;font-size:14px}
 @media(max-width:520px){.ylrp-bd{padding:12px}.ylrp-hero .n{font-size:44px}.ylrp-mf .actions{flex-direction:column-reverse}.ylrp-mf .actions .btn{width:100%}}
 
-.ylrp-warn{margin:14px 22px 0;padding:14px 16px;background:#fdecea;border:1px solid #f5b5ae;border-radius:14px;color:#7a1d14;font-size:14px;line-height:1.45}
-.ylrp-r .ylrp-pill.nc{background:#fdecea;color:#9b1c1c;min-width:auto;padding:0 10px;font-size:12px;font-weight:700}
+.ylrp-note{margin:14px 22px 0;padding:12px 16px;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:14px;color:#3f3f46;font-size:13px;line-height:1.45}
+.wz-note{margin:10px 0 12px;padding:10px 12px;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:10px;color:#3f3f46;font-size:13px;line-height:1.45}
+.ylrp-r{display:flex;align-items:flex-start;gap:12px;padding:6px 0;font-size:14px;color:#3f3f46}
+.ylrp-rl{min-width:0}
+.ylrp-lab{font-size:14px;color:#3f3f46}
+.ylrp-tag{display:inline;margin-left:6px;font-size:13px;color:#52525b;font-weight:600}
+.ylrp-learn{margin-left:6px;font-size:12px;color:#71717a;text-decoration:underline;font-weight:600}
+.ylrp-learn:hover{color:#262626}
+.ylrp-def{display:block;margin:2px 0 0;font-size:12px;color:#71717a;line-height:1.35;font-weight:400}
 .ylrp-dl .btn.busy{background:#ffe28a;color:#7a5a00;pointer-events:none;box-shadow:none}
 .ylrp-csv.busy{text-decoration:none;color:#71717a;cursor:default;pointer-events:none}
 .ylrp-wait{padding:22px 24px 28px}
@@ -7755,7 +7767,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   {a:"957 Cedar Ct",c:"Irvine",s:"CA",z:"92614"},{a:"2379 Elm Street",c:"Irvine",s:"CA",z:"92614"},{a:"14817 Le Grande Drive",c:"Addison",s:"TX",z:"75001"},{a:"4410 Oak Avenue",c:"Garden Grove",s:"California",z:"92840"}];
  var RET=window.YL_RETURNED=[
   {a:"108 Main St",c:"Austin",s:"TX",z:"78708"},{a:"6710 Maple Lane",c:"Fullerton",s:"CA",z:"92832"},{a:"2210 Elm Street",c:"Dallas",s:"TX",z:"75201"}];
- function dnmDown(){try{if(/[?&#](?:dnm|organizer)=down/i.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmDown")==="1"}catch(e){return false}}
+ function dnmDown(){try{if(dnmUnsub())return false;if(/[?&#](?:dnm|organizer)=down/i.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmDown")==="1"}catch(e){return false}}
+ function dnmUnsub(){try{if(/[?&#]dnm=unsubscribed/i.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmUnsub")==="1"}catch(e){return false}}
  /* ---------- address normalizing ---------- */
  var SUF={STREET:"ST",STR:"ST",AVENUE:"AVE",AV:"AVE",ROAD:"RD",DRIVE:"DR",DRV:"DR",LANE:"LN",COURT:"CT",BOULEVARD:"BLVD",CIRCLE:"CIR",PLACE:"PL",TERRACE:"TER",HIGHWAY:"HWY",PARKWAY:"PKWY",TRAIL:"TRL",WAY:"WAY",SQUARE:"SQ",NORTH:"N",SOUTH:"S",EAST:"E",WEST:"W",NORTHEAST:"NE",NORTHWEST:"NW",SOUTHEAST:"SE",SOUTHWEST:"SW"};
  var UNIT=/\b(APT|APARTMENT|UNIT|STE|SUITE|BLDG|BUILDING|FL|FLOOR|RM|ROOM|LOT|SPC|SPACE)\b.*$|#.*$/;
@@ -7802,9 +7815,9 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(!rows){rows=sampleRows();cols=SCOLS.slice();sample=true}
   var raw=window.WZ_FILE||(W&&W.files&&W.files[0])||"";if(typeof raw==="object"&&raw)raw=raw.name||"";
   var name=(!raw||/^YLHQ Sample List/i.test(raw)||/^your-list/i.test(raw))?"Absentee Owners - Orange County.csv":raw;
-  return {rows:rows,cols:cols,sample:sample,m:W.m,name:name,dup:(W.st&&W.st.lo&&W.st.lo.dup)||"mailing_property",tout:!!(W.st&&W.st.lo&&W.st.lo.tout),down:dnmDown()}}
+  return {rows:rows,cols:cols,sample:sample,m:W.m,name:name,dup:(W.st&&W.st.lo&&W.st.lo.dup)||"mailing_property",tout:!!(W.st&&W.st.lo&&W.st.lo.tout),down:dnmDown(),unsub:dnmUnsub()}}
  function evaluate(ctx){
-  var key=JSON.stringify([ctx.rows.length,ctx.cols,ctx.m,ctx.dup,ctx.tout,ctx.sample,!!ctx.down,ctx.rows.length?ctx.rows[0]:0,ctx.rows.length?ctx.rows[ctx.rows.length-1]:0]);
+  var key=JSON.stringify([ctx.rows.length,ctx.cols,ctx.m,ctx.dup,ctx.tout,ctx.sample,!!ctx.down,!!ctx.unsub,ctx.rows.length?ctx.rows[0]:0,ctx.rows.length?ctx.rows[ctx.rows.length-1]:0]);
   if(CACHE.key===key)return CACHE.val;
   var ci={};ctx.cols.forEach(function(c,i){ci[c]=i});
   function col(k,row){var v=ctx.m[k];if(v==="=m")v=ctx.m[k.replace("property","mailing")];if(!v||v==="-"||ci[v]==null)return "";var x=row[ci[v]];return x==null?"":String(x)}
@@ -7817,8 +7830,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    rec.ta=useMail?rec.ma:rec.pa;rec.tc=useMail?rec.mc:rec.pc;rec.ts=useMail?rec.ms:rec.ps;rec.tz=useMail?rec.mz:rec.pz;
    var mailRec={a:rec.ma,c:rec.mc,s:rec.ms,z:rec.mz},propRec={a:rec.pa,c:rec.pc,s:rec.ps,z:rec.pz};
    var out={status:"Will be mailed",why:"",yes:"Yes",same:""};
-   if(!ctx.down&&(sameAddr(mailRec,dnmList)||sameAddr(propRec,dnmList))){out={status:"Removed",why:"On your Do Not Mail list. Not mailed.",yes:"No",same:"",k:"dnm"};res.rm.dnm++}
-   else if(!ctx.down&&(sameAddr(mailRec,RET)||sameAddr(propRec,RET))){out={status:"Removed",why:"Mail came back before. Not mailed.",yes:"No",same:"",k:"ret"};res.rm.ret++}
+   if(!ctx.down&&!ctx.unsub&&(sameAddr(mailRec,dnmList)||sameAddr(propRec,dnmList))){out={status:"Removed",why:"On your Do Not Mail list. Not mailed.",yes:"No",same:"",k:"dnm"};res.rm.dnm++}
+   else if(!ctx.down&&!ctx.unsub&&(sameAddr(mailRec,RET)||sameAddr(propRec,RET))){out={status:"Removed",why:"Returned mail: mail we sent to this address before came back undeliverable. Not mailed.",yes:"No",same:"",k:"ret"};res.rm.ret++}
    else if(!ctx.tout){
     var kM=fullKey(rec.ta,rec.tc,rec.ts,rec.tz),kP=fullKey(rec.pa,rec.pc,rec.ps,rec.pz);
     var k=useP?(kP||kM):useM?(kM||kP):(kM+"||"+kP);if(!kM&&!kP)k="";
@@ -7839,9 +7852,10 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    rec.out=out;rec.mail={a:a1,c:cityKey(rec.tc),s:stState(rec.ts),z:zip5(rec.tz)};
    res.recs.push(rec)});
   res.removed=res.rm.dnm+res.rm.ret+res.rm.dup+res.rm.spelled+res.rm.und;
-  res.dnmStatus=ctx.down?"failed":"ok";res.down=!!ctx.down;
+  res.unsub=!!ctx.unsub;res.down=!!ctx.down&&!ctx.unsub;
+  res.dnmStatus=ctx.unsub?"unsubscribed":(ctx.down?"failed":"ok");
   if(ctx.sample){
-    if(ctx.down){res.total=5000;res.mailed=4775;res.removed=225;res.changed=2034;res.rm={dnm:0,ret:0,dup:150,spelled:75,und:0}}
+    if(ctx.unsub||ctx.down){res.total=5000;res.mailed=4775;res.removed=225;res.changed=2034;res.rm={dnm:0,ret:0,dup:150,spelled:75,und:0}}
     else{res.total=5000;res.mailed=4612;res.removed=388;res.changed=1204;res.rm={dnm:41,ret:17,dup:212,spelled:63,und:55}}
   }
   CACHE={key:key,val:res};return res}
@@ -7888,7 +7902,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   s2.push(rowX(6,cell(6,0,"Removed",11)+cell(6,1,res.removed,15),26.25));
   s2.push(rowX(7,cell(7,0,"Addresses written the standard way, still mailed",8)+cell(7,1,res.changed,16),26.25));
   s2.push(rowX(9,cell(9,0,"Removed, by reason",17)+cell(9,1,"Count",17)+cell(9,2,"What it means",17)));
-  var reasons=[["Do Not Mail",res.rm.dnm,"These addresses are on your Do Not Mail list (spelling and suffix variants included). We never mail them."],["Mail came back before",res.rm.ret,"Mail to this address was returned to you before. Returned mail is its own reason, never counted as Do Not Mail."],["Duplicate",res.rm.dup,"Same address already in this file. One copy is kept."],["Same address, spelled differently",res.rm.spelled,"Same place written two ways, like 123 Main Street, California and 123 Main St, CA. One copy is kept."],["Undeliverable",res.rm.und,"The post office says it cannot deliver here."]];
+  var reasons=[["Do Not Mail",res.rm.dnm,"These addresses are on your Do Not Mail list (spelling and suffix variants included). We never mail them."],["Returned mail",res.rm.ret,"Mail we sent to this address before came back undeliverable."],["Duplicate",res.rm.dup,"Same address already in this file. One copy is kept."],["Same address, spelled differently",res.rm.spelled,"Same place written two ways, like 123 Main Street, California and 123 Main St, CA. One copy is kept."],["Undeliverable",res.rm.und,"The post office says it cannot deliver here."]];
   reasons.forEach(function(x,i){var r=10+i;s2.push(rowX(r,cell(r,0,x[0],11)+cell(r,1,x[1],15)+cell(r,2,x[2],10),27.75))});
   var sheet2='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheetPr><tabColor rgb="FF2B2B2B"/></sheetPr><dimension ref="A1:C14"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"/></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="48.7" customWidth="1"/><col min="2" max="2" width="14.7" customWidth="1"/><col min="3" max="3" width="90.7" customWidth="1"/></cols><sheetData>'+s2.join("")+'</sheetData><mergeCells count="2"><mergeCell ref="A1:C1"/><mergeCell ref="A2:C2"/></mergeCells><pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/></worksheet>';
   var wb='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView xWindow="240" yWindow="15" windowWidth="16095" windowHeight="9660"/></bookViews><sheets><sheet name="Your list" sheetId="1" r:id="rId1"/><sheet name="Summary" sheetId="2" r:id="rId2"/></sheets><definedNames><definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">\'Your list\'!$A$4:$'+last+'$'+lastRow+'</definedName></definedNames></workbook>';
@@ -7906,9 +7920,10 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
  function asset(name){var p=location.pathname||"/";if(/\/(api|api-builder|pages)(\/|$)/.test(p))p=p.replace(/\/(api|api-builder|pages)(?:\/.*)?$/,"/");p=p.replace(/index\.html$/,"");if(p.slice(-1)!=="/")p+="/";return p+"assets/upload-results/"+name}
  function saveAsset(file,dl){var a=document.createElement("a");a.href=asset(file);a.download=dl||file;document.body.appendChild(a);a.click();a.remove()}
  function waitMs(){return window.ylRP&&ylRP.instant?0:((/[?&#]ylfast=1/.test(location.href+location.hash))?40:700)}
- var DNM_FAIL="The Do Not Mail check didn't run. We couldn't reach List Organizer, so your Do Not Mail list and returned mail were not checked for this upload.";
- function isDown(res){return !!(res&&(res.dnmStatus==="failed"||res.dnmStatus==="off"||res.dnmStatus==="no_organizer_account"||res.down))}
- function showWait(res,done){CUR=res;ONDONE=done;var my=++SEQ,b=root(),down=isDown(res)||dnmDown();
+ var DNM_DOWN_NOTE="The Do Not Mail and returned mail check didn't run this time, so those counts show as 0.";var DNM_UNSUB_NOTE="Do Not Mail and returned mail were not checked, because this account is not subscribed.";var RET_DEF="Mail we sent to this address before came back undeliverable.";
+ function isUnsub(res){return !!(res&&(res.dnmStatus==="unsubscribed"||res.unsub||res.dnmStatus==="off"||res.dnmStatus==="no_organizer_account"))}
+ function isDown(res){return !!(res&&!isUnsub(res)&&(res.dnmStatus==="failed"||res.down))}
+ function showWait(res,done){CUR=res;ONDONE=done;var my=++SEQ,b=root(),unsub=isUnsub(res)||dnmUnsub(),down=(isDown(res)||dnmDown())&&!unsub;
   b.innerHTML='<div class="ylrp-m ylrp-waitm" data-ylrp="wait"><div class="ylrp-mh"><h2 id="ylrpT">Checking your list</h2></div>'+
    '<div class="ylrp-body ylrp-wait"><p class="ylrp-wait-l">Please wait while we tidy addresses, remove duplicates, and check Do Not Mail and returned mail.</p>'+
    '<div class="ylrp-bar" aria-hidden="true"><i id="ylrpBar" style="width:8%"></i></div>'+
@@ -7918,19 +7933,23 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
     '<li data-st="2">Checking Do Not Mail and returned mail</li>'+
    '</ul></div></div>';
   open();
-  var steps=["Tidying addresses","Removing duplicates",down?"Couldn\u2019t reach List Organizer":"Checking Do Not Mail and returned mail"];
+  var steps=["Tidying addresses","Removing duplicates",unsub?"Do Not Mail and returned mail (not subscribed)":down?"Do Not Mail and returned mail (check didn\u2019t run this time)":"Checking Do Not Mail and returned mail"];
   var i=0,t=waitMs();
   function tick(){if(my!==SEQ)return;var lis=b.querySelectorAll("#ylrpSteps li"),bar=document.getElementById("ylrpBar");
-   for(var k=0;k<lis.length;k++){lis[k].className=k<i?"done":k===i?"on":"";if(k===2&&i>=2)lis[k].textContent=steps[2]+(down&&i>=2?" \u2014 Do Not Mail was not checked":"")}
+   for(var k=0;k<lis.length;k++){lis[k].className=k<i?"done":k===i?"on":"";if(k===2&&i>=2)lis[k].textContent=steps[2]}
    if(bar)bar.style.width=Math.min(100,Math.round((i+1)/3*100))+"%";
    i++;
    if(i<=3){if(!t){tick();return}setTimeout(tick,t)}
    else{showResults(res,done,{building:true})}}
   tick()}
- function showResults(res,done,opt){CUR=res;ONDONE=done;opt=opt||{};var r=res.rm||{},b=root(),down=isDown(res),busy=!!opt.building,name=res.name||"your list";
-  function pill(label,val,nc){return '<div class="ylrp-r"><span class="ylrp-pill'+(nc?" nc":"")+'">'+(nc?"Not checked":nf(val))+'</span> '+esc(label)+'</div>'}
-  var rows=pill("Do Not Mail",r.dnm,down)+pill("Mail came back before",r.ret,down)+pill("Duplicate",r.dup,false)+pill("Same address, spelled differently",r.spelled,false)+(r.und?pill("Undeliverable",r.und,false):"");
-  var warn=down?'<div class="ylrp-warn" role="status">'+esc(DNM_FAIL)+'</div>':'';
+ function showResults(res,done,opt){CUR=res;ONDONE=done;opt=opt||{};var r=res.rm||{},b=root(),unsub=isUnsub(res),down=isDown(res),busy=!!opt.building,name=res.name||"your list";
+  function row(label,val,mode,def){var h='<div class="ylrp-r"><span class="ylrp-pill">'+nf(mode?0:val)+'</span><div class="ylrp-rl"><span class="ylrp-lab">'+esc(label)+'</span>';
+    if(mode==="unsub")h+=' <span class="ylrp-tag">&ldquo;Not subscribed&rdquo;</span> <a class="ylrp-learn" href="#/datahub">Learn more</a>';
+    if(def)h+='<small class="ylrp-def">'+esc(def)+'</small>';
+    return h+"</div></div>"}
+  var mode=unsub?"unsub":(down?"down":"");
+  var rows=row("Do Not Mail",r.dnm,mode)+row("Returned mail",r.ret,mode,RET_DEF)+row("Duplicate",r.dup)+row("Same address, spelled differently",r.spelled)+(r.und?row("Undeliverable",r.und):"");
+  var warn=unsub?'<div class="ylrp-note" role="status">'+esc(DNM_UNSUB_NOTE)+'</div>':down?'<div class="ylrp-note" role="status">'+esc(DNM_DOWN_NOTE)+'</div>':'';
   b.innerHTML='<div class="ylrp-m" data-ylrp="'+(down?"downok":"ok")+'"><div class="ylrp-mh"><h2 id="ylrpT">Your list is ready<small>'+esc(name)+'</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
    '<div class="ylrp-body"><div class="ylrp-hero"><div class="n" id="ylrpN">'+nf(res.mailed)+'</div><div class="l">will be mailed</div><div class="of">of '+nf(res.total)+' uploaded</div></div>'+
    warn+
@@ -7948,8 +7967,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(t===b&&b.querySelector('[data-ylrp="ok"],[data-ylrp="downok"]')){finish(CUR)}
  });
  document.addEventListener("keydown",function(ev){if(ev.key!=="Escape")return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;if(b.querySelector('[data-ylrp="wait"]'))return;finish(CUR)});
- function cardHTML(res){var down=isDown(res);
-  return '<div class="yl-ready" role="status"><span class="yl-ready-ic" aria-hidden="true">\u2713</span><div class="yl-ready-tx"><b>Your list is ready: '+nf(res.mailed)+' records will be mailed.</b><span>'+nf(res.removed)+' removed \u00b7 '+nf(res.changed)+' addresses written the standard way'+(down?" \u00b7 Do Not Mail was not checked":"")+'</span></div><button type="button" class="yl-ready-btn" data-ylsee="1">See results</button></div>'}
+ function cardHTML(res){var extra=isUnsub(res)?" \u00b7 \u201cNot subscribed\u201d to Do Not Mail":isDown(res)?" \u00b7 Do Not Mail check didn\u2019t run this time":"";
+  return '<div class="yl-ready" role="status"><span class="yl-ready-ic" aria-hidden="true">\u2713</span><div class="yl-ready-tx"><b>Your list is ready: '+nf(res.mailed)+' records will be mailed.</b><span>'+nf(res.removed)+' removed \u00b7 '+nf(res.changed)+' addresses written the standard way'+extra+'</span></div><button type="button" class="yl-ready-btn" data-ylsee="1">See results</button></div>'}
  function hostFor(st){if(st===window.PS)return document.querySelector("#pcUpbar .lt-acc-body");if(st===window.RO)return document.querySelector("#roDrop")||document.querySelector("#rStep2");return document.querySelector("#ltUpbar .lt-acc-body")}
  function decorate(){[["lt",window.LS],["pc",window.PS],["ro",window.RO]].forEach(function(pair){var k=pair[0],st=pair[1],acc=hostFor(st);if(!acc)return;
    var wrap=acc.querySelector("#ylSeeRes"+k)||acc.querySelector(".yl-ready-wrap");
@@ -7985,10 +8004,13 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
     var box=document.getElementById("ylxlTbody");if(box)box.innerHTML=html;
   }).catch(function(){var box=document.getElementById("ylxlTbody");if(box)box.innerHTML="<p>Could not load the sample spreadsheet.</p>"})}
  window.ylRP={
-  ctx:getCtx,evaluate:evaluate,dnmDown:dnmDown,csv:csvText,xlsx:xlsxBytes,table:table,
+  ctx:getCtx,evaluate:evaluate,dnmDown:dnmDown,dnmUnsub:dnmUnsub,csv:csvText,xlsx:xlsxBytes,table:table,
   instant:false,
-  setDown:function(v){try{if(v)localStorage.setItem("ylDnmDown","1");else localStorage.removeItem("ylDnmDown")}catch(e){}
-   try{var u=new URL(location.href);if(v)u.searchParams.set("organizer","down");else{u.searchParams.delete("organizer");u.searchParams.delete("dnm")}history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}},
+  dnmUnsub:dnmUnsub,
+  setDown:function(v){try{if(v){localStorage.setItem("ylDnmDown","1");localStorage.removeItem("ylDnmUnsub")}else localStorage.removeItem("ylDnmDown")}catch(e){}
+   try{var u=new URL(location.href);if(v){u.searchParams.set("organizer","down");if(u.searchParams.get("dnm")==="unsubscribed")u.searchParams.delete("dnm")}else{u.searchParams.delete("organizer");if(u.searchParams.get("dnm")==="down")u.searchParams.delete("dnm")}history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}},
+  setUnsub:function(v){try{if(v){localStorage.setItem("ylDnmUnsub","1");localStorage.removeItem("ylDnmDown")}else localStorage.removeItem("ylDnmUnsub")}catch(e){}
+   try{var u=new URL(location.href);if(v){u.searchParams.set("dnm","unsubscribed");u.searchParams.delete("organizer")}else{if(u.searchParams.get("dnm")==="unsubscribed")u.searchParams.delete("dnm")}history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}},
   run:function(W,COLS,onOk,onBack){
    var res=evaluate(getCtx(W,COLS));
    showWait(res,function(r){if(onOk)onOk(r||res)})},
@@ -7996,9 +8018,15 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   show:function(res,done,opt){showResults(res,done,opt||{})},
   showWait:showWait,showExcelPreview:showExcelPreview,shut:shut,asset:asset,canned:cannedResult
  };
- function cannedResult(down,name){
-  if(down)return {total:5000,mailed:4775,removed:225,changed:2034,rm:{dnm:0,ret:0,dup:150,spelled:75,und:0},dnmStatus:"failed",down:true,name:name||"Absentee Owners - Orange County.csv",sample:true};
-  return {total:5000,mailed:4612,removed:388,changed:1204,rm:{dnm:41,ret:17,dup:212,spelled:63,und:55},dnmStatus:"ok",down:false,name:name||"Absentee Owners - Orange County.csv",sample:true}}
+ function cannedResult(a,name){
+  var down=false,unsub=false;
+  if(a&&typeof a==="object"){down=!!a.down;unsub=!!a.unsub||a.mode==="unsub";name=a.name||name}
+  else if(a==="unsub"||a==="unsubscribed")unsub=true;
+  else down=!!a;
+  var nm=name||"Absentee Owners - Orange County.csv";
+  if(unsub)return {total:5000,mailed:4775,removed:225,changed:2034,rm:{dnm:0,ret:0,dup:150,spelled:75,und:0},dnmStatus:"unsubscribed",unsub:true,down:false,name:nm,sample:true};
+  if(down)return {total:5000,mailed:4775,removed:225,changed:2034,rm:{dnm:0,ret:0,dup:150,spelled:75,und:0},dnmStatus:"failed",down:true,unsub:false,name:nm,sample:true};
+  return {total:5000,mailed:4612,removed:388,changed:1204,rm:{dnm:41,ret:17,dup:212,spelled:63,und:55},dnmStatus:"ok",down:false,unsub:false,name:nm,sample:true}}
  window.ylDecorate=decorate;
  window.ylListReady=function(st){return !!(st&&st.files&&st.files.length&&st._ylRes)};
  document.addEventListener("click",function(ev){var b=ev.target&&ev.target.closest&&ev.target.closest("[data-ylsee]");if(!b)return;ev.preventDefault();var k=b.getAttribute("data-ylsee"),st=k==="pc"?window.PS:k==="ro"?window.RO:window.LS;window.ylRP.reopen(st,function(){})});
@@ -8726,7 +8754,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r56#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r57#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8897,10 +8925,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r56#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r57#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r56#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r57#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8995,8 +9023,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r56#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r56#/home";
+var M=API?"../?v=r57#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r57#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
@@ -9017,14 +9045,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r56 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r56#/home">Main site</a><a href="../api/?v=r56#/home">API Version A (no builder)</a><a href="../api-builder/?v=r56#/home">API Version B (with builder)</a><a href="../pages/?v=r56">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r57 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r57#/home">Main site</a><a href="../api/?v=r57#/home">API Version A (no builder)</a><a href="../api-builder/?v=r57#/home">API Version B (with builder)</a><a href="../pages/?v=r57">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
   var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r55</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r56#/home">API Version A: no builder</a><a href="api-builder/?v=r56#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r57#/home">API Version A: no builder</a><a href="api-builder/?v=r57#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r56#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r57#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -9106,7 +9134,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r56#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r57#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
