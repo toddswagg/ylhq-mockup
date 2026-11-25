@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r53#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r54#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2364,7 +2364,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r53#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r54#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -2677,7 +2677,9 @@ function tierIdx(q){var i=0;for(var j=0;j<TIERS.length;j++)if(q>=TIERS[j])i=j;re
 function r3(n){return Math.round(n*1000)/1000}
 
 var ORDERS=[
- {id:204518,date:"2026-10-26",placed:"Oct 26, 2026",st:"proof",prod:"Letter with #10 Envelope",post:"Standard",qty:2000,ppc:.616,drops:["11/20/26"],done:0,name:"Absentee owners Oct",paid:true,img:IMG.yhalf,eos:false},
+ {id:204518,date:"2026-10-26",placed:"Oct 26, 2026",st:"proof",prod:"Letter with #10 Envelope",post:"Standard",qty:2000,ppc:.616,drops:["12/09/26"],done:0,name:"Absentee owners Oct",paid:true,img:IMG.yhalf,eos:false},
+ {id:204640,date:"2026-11-18",placed:"Nov 18, 2026",st:"proof",prod:"First Class Half Page Postcard (8.5 x 5.5)",post:"First Class",qty:1000,ppc:.639,drops:["12/09/26"],done:0,name:"Vacant land Nov",paid:true,img:IMG.yhalf,eos:false},
+ {id:204650,date:"2026-11-22",placed:"Nov 22, 2026",st:"proof",prod:"Letter with #10 Envelope",post:"Standard",qty:2500,ppc:.616,drops:["11/27/26"],done:0,name:"Probate follow-up Nov",paid:true,img:IMG.yhalf,eos:false},
  {id:204377,date:"2026-10-19",placed:"Oct 19, 2026",st:"prod",prod:"Pressure Sealed Letter/Snap Packs",post:"First Class",qty:1500,ppc:.788,drops:["10/23/26","10/30/26","11/06/26","11/13/26","11/20/26","12/04/26","12/11/26","12/18/26","01/08/27","01/15/27","01/22/27","01/29/27"],done:4,name:"Probate list",paid:true,img:IMG.checks,eos:true},
  {id:203902,date:"2026-09-28",placed:"Sep 28, 2026",st:"ok",prod:"Jumbo Postcard (5.5 x 11)",post:"First Class",qty:1000,ppc:.729,drops:["10/02/26","10/16/26","10/30/26"],done:3,name:"",paid:true,img:IMG.yhalf,eos:false},
  {id:203455,date:"2026-09-09",placed:"Sep 9, 2026",st:"ok",prod:"Letter with Windowed Envelope",post:"Standard",qty:3000,ppc:.883,drops:["09/14/26"],done:1,name:"Vacant land",paid:true,img:IMG.yellowwin,eos:true},
@@ -2759,7 +2761,7 @@ function route(){
   if(r==="cart")renderCart();
   if(r==="orders")renderOrders();
   if(r==="detail")renderDetail(arg);
-  if(r==="proof")renderProof(arg);
+  if(r==="proof"){document.body.classList.add("r54-proof-on");document.documentElement.classList.add("r54-proof-on");renderProof(arg)}else{document.body.classList.remove("r54-proof-on");document.documentElement.classList.remove("r54-proof-on")};
   if(r==="rapid"){renderRapid();roStep(RO.id?RO.step:1);roHowFirst()}
   if(r==="rapid-proofs")renderRP();
   if(r==="datahub-signup")renderDHS(arg);
@@ -4214,6 +4216,11 @@ function pvSheet(o,tab,zoom){
   var addr='<b>'+esc(r[0])+'</b><br>'+esc(r[1])+'<br>'+esc(r[2]);
   var stamp='<div class="pvs-stamp">FIRST-CLASS MAIL<br>U.S. POSTAGE PAID<br>PERMIT NO. 000</div>';
   if(tab==="env")return '<div class="pvs env" style="width:'+w+'px;height:'+Math.round(w*4.125/9.5)+'px;font-size:'+fs+'px"><div class="pvs-ret">'+ret+'</div>'+(o.post==="Standard"?stamp.replace("FIRST-CLASS MAIL","PRSRT STD"):stamp)+'<div class="pvs-to">'+addr+'</div><div class="pvs-sticky">Call me, I may buy your house!</div><div class="pvs-barc"></div></div>';
+  if(tab==="inside"||(tab==="front"&&!pc)){
+    var first=esc(r[0].split(" ")[0]);
+    if(tab==="front")return '<div class="pvs cardfront" style="width:'+Math.round(w*0.85)+'px;height:'+Math.round(w*0.85*1.15)+'px;font-size:'+(fs*1.15).toFixed(2)+'px"><div class="pvs-cf"><h4>Wishing You</h4><p>a happy home and a fresh start</p></div></div>';
+    return '<div class="pvs cardin" style="width:'+Math.round(w*0.85)+'px;height:'+Math.round(w*0.85*1.15)+'px;font-size:'+fs+'px"><div class="pvs-ci"><p class="pvs-d">November 20, 2026</p><p>Dear '+first+',</p><p>Thinking of you at <b>'+esc(r[1])+'</b>. If you ever want to talk about selling, I would love to help.</p><p class="pvs-sig">John Sample</p><p>555-0100</p></div></div>';
+  }
   if(pc)return '<div class="pvs pcard" style="width:'+Math.round(w*(tab==="back"?1.2:1.2))+'px;font-size:'+(fs*1.2).toFixed(2)+'px">'+(tab==="back"?'<div class="pvs-bk"><div class="pvs-ret">'+ret+'</div>'+stamp+'<div class="pvs-to">'+addr+'</div></div>':'<div class="pvs-fr"><h4>We buy houses<br>in any condition</h4><p>Hi '+esc(r[0].split(" ")[0])+', we would love to make you a fair cash offer on '+esc(r[1])+'.</p><b class="pvs-btn">Call 555-0100</b></div>')+'</div>';
   return '<div class="pvs letter" style="width:'+w+'px;height:'+Math.round(w*11/8.5)+'px;font-size:'+fs+'px"><div class="pvs-lh"><b>Sample Home Buyers</b><span>PO Box 100, Springfield, MO 65800</span></div><p class="pvs-d">November 20, 2026</p><p>Dear '+esc(r[0].split(" ")[0])+',</p><p>My name is John Sample and I am a local home buyer. I am writing about your property at <b>'+esc(r[1])+'</b> in '+esc(r[2].split(",")[0])+'.</p><p>If you have thought about selling, I can make a fair cash offer, close on your timeline and cover the closing costs. There are no repairs, no agents and no fees.</p><p>Please call or text me at <b>555-0100</b> and we can talk it over, no pressure.</p><p>Sincerely,</p><p class="pvs-sig">John Sample</p><p class="pvs-ps">P.S. Even if you are not ready now, keep my number for later.</p></div>'}
 function pvFinalDates(o){if(PF.confirmed)return pfDates();if(fa14V()==="late")return ["Not chosen yet"];return o.drops.map(function(d){var t=pfParse(d);return t?ylFmt(t,1):d})}
@@ -4229,44 +4236,115 @@ function pvSummary(o,s){
    dl("Postage",lk("postage",esc(o.post)))+'<p class="help pv-note" id="pvPostNote" hidden></p>'+
    dl("Mail dates",ds[0]==="Not chosen yet"?"Not chosen yet "+lk("dates","Choose dates"):ds.length+(ds.length>1?" batches":" batch")+", "+esc(ds[0])+(ds.length>1?" to "+esc(ds[ds.length-1]):"")+" "+lk("dates","See dates"))+
    dl("Status",s==="ok"?'<span class="chip ok">Approved</span>':s&&s.dis?'<span class="chip amb">Revision requested</span>':'<span class="chip y">Waiting for approval</span>')+'</aside>'}
+function pvKind(o){var p=o.prod||"";if(/postcard/i.test(p))return "pc";if(/handwritten|greeting card|folded note/i.test(p))return "card";if(/pressure seal|snap pack/i.test(p))return "pack";return "letter"}
+function pvPages(o){var k=pvKind(o);if(k==="pc")return [["front","Front"],["back","Back"]];if(k==="card")return [["front","Card front"],["inside","Inside"]];if(k==="pack")return [["letter","Letter"],["env","Snap pack"]];return [["letter","Letter"],["env","Envelope"]]}
+function pvNeedDates(o){if(fa14V()==="late")return true;var rule=pfRule(o),now=ylNowPT();return (o.drops||[]).some(function(d){var t=pfParse(d);return !t||!ylValid(t,rule,now)})}
+function r54Fit(){
+  var nh=document.querySelector(".nh");
+  document.documentElement.style.setProperty("--r54hh",(nh?Math.round(nh.getBoundingClientRect().height):64)+"px");
+  $$(".r54-fit").forEach(function(host){
+    var wrap=host.querySelector(".r54-scale"),sheet=host.querySelector(".pvs");
+    if(!wrap||!sheet)return;
+    wrap.style.width="";wrap.style.height="";sheet.style.transform="";
+    var nw=sheet.offsetWidth||1,nh2=sheet.offsetHeight||1,aw=host.clientWidth-8,ah=host.clientHeight-8;
+    var s=Math.min(aw/nw,ah/nh2,1);
+    wrap.style.width=Math.round(nw*s)+"px";wrap.style.height=Math.round(nh2*s)+"px";
+    sheet.style.transformOrigin="top left";sheet.style.transform="scale("+s+")";
+  });
+}
+function r54ZoomOpen(html,label){
+  var old=$(".r54-zoomov");if(old)old.remove();
+  var ov=document.createElement("div");ov.className="r54-zoomov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label",(label||"Proof")+" zoomed");
+  ov.innerHTML='<div class="r54-zoombx"><div class="r54-zoomhd"><b>'+esc(label||"Proof")+'</b><button type="button" class="btn sec sm" data-r54z="x">Close</button></div><div class="r54-zoomst">'+html+'</div></div>';
+  document.body.appendChild(ov);
+  var close=function(){ov.remove();document.removeEventListener("keydown",onK)};
+  var onK=function(e){if(e.key==="Escape")close()};
+  document.addEventListener("keydown",onK);
+  ov.addEventListener("click",function(e){if(e.target===ov||e.target.getAttribute("data-r54z")==="x")close()});
+}
+
 function renderProof(id){
   var pid=parseInt(id,10)||204518,o=ofind(pid);if(!o){$("#proof-root").innerHTML='<div class="wrap page" style="max-width:720px;padding-top:18px"><a class="btn sec sm" href="#/orders">&lsaquo; My Orders</a>'+missOrder(pid)+'</div>';return}
-  var s=PRS[o.id],locked=!!s,y=window.pageYOffset;pfInit(o);if(PV.id!==o.id)PV={id:o.id,tab:pvIsPc(o)?"front":"env",zoom:window.innerWidth<600?50:100,rec:0,agree:false};
-  var pc=pvIsPc(o),tabs=pc?[["front","Front"],["back","Back"]]:[["letter","Letter"],["env","Envelope"]];
-  var head='<div class="pv-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+(s==="ok"?"Proof approved":s&&s.dis?"Revision requested":"Review and approve your proof")+'</h1><p class="muted">'+esc(o.prod)+(o.name?" &middot; "+esc(o.name):"")+'</p></div>';
-  var qrN=(window.PV_QR||/[?&]qr=1/.test(location.hash))&&!locked?'<div class="pv-alert pv-qr" role="note"><b>Important: QR code proof.</b> The first page contains field names. Do not scan the first page. Only scan QR codes on the sample mail pages after the first page.</div>':'';var mode=fa14V(),isLate=mode==="late"&&!locked,alertH=(isLate?'<div class="pv-red" role="alert"><b>Your original mail dates have passed. You must choose new dates before approving.</b> Go to Step 2 and pick new dates.</div>':'')+(mode==="override"&&!locked?'<div class="pv-ovr-note"><span class="chip y">Date override</span> This account can change mail dates freely, even late.</div>':'')+qrN+(locked?'':'<div class="pv-alert" role="alert"><b>Approve or request changes only with these buttons.</b> Please do not email an approval request, that can delay your mail.</div>');
+  var s=PRS[o.id],locked=!!s,y=window.pageYOffset;pfInit(o);
+  var pages=pvPages(o),need=pvNeedDates(o)&&!locked,mode=fa14V(),isLate=need;
+  if(PV.id!==o.id)PV={id:o.id,tab:pages[0][0],zoom:100,rec:0,agree:false};
+  var kind=pvKind(o);
+  var title=s==="ok"?"Proof approved":s&&s.dis?"Revision requested":"Review and approve your proof";
+  var head='<div class="r54-top"><a class="pv-back" href="#/detail/'+o.id+'">&lsaquo; Order #'+o.id+'</a><h1>'+title+'</h1><span class="chip '+(s==="ok"?"ok":s&&s.dis?"amb":"y")+'">'+(s==="ok"?"Approved":s&&s.dis?"Revision requested":"Waiting for approval")+'</span></div>';
+  var qrN=(window.PV_QR||/[?&]qr=1/.test(location.hash))&&!locked?'<div class="r54-alert" role="note"><b>QR code proof:</b> Do not scan the first page. Only scan sample mail pages after it.</div>':'';
+  var alertH=(mode==="override"&&!locked?'<div class="r54-alert r54-ovr">This account can change mail dates freely. The production-day minimum still applies.</div>':'')+qrN+(locked?'':'<div class="r54-alert">Approve or request changes only with the buttons on this page. Please do not email an approval, that can delay your mail.</div>');
   var result=s==="ok"?pvConfirmHTML(o):s&&s.dis?pvDisHTML(o,s):"";
-  var pages=pc?[["front","Front"],["back","Back"]]:[["env","Envelope"],["letter","Letter"]],pgIdx=Math.max(0,pages.map(function(t){return t[0]}).indexOf(PV.tab));
-  var viewer='<section class="panel pv-card" id="pvSecProof"><div class="pv-h"><span class="pv-pill">Step 1</span><h3>Review your proof</h3></div><div class="pv-tools"><div class="pv-pgnav"><button type="button" class="pv-lk" data-pg="-1">&lsaquo; Previous page</button><span id="pvPgLbl">Page '+(pgIdx+1)+' of 2 &middot; '+pages[pgIdx][1]+'</span><button type="button" class="pv-lk" data-pg="1">Next page &rsaquo;</button></div><div class="pv-zoom"><button type="button" data-z="-25" aria-label="Zoom out">&minus;</button><span id="pvZ">'+PV.zoom+'%</span><button type="button" data-z="25" aria-label="Zoom in">+</button></div></div><div class="pv-stage pv-doc" id="pvStage">'+pages.map(function(t,k){return '<figure class="pv-page" id="pvPg-'+t[0]+'" data-page="'+k+'"><figcaption>Page '+(k+1)+' of 2 &middot; '+t[1]+'</figcaption>'+pvSheet(o,t[0],PV.zoom)+'</figure>'}).join("")+'</div><div class="pv-meta"><span>One PDF proof: '+pages[0][1].toLowerCase()+' and '+pages[1][1].toLowerCase()+' together &middot; Sample record '+((PV.rec||0)+1)+' of '+RECS.length+'</span><span><button type="button" class="pv-lk" data-rec="-1">Previous record</button> &middot; <button type="button" class="pv-lk" data-rec="1">Next record</button></span></div><p class="help">Check names, phone number, spelling and layout on every page. The sample names are made up.</p><div class="pv-links"><a href="#" id="pdl" class="pv-lk">Download PDF</a></div><p class="help pv-note" id="pvDlNote" hidden></p></section>';
-  var dates='<section class="pv-card pv-sec" id="pvSecDates"><div class="pv-h"><span class="pv-pill">Step 2</span><h3>Confirm your mail dates</h3></div>'+(locked&&s==="ok"?pfMailHTML(o,"ok"):locked?'':pfMailHTML(o,null))+'</section>';
-  var appr=locked?'':'<section class="panel pv-card" id="pvSecAppr"><div class="pv-h"><span class="pv-pill">Step 3</span><h3>Approve or request changes</h3></div><div class="pv-terms r45terms3" tabindex="0"><p style="margin:0 0 6px"><b>Before you approve:</b></p><ul style="margin:0 0 6px;padding-left:20px;line-height:1.5"><li>Check names, phone number, mail dates and spelling. Mistakes found after approval are not refunded.</li><li>Approving sends your order to print. Changes after that have a reprint fee.</li><li>You confirm you have the right to use everything shown.</li></ul><p style="margin:0"><a href="#/terms-proof-approval">Read the full Proof Approval &amp; Order Terms &rsaquo;</a></p></div><label class="pv-agree"><input type="checkbox" id="pvAgree"'+(PV.agree?" checked":"")+'> I agree. Checking this box is my electronic signature.</label><p class="help">Mail dates: <b>'+pvFinalDates(o).join(", ")+'</b>. <a href="#" class="pv-lk" data-pv="dates">Change</a></p><p class="err" id="pvErr" role="alert">'+(isLate&&!PF.confirmed?"Approve is locked until you choose new mail dates in Step 2.":"")+'</p><div class="pv-nav"><button type="button" class="btn ylhq-proof-approve" id="pAp"'+(PV.agree&&!(isLate&&!PF.confirmed)?"":" disabled")+'>I approve this proof</button><button type="button" class="btn sec pv-dis ylhq-proof-disapprove" id="pvDisBtn" aria-expanded="'+(PV.dis?"true":"false")+'">Request changes</button></div><div class="pv-disbox" id="pvDisBox"'+(PV.dis?"":" hidden")+'><label class="f" for="pvMsg">What needs to change? <span class="req">*</span></label><p class="help" style="margin:0 0 6px">Tell us what to fix. We send a new proof, and nothing prints until you approve it.</p><textarea class="inp" id="pvMsg" rows="4" placeholder="For example: change the phone number to 555-0123">'+esc(PV.msg||"")+'</textarea><p class="err" id="pvMErr" role="alert"></p><div class="pv-nav" style="margin-top:12px"><button type="button" class="btn" id="pvSubmit">Submit</button><button type="button" class="btn sec" id="pvCancel">Cancel</button></div></div></section>';
+  var recN=(PV.rec||0)+1;
+  var figs=pages.map(function(t){return '<figure class="r54-fig" data-tab="'+t[0]+'"><figcaption>'+t[1]+' <span>Click to zoom</span></figcaption><div class="r54-fit"><div class="r54-scale">'+pvSheet(o,t[0],100)+'</div></div></figure>'}).join("");
+  var viewer='<section class="r54-previews" id="pvSecProof">'+figs+'<div class="r54-rec"><span>Sample record '+recN+' of '+RECS.length+' (names are made up)</span><span><button type="button" class="pv-lk" data-rec="-1">Previous</button> · <button type="button" class="pv-lk" data-rec="1">Next</button></span></div></section>';
+  var earliest=ylFmt((ylDefaults(PF.rule||pfRule(o)).asap));
+  var origDates=(o.drops||[]).map(function(d){var t=pfParse(d);return t?ylFmt(t):d}).join(", ");
+  var datePick=(function(){var html=schedStartHTML("pf",PF);html=html.replace(/<details class="of-more">[\s\S]*?<\/details>/g,"");html=html.replace(/Campaign start date/g,"New mail date");html=html.replace(/Choose a campaign start date/g,"Choose a new mail date");return html})();
+  var datesInner;
+  if(locked){datesInner='<div class="pvr"><span>Mail dates</span><b>'+esc(pvFinalDates(o).join(", "))+'</b></div>';}
+  else if(need){
+    datesInner='<div class="r54-warn" id="pvDateWarn" role="alert"><b>Not enough production time</b> to make your scheduled mail date ('+esc(origDates)+'). Choose a new date on or after <b>'+earliest+'</b>. Approve stays locked until you do.</div>'+
+      '<div class="r54-datefld r54-date-hl" id="pfPick">'+datePick+'<p class="help" style="margin:6px 0 0">Earliest if you approve today: <b>'+earliest+'</b></p><div class="r54-dateact"><button type="button" class="btn sm" id="pfConfirm">Use this date</button><span class="muted" id="pfMsg">'+(PF.confirmed?"New date chosen: "+pfDates().join(", "):"")+'</span></div></div>';
+  } else {
+    datesInner='<div class="pvr"><span>Mail dates</span><b>'+esc(pvFinalDates(o).join(", "))+' <button type="button" class="pv-lk" id="pfChange">Edit</button></b></div>'+
+      '<div id="pfPick" hidden><p class="help" style="margin:0 0 6px">Dates are optional if you approve in time. Earliest: <b>'+earliest+'</b></p>'+datePick+'<div class="r54-dateact"><button type="button" class="btn sm" id="pfConfirm">Use this date</button><span class="muted" id="pfMsg"></span></div></div>';
+  }
+  var sum='<div class="r54-sum" id="pvSum">'+
+    '<h3>Order #'+o.id+'</h3><p class="muted r54-oname">'+esc(o.name||"Untitled order")+'</p>'+
+    '<div class="pvr"><span>Product</span><b>'+esc(o.prod)+'</b></div>'+
+    '<div class="pvr"><span>Quantity</span><b>'+fmtN(o.qty)+' pieces</b></div>'+
+    '<div class="pvr"><span>Postage</span><b><a href="#" class="pv-lk" data-pv="postage">'+esc(o.post)+'</a></b></div><p class="help pv-note" id="pvPostNote" hidden></p>'+
+    '<div id="pfMail">'+datesInner+'</div>'+
+    '<p class="r54-dl"><a href="#" id="pdl" class="pv-lk">Download PDF</a></p><p class="help pv-note" id="pvDlNote" hidden></p></div>';
+  var appr=locked?'':'<div class="r54-actions" id="pvSecAppr">'+
+    '<div class="r54-terms"><p>Check names, phone number, mail dates and spelling. Approving sends this order to print. Mistakes found after approval are not refunded. <a href="#/terms-proof-approval">Proof Approval &amp; Order Terms</a></p></div>'+
+    '<label class="pv-agree"><input type="checkbox" id="pvAgree"'+(PV.agree?" checked":"")+'> I agree. Checking this box is my electronic signature.</label>'+
+    '<p class="err" id="pvErr" role="alert">'+(need&&!PF.confirmed?"Approve is locked until you choose a new mail date after the production window.":"")+'</p>'+
+    '<div class="pv-nav r54-btns"><button type="button" class="btn ylhq-proof-approve" id="pAp"'+(PV.agree&&!(need&&!PF.confirmed)?"":" disabled")+'>I approve this proof</button><button type="button" class="btn sec pv-dis ylhq-proof-disapprove" id="pvDisBtn" aria-expanded="'+(PV.dis?"true":"false")+'">Request changes</button></div>'+
+    '<div class="pv-disbox" id="pvDisBox"'+(PV.dis?"":" hidden")+'><label class="f" for="pvMsg">What needs to change? <span class="req">*</span></label><p class="help" style="margin:0 0 6px">Tell us what to fix. We send a new proof, and nothing prints until you approve it.</p><textarea class="inp" id="pvMsg" rows="3" placeholder="For example: change the phone number to 555-0123">'+esc(PV.msg||"")+'</textarea><p class="err" id="pvMErr" role="alert"></p><div class="pv-nav" style="margin-top:10px"><button type="button" class="btn" id="pvSubmit">Submit</button><button type="button" class="btn sec" id="pvCancel">Cancel</button></div></div></div>';
   var root=$("#proof-root");
-  root.innerHTML=head+alertH+(result?'<div class="pv-resultwrap">'+result+'</div>':'')+'<div class="pv-grid"><div class="pv-main">'+viewer+dates+appr+'</div>'+pvSummary(o,s)+'</div>';
-  if(!locked){pfWire(o);var updAp=function(){var a=$("#pAp");if(!a)return;var lk=isLate&&!PF.confirmed;a.disabled=!PV.agree||lk;$("#pvErr").textContent=lk?"Approve is locked until you choose new mail dates in Step 2.":""};var pm=$("#pfMail");if(pm){pm.addEventListener("click",function(){setTimeout(updAp,20)});pm.addEventListener("change",function(){setTimeout(updAp,20)})}}
-  window.scrollTo(0,y);
+  root.className="proofpg r54pv";
+  root.innerHTML=head+alertH+(result?'<div class="r54-result">'+result+'</div>':'')+'<div class="r54-grid" id="pfMailWrap"><div class="r54-main">'+viewer+'</div><aside class="panel r54-side">'+sum+appr+'</aside></div>';
   var again=function(){renderProof(o.id)};
-  var stg=$("#pvStage"),goPg=function(t,smooth){var f=$("#pvPg-"+t);if(!f||!stg)return;PV.tab=t;stg.scrollTop=f.offsetTop-stg.offsetTop-8;var k=pages.map(function(x){return x[0]}).indexOf(t);$("#pvPgLbl").innerHTML="Page "+(k+1)+" of 2 &middot; "+pages[k][1]};
-  if(stg){var sy=PV.sy||0;stg.scrollTop=sy;stg.onscroll=function(){PV.sy=stg.scrollTop;var fs=[].slice.call(stg.querySelectorAll(".pv-page")),k=0;fs.forEach(function(f,j){if(f.offsetTop-stg.offsetTop-8<=stg.scrollTop+40)k=j});PV.tab=pages[k][0];var l=$("#pvPgLbl");if(l)l.innerHTML="Page "+(k+1)+" of 2 &middot; "+pages[k][1]}}
-  $$("[data-pg]",root).forEach(function(b){b.onclick=function(){var k=Math.max(0,Math.min(1,pages.map(function(x){return x[0]}).indexOf(PV.tab)+ +b.getAttribute("data-pg")));goPg(pages[k][0])}});
-  $$("[data-z]",root).forEach(function(b){b.onclick=function(){PV.zoom=Math.max(50,Math.min(200,PV.zoom+ +b.getAttribute("data-z")));again()}});
+  var updAp=function(){var a=$("#pAp");if(!a)return;var lk=need&&!PF.confirmed;a.disabled=!PV.agree||lk;var e=$("#pvErr");if(e)e.textContent=lk?"Approve is locked until you choose a new mail date after the production window.":""};
+  if(!locked){
+    var box=$("#pfMail");
+    if(box){
+      if(typeof schedWire==="function")try{schedWire(box,"pf",PF)}catch(err){}
+      var pop=box.querySelector(".dp-pop");
+      if(pop)pop.addEventListener("click",function(){setTimeout(function(){PF.batchDates[0]=PF.start;PF._bdUser={0:1};if(need)PF.confirmed=false;updAp();var m=$("#pfMsg");if(m&&need)m.textContent=""},0)});
+      var ch=$("#pfChange");if(ch)ch.onclick=function(){var p=$("#pfPick");if(p)p.hidden=!p.hidden};
+      var cf=$("#pfConfirm");
+      if(cf)cf.onclick=function(){
+        var t=ylParse(PF.start),ok=t&&ylValid(t,pfRule(o));
+        if(!ok){var m=$("#pfMsg");if(m)m.textContent="Pick a date on or after "+earliest+".";return}
+        PF.confirmed=true;var m=$("#pfMsg");if(m)m.textContent="New date chosen: "+pfDates().join(", ")+".";updAp();
+      };
+    }
+  }
+  requestAnimationFrame(function(){r54Fit();requestAnimationFrame(r54Fit)});
+  if(!window._r54fit){window._r54fit=true;window.addEventListener("resize",function(){if(document.body.classList.contains("r54-proof-on"))r54Fit()})}
+  $$(".r54-fig",root).forEach(function(fig){
+    fig.onclick=function(){var tab=fig.getAttribute("data-tab");var lab=(pages.filter(function(x){return x[0]===tab})[0]||[tab,tab])[1];r54ZoomOpen(pvSheet(o,tab,130),lab)};
+  });
   $$("[data-rec]",root).forEach(function(b){b.onclick=function(){PV.rec=((PV.rec||0)+ +b.getAttribute("data-rec")+RECS.length)%RECS.length;again()}});
-  var scrollTo_=function(sel){var e=$(sel);if(e)e.scrollIntoView({behavior:"auto",block:"start"})};
   $$(".pv-lk[data-pv]",root).forEach(function(a){a.onclick=function(e){e.preventDefault();var k=a.getAttribute("data-pv");
-    if(/^tab-/.test(k)){scrollTo_("#pvSecProof");goPg(k.slice(4))}
+    if(/^tab-/.test(k)){var fig=root.querySelector('.r54-fig[data-tab="'+k.slice(4)+'"]');if(fig)fig.click()}
     else if(k==="postage"){var n=$("#pvPostNote");n.textContent=o.post==="Standard"?"Standard (marketing) mail is the lowest price. Delivery usually takes 3 to 10 days after it reaches the post office.":"First Class mail is delivered faster, usually 2 to 5 days after it reaches the post office, and is forwarded when a recipient moves.";n.hidden=!n.hidden}
-    else scrollTo_("#pvSecDates")}});
+    else {var p=$("#pfPick");if(p){p.hidden=false;p.scrollIntoView({block:"nearest"})}}
+  }});
   if($("#pdl"))$("#pdl").onclick=function(e){e.preventDefault();var n=$("#pvDlNote");n.textContent="Mockup: on the live site this downloads the proof PDF for order #"+o.id+". Nothing downloads here.";n.hidden=false};
-  if($("#pvExOn")){PV.ex=PV.ex||{};$("#pvExOn").onchange=function(){PV.ex.on=this.checked;$("#pvExBox").hidden=!this.checked};$("#pvExDate").onchange=function(){PV.ex.date=this.value;$("#pvErr").textContent=""};$("#pvExNote").oninput=function(){PV.ex.note=this.value}}
-  if($("#pvAgree"))$("#pvAgree").onchange=function(){PV.agree=this.checked;var lk=isLate&&!PF.confirmed;$("#pAp").disabled=!this.checked||lk};
-  if($("#pAp"))$("#pAp").onclick=function(){if(!PV.agree)return;var late=isLate;if(late&&!PF.confirmed){$("#pvErr").textContent="Your approval is late, so please choose new mail dates above and press Use these dates, then approve.";scrollTo_("#pvSecDates");return}
+  if($("#pvAgree"))$("#pvAgree").onchange=function(){PV.agree=this.checked;updAp()};
+  if($("#pAp"))$("#pAp").onclick=function(){if(!PV.agree)return;if(need&&!PF.confirmed){$("#pvErr").textContent="There is not enough production time left. Choose a new mail date on or after "+earliest+", then approve.";var p=$("#pfPick");if(p)p.scrollIntoView({block:"nearest"});return}
     if(PF.confirmed){o.dropsOrig=o.dropsOrig||o.drops.slice();o.drops=(PF.drops==="multi"&&PF.batches>1?PF.batchDates.slice(0,PF.batches):[PF.start]).map(pfMDY)}
-    if(PV.ex&&PV.ex.on&&(mode==="late"||mode==="override")){if(!PV.ex.date){$("#pvErr").textContent="Pick the earlier date you want for Drop 1, or untick the exception request.";scrollTo_("#pvEx");return}o.exc={date:PV.ex.date,note:PV.ex.note||"",ticket:"EX-1042"}}else delete o.exc;
+    if(PV.ex&&PV.ex.on&&(mode==="late"||mode==="override")){if(!PV.ex.date){$("#pvErr").textContent="Pick the earlier date you want for Drop 1, or untick the exception request.";return}o.exc={date:PV.ex.date,note:PV.ex.note||"",ticket:"EX-1042"}}else delete o.exc;
     PRS[o.id]="ok";again();window.scrollTo(0,0)};
   if($("#pvDisBtn"))$("#pvDisBtn").onclick=function(){PV.dis=!PV.dis;var b=$("#pvDisBox");b.hidden=!PV.dis;this.setAttribute("aria-expanded",PV.dis);if(PV.dis)$("#pvMsg").focus()};
   if($("#pvCancel"))$("#pvCancel").onclick=function(){PV.dis=false;PV.msg="";again()};
   if($("#pvSubmit"))$("#pvSubmit").onclick=function(){var v=$("#pvMsg").value.trim();PV.msg=v;if(!v){$("#pvMErr").textContent="Please tell us what needs to change.";return}PRS[o.id]={dis:1,msg:v};again();window.scrollTo(0,0)};
   if($("#pvRestart"))$("#pvRestart").onclick=function(e){e.preventDefault();delete PRS[o.id];delete o.exc;if(o.dropsOrig){o.drops=o.dropsOrig;delete o.dropsOrig}PV={};PF={};again();window.scrollTo(0,0)};
 }
+
 var fa14PV="";window.addEventListener("hashchange",function(){if(!/^#\/proof/.test(location.hash)){fa14PV="";PV={}}});
 
 /* ---------- RAPID ORDER ---------- */
@@ -6297,7 +6375,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r53&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r54&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p>'+
@@ -8511,7 +8589,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r53#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r54#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8682,10 +8760,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r53#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r54#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r53#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r54#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8780,8 +8858,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r53#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r53#/home";
+var M=API?"../?v=r54#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r54#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
@@ -8802,14 +8880,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r50 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r53#/home">Main site</a><a href="../api/?v=r53#/home">API Version A (no builder)</a><a href="../api-builder/?v=r53#/home">API Version B (with builder)</a><a href="../pages/?v=r53">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r54 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r54#/home">Main site</a><a href="../api/?v=r54#/home">API Version A (no builder)</a><a href="../api-builder/?v=r54#/home">API Version B (with builder)</a><a href="../pages/?v=r54">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
-  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r50</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r53#/home">API Version A: no builder</a><a href="api-builder/?v=r53#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r54</b>";
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r54#/home">API Version A: no builder</a><a href="api-builder/?v=r54#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r53#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r54#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -8891,7 +8969,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r53#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r54#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
@@ -9207,6 +9285,62 @@ body.dm .r51-notes{display:none !important}
 @media (max-width:700px){
   #ltMoreAcc .r53-pair,#pcMoreAcc .r53-pair{grid-template-columns:1fr}
   .r53-mail{grid-template-columns:1fr}
+}
+</style>
+
+<style id="r54-css">
+html.r54-proof-on,body.r54-proof-on{overflow:hidden;height:100%}
+body.r54-proof-on footer,body.r54-proof-on #hlchat,body.r54-proof-on #mocktag{display:none!important}
+body.r54-proof-on #s-proof{min-height:0}
+.proofpg.r54pv{max-width:none;width:100%;height:calc(100dvh - var(--r54hh,61px));padding:8px 20px 10px;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;gap:6px}
+.r54-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:none}
+.r54-top h1{font:700 20px/1.2 Montserrat,"Open Sans",sans-serif;margin:0;flex:1;min-width:180px}
+.r54-top .pv-back{font-size:13px;white-space:nowrap}
+.r54-alert{border:1px solid #F5DB8A;background:#FFF8E0;border-radius:10px;padding:6px 12px;font-size:13px;color:#5b4300;flex:none}
+.r54-grid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:16px;flex:1;min-height:0;align-items:stretch}
+.r54-main{min-width:0;min-height:0;display:flex;flex-direction:column}
+.r54-previews{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr) auto;gap:12px}
+.r54-fig{margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;cursor:zoom-in}
+.r54-fig figcaption{font:700 12px/1.2 "Open Sans",sans-serif;color:#444;margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+.r54-fig figcaption span{font-weight:600;color:#888;font-size:11px}
+.r54-fit{flex:1;min-height:0;background:#ececec;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px}
+.r54-scale{position:relative;overflow:hidden}
+.r54-scale .pvs{display:block}
+.r54-rec{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:#666}
+.r54-side{padding:14px 16px;overflow:auto;min-height:0;display:flex;flex-direction:column;gap:0}
+.r54-sum h3{font:700 16px Montserrat,sans-serif;margin:0}
+.r54-oname{margin:2px 0 8px!important;font-size:13px}
+.r54-side .pvr{padding:7px 0}
+.r54-dl{margin:8px 0 0}
+.r54-warn{background:#FEF3F2;border:2px solid #D92D20;border-radius:10px;padding:7px 9px;color:#B42318;font-size:12px;line-height:1.4;margin:6px 0}
+.r54-date-hl .dp-btn,.r54-date-hl .inp,#pfMail.r54-dates-req .dp-btn{border:2px solid #D92D20!important;box-shadow:0 0 0 3px rgba(217,45,32,.15);background:#fff}
+.r54-datefld{margin-top:6px}
+.r54-dateact{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.r54-actions{margin-top:8px;border-top:1px solid #eee;padding-top:8px}
+.r54-terms{font-size:11px;line-height:1.4;color:#444;margin:0 0 6px}
+.r54-terms a{font-weight:600}
+.r54-btns{margin-top:8px;display:flex;flex-wrap:nowrap;gap:8px;width:100%;box-sizing:border-box}
+.r54-btns .btn{border-radius:999px;min-height:40px;padding:8px 10px!important;flex:1 1 0;min-width:0;font-size:13px;white-space:nowrap;box-sizing:border-box}
+.r54-result{flex:1;min-height:0;overflow:auto}
+.r54-zoomov{position:fixed;inset:0;background:rgba(20,20,20,.72);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+.r54-zoombx{background:#f3f3f3;border-radius:16px;max-width:min(1100px,96vw);max-height:92vh;overflow:auto;padding:14px 16px 20px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.r54-zoomhd{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.r54-zoomst{display:flex;justify-content:center;padding:10px}
+.pvs.cardfront,.pvs.cardin{aspect-ratio:5/7;padding:0}
+.pvs-cf{position:absolute;inset:0;background:linear-gradient(165deg,#fff6cf,#FFC523 55%,#e8a800);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5em}
+.pvs-cf h4{font:800 2.2em/1.1 Montserrat,sans-serif;margin:0 0 .4em;color:#262626}
+.pvs-ci{position:absolute;inset:0;background:#fffdf6;padding:12% 12%;border:1px solid #eee}
+body.r54-proof-on .pv-done{padding:20px}
+@media(max-width:860px){
+  html.r54-proof-on,body.r54-proof-on{overflow:auto;height:auto}
+  .proofpg.r54pv{height:auto;overflow:visible;padding:8px 12px 110px}
+  .r54-grid{grid-template-columns:1fr;flex:none}
+  .r54-previews{grid-template-columns:1fr;grid-template-rows:none;flex:none}
+  .r54-fig{min-height:220px;height:260px}
+  .r54-side{overflow:visible}
+  .r54-actions{position:static;box-shadow:none;margin:12px 0 0;padding:10px 0 0;border-top:1px solid #eee;background:transparent}
+  .r54-btns{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;margin:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 18px rgba(0,0,0,.12);border-top:1px solid #eee}
+  .r54-btns .btn{flex:1}
 }
 </style>
 </html>
