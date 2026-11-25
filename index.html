@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r55#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><script>(function(){try{var u=new URL(location.href);if(u.searchParams.get("v")!=="r50"){u.searchParams.set("v","r50");location.replace(u.toString())}}catch(e){}})()</script><script id="r41-redir">(function(){var M={"subscriptions":"#/datahub","sub/list-source":"#/datahub?s=list-source","sub/skip-tracing":"#/datahub?s=skip-tracing","sub/list-organizer":"#/datahub","sub/returned-mail":"#/returned-mail"},API="api-builder/?v=r56#/overview/6";function fix(h){if(/^integrations\?tab=templates/.test((h||"").replace(/^#\/?/,"")))return"#/my-templates";var k=(h||"").replace(/^#\/?/,"").split("?")[0];if(k==="test-proof")return"API";return M[k]||null}function go(){var r=fix(location.hash);if(r==="API"){location.replace(new URL(API,location.href).href);return true}if(r){history.replaceState(null,"",location.pathname+location.search+r);return true}return false}go();window.addEventListener("hashchange",function(e){var r=fix(location.hash);if(r==="API"){e.stopImmediatePropagation();location.replace(new URL(API,location.href).href)}else if(r){e.stopImmediatePropagation();location.hash=r}},true)})()</script><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yellow Letter HQ (MOCKUP, not the live site)</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2364,7 +2364,7 @@ body.embed .tpl-saved{max-width:900px;margin:0 auto}
  <a href="#/postcards" data-p="postcards"><i>3</i>Postcards + Half Page</a>
  <a href="#/letters" data-p="letters"><i>4</i>Letters</a>
  <a href="#/handwritten" data-p="real-handwritten"><i>5</i>Handwritten (Real Handwritten section)</a>
- <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r55#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
+ <a href="#/custom-template" data-p="custom-template"><i>6</i>Design a New Mail Piece</a><a href="#/design-with-ai" data-p="design-with-ai"><i>6a</i>Design it with AI</a><a href="api-builder/?v=r56#/overview/6" data-p="test-proof"><i>6b</i>Test Order &amp; Proof (in the API)</a>
  <a href="#/cart" data-p="cart"><i>8</i>Cart (demo)</a>
  <a href="#/checkout" data-p="checkout"><i>9</i>Checkout (demo)</a>
  <h5>HQ DataHub</h5>
@@ -5731,13 +5731,13 @@ function renderRO2(){
    '<div class="err" id="ro2Err"></div><div class="ro-nav"><button class="btn sec" id="roB1">&lsaquo; Back</button><button class="btn" id="roN2">Next: Pick Drop Date(s)</button></div>';
   $("#roChange").onclick=function(){roStep(1)};
   
-  var d=$("#drop-rolist"),add=function(list){[].forEach.call(list,function(f){RO.files.push(f.name)});$("#files-rolist").innerHTML=fileList(RO.files,"rolist")};
+  var d=$("#drop-rolist"),add=function(list){[].forEach.call(list,function(f){RO.files.push(f.name)});$("#files-rolist").innerHTML=fileList(RO.files,"rolist");if(list.length&&typeof fa14Match==="function")fa14Match([].map.call(list,function(f){return f.name}),{st:RO})};
   ["dragenter","dragover"].forEach(function(ev){d.addEventListener(ev,function(e){e.preventDefault();d.classList.add("over")})});
   ["dragleave","drop"].forEach(function(ev){d.addEventListener(ev,function(e){e.preventDefault();d.classList.remove("over")})});
   d.addEventListener("drop",function(e){if(e.dataTransfer&&e.dataTransfer.files)add(e.dataTransfer.files)});$("input[type=file]",d).onchange=function(){add(this.files);this.value=""};
   $("#files-rolist").onclick=function(e){var b=e.target.closest("[data-rm]");if(!b)return;RO.files.splice(+b.getAttribute("data-rm").split(":")[1],1);$("#files-rolist").innerHTML=fileList(RO.files,"rolist")};
   $("#roCsv").onclick=function(e){e.preventDefault();demo("Example .CSV","On the live site this downloads an example list file. Nothing downloads in the mockup.")};
-  $("#roB1").onclick=function(){roStep(1)};$("#roN2").onclick=function(){var e=$("#ro2Err");if(!RO.files.length){if(e)e.textContent="Upload a list first.";toast("Upload a list first.");return}if(e)e.textContent="";roStep(3)};
+  $("#roB1").onclick=function(){roStep(1)};$("#roN2").onclick=function(){var e=$("#ro2Err");if(!RO.files.length){if(e)e.textContent="Upload a list first.";toast("Upload a list first.");return}if(!RO._ylRes&&window.wzOpen){window.wzOpen(RO.files,{st:RO});return}if(e)e.textContent="";roStep(3)};
 }
 function renderRO3(){
   var o=roSrc(),hw=/Handwritten/.test(o.prod);
@@ -6408,7 +6408,7 @@ bp("integrations","Integrations",function(root,arg,Q){var v=Q.v||"",t=Q.tab||"";
   var tb='<div class="bp-mock" style="background:#fff"><span>Section:</span>'+tabs.map(function(x){return '<a class="chip'+(x[0]===t?" on":"")+'" href="#/integrations'+(x[0]?"?tab="+x[0]:"")+'">'+x[1]+'</a>'}).join("")+'<a class="chip" href="#/api-orders">API order history</a></div>';
   var body;
   if(t==="templates")body='<div class="panel" style="padding:26px"><div data-ylib data-ctx="main" data-new="#/custom-template"></div></div>';
-  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r55&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
+  else if(t==="wallet")body='<div class="panel" style="max-width:860px;padding:0;border:0;background:none;box-shadow:none"><iframe id="wlf" title="Account balance" src="api-builder/?v=r56&embed=proof#/overview/4" style="width:100%;height:1100px;border:0;display:block" scrolling="no"></iframe></div>';
   else body='<div class="panel" style="max-width:860px"><h3 style="font-size:18px;margin-bottom:4px">API key</h3><p class="muted" style="margin:0 0 12px">Send it in the <code>X-API-Key</code> header on every call. Keep it private, like a password.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="apiK" value="'+KEYM+'" readonly aria-label="API key" style="flex:1;min-width:240px;font-family:ui-monospace,Menlo,monospace"><button class="btn sec" id="apiShow">Show</button><button class="btn" id="apiCopy">Copy</button></div>'+
     '<p class="muted" style="font-size:12.5px;margin:8px 0 0">Mockup, example only. No key is shown. Lost it? <a href="'+lnk("lost-api-key","Lost API Key")+'">Get a new key</a>.</p>'+
@@ -7499,9 +7499,8 @@ cartBadge();route();
 
 function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false},rows=(window.WZ_N||5214);
   if(window.ylRP&&W&&W.m){try{
-    if(ylRP.dnmDown())return {rows:rows,d:0,u:0,nc:0,t:0,fin:0,o:o,down:true};
-    var rr=ylRP.evaluate(ylRP.ctx(W,COLS));
-    return {rows:rr.total,d:rr.rm.dup+rr.rm.spelled,u:0,nc:0,t:0,fin:rr.mailed,o:o,dnm:rr.rm.dnm,ret:rr.rm.ret,real:true,sample:rr.sample}
+        var rr=ylRP.evaluate(ylRP.ctx(W,COLS));
+    return {rows:rr.total,d:rr.rm.dup+rr.rm.spelled,u:rr.rm.und||0,nc:0,t:0,fin:rr.mailed,o:o,dnm:rr.rm.dnm,ret:rr.rm.ret,real:true,sample:rr.sample,down:!!(rr.down||rr.dnmStatus==="failed")}
   }catch(ex){}}
   var sc=rows/5214;
   var d=o.tout?0:Math.round(({mailing_property:37,mailing:52,property:41}[o.dup]||0)*sc),u=o.tout?0:Math.round(112*sc),nc=o.tout?0:Math.round(48*sc),t=(!o.tout&&o.trust)?Math.round(19*sc):0;
@@ -7512,11 +7511,11 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   h+=(window.listOptsHTML?listOptsHTML("wz",W.st,0):"");
   h+='<p class="help" style="margin:8px 0 0">Turn off upload tool skips the whole clean up: no duplicate removal and no address checks. You pay for every row.</p>';
   if(!W.ran)return h+'<div style="margin-top:12px"><button type="button" class="btn" id="wzRun">Clean my list</button></div>';
-  var c=counts();if(c.down)return h+'<div class="wz-err" role="alert" id="wzDnmDown"><b>We couldn\u2019t check your Do Not Mail list yet, try again.</b> We never mail an address on your Do Not Mail list, so your list is not ready until the check has run.</div><button type="button" class="btn sec sm" id="wzRun">Try again</button>';if(c.o.tout)return h+'<div class="wz-cnt"><div><span>Rows in your list</span><b>'+n(c.rows)+'</b></div><div><span>Records to mail (nothing removed)</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button>';
-  return h+'<div class="wz-bar"><i style="width:100%"></i></div><div class="wz-cnt" id="wzCnt">'+
+  var c=counts();if(c.o.tout)return h+'<div class="wz-cnt"><div><span>Rows in your list</span><b>'+n(c.rows)+'</b></div><div><span>Records to mail (nothing removed)</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button>';
+  return h+(c.down?'<div class="wz-err" role="status" id="wzDnmDown"><b>The Do Not Mail check didn\u2019t run.</b> We couldn\u2019t reach List Organizer, so your Do Not Mail list and returned mail were not checked for this upload. The rest of the clean-up still finished.</div>':'')+'<div class="wz-bar"><i style="width:100%"></i></div><div class="wz-cnt" id="wzCnt">'+
    '<div><span>Rows in your list (file format checked)</span><b>'+n(c.rows)+'</b></div>'+
    '<div><span>Duplicates removed ('+({mailing_property:"mailing and property",mailing:"mailing",property:"property"}[c.o.dup]||"none")+')</span><span class="m">'+(c.d?'&minus; '+n(c.d):'0')+'</span></div>'+
-   (c.real?'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">'+(c.dnm?'&minus; '+n(c.dnm):'0')+'</span></div><div><span>Mail came back before, removed</span><span class="m">'+(c.ret?'&minus; '+n(c.ret):'0')+'</span></div>':'<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
+   (c.real?(c.down?'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">Not checked</span></div><div><span>Mail came back before, removed</span><span class="m">Not checked</span></div>':'<div><span>Do Not Mail records removed (your Do Not Mail list)</span><span class="m" id="wzDnm">'+(c.dnm?'&minus; '+n(c.dnm):'0')+'</span></div><div><span>Mail came back before, removed</span><span class="m">'+(c.ret?'&minus; '+n(c.ret):'0')+'</span></div>'+(c.u?'<div><span>Undeliverable addresses removed</span><span class="m">&minus; '+n(c.u)+'</span></div>':'')):'<div><span>Undeliverable addresses removed (USPS CASS check)</span><span class="m">&minus; '+n(c.u)+'</span></div>'+
    '<div><span>Movers updated to their new address (NCOA)</span><span class="u">'+n(c.nc)+' updated</span></div>')+
    (c.t?'<div><span>Trust names changed (\u201cOntiveros 1997 Trust\u201d to \u201cOntiveros Family\u201d)</span><span class="u">'+n(c.t)+' changed</span></div>':'')+
    '<div><span>Records to mail</span><span>'+n(c.fin)+'</span></div></div><button type="button" class="btn sec sm" id="wzRun">Clean again</button> <span class="muted" style="font-size:12.5px">'+(c.real?(c.sample?'Counts from the example list.':'Counts from your file.'):'Example counts.')+'</span>'}
@@ -7568,7 +7567,6 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   if(B.scrollTo)B.scrollTop=keep}
 
  function commitList(res){
-  if(window.ylRP&&ylRP.dnmDown())return;
   var fin=res?res.mailed:counts().fin;
    if(W.st){var _nm=(W.files||[]).map(function(x){return typeof x==="string"?x:(x&&x.name)||""}).filter(function(x){return /\.(csv|xlsx?)$/i.test(x)});if(!_nm.length)_nm=[window.WZ_FILE||"your-list.csv"];var _L=(window.__ylAdd&&W.st.lists)?W.st.lists.slice():[];var _b=Math.floor(fin/_nm.length),_r=fin-_b*_nm.length;_nm.forEach(function(x,i){_L=_L.filter(function(y){return y.name!==x});_L.push({name:x,n:_b+(i<_r?1:0),cols:0})});W.st.lists=_L;fin=_L.reduce(function(t,y){return t+y.n},0);window.__ylAdd=false}
    if(W.st){
@@ -7581,7 +7579,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    var q=$q("#qty")||$q("#lqty");
    var lock=window.formLockQty||formLockQty;if(typeof lock==="function")lock(q,W.st||{});else if(q){q.value=fin;q.readOnly=true}
    closeModal();
-   try{var cEl=$q("#lqty")||$q("#qty"),hostB=W.st===window.PS?document.querySelector("#pcUpbar .lt-acc-body"):document.querySelector("#ltUpbar .lt-acc-body");if(hostB){var sm=hostB.querySelector(".up-sum");if(!sm){sm=document.createElement("div");sm.className="up-sum";hostB.insertBefore(sm,hostB.firstChild)}var nf2=(W.files||[]).map(function(x){return typeof x==="string"?x:x.name}).filter(function(x){return /\.csv$/i.test(x)})[0]||"your list",mm=0,is=0;for(var kk in W.m)if(W.m[kk]&&W.m[kk]!=="-")mm++;for(var kl in W.lv)if(W.lv[kl]==="chk"||W.lv[kl]==="no")is++;var LL=(W.st&&W.st.lists)||[];var rows=LL.map(function(y,ix){return '<div class="ls-row"><span class="ok">\u2713</span><b>'+e(y.name)+'</b><span>'+n(y.n)+' to mail</span><span>'+mm+' columns matched</span><button type="button" class="ls-x" data-lsx="'+ix+'" aria-label="Remove '+e(y.name)+'">\u00d7</button></div>'}).join("");sm.innerHTML='<div class="ls-list">'+rows+'</div><div class="ls-tot"><span>'+LL.length+' list'+(LL.length===1?'':'s')+' combined into this order</span><b>'+n(fin)+' pieces</b></div><div class="ls-act"><button type="button" class="btn sec sm" data-lsadd="1">Add another list</button><button type="button" class="btn sec sm" data-wzrev="1">Review matches</button></div><p class="ls-hint">Add as many lists as you want, they combine into one order. Each list is matched and cleaned on its own.</p>';sm.querySelector("[data-wzrev]").onclick=function(){W.det[2]=true;window.wzOpen(W.files,{st:W.st})};sm.querySelector("[data-lsadd]").onclick=function(){var fi=document.getElementById("lsAddFile");if(!fi){fi=document.createElement("input");fi.type="file";fi.id="lsAddFile";fi.accept=".csv,text/csv";fi.multiple=true;fi.hidden=true;document.body.appendChild(fi)}fi.value="";fi.onchange=function(){var nm=[].map.call(fi.files,function(q){return q.name});if(!nm.length)return;window.__ylAdd=true;window.wzOpen(nm,{st:W.st})};fi.click()};sm.querySelectorAll("[data-lsx]").forEach(function(bt){bt.onclick=function(){var ix=+bt.getAttribute("data-lsx");W.st.lists.splice(ix,1);var tt=W.st.lists.reduce(function(t,y){return t+y.n},0);W.st.qty=tt;var qq=document.querySelector("#lqty")||document.querySelector("#qty");var lk=window.formLockQty||formLockQty;if(typeof lk==="function")lk(qq,W.st);if(!W.st.lists.length){W.st.files=[];W.st._ylRes=null}var sy=window.formSync||formSync;if(typeof sy==="function")sy();var lu=window.lUpdate||lUpdate;if(typeof lu==="function"&&qq&&qq.id==="lqty")lu();sm.remove()}})}}catch(ex){}
+   try{var cEl=$q("#lqty")||$q("#qty"),hostB=W.st===window.PS?document.querySelector("#pcUpbar .lt-acc-body"):W.st===window.RO?(document.querySelector("#roDrop")||document.querySelector("#rStep2")):document.querySelector("#ltUpbar .lt-acc-body");if(hostB){var sm=hostB.querySelector(".up-sum");if(!sm){sm=document.createElement("div");sm.className="up-sum";hostB.insertBefore(sm,hostB.firstChild)}var nf2=(W.files||[]).map(function(x){return typeof x==="string"?x:x.name}).filter(function(x){return /\.csv$/i.test(x)})[0]||"your list",mm=0,is=0;for(var kk in W.m)if(W.m[kk]&&W.m[kk]!=="-")mm++;for(var kl in W.lv)if(W.lv[kl]==="chk"||W.lv[kl]==="no")is++;var LL=(W.st&&W.st.lists)||[];var rows=LL.map(function(y,ix){return '<div class="ls-row"><span class="ok">\u2713</span><b>'+e(y.name)+'</b><span>'+n(y.n)+' to mail</span><span>'+mm+' columns matched</span><button type="button" class="ls-x" data-lsx="'+ix+'" aria-label="Remove '+e(y.name)+'">\u00d7</button></div>'}).join("");sm.innerHTML='<div class="ls-list">'+rows+'</div><div class="ls-tot"><span>'+LL.length+' list'+(LL.length===1?'':'s')+' combined into this order</span><b>'+n(fin)+' pieces</b></div><div class="ls-act"><button type="button" class="btn sec sm" data-lsadd="1">Add another list</button><button type="button" class="btn sec sm" data-wzrev="1">Review matches</button></div><p class="ls-hint">Add as many lists as you want, they combine into one order. Each list is matched and cleaned on its own.</p>';sm.querySelector("[data-wzrev]").onclick=function(){W.det[2]=true;window.wzOpen(W.files,{st:W.st})};sm.querySelector("[data-lsadd]").onclick=function(){var fi=document.getElementById("lsAddFile");if(!fi){fi=document.createElement("input");fi.type="file";fi.id="lsAddFile";fi.accept=".csv,text/csv";fi.multiple=true;fi.hidden=true;document.body.appendChild(fi)}fi.value="";fi.onchange=function(){var nm=[].map.call(fi.files,function(q){return q.name});if(!nm.length)return;window.__ylAdd=true;window.wzOpen(nm,{st:W.st})};fi.click()};sm.querySelectorAll("[data-lsx]").forEach(function(bt){bt.onclick=function(){var ix=+bt.getAttribute("data-lsx");W.st.lists.splice(ix,1);var tt=W.st.lists.reduce(function(t,y){return t+y.n},0);W.st.qty=tt;var qq=document.querySelector("#lqty")||document.querySelector("#qty");var lk=window.formLockQty||formLockQty;if(typeof lk==="function")lk(qq,W.st);if(!W.st.lists.length){W.st.files=[];W.st._ylRes=null}var sy=window.formSync||formSync;if(typeof sy==="function")sy();var lu=window.lUpdate||lUpdate;if(typeof lu==="function"&&qq&&qq.id==="lqty")lu();sm.remove()}})}}catch(ex){}
    var sync=window.formSync||formSync;if(typeof sync==="function")sync();
    var lu=window.lUpdate||lUpdate;if(typeof lu==="function"&&q&&q.id==="lqty")lu();
    var up=window.updatePrice||updatePrice;if(typeof up==="function"&&q&&q.id==="qty")up();
@@ -7590,7 +7588,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    var adv=window.formAdvance||formAdvance;if(typeof adv==="function")adv("list");
    toast("List ready: "+n(fin)+" records. Piece count is locked to the cleaned list.");
   
-  if(window.ylDecorate)try{ylDecorate()}catch(e){}
+  if(window.ylDecorate)try{ylDecorate()}catch(e){};setTimeout(function(){try{if(window.ylDecorate)ylDecorate()}catch(e){}},80);
  }
  window.wzOpen=function(files,opt){W=fresh(files,opt);if(W.st){W.st._ylRes=null}var d=document.getElementById("dim");d.classList.add("wz");d.classList.add("on");draw()};
  function closeModal(){var d=document.getElementById("dim");d.classList.remove("on");d.classList.remove("wz")}
@@ -7674,8 +7672,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
 <style id="ylrp-css">
 .ylrp-bd{position:fixed;inset:0;background:rgba(20,20,20,.55);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;z-index:100000;overflow:auto}
 .ylrp-bd.open{display:flex}html.ylrp-lock{overflow:hidden}
-.ylrp-m{background:#fff;border-radius:18px;width:min(560px,100%);box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100vh - 80px)}
-.ylrp-body{overflow:auto;flex:1 1 auto}
+.ylrp-m{background:#fff;border-radius:18px;width:min(560px,100%);box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:visible;display:flex;flex-direction:column}
+.ylrp-body{overflow:visible;flex:1 1 auto}
 .ylrp-mh{background:#fff;padding:18px 20px 16px 22px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e4e4e7}
 .ylrp-mh h2{margin:0;font:700 18px/1.25 var(--head,Montserrat,sans-serif);flex:1}
 .ylrp-mh h2 small{display:block;font:400 12px var(--body,'Open Sans',Arial,sans-serif);color:#71717a;margin-top:4px}
@@ -7687,8 +7685,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
 .ylrp-hero .of{font-size:14px;color:#71717a;margin-top:4px}
 .ylrp-sec{margin:14px 22px 0;padding:16px 18px 14px;border:1px solid #e4e4e7;border-radius:14px;background:#fff}
 .ylrp-sh{font-size:15px;font-weight:700;margin:0 0 10px}
-.ylrp-r{display:flex;align-items:center;gap:12px;padding:5px 0;font-size:14px;color:#3f3f46}
-.ylrp-r .pill{min-width:42px;height:26px;padding:0 10px;border-radius:999px;background:#fff7db;color:#2b2b2b;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ylrp-r{display:flex;align-items:center;gap:12px;padding:5px 0;font-size:14px;color:#3f3f46}.ylrp-r .ylrp-pill:before,.ylrp-r .ylrp-pill:after{content:none!important;display:none!important}
+.ylrp-r .ylrp-pill{list-style:none;min-width:42px;position:relative;height:26px;padding:0 10px;border-radius:999px;background:#fff7db;color:#2b2b2b;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 .ylrp-tidy{margin:12px 22px 0;padding:14px 18px;background:#fff7db;border-radius:14px;font-size:14px;color:#2b2b2b}
 .ylrp-dl{margin:16px 22px 8px;text-align:center}.ylrp-dl .btn{width:100%;padding:14px 18px;font-size:15px}
 .ylrp-csv{display:inline-block;margin-top:12px;font:600 14px var(--body,'Open Sans',Arial,sans-serif);color:#3f3f46;text-decoration:underline;background:none;border:0;cursor:pointer;padding:0}
@@ -7700,6 +7698,49 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
 .yl-mocktog{margin-left:auto;font-size:12px;color:#71717a;display:inline-flex;align-items:center;gap:6px}
 .yl-seeres{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;background:#fff7db;border-radius:12px;font-size:14px}
 @media(max-width:520px){.ylrp-bd{padding:12px}.ylrp-hero .n{font-size:44px}.ylrp-mf .actions{flex-direction:column-reverse}.ylrp-mf .actions .btn{width:100%}}
+
+.ylrp-warn{margin:14px 22px 0;padding:14px 16px;background:#fdecea;border:1px solid #f5b5ae;border-radius:14px;color:#7a1d14;font-size:14px;line-height:1.45}
+.ylrp-r .ylrp-pill.nc{background:#fdecea;color:#9b1c1c;min-width:auto;padding:0 10px;font-size:12px;font-weight:700}
+.ylrp-dl .btn.busy{background:#ffe28a;color:#7a5a00;pointer-events:none;box-shadow:none}
+.ylrp-csv.busy{text-decoration:none;color:#71717a;cursor:default;pointer-events:none}
+.ylrp-wait{padding:22px 24px 28px}
+.ylrp-wait-l{margin:0 0 16px;font-size:15px;color:#3f3f46;line-height:1.45}
+.ylrp-bar{height:8px;border-radius:99px;background:#f4f4f5;overflow:hidden}
+.ylrp-bar i{display:block;height:100%;background:#ffc523;border-radius:99px;transition:width .35s ease}
+.ylrp-steps{list-style:none;margin:16px 0 0;padding:0}
+.ylrp-steps li{position:relative;padding:8px 0 8px 28px;font-size:14px;color:#71717a}
+.ylrp-steps li:before{content:"";position:absolute;left:0;top:12px;width:12px;height:12px;border-radius:50%;border:2px solid #d4d4d8;background:#fff}
+.ylrp-steps li.on{color:#262626;font-weight:700}
+.ylrp-steps li.on:before{border-color:#ffc523;background:#ffc523}
+.ylrp-steps li.done{color:#3f3f46}
+.ylrp-steps li.done:before{border-color:#15803d;background:#15803d}
+.yl-ready-wrap{margin:0 0 12px}
+.yl-ready{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;background:#ecfdf3;border:1px solid #bbf7d0;border-radius:12px}
+.yl-ready-ic{width:28px;height:28px;border-radius:50%;background:#15803d;color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.yl-ready-tx{flex:1 1 180px;min-width:0}
+.yl-ready-tx b{display:block;font-size:14px;color:#14532d;font-weight:800}
+.yl-ready-tx span{display:block;font-size:13px;color:#166534;margin-top:2px}
+.yl-ready-btn{background:#262626!important;color:#fff!important;border:0!important;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;flex-shrink:0;box-shadow:none}
+.yl-ready-btn:hover{background:#111}
+.ylxl-bd{position:fixed;inset:0;background:rgba(20,20,20,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;z-index:100001;overflow:auto}
+.ylxl-bd.open{display:flex}html.ylrp-lock{overflow:hidden}
+.ylxl-m{background:#fff;width:min(1200px,100%);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:hidden}
+.ylxl-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;padding:16px 18px;background:#ffc523}
+.ylxl-top h2{margin:0;font:800 20px/1.2 var(--head,Montserrat,sans-serif);color:#262626}
+.ylxl-top p{margin:4px 0 0;font-size:13px;color:#3f3f46}
+.ylxl-acts{display:flex;gap:8px;flex-shrink:0}
+.ylxl-leg{margin:0;padding:8px 18px;font-size:12px;color:#3f3f46;background:#fffbeb;border-bottom:1px solid #e4e4e7}
+.ylxl-leg .lg{display:inline-block;width:12px;height:12px;border-radius:2px;margin:0 6px 0 12px;vertical-align:middle}
+.ylxl-leg .lg:first-child{margin-left:0}
+.ylxl-leg .g{background:#d1fae5}.ylxl-leg .y{background:#fef08a}.ylxl-leg .r{background:#fecaca}
+.ylxl-sc{overflow:auto;max-height:70vh}
+.ylxl-tb{border-collapse:collapse;font-size:12px;min-width:1100px;width:100%}
+.ylxl-tb th{position:sticky;top:0;background:#262626;color:#fff;font-weight:700;padding:8px 8px;text-align:left;white-space:nowrap}
+.ylxl-tb td{padding:6px 8px;border-bottom:1px solid #e4e4e7;vertical-align:top;max-width:220px;text-decoration:none;color:#262626}
+.ylxl-tb tr.ok td{background:#ecfdf3}
+.ylxl-tb tr.ch td{background:#fef9c3}
+.ylxl-tb tr.rm td{background:#fee2e2;text-decoration:none}
+.ylxl-load{padding:24px;color:#71717a}
 </style>
 <script id="ylrp-js">/* YLHQ list check: Do Not Mail removal, results popup, Excel/CSV report (mockup, invented sample data only). */
 (function(){
@@ -7714,7 +7755,7 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
   {a:"957 Cedar Ct",c:"Irvine",s:"CA",z:"92614"},{a:"2379 Elm Street",c:"Irvine",s:"CA",z:"92614"},{a:"14817 Le Grande Drive",c:"Addison",s:"TX",z:"75001"},{a:"4410 Oak Avenue",c:"Garden Grove",s:"California",z:"92840"}];
  var RET=window.YL_RETURNED=[
   {a:"108 Main St",c:"Austin",s:"TX",z:"78708"},{a:"6710 Maple Lane",c:"Fullerton",s:"CA",z:"92832"},{a:"2210 Elm Street",c:"Dallas",s:"TX",z:"75201"}];
- function dnmDown(){try{if(/[?&#]dnm=down/.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmDown")==="1"}catch(e){return false}}
+ function dnmDown(){try{if(/[?&#](?:dnm|organizer)=down/i.test(location.href+location.hash))return true;return localStorage.getItem("ylDnmDown")==="1"}catch(e){return false}}
  /* ---------- address normalizing ---------- */
  var SUF={STREET:"ST",STR:"ST",AVENUE:"AVE",AV:"AVE",ROAD:"RD",DRIVE:"DR",DRV:"DR",LANE:"LN",COURT:"CT",BOULEVARD:"BLVD",CIRCLE:"CIR",PLACE:"PL",TERRACE:"TER",HIGHWAY:"HWY",PARKWAY:"PKWY",TRAIL:"TRL",WAY:"WAY",SQUARE:"SQ",NORTH:"N",SOUTH:"S",EAST:"E",WEST:"W",NORTHEAST:"NE",NORTHWEST:"NW",SOUTHEAST:"SE",SOUTHWEST:"SW"};
  var UNIT=/\b(APT|APARTMENT|UNIT|STE|SUITE|BLDG|BUILDING|FL|FLOOR|RM|ROOM|LOT|SPC|SPACE)\b.*$|#.*$/;
@@ -7759,9 +7800,11 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
  var CACHE={};
  function getCtx(W,COLS){var rows=window.WZ_ROWS&&window.WZ_ROWS.length?window.WZ_ROWS:null,cols=COLS,sample=false;
   if(!rows){rows=sampleRows();cols=SCOLS.slice();sample=true}
-  return {rows:rows,cols:cols,sample:sample,m:W.m,name:window.WZ_FILE||(W.files&&W.files[0])||"YLHQ Sample List.csv",dup:(W.st&&W.st.lo&&W.st.lo.dup)||"mailing_property",tout:!!(W.st&&W.st.lo&&W.st.lo.tout)}}
+  var raw=window.WZ_FILE||(W&&W.files&&W.files[0])||"";if(typeof raw==="object"&&raw)raw=raw.name||"";
+  var name=(!raw||/^YLHQ Sample List/i.test(raw)||/^your-list/i.test(raw))?"Absentee Owners - Orange County.csv":raw;
+  return {rows:rows,cols:cols,sample:sample,m:W.m,name:name,dup:(W.st&&W.st.lo&&W.st.lo.dup)||"mailing_property",tout:!!(W.st&&W.st.lo&&W.st.lo.tout),down:dnmDown()}}
  function evaluate(ctx){
-  var key=JSON.stringify([ctx.rows.length,ctx.cols,ctx.m,ctx.dup,ctx.tout,ctx.sample,ctx.rows.length?ctx.rows[0]:0,ctx.rows.length?ctx.rows[ctx.rows.length-1]:0]);
+  var key=JSON.stringify([ctx.rows.length,ctx.cols,ctx.m,ctx.dup,ctx.tout,ctx.sample,!!ctx.down,ctx.rows.length?ctx.rows[0]:0,ctx.rows.length?ctx.rows[ctx.rows.length-1]:0]);
   if(CACHE.key===key)return CACHE.val;
   var ci={};ctx.cols.forEach(function(c,i){ci[c]=i});
   function col(k,row){var v=ctx.m[k];if(v==="=m")v=ctx.m[k.replace("property","mailing")];if(!v||v==="-"||ci[v]==null)return "";var x=row[ci[v]];return x==null?"":String(x)}
@@ -7774,8 +7817,8 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    rec.ta=useMail?rec.ma:rec.pa;rec.tc=useMail?rec.mc:rec.pc;rec.ts=useMail?rec.ms:rec.ps;rec.tz=useMail?rec.mz:rec.pz;
    var mailRec={a:rec.ma,c:rec.mc,s:rec.ms,z:rec.mz},propRec={a:rec.pa,c:rec.pc,s:rec.ps,z:rec.pz};
    var out={status:"Will be mailed",why:"",yes:"Yes",same:""};
-   if(sameAddr(mailRec,dnmList)||sameAddr(propRec,dnmList)){out={status:"Removed",why:"On your Do Not Mail list. Not mailed.",yes:"No",same:"",k:"dnm"};res.rm.dnm++}
-   else if(sameAddr(mailRec,RET)||sameAddr(propRec,RET)){out={status:"Removed",why:"Mail came back before. Not mailed.",yes:"No",same:"",k:"ret"};res.rm.ret++}
+   if(!ctx.down&&(sameAddr(mailRec,dnmList)||sameAddr(propRec,dnmList))){out={status:"Removed",why:"On your Do Not Mail list. Not mailed.",yes:"No",same:"",k:"dnm"};res.rm.dnm++}
+   else if(!ctx.down&&(sameAddr(mailRec,RET)||sameAddr(propRec,RET))){out={status:"Removed",why:"Mail came back before. Not mailed.",yes:"No",same:"",k:"ret"};res.rm.ret++}
    else if(!ctx.tout){
     var kM=fullKey(rec.ta,rec.tc,rec.ts,rec.tz),kP=fullKey(rec.pa,rec.pc,rec.ps,rec.pz);
     var k=useP?(kP||kM):useM?(kM||kP):(kM+"||"+kP);if(!kM&&!kP)k="";
@@ -7796,6 +7839,11 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
    rec.out=out;rec.mail={a:a1,c:cityKey(rec.tc),s:stState(rec.ts),z:zip5(rec.tz)};
    res.recs.push(rec)});
   res.removed=res.rm.dnm+res.rm.ret+res.rm.dup+res.rm.spelled+res.rm.und;
+  res.dnmStatus=ctx.down?"failed":"ok";res.down=!!ctx.down;
+  if(ctx.sample){
+    if(ctx.down){res.total=5000;res.mailed=4775;res.removed=225;res.changed=2034;res.rm={dnm:0,ret:0,dup:150,spelled:75,und:0}}
+    else{res.total=5000;res.mailed=4612;res.removed=388;res.changed=1204;res.rm={dnm:41,ret:17,dup:212,spelled:63,und:55}}
+  }
   CACHE={key:key,val:res};return res}
  /* ---------- CSV / XLSX ---------- */
  var STD=["Row in your file","Result","Why","Will be mailed?","First name","Last name","Property address (as uploaded)","Property city","Property state","Property ZIP","Mailing address (as uploaded)","Mailing city","Mailing state","Mailing ZIP","Address we will mail","City we will mail","State we will mail","ZIP we will mail","Same as row"];
@@ -7852,52 +7900,108 @@ function counts(){var o=W.st.lo||{dup:"mailing_property",tout:false,trust:false}
  /* ---------- popup ---------- */
  var CUR=null,ONDONE=null;
  function root(){var b=document.getElementById("ylrp");if(b)return b;b=document.createElement("div");b.id="ylrp";b.className="ylrp-bd";b.setAttribute("role","dialog");b.setAttribute("aria-modal","true");b.setAttribute("aria-labelledby","ylrpT");document.body.appendChild(b);return b}
- function shut(){var b=document.getElementById("ylrp");if(b)b.classList.remove("open");document.documentElement.classList.remove("ylrp-lock")}
+ function shut(){SEQ++;var b=document.getElementById("ylrp");if(b){b.classList.remove("open");b.innerHTML=""}document.documentElement.classList.remove("ylrp-lock")}
+ var SEQ=0;
  function open(){root().classList.add("open");document.documentElement.classList.add("ylrp-lock")}
- function showResults(res,done){CUR=res;ONDONE=done;var r=res.rm,b=root();
-  var rows=[["Do Not Mail",r.dnm],["Mail came back before",r.ret],["Duplicate",r.dup],["Same address, spelled differently",r.spelled]];if(r.und)rows.push(["Undeliverable",r.und]);
-  b.innerHTML='<div class="ylrp-m" data-ylrp="ok"><div class="ylrp-mh"><h2 id="ylrpT">Your list is ready<small>'+esc(res.name)+'</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
+ function asset(name){var p=location.pathname||"/";if(/\/(api|api-builder|pages)(\/|$)/.test(p))p=p.replace(/\/(api|api-builder|pages)(?:\/.*)?$/,"/");p=p.replace(/index\.html$/,"");if(p.slice(-1)!=="/")p+="/";return p+"assets/upload-results/"+name}
+ function saveAsset(file,dl){var a=document.createElement("a");a.href=asset(file);a.download=dl||file;document.body.appendChild(a);a.click();a.remove()}
+ function waitMs(){return window.ylRP&&ylRP.instant?0:((/[?&#]ylfast=1/.test(location.href+location.hash))?40:700)}
+ var DNM_FAIL="The Do Not Mail check didn't run. We couldn't reach List Organizer, so your Do Not Mail list and returned mail were not checked for this upload.";
+ function isDown(res){return !!(res&&(res.dnmStatus==="failed"||res.dnmStatus==="off"||res.dnmStatus==="no_organizer_account"||res.down))}
+ function showWait(res,done){CUR=res;ONDONE=done;var my=++SEQ,b=root(),down=isDown(res)||dnmDown();
+  b.innerHTML='<div class="ylrp-m ylrp-waitm" data-ylrp="wait"><div class="ylrp-mh"><h2 id="ylrpT">Checking your list</h2></div>'+
+   '<div class="ylrp-body ylrp-wait"><p class="ylrp-wait-l">Please wait while we tidy addresses, remove duplicates, and check Do Not Mail and returned mail.</p>'+
+   '<div class="ylrp-bar" aria-hidden="true"><i id="ylrpBar" style="width:8%"></i></div>'+
+   '<ul class="ylrp-steps" id="ylrpSteps">'+
+    '<li data-st="0">Tidying addresses</li>'+
+    '<li data-st="1">Removing duplicates</li>'+
+    '<li data-st="2">Checking Do Not Mail and returned mail</li>'+
+   '</ul></div></div>';
+  open();
+  var steps=["Tidying addresses","Removing duplicates",down?"Couldn\u2019t reach List Organizer":"Checking Do Not Mail and returned mail"];
+  var i=0,t=waitMs();
+  function tick(){if(my!==SEQ)return;var lis=b.querySelectorAll("#ylrpSteps li"),bar=document.getElementById("ylrpBar");
+   for(var k=0;k<lis.length;k++){lis[k].className=k<i?"done":k===i?"on":"";if(k===2&&i>=2)lis[k].textContent=steps[2]+(down&&i>=2?" \u2014 Do Not Mail was not checked":"")}
+   if(bar)bar.style.width=Math.min(100,Math.round((i+1)/3*100))+"%";
+   i++;
+   if(i<=3){if(!t){tick();return}setTimeout(tick,t)}
+   else{showResults(res,done,{building:true})}}
+  tick()}
+ function showResults(res,done,opt){CUR=res;ONDONE=done;opt=opt||{};var r=res.rm||{},b=root(),down=isDown(res),busy=!!opt.building,name=res.name||"your list";
+  function pill(label,val,nc){return '<div class="ylrp-r"><span class="ylrp-pill'+(nc?" nc":"")+'">'+(nc?"Not checked":nf(val))+'</span> '+esc(label)+'</div>'}
+  var rows=pill("Do Not Mail",r.dnm,down)+pill("Mail came back before",r.ret,down)+pill("Duplicate",r.dup,false)+pill("Same address, spelled differently",r.spelled,false)+(r.und?pill("Undeliverable",r.und,false):"");
+  var warn=down?'<div class="ylrp-warn" role="status">'+esc(DNM_FAIL)+'</div>':'';
+  b.innerHTML='<div class="ylrp-m" data-ylrp="'+(down?"downok":"ok")+'"><div class="ylrp-mh"><h2 id="ylrpT">Your list is ready<small>'+esc(name)+'</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
    '<div class="ylrp-body"><div class="ylrp-hero"><div class="n" id="ylrpN">'+nf(res.mailed)+'</div><div class="l">will be mailed</div><div class="of">of '+nf(res.total)+' uploaded</div></div>'+
-   '<div class="ylrp-sec"><div class="ylrp-sh">'+nf(res.removed)+' removed</div>'+rows.map(function(x){return '<div class="ylrp-r" data-reason="'+esc(x[0])+'"><span class="pill">'+nf(x[1])+'</span> '+esc(x[0])+'</div>'}).join("")+'</div>'+
+   warn+
+   '<div class="ylrp-sec"><div class="ylrp-sh">'+nf(res.removed)+' removed</div>'+rows+'</div>'+
    '<div class="ylrp-tidy"><b>'+nf(res.changed)+'</b> addresses written the standard way, still mailed</div>'+
-   '<div class="ylrp-dl"><button type="button" class="btn" id="ylrpXl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download your list (Excel)</button><button type="button" class="ylrp-csv" id="ylrpCsv">or download as CSV</button><p>The Excel is color-coded and has every record and every column from your file, plus what happened and why. The CSV has the same data, for your other tools.</p></div></div>'+
+   '<div class="ylrp-dl"><button type="button" class="btn'+(busy?" busy":"")+'" id="ylrpXl"'+(busy?' aria-disabled="true"':'')+'><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> '+(busy?"Preparing your Excel\u2026":"Download your list (Excel)")+'</button><button type="button" class="ylrp-csv'+(busy?" busy":"")+'" id="ylrpCsv"'+(busy?' aria-disabled="true"':'')+'>'+(busy?"Preparing the CSV\u2026":"or download as CSV")+'</button><p>The Excel is color-coded and has every record and every column from your file, plus what happened and why. The CSV has the same data, for your other tools.</p></div></div>'+
    '<div class="ylrp-mf"><span class="sp">The final count can still move a little after our mail house checks addresses before printing.</span><div class="actions"><button type="button" class="btn sec" id="ylrpClose">Close</button><button type="button" class="btn" id="ylrpGo">Continue with '+nf(res.mailed)+'</button></div></div></div>';
-  open();var g=document.getElementById("ylrpGo");if(g)g.focus()}
- function showDown(retry,cancel){CUR=null;var b=root();
-  b.innerHTML='<div class="ylrp-m ylrp-down" data-ylrp="down"><div class="ylrp-mh"><h2 id="ylrpT">We couldn\u2019t check your Do Not Mail list yet<small>Your list is not ready</small></h2><button type="button" class="ylrp-x" id="ylrpX" aria-label="Close">&times;</button></div>'+
-   '<div class="ylrp-body"><div class="ylrp-err" role="alert"><b>We couldn\u2019t check your Do Not Mail list yet, try again.</b><p>We never mail an address on your Do Not Mail list, so we can\u2019t go on until the check has run. Nothing has been added to your order.</p></div></div>'+
-   '<div class="ylrp-mf"><div class="actions"><button type="button" class="btn sec" id="ylrpCancel">Back</button><button type="button" class="btn" id="ylrpRetry">Try again</button></div></div></div>';
-  b.__retry=retry;b.__cancel=cancel;open();var g=document.getElementById("ylrpRetry");if(g)g.focus()}
+  open();var g=document.getElementById("ylrpGo");if(g&&!busy)g.focus();
+  if(busy&&!opt.hold){var t=waitMs()?Math.max(800,waitMs()+200):0,my2=SEQ;function ready(){if(my2!==SEQ)return;showResults(res,done,{building:false})}if(!t)ready();else setTimeout(ready,t)}}
+ function finish(res){shut();var d=ONDONE;ONDONE=null;if(d)d(res||CUR)}
  document.addEventListener("click",function(ev){var t=ev.target;if(!t||!t.closest)return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;
-  if(t.closest("#ylrpXl")){if(CUR)save("your-list-results.xlsx",xlsxBytes(CUR),"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");return}
-  if(t.closest("#ylrpCsv")){if(CUR)save("your-list-results.csv",utf8(csvText(CUR)),"text/csv;charset=utf-8");return}
-  if(t.closest("#ylrpRetry")){var f=b.__retry;if(f)f();return}
-  if(t.closest("#ylrpCancel")||(t.closest("#ylrpX")&&b.querySelector('[data-ylrp="down"]'))){shut();var c=b.__cancel;if(c)c();return}
-  if(t.closest("#ylrpGo")||t.closest("#ylrpClose")||t.closest("#ylrpX")){shut();var d=ONDONE;ONDONE=null;if(d)d(CUR);return}
-  if(t===b&&b.querySelector('[data-ylrp="ok"]')){shut();var d2=ONDONE;ONDONE=null;if(d2)d2(CUR)}
+  if(t.closest("#ylrpXl")){if(t.closest(".busy")||(t.closest("#ylrpXl")&&document.getElementById("ylrpXl")&&document.getElementById("ylrpXl").getAttribute("aria-disabled")==="true"))return;saveAsset("your-list-results-SAMPLE.xlsx","your-list-results.xlsx");return}
+  if(t.closest("#ylrpCsv")){if(t.closest(".busy")||(document.getElementById("ylrpCsv")&&document.getElementById("ylrpCsv").getAttribute("aria-disabled")==="true"))return;saveAsset("your-list-results-SAMPLE.csv","your-list-results.csv");return}
+  if(t.closest("#ylrpGo")||t.closest("#ylrpClose")||t.closest("#ylrpX")){if(b.querySelector('[data-ylrp="wait"]'))return;finish(CUR);return}
+  if(t===b&&b.querySelector('[data-ylrp="ok"],[data-ylrp="downok"]')){finish(CUR)}
  });
- document.addEventListener("keydown",function(ev){if(ev.key!=="Escape")return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;var x=document.getElementById("ylrpX");if(x)x.click()});
- /* ---------- public ---------- */
+ document.addEventListener("keydown",function(ev){if(ev.key!=="Escape")return;var b=document.getElementById("ylrp");if(!b||!b.classList.contains("open"))return;if(b.querySelector('[data-ylrp="wait"]'))return;finish(CUR)});
+ function cardHTML(res){var down=isDown(res);
+  return '<div class="yl-ready" role="status"><span class="yl-ready-ic" aria-hidden="true">\u2713</span><div class="yl-ready-tx"><b>Your list is ready: '+nf(res.mailed)+' records will be mailed.</b><span>'+nf(res.removed)+' removed \u00b7 '+nf(res.changed)+' addresses written the standard way'+(down?" \u00b7 Do Not Mail was not checked":"")+'</span></div><button type="button" class="yl-ready-btn" data-ylsee="1">See results</button></div>'}
+ function hostFor(st){if(st===window.PS)return document.querySelector("#pcUpbar .lt-acc-body");if(st===window.RO)return document.querySelector("#roDrop")||document.querySelector("#rStep2");return document.querySelector("#ltUpbar .lt-acc-body")}
+ function decorate(){[["lt",window.LS],["pc",window.PS],["ro",window.RO]].forEach(function(pair){var k=pair[0],st=pair[1],acc=hostFor(st);if(!acc)return;
+   var wrap=acc.querySelector("#ylSeeRes"+k)||acc.querySelector(".yl-ready-wrap");
+   if(!st||!st._ylRes||!(st.files&&st.files.length)){if(wrap&&wrap.parentNode)wrap.parentNode.removeChild(wrap);return}
+   if(!wrap){wrap=document.createElement("div");wrap.className="yl-ready-wrap";wrap.id="ylSeeRes"+k;var sm=acc.querySelector(".up-sum");if(sm)acc.insertBefore(wrap,sm);else acc.insertBefore(wrap,acc.firstChild)}
+   wrap.innerHTML=cardHTML(st._ylRes);
+   var btn=wrap.querySelector("[data-ylsee]");if(btn)btn.setAttribute("data-ylsee",k)})}
+ function previewHost(){var b=document.getElementById("ylxl");if(b)return b;b=document.createElement("div");b.id="ylxl";b.className="ylxl-bd";b.setAttribute("role","dialog");b.setAttribute("aria-modal","true");b.setAttribute("aria-labelledby","ylxlT");document.body.appendChild(b);return b}
+ function parseCsv(text){text=(text||"").replace(/^\ufeff/,"");var rows=[],row=[],cur="",q=false;
+  for(var i=0;i<text.length;i++){var c=text[i];
+   if(q){if(c=='"'){if(text[i+1]=='"'){cur+='"';i++}else q=false}else cur+=c}
+   else if(c=='"')q=true;
+   else if(c==="," ){row.push(cur);cur=""}
+   else if(c==="\n"){row.push(cur);rows.push(row);row=[];cur=""}
+   else if(c==="\r"){}
+   else cur+=c}
+  if(cur.length||row.length){row.push(cur);rows.push(row)}
+  return rows}
+ function showExcelPreview(){var b=previewHost();
+  b.innerHTML='<div class="ylxl-m"><div class="ylxl-top"><div><h2 id="ylxlT">Your list results</h2><p>Absentee Owners - Orange County.csv \u00b7 5,000 records uploaded, '+((CUR&&CUR.mailed)?nf(CUR.mailed):"4,612")+' will be mailed.</p></div><div class="ylxl-acts"><a class="btn" href="'+asset("your-list-results-SAMPLE.xlsx")+'" download="your-list-results.xlsx">Download Excel</a><button type="button" class="btn sec" id="ylxlX">Close</button></div></div>'+
+   '<p class="ylxl-leg"><span class="lg g"></span> Will be mailed <span class="lg y"></span> Address written the standard way, still mailed <span class="lg r"></span> Removed, will not be mailed. Built from SAMPLE data (invented names only).</p>'+
+   '<div class="ylxl-sc" id="ylxlTbody"><p class="ylxl-load">Loading the sample spreadsheet\u2026</p></div></div>';
+  b.classList.add("open");document.documentElement.classList.add("ylrp-lock");
+  b.onclick=function(ev){if(ev.target===b||ev.target.id==="ylxlX"){b.classList.remove("open");document.documentElement.classList.remove("ylrp-lock")}};
+  fetch(asset("your-list-results-SAMPLE.csv")).then(function(r){return r.text()}).then(function(t){
+    var rows=parseCsv(t);if(!rows.length)return;
+    var head=rows[0],body=rows.slice(1);
+    var ri=head.indexOf("Result"),yi=head.indexOf("Will be mailed?");
+    var html='<table class="ylxl-tb"><thead><tr>'+head.map(function(c){return "<th>"+esc(c)+"</th>"}).join("")+"</tr></thead><tbody>";
+    body.forEach(function(row){var st=(row[ri]||"").toLowerCase(),cls=st.indexOf("removed")>=0?"rm":st.indexOf("changed")>=0?"ch":"ok";
+      html+='<tr class="'+cls+'">'+head.map(function(_,i){return "<td>"+esc(row[i]||"")+"</td>"}).join("")+"</tr>"});
+    html+="</tbody></table>";
+    var box=document.getElementById("ylxlTbody");if(box)box.innerHTML=html;
+  }).catch(function(){var box=document.getElementById("ylxlTbody");if(box)box.innerHTML="<p>Could not load the sample spreadsheet.</p>"})}
  window.ylRP={
   ctx:getCtx,evaluate:evaluate,dnmDown:dnmDown,csv:csvText,xlsx:xlsxBytes,table:table,
-  setDown:function(v){try{if(v)localStorage.setItem("ylDnmDown","1");else localStorage.removeItem("ylDnmDown")}catch(e){}},
-  /* run the check for the wizard. onOk(res) is called only when the Do Not Mail check ran and the customer pressed Continue/Close. Fails closed. */
+  instant:false,
+  setDown:function(v){try{if(v)localStorage.setItem("ylDnmDown","1");else localStorage.removeItem("ylDnmDown")}catch(e){}
+   try{var u=new URL(location.href);if(v)u.searchParams.set("organizer","down");else{u.searchParams.delete("organizer");u.searchParams.delete("dnm")}history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}},
   run:function(W,COLS,onOk,onBack){
-   function go(){if(dnmDown()){showDown(go,onBack);return}
-    var res=evaluate(getCtx(W,COLS));showResults(res,onOk)}
-   go()},
-  reopen:function(st,onOk){var res=st&&st._ylRes;if(!res)return;if(dnmDown()){showDown(function(){window.ylRP.reopen(st,onOk)},null);return}showResults(res,onOk||function(){})},
-  show:showResults,showDown:showDown,shut:shut
+   var res=evaluate(getCtx(W,COLS));
+   showWait(res,function(r){if(onOk)onOk(r||res)})},
+  reopen:function(st,onOk){var res=st&&st._ylRes;if(!res)return;showResults(res,onOk||function(){},{building:false})},
+  show:function(res,done,opt){showResults(res,done,opt||{})},
+  showWait:showWait,showExcelPreview:showExcelPreview,shut:shut,asset:asset,canned:cannedResult
  };
- /* "See results" button in the list step */
- function decorate(){["lt","pc"].forEach(function(k){var st=k==="pc"?window.PS:window.LS,acc=document.getElementById(k==="pc"?"pcUpbar":"ltUpbar");if(!acc)return;var has=acc.querySelector("#ylSeeRes"+k);
-   if(!st||!st._ylRes||!(st.files&&st.files.length)){if(has&&has.parentNode)has.parentNode.removeChild(has);return}
-   var res=st._ylRes;var txt='<b>'+nf(res.mailed)+'</b> will be mailed, '+nf(res.removed)+' removed'+(res.rm.dnm?' ('+nf(res.rm.dnm)+' on your Do Not Mail list)':'');
-   if(!has){has=document.createElement("div");has.id="ylSeeRes"+k;has.className="yl-seeres";var body=acc.querySelector(".lt-acc-body")||acc;body.insertBefore(has,body.firstChild)}
-   has.innerHTML='<span>'+txt+'</span> <button type="button" class="btn sec sm" data-ylsee="'+k+'">See results</button>'})}
+ function cannedResult(down,name){
+  if(down)return {total:5000,mailed:4775,removed:225,changed:2034,rm:{dnm:0,ret:0,dup:150,spelled:75,und:0},dnmStatus:"failed",down:true,name:name||"Absentee Owners - Orange County.csv",sample:true};
+  return {total:5000,mailed:4612,removed:388,changed:1204,rm:{dnm:41,ret:17,dup:212,spelled:63,und:55},dnmStatus:"ok",down:false,name:name||"Absentee Owners - Orange County.csv",sample:true}}
  window.ylDecorate=decorate;
  window.ylListReady=function(st){return !!(st&&st.files&&st.files.length&&st._ylRes)};
- document.addEventListener("click",function(ev){var b=ev.target&&ev.target.closest&&ev.target.closest("[data-ylsee]");if(!b)return;ev.preventDefault();var k=b.getAttribute("data-ylsee"),st=k==="pc"?window.PS:window.LS;window.ylRP.reopen(st,function(){})});
+ document.addEventListener("click",function(ev){var b=ev.target&&ev.target.closest&&ev.target.closest("[data-ylsee]");if(!b)return;ev.preventDefault();var k=b.getAttribute("data-ylsee"),st=k==="pc"?window.PS:k==="ro"?window.RO:window.LS;window.ylRP.reopen(st,function(){})});
  var _fs=window.formSync;if(typeof _fs==="function"&&!_fs.__yl){var w=function(){var r=_fs.apply(this,arguments);try{decorate()}catch(e){}return r};w.__yl=1;window.formSync=w}
 })();
 </script>
@@ -8622,7 +8726,7 @@ var IC={s:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#
 function init(root){
  if(root.getAttribute("data-ready"))return;root.setAttribute("data-ready","1");
  var ctx=root.getAttribute("data-ctx")||"main",bld=root.getAttribute("data-builder")==="1";
- var base=ctx==="main"?"#/":"../?v=r55#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
+ var base=ctx==="main"?"#/":"../?v=r56#/",proof=ctx==="main"?"#/proof/204518":"#/overview/6";
  var S={q:"",cat:"All",priv:true,glob:true,sort:"new",view:"grid",sel:""};
  root.innerHTML='<section class="yl-lib"><header class="yll-h"><div><h2>Template Library</h2><p class="yll-sub"><b data-n></b> templates. Copy an ID and send it as <code>template_on_file</code>.</p></div><div class="yll-ctl"><label class="yll-s">'+IC.s+'<input type="search" placeholder="Search name, product or ID" aria-label="Search templates"></label>'+(root.getAttribute("data-new")?'<a class="yll-btn pri" href="'+root.getAttribute("data-new")+'" style="flex:none">+ New template</a>':'')+'<div class="yll-vw" role="group" aria-label="View"><button type="button" data-v="grid" class="on" aria-label="Grid view" title="Grid view">'+IC.g+'</button><button type="button" data-v="list" aria-label="List view" title="List view">'+IC.l+'</button></div></div></header><div class="yll-bar"><div class="yll-pills" role="group" aria-label="Category"></div><div class="yll-tg"><button type="button" class="yll-chip p on" data-t="priv" aria-pressed="true"><i></i>Private</button><button type="button" class="yll-chip g on" data-t="glob" aria-pressed="true"><i></i>Global</button></div><label class="yll-sort">Sort<select aria-label="Sort"><option value="new">Newest</option><option value="name">Name</option><option value="prod">Product</option></select></label></div><div class="yll-detail" hidden></div><div class="yll-body"></div><p class="yll-foot">Sample templates. Your own Unique IDs show up here as you save them.</p></section>';
  var q=function(s){return root.querySelector(s)};
@@ -8793,10 +8897,10 @@ function render(root,arg,q,raw){
    var cz=window.ylCanon?window.ylCanon(p.canon):{k:p.k,p:p.name};
    var n=+(sessionStorage.getItem("ylTplN")||5600)+1;sessionStorage.setItem("ylTplN",n);var id="CT"+n;
    try{var A=JSON.parse(sessionStorage.getItem("ylSavedTpls")||"[]");A.unshift({id:id,n:nm,p:cz.p,s:"Private",img:tplImg(p.tpl),d:new Date().toLocaleDateString("en-US",{month:"short",day:"2-digit",year:"numeric"}),k:cz.k});sessionStorage.setItem("ylSavedTpls",JSON.stringify(A))}catch(e){}
-   var href=emb()?"../api-builder/?v=r55#/my-templates":"#/integrations?tab=templates";
+   var href=emb()?"../api-builder/?v=r56#/my-templates":"#/integrations?tab=templates";
    var sv=root.querySelector("#yai-saved");if(sv)sv.remove();
    sv=document.createElement("div");sv.id="yai-saved";sv.className="yai-ban";sv.style.margin="16px 0 0";
-   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r55#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
+   sv.innerHTML='<span>Saved. &ldquo;'+esc(nm)+'&rdquo; ('+esc(cz.p)+') was saved to My Templates.</span><a class="yai-btn sm" href="'+(emb()?'../?v=r56#/my-templates':'#/my-templates')+'"'+(emb()?' target="_top"':'')+'>View in My Templates</a>';
    root.querySelector(".yai-up").appendChild(sv);sv.style.gridColumn="1/-1";
    btn.disabled=false;btn.textContent="Upload and check";sv.scrollIntoView({block:"center"});
    })();
@@ -8891,8 +8995,8 @@ document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.targe
 if(window.__nh40)return;window.__nh40=1;
 var API=!!document.querySelector(".ylhq-api"),EMB=/[?&]embed=/.test(location.search);
 if(EMB)return;
-var M=API?"../?v=r55#/":"#/";
-var apiHref=API?"#/home":"api-builder/?v=r55#/home";
+var M=API?"../?v=r56#/":"#/";
+var apiHref=API?"#/home":"api-builder/?v=r56#/home";
 var logoEl=document.querySelector(".logo img, .hdr img");var logo=logoEl?logoEl.getAttribute("src"):"";
 function a(h,t,x){return '<a href="'+h+'"'+(x||"")+'>'+t+'</a>'}
 var design='<a href="'+M+'my-templates">My Templates<small>Your saved designs</small></a><a href="'+M+'custom-template">Design a New Mail Piece<small>Letters, postcards, handwritten</small></a><a href="'+M+'design-with-ai">Design it with AI<small>Use our prompts with Grok, ChatGPT or Claude</small></a><a href="'+M+'handwriting-font">Make your handwriting font<small>Your own handwriting for handwritten mail</small></a>';
@@ -8913,14 +9017,14 @@ function mount(){
   kids.forEach(function(k){if(k.matches&&!k.classList.contains("ylhq-api")&&k.tagName==="DIV"&&/Yellow Letter HQ mockup/.test(k.innerText||"")&&k.children.length<8)k.style.display="none"});
   document.body.insertAdjacentHTML("afterbegin",h);
   var cur=/api-builder/.test(location.pathname)?"B":"A";
-  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r55 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r55#/home">Main site</a><a href="../api/?v=r55#/home">API Version A (no builder)</a><a href="../api-builder/?v=r55#/home">API Version B (with builder)</a><a href="../pages/?v=r55">Pages index</a></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="nhtag" id="nhtag"><button type="button">Mockup r56 &#9662; · '+cur+'</button><div class="nhm"><a href="../?v=r56#/home">Main site</a><a href="../api/?v=r56#/home">API Version A (no builder)</a><a href="../api-builder/?v=r56#/home">API Version B (with builder)</a><a href="../pages/?v=r56">Pages index</a></div></div>');
   document.querySelector("#nhtag > button").onclick=function(){document.getElementById("nhtag").classList.toggle("open")};
  }else{
   var old=document.querySelector("header.hdr");if(old)old.insertAdjacentHTML("beforebegin",h);else document.body.insertAdjacentHTML("afterbegin",h);
   var l=document.querySelector("#mocktag .lbl");if(l)l.innerHTML="<b>Mockup r55</b>";
-  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r55#/home">API Version A: no builder</a><a href="api-builder/?v=r55#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
+  var pm=document.getElementById("pmenu");if(pm&&!document.getElementById("nhsw"))pm.insertAdjacentHTML("afterbegin",'<h5 id="nhsw">Switch version</h5><a href="#/home">Main site</a><a href="api/?v=r56#/home">API Version A: no builder</a><a href="api-builder/?v=r56#/home">API Version B: with builder</a><h5 id="r44rh">Viewing as</h5><a href="#" id="r44role">API Customer</a>');
  }
- if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r55#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
+ if(API){var sb=document.getElementById("side");if(sb){var addSide=function(){if(sb.querySelector(".nhside")||!sb.children.length)return;var d=document.createElement("div");d.className="nhside";d.innerHTML='<a href="../?v=r56#/integrations" class="nhs"><span class="ic">&#9881;</span>Integrations</a>';var anchor=sb.querySelector('a[href*="my-templates"]');if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(d,anchor);else sb.appendChild(d)};new MutationObserver(addSide).observe(sb,{childList:true,subtree:true});addSide()}}
  var nh=document.getElementById("nh");
  nh.addEventListener("click",function(e){var b=e.target.closest(".nhd>.nhb");var all=nh.querySelectorAll(".nhd");
   if(b){var d=b.parentNode,o=d.classList.contains("open");all.forEach(function(x){x.classList.remove("open")});if(!o)d.classList.add("open");b.setAttribute("aria-expanded",!o);return}
@@ -9002,7 +9106,7 @@ setInterval(tick,400);window.addEventListener("hashchange",function(){setTimeout
  st.textContent="script#r44tagjs,script#r44api,script#r44head,script#r44pick{display:none!important}.r44hwt{opacity:.75;border-style:dashed!important;cursor:default!important}.r44hwt .r44pend{display:inline-block;background:#FEF0C7;color:#B54708;border-radius:99px;padding:2px 10px;font:700 12px Montserrat,sans-serif;margin-top:2px}.r44hwt a{font:700 12px Montserrat,sans-serif;color:#262626}";
  document.head.appendChild(st);
  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("#r44role");if(!t)return;e.preventDefault();try{localStorage.setItem("ylhq_role",role==="reg"?"api":"reg")}catch(x){}if(API&&/^#\/(overview|home)/.test(location.hash))location.hash="#/overview/3";location.reload()},true);
- var HWHREF=API?"../?v=r55#/handwriting-font":"#/handwriting-font";
+ var HWHREF=API?"../?v=r56#/handwriting-font":"#/handwriting-font";
  function tick(){
   var rb=document.getElementById("r44role");if(rb){var lab=(role==="reg"?"Regular customer":"API Customer")+" \u21C6";rb.textContent=API?"Viewing as: "+lab:lab}
   [].forEach.call(document.querySelectorAll(".nhm small"),function(s){if(s.textContent==="All templates and IDs")s.textContent="Your saved designs"});
